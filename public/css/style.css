@@ -1,0 +1,456 @@
+html, body {
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+	font-family: Arial, Helvetica, sans-serif;
+	position:fixed;
+	margin: 0px;
+}
+
+.main-container{
+	height: 100vh;
+	width: 100vw;
+}
+
+.pageContent {
+	height: calc(100vh - 50px);
+}
+
+
+
+
+/* standard class */
+
+.none {
+	display: none;
+}
+
+
+.center {
+	width: 80%;
+	margin: 0 auto;
+	text-align: center;
+	padding: 20px;
+}
+
+/* general classes */
+
+.generalButton {
+	padding: 5px;
+	background-color: #2271b1;
+	width: 40%;
+	margin: 10px auto;
+	color: white;
+	border-radius: 5px;
+	cursor: pointer;
+	text-align: center;
+}
+
+.generalInput  {
+	border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    height: 30px;
+	width: max(120px, 100%);
+}
+
+.generalSelect {
+	border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    height: 30px;
+	width: max(120px, 100%);
+}
+
+.generalTable .td{
+	padding: 6px;
+}
+
+.generalTable .generalTableSearch .td{
+	padding: 6px;
+}
+
+.generalTable .generalTableHeader .td{
+	background-color: #1d2327;
+	color: white;
+	padding: 6px;
+}
+
+.generalTable .generalTableContentRow {
+	
+}
+/* Header */
+
+
+
+header.header {
+	width: 100%;
+	color: #c3c4c7;
+}
+
+header.header a {
+	text-decoration: none;
+}
+
+header.header .fa {
+	height: 100%;
+	line-height: 100%;
+}
+
+header.header .fa-bell {
+	color: #c3c4c7;
+}
+
+header.header .fa-bell::after {
+	background-color: red;
+    padding: 4px;
+    font-weight: bold;
+    border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 33%;
+    content: "100";
+    position: relative;
+    top: -18px;
+    left: -1px;
+	color: white;
+}
+
+/* Desktop header */
+
+header.header .desktopHeader {
+	width: 100%;
+	height: 50px;
+	padding: 10px;
+	font-size: 30px;
+	line-height: 30px;
+	background-color: #1d2327;
+}
+
+header.header .desktopHeader .headerProfileInfo {
+	display: inline-block;
+	float: right;
+}
+
+header.header .desktopHeader .headerProfileInfo div.profileLink {
+	display: inline-block;
+	float: right;
+	height: 40px;
+}
+
+header.header .desktopHeader div.profileLink a{
+	text-decoration: none;
+	color: #c3c4c7;	
+}
+
+header.header .desktopHeader span.userInfo {
+	padding-right: 5px;
+}
+
+header.header .desktopHeader div.userInfoDropdown {
+	display: none;
+	position: fixed;
+	right: 0px;
+	top: 50px;
+	padding: 10px;
+	background-color: #c3c4c7;
+	color: #1d2327;
+}
+
+header.header .desktopHeader .headerProfileInfo:hover .userInfoDropdown{
+	display: block;
+}
+
+header.header .desktopHeader .headerProfileInfo .userInfoDropdown .dropdownElement{
+	font-size: 60%;
+	width: 180px;
+	text-align: right;
+}
+
+header.header .desktopHeader .headerProfileInfo .userInfoDropdown .dropdownElement a{
+	text-decoration: none;
+	color: #1d2327;
+}
+
+/* Mobile header */
+
+header.header .mobileHeader {
+	height: 50px;
+	padding: 5px 10px 5px 10px;
+	font-size: 40px;
+	line-height: 40px;
+	background-color: #1d2327;
+}
+
+header.header .mobileHeader .fa {
+	height: 100%;
+	line-height: 100%;
+	color: #c3c4c7;
+}
+
+header.header .mobileHeader .fa-user-circle-o {
+	float: right;
+}
+
+/* Header Notice */
+
+.mainContainer .headerNoticeFailed {
+    background-color: #d01818;
+    color: hsla(0,0%,100%,.8);
+}
+.mainContainer .headerNoticeHidden {
+    transform: translate3d(0,-100%,0);
+    visibility: hidden;
+    opacity: 0;
+}
+.mainContainer .headerNotice {
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    border-radius: 0;
+    font-weight: 300;
+    font-size: 16px;
+    transition: all .7s cubic-bezier(.65,-.37,.55,.98);
+}
+
+.mainContainer .headerNotice.red {
+    background-color: #d01818;
+    color: white;
+}
+
+.mainContainer .headerNotice.green {
+    background-color: #7fad39;
+    color: white;
+}
+
+.mainContainer .headerNoticeWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainContainer .headerNoticeMessage {
+    padding: 10px 20px 10px 70px;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.mainContainer .headerNoticeMessageLink {
+    color: white;
+    text-decoration: underline;
+    font-weight: 400;
+}
+
+.mainContainer .headerNoticeClose {
+    cursor: pointer;
+    color: hsla(0,0%,100%,.8);
+    text-decoration: none;
+    font-weight: 400;
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.mainContainer .headerNoticeClose:before {
+    content: "\f00d";
+    padding: 15px 20px;
+}
+
+/* Menu */
+
+
+@media screen and (max-width: 767px) {
+	header.header .desktopHeader {
+		display: none;
+	}
+	
+	.menuContainer .desktopMenuContainer {
+		display: none;
+	}
+	
+	.menuContainer .mobileMenuContainer {
+		height: calc(100vh - 50px);
+	}
+	
+}
+
+@media screen and (min-width: 768px) {
+	header.header .mobileHeader {
+		display: none;
+	}
+	
+	.menuContainer .mobileMenuContainer {
+		display: none;
+	}
+	
+	.menuContainer {
+		height: 100%;
+	}
+	
+	.menuContainer .desktopMenuContainer {
+		height: 100%;
+		overflow-y: auto;
+	}
+}
+
+
+/* Desktop Menu */
+
+.menuContainer .desktopMenuContainer {
+	width: 100%;
+	background-color: #1d2327;
+	padding: 10px 0 10px 0;
+	min-height: calc(100vh - 50px);
+	overflow-x: hidden;
+}
+
+.menuContainer .desktopMenuContainer .menuElement{
+	padding: 10px 5px 10px 10px;
+	width: 100%;
+}
+
+.menuContainer .desktopMenuContainer .menuElement a{
+	color: white;
+	text-decoration: none;
+	width: 100%;
+	display: inline-block;
+}
+
+.menuContainer .desktopMenuContainer .menuElement.selected {
+	color: black;
+	background-color: #2271b1;
+}
+
+.menuContainer .desktopMenuContainer .menuElement.selected:hover a{
+	color: white;
+	font-weight: bold;
+}
+
+.menuContainer .desktopMenuContainer .menuElement:hover a{
+	color: #448cf7;
+}
+
+.menuContainer .desktopMenuContainer .menuElement:hover + .subMenu,
+.menuContainer .desktopMenuContainer .subMenu:hover,
+.menuContainer .desktopMenuContainer .subMenu.subMenuOpen {
+	display: block;
+}
+
+.menuContainer .desktopMenuContainer .subMenu{
+	display: none;
+}
+
+.menuContainer .desktopMenuContainer .menuElement.subElement {
+	background-color: grey;
+	padding-left: 20px;
+	border: 0px;
+}
+
+.menuContainer .desktopMenuContainer .menuElement.subElement.selected {
+	font-weight: bold;
+}
+
+
+
+/* Mobile menu */
+
+.menuContainer .mobileMenuContainer {
+	z-index: 100;
+	position: fixed;
+	top: 50px;
+	background-color: #484d50;
+	width: 100%;
+	color: white;
+	overflow-y: auto;
+}
+
+.menuContainer .mobileMenuContainer .menuElement {
+	height: 60px;
+	line-height: 60px;
+	font-size: 20px;
+	padding-left: 20px;
+}
+
+.menuContainer .mobileMenuContainer .menuElement.selected {
+	color: black;
+	background-color: #2271b1;
+}
+
+.menuContainer .mobileMenuContainer .menuElement a{
+	text-decoration: none;
+	color: white;
+	width: 80%;
+	height: 100%;
+	display: block;
+	float: left;
+}
+
+.menuContainer .mobileMenuContainer .menuElement .fa-caret-down {
+	font-size: 20px;
+	float: right;
+	line-height: 60px;
+	margin-right: 10px;
+}
+
+.menuContainer .mobileMenuContainer .menuElement .fa-caret-down.subMenuOpen { 
+	transform: rotate(-90deg);
+}
+
+.menuContainer .mobileMenuContainer .menuElement.subElement {
+	background-color: grey;
+	padding-left: 40px;
+	border: 0px;
+}
+
+.menuContainer .mobileMenuContainer .menuElement.subElement.selected {
+	font-weight: bold;
+}
+
+/* Content / Page content */
+
+.mainContainer .pageContent .content {
+	display: inline-block;
+	height: 100%;
+}
+
+@media screen and (min-width: 768px) {
+	.mainContainer .pageContent .content {
+		padding-right: 24px;
+	}
+}
+
+@media screen and (max-width: 767px) {
+	.mainContainer .pageContent {
+		margin: 0px;
+	}
+	
+	.mainContainer .pageContent .content {
+		padding: 12px;
+	}
+}
+
+
+/* page */
+
+.mainContainer .pageContent .content .page {
+	padding: 10px;
+	height: 100%;
+	overflow-y: auto;
+}
+
+
+.mainContainer .page .backgroundImage {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	z-index: -1;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	-webkit-transform: translateY(-50%) translateX(-50%);
+}
+

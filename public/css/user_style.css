@@ -1,0 +1,70 @@
+/* User styles */
+
+
+/* Login page */
+
+.page.login {
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	width: 100vw;
+	height: 100vh;
+	display: inline-block;
+}
+
+.page.login .loginFormContainer {
+	margin: calc((100vh - 200px)/ 2) auto;
+}
+
+/* Login form */
+
+.loginFormOverlay {
+	background-color: #e2e2e2e3;
+	padding: 10px;
+	border-radius: 5px;
+	width: min(350px, 100%);
+}
+
+.loginFormOverlay input{
+	border-top: none;
+	border-right: none;
+	border-left: none;
+	
+	border-bottom: 2px solid white;
+	width: min(300px, 90%);
+	margin: 10px;
+	height: 44px;
+	line-height: 30px;
+	font-size: 22px;	
+	background-color: transparent;
+	padding: 10px;
+	color: black;
+}
+
+.loginFormOverlay .loginButton {
+	padding: 5px;
+	background-color: #2271b1;
+	width: 40%;
+	margin: 10px auto;
+	color: white;
+	border-radius: 5px;
+	cursor: pointer;
+	text-align: center;
+}
+
+.loginFormOverlay .loginNotice {
+	width: 100%;
+	text-align: center;
+	color: red;
+}
+
+/* Header login form */
+
+.mainContainer .headerLoginOverlay {
+	position: fixed;
+	z-index: 10;
+	padding-left: calc((100vw - 350px)/ 2);
+	padding-right: calc((100vw - 350px)/ 2);
+	padding-top: calc((100vh - 245px)/ 2);
+	padding-bottom: calc((100vh - 245px)/ 2);
+	background-color: #e2e2e2e3;
+}
