@@ -55,10 +55,21 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 		defined("STORAGE_OVERVIEW_SEARCH_PARENT_NAME") ? null :  define("STORAGE_OVERVIEW_SEARCH_PARENT_NAME", "Parent name");
 		defined("STORAGE_OVERVIEW_SEARCH_TYPE") ? null :  define("STORAGE_OVERVIEW_SEARCH_TYPE", "Storage type");
 	
+	//Edit/Add
 	
+		defined("STORAGE_PLACEHOLDER_PARENT") ? null :  define("STORAGE_PLACEHOLDER_PARENT", "Parent");
+		
 //Basic words
 
 	defined("WORD_WELCOME") ? null :  define("WORD_WELCOME", "Welcome");
+	defined("WORD_SEARCH") ? null :  define("WORD_SEARCH", "Search");
+	defined("WORD_LOADING") ? null :  define("WORD_LOADING", "Loading...");
+	defined("WORD_SAVE") ? null :  define("WORD_SAVE", "Save");
+	defined("WORD_DELETE") ? null :  define("WORD_DELETE", "Delete");
+	defined("WORD_ABORT") ? null :  define("WORD_ABORT", "Abort");
+	
+//Basic phrase
+
 	
 	
 ?>

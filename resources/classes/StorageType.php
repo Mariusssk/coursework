@@ -13,19 +13,14 @@ class StorageType extends SystemClass {
 	
 	//get a list of all storage type IDs
 	
-	static function getAll() {
-		$type = new StorageType;
-		//Create SQL Statment
-		$sql = "SELECT ".$type->TABLE_NAME."_id FROM ".$type->TABLE_NAME;
-		
-		//query SQL database
-		$types = pdSelect($sql,"mysqli");
-		
-		//reduce array to one dimension
-		return($type->mergeResult($types));
+	static function getAll($object = "") {
+		if(empty($object)) {
+			$object = new StorageType;
+		}
+		return(Parent::getAll($object));
 	}
 	
-	//get a select for countries
+	//get a select for types
 	
 	public static function getSelect($attributes = array(),$option = "0") {
 		//get array of all types

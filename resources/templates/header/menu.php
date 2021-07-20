@@ -26,7 +26,7 @@ $( document ).ready(function() {
 		<a href="<?php echo URL;?>">Dashbord</a>
 	</div>
 	<div class="menuElement" data-sub-menu-parent="Storage" data-destination="storage">
-		<a href="<?php echo URL;?>/storage">Storage</a></i>
+		<a href="<?php echo URL;?>/storage">Storage</a>
 	</div>
 	<div class="subMenu" data-sub-menu="Storage">
 		<div class="menuElement subElement" data-destination="storage/new">
@@ -63,19 +63,19 @@ $( document ).ready(function() {
 
 <div class="mobileMenuContainer none">
 	<div class="menuElement" data-destination="dashbord">
-		<a href="#">Dashbord</a>
+		<a href="<?php echo URL;?>">Dashbord</a>
 	</div>
-	<!--<div class="menuElement" data-destination="">
-		<a href="#">Test</a><i class="fa fa-caret-down" data-sub-menu-button="subMenuTest" aria-hidden="true" onclick="subMenu('subMenuTest')"></i>
+	<div class="menuElement" data-destination="storage">
+		<a href="<?php echo URL;?>/storage">Storage</a><i class="fa fa-caret-down" data-sub-menu-button="Storage" aria-hidden="true" onclick="subMenu('Storage')"></i>
 	</div>
-	<div class="subMenu none" data-sub-menu="subMenuTest">
-		<div class="menuElement subElement" data-destination="">
-			<a href="#">Test</a>
+	<div class="subMenu none" data-sub-menu="Storage">
+		<div class="menuElement subElement" data-destination="storage/new">
+			<a href="<?php echo URL;?>/storage/new"><?php echo HEADER_MENU_ITEM_STORAGE_CREATE;?></a>
 		</div>
-		<div class="menuElement subElement" data-destination="">
-			<a href="#">Test</a>
+		<div class="menuElement subElement" data-destination="storage">
+			<a href="<?php echo URL;?>/storage"><?php echo HEADER_MENU_ITEM_STORAGE_OVERVIEW;?></a>
 		</div>
-	</div>-->
+	</div>
 	<hr>
 	<div class="menuElement" data-destination="login">
 		<a href="<?php echo URL;?>/login"><?php echo HEADER_MENU_USER_LOGOUT;?></a>

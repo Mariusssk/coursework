@@ -124,7 +124,7 @@ class SystemClass {
 			if(!empty($sqlSet) AND strlen($sqlType) == count($sqlParams)) {
 				$sql .= $sqlSet. " WHERE ".$this->TABLE_NAME."_id = ?";
 				$sqlType .= "i";
-				array_push($sqlParams,$this->id);
+				array_push($sqlParams,$this->{$this->TABLE_NAME."_id"});
 				pdInsert($sql, "mysqli",$sqlType,$sqlParams);
 				
 				return(True);
@@ -137,6 +137,7 @@ class SystemClass {
 	//create new DB entry based on object instance
 	
 	function createNewData() {
+		$this->{$this->TABLE_NAME."_id"} = 9999999999;
 		if($this->dataFullyLoaded()) {
 			//create SQL statment
 			$sql = "INSERT INTO ".$this->TABLE_NAME." ";
@@ -149,7 +150,8 @@ class SystemClass {
 			
 			$vars = $this->getObjectVars();
 			foreach($vars as $varKey => $tmpVar) {
-				if(!isset($this->IGNORE) OR !in_array($varKey, $this->IGNORE)) {
+				
+				if((!isset($this->IGNORE) OR !in_array($varKey, $this->IGNORE)) AND $varKey != $this->TABLE_NAME."_id") {
 					if(isset($this->$varKey)  AND (!empty($this->$varKey) AND $this->$varKey !== "0" AND $this->$varKey !== 0)) {
 						if(!empty($sqlSet)) { $sqlSet.= ",";}
 						if(!empty($sqlValues)) { $sqlValues.= ",";}
@@ -161,6 +163,8 @@ class SystemClass {
 				}
 			}
 			
+			
+			
 			//run SQL statment
 			
 			if(!empty($sqlSet) AND strlen($sqlType) == count($sqlParams)) {
@@ -168,7 +172,7 @@ class SystemClass {
 				$sql .= "(".$sqlSet.") VALUES (".$sqlValues.")";
 				pdInsert($sql, "mysqli",$sqlType,$sqlParams);
 				$lastID = pdLastID("mysqli");
-				$this->id = $lastID;
+				$this->{$this->TABLE_NAME."_id"} = $lastID;
 				return(True);
 			}
 			
@@ -191,11 +195,11 @@ class SystemClass {
 					$sqlType .= "s";
 				}
 				$sqlType .= "i";
-				$sqlParams = array($value,$this->id);
+				$sqlParams = array($value,$this->{$this->TABLE_NAME."_id"});
 			} else if(in_array($cellName,$this->NULL_VAR)){
 				$sql = "UPDATE ".$this->TABLE_NAME." SET ".$cellName." = NULL WHERE ".$this->TABLE_NAME."_id = ?";
 				$sqlType = "i";
-				$sqlParams = array($this->ID);
+				$sqlParams = array($this->{$this->TABLE_NAME."_id"});
 			} else {
 				return(False);
 			}
@@ -207,10 +211,10 @@ class SystemClass {
 	//delete corresponding entry from DB
 	
 	public function deleteData() {
-		if(isset($this->id) AND !empty($this->id)) {
+		if(isset($this->{$this->TABLE_NAME."_id"}) AND !empty($this->{$this->TABLE_NAME."_id"})) {
 			$sql = "DELETE FROM ".$this->TABLE_NAME." WHERE ".$this->TABLE_NAME."_id = ?";
 			$sqlType = "i";
-			$sqlParams = array($this->id);
+			$sqlParams = array($this->{$this->TABLE_NAME."_id"});
 			
 			pdInsert($sql,"mysqli",$sqlType,$sqlParams);
 			return(True);
@@ -226,5 +230,17 @@ class SystemClass {
 			$result[$i] = array_values($result[$i])[0];
 		}
 		return($result);
+	}
+	
+	//return all table entry ids
+	
+	static function getAll($object) {
+		//Create SQL statment
+		$sql = "SELECT ".$object->TABLE_NAME."_id FROM ".$object->TABLE_NAME;
+		//query SQL databse
+		$entrys = pdSelect($sql,"mysqli");
+		
+		//return merged results
+		return($object->mergeResult($entrys));
 	}
 }

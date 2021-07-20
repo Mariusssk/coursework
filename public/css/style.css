@@ -16,7 +16,14 @@ html, body {
 	height: calc(100vh - 50px);
 }
 
-
+hr{
+	display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #cccccc;
+    margin: 1em 0;
+    padding: 0;
+}
 
 
 /* standard class */
@@ -25,12 +32,17 @@ html, body {
 	display: none;
 }
 
-
 .center {
 	width: 80%;
 	margin: 0 auto;
 	text-align: center;
 	padding: 20px;
+}
+
+@media screen and (min-width: 768px) {
+	.desktopNone {
+		display: none;
+	}
 }
 
 /* general classes */
@@ -66,6 +78,14 @@ html, body {
 	padding: 6px;
 }
 
+.generalTable .hr{
+	padding: 0px;
+}	
+
+.generalTable hr{
+	margin: 10px 0px;
+}
+
 .generalTable .generalTableSearch .td{
 	padding: 6px;
 }
@@ -74,6 +94,7 @@ html, body {
 	background-color: #1d2327;
 	color: white;
 	padding: 6px;
+	margin-bottom: 10px;
 }
 
 .generalTable .generalTableContentRow {
@@ -362,6 +383,7 @@ header.header .mobileHeader .fa-user-circle-o {
 	z-index: 100;
 	position: fixed;
 	top: 50px;
+	left: 0px;
 	background-color: #484d50;
 	width: 100%;
 	color: white;

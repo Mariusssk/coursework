@@ -23,7 +23,7 @@ RewriteRule ^logout$ login_logout.php?request=logout [QSA,NC,L]
 
 RewriteRule ^storage$ storage.php?request=overview [QSA,NC,L]
 RewriteRule ^storage/new$ storage.php?request=new [QSA,NC,L]
-RewriteRule ^storage/edit/([0-9-]+)$ storage.php?request=edit&id=$1 [QSA,NC,L]
+RewriteRule ^storage/edit/([0-9-]+)$ storage.php?request=edit&ID=$1 [QSA,NC,L]
 
 #-----------------------------------------
 
