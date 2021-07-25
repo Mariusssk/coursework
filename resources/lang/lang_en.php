@@ -20,8 +20,29 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 		//Storage
 			defined("HEADER_MENU_ITEM_STORAGE_CREATE") ? null :  define("HEADER_MENU_ITEM_STORAGE_CREATE", "Create new");
 			defined("HEADER_MENU_ITEM_STORAGE_OVERVIEW") ? null :  define("HEADER_MENU_ITEM_STORAGE_OVERVIEW", "Overview");
+			
+		//Item
+			defined("HEADER_MENU_ITEM_ITEM_MAIN") ? null :  define("HEADER_MENU_ITEM_ITEM_MAIN", "Item");
+			defined("HEADER_MENU_ITEM_ITEM_CREATE") ? null :  define("HEADER_MENU_ITEM_ITEM_CREATE", "Create new");
+			defined("HEADER_MENU_ITEM_ITEM_OVERVIEW") ? null :  define("HEADER_MENU_ITEM_ITEM_OVERVIEW", "Overview");
+			defined("HEADER_MENU_ITEM_ITEM_LEND") ? null :  define("HEADER_MENU_ITEM_ITEM_LEND", "Lended");
+			
+		//To-Do
+			defined("HEADER_MENU_ITEM_TODO_CREATE") ? null :  define("HEADER_MENU_ITEM_TODO_CREATE", "Create new");
+			defined("HEADER_MENU_ITEM_TODO_OVERVIEW") ? null :  define("HEADER_MENU_ITEM_TODO_OVERVIEW", "Overview");
+			
+		//Events
+			defined("HEADER_MENU_ITEM_EVENT_CREATE") ? null :  define("HEADER_MENU_ITEM_EVENT_CREATE", "Create new");
+			defined("HEADER_MENU_ITEM_EVENT_OVERVIEW") ? null :  define("HEADER_MENU_ITEM_EVENT_OVERVIEW", "Overview");
+			defined("HEADER_MENU_ITEM_EVENT_LOCATIONS") ? null :  define("HEADER_MENU_ITEM_EVENT_LOCATIONS", "Locations");
 	
-	
+		//Settings
+			defined("HEADER_MENU_ITEM_SETTINGS_MAIN") ? null :  define("HEADER_MENU_ITEM_SETTINGS_MAIN", "Settings");
+			defined("HEADER_MENU_ITEM_SETTINGS_USER") ? null :  define("HEADER_MENU_ITEM_SETTINGS_USER", "Personal data");
+			defined("HEADER_MENU_ITEM_SETTINGS_NOTIFICATIONS") ? null :  define("HEADER_MENU_ITEM_SETTINGS_NOTIFICATIONS", "Notifications");
+			defined("HEADER_MENU_ITEM_SETTINGS_CREATE_USER") ? null :  define("HEADER_MENU_ITEM_SETTINGS_CREATE_USER", "Create User");
+			defined("HEADER_MENU_ITEM_SETTINGS_USER_OVERVIEW") ? null :  define("HEADER_MENU_ITEM_SETTINGS_USER_OVERVIEW", "List User");
+			defined("HEADER_MENU_ITEM_SETTINGS_USER_ROLE") ? null :  define("HEADER_MENU_ITEM_SETTINGS_USER_ROLE", "User roles");
 	
 	//Overlay Login
 	
@@ -29,14 +50,15 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 	
 //User
 
-	//Login
+	//Login/Logout
 		
 	defined("USER_USERNAME") ? null :  define("USER_USERNAME", "Username/E-Mail");
 	defined("USER_PASSWORD") ? null :  define("USER_PASSWORD", "Password");
+	defined("USER_REPEAT_PASSWORD") ? null :  define("USER_REPEAT_PASSWORD", "repeat Password");
 	defined("USER_LOGIN_BTN") ? null :  define("USER_LOGIN_BTN", "Login");
 	
-	//Logout
-	
+	defined("USER_RESET_PASSWORD_BTN") ? null :  define("USER_RESET_PASSWORD_BTN", "Reset Password");
+
 	defined("USER_LOGOUT_BTN") ? null :  define("USER_LOGOUT_BTN", "Logout");
 	defined("USER_LOGED_IN_STATUS") ? null :  define("USER_LOGED_IN_STATUS", "Your are logged in");
 	
@@ -44,6 +66,16 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 	
 	defined("USER_RIGHTS_MISSING_HEADER") ? null :  define("USER_RIGHTS_MISSING_HEADER", "You are not having sufficient rights!");
 	defined("USER_RIGHTS_MISSING_INFO") ? null :  define("USER_RIGHTS_MISSING_INFO", "You user role does not have the rights to view this page or information. Please contact an admin if you think this is a mistake!");
+	
+	
+	//Password requirements
+	defined("USER_PASSWORD_REQUIREMENTS_LENGTH") ? null :  define("USER_PASSWORD_REQUIREMENTS_LENGTH", "minimum 8 and maximum 20 characters");
+	defined("USER_PASSWORD_REQUIREMENTS_NUMBER") ? null :  define("USER_PASSWORD_REQUIREMENTS_NUMBER", "at least one number");
+	defined("USER_PASSWORD_REQUIREMENTS_LOWERCASE") ? null :  define("USER_PASSWORD_REQUIREMENTS_LOWERCASE", "at least one lowercase letter");
+	defined("USER_PASSWORD_REQUIREMENTS_UPPERCASE") ? null :  define("USER_PASSWORD_REQUIREMENTS_UPPERCASE", "at least one uppercase letter");
+	defined("USER_PASSWORD_REQUIREMENTS_SPECIAL_CHAR_A") ? null :  define("USER_PASSWORD_REQUIREMENTS_SPECIAL_CHAR_A", "at least one special character");
+	defined("USER_PASSWORD_REQUIREMENTS_SPECIAL_CHAR_B") ? null :  define("USER_PASSWORD_REQUIREMENTS_SPECIAL_CHAR_B", "allowed special characters: !?@#$%&*");
+	
 	
 //Storage
 
@@ -59,6 +91,25 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 	
 		defined("STORAGE_PLACEHOLDER_PARENT") ? null :  define("STORAGE_PLACEHOLDER_PARENT", "Parent");
 		
+//Settings
+
+	//personal data
+		
+		defined("SETTINGS_PERSONAL_DATA_INPUT_NAME_SCHOOL_EMAIL") ? null :  define("SETTINGS_PERSONAL_DATA_INPUT_NAME_SCHOOL_EMAIL", "School E-Mail");
+
+//Emails
+
+	//Basic
+	
+		defined("EMAIL_BASIC_ADOBE_INFO") ? null :  define("EMAIL_BASIC_ADOBE_INFO", "You need Acrobat Reader to open PDF files. You can download it here free of charge");
+		defined("EMAIL_BASIC_CONFIDENTIAL_INFO") ? null :  define("EMAIL_BASIC_CONFIDENTIAL_INFO", "This message may contain confidential information and is only intended for the specified recipient. If you are not the intended recipient, please inform the sender or delete the message. Forwarding, distribution or copying of the message is prohibited.");
+
+	//Confirm Email
+		defined("EMAIL_CONFIRM_EMAIL_SUBJECT") ? null :  define("EMAIL_CONFIRM_EMAIL_SUBJECT", "Please confirm your email address");
+		defined("EMAIL_CONFIRM_EMAIL_INTRO") ? null :  define("EMAIL_CONFIRM_EMAIL_INTRO", "Please click the button to confirm your new or changed email address. Alternatively, you can enter the following link in your web browser.");
+		defined("EMAIL_CONFIRM_EMAIL_BUTTON") ? null :  define("EMAIL_CONFIRM_EMAIL_BUTTON", "Confirm E-Mail");
+		defined("EMAIL_CONFIRM_EMAIL_BOTTOM_INFO") ? null :  define("EMAIL_CONFIRM_EMAIL_BOTTOM_INFO", "The link is valid for 24 hours and can only be used once! If a new link is generated in the meantime the old link gets deactivated.");
+	
 //Basic words
 
 	defined("WORD_WELCOME") ? null :  define("WORD_WELCOME", "Welcome");
@@ -67,6 +118,12 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 	defined("WORD_SAVE") ? null :  define("WORD_SAVE", "Save");
 	defined("WORD_DELETE") ? null :  define("WORD_DELETE", "Delete");
 	defined("WORD_ABORT") ? null :  define("WORD_ABORT", "Abort");
+	defined("WORD_RESET") ? null :  define("WORD_RESET", "Reset");
+	defined("WORD_EMAIL") ? null :  define("WORD_EMAIL", "E-Mail");
+	defined("WORD_USERNAME") ? null :  define("WORD_USERNAME", "Username");
+	
+	defined("WORD_FIRSTNAME") ? null :  define("WORD_FIRSTNAME", "Firstname");
+	defined("WORD_LASTNAME") ? null :  define("WORD_LASTNAME", "Lastname");
 	
 //Basic phrase
 

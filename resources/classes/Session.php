@@ -55,6 +55,10 @@ class Session {
 		$_SESSION['user_id'] = $userID;
 	}
 	
+	function setPreferredLanguage($lang) {
+		$_SESSION['lang'] = $lang;
+	}
+	
 		
 	//User functions
 	

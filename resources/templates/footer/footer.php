@@ -1,9 +1,11 @@
-			</div>
 			
-			<!-- Footer Section Begin -->
-			<footer class="footer spad">
-			</footer>
-			<!-- Footer Section End -->
+			
+				<!-- Footer Section Begin -->
+				<footer class="footer spad">
+					
+				</footer>
+				<!-- Footer Section End -->
+			</div>
 
 		</div>
 	</div>

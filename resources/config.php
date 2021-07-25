@@ -35,6 +35,8 @@ include "functions.php";
 	defined("INCLUDES") ? null : define("INCLUDES", URL . "/includes");
 
 	defined("TEMPLATES") ? null : define("TEMPLATES", __DIR__ . DS . "templates");
+	
+	defined("MODULES") ? null : define("MODULES", __DIR__ . DS . "modules");
 
 	defined("LANG") ? null : define("LANG", __DIR__ . DS . "lang");
 	
@@ -59,14 +61,19 @@ include "functions.php";
 //Connect database
 
 $mysqli = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+//Include mailer functions
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 	
 //Load functions
 	
 spl_autoload_register(function ($class_name) {
 	if(substr($class_name,0,9) == "PHPMailer" OR $class_name == "PHPMailer" OR $class_name=="Exception" OR $class_name=="SMTP") {
-		//include MODULES.'/PHPMailer/src/Exception.php';
-		//include MODULES.'/PHPMailer/src/PHPMailer.php';
-		//include MODULES.'/PHPMailer/src/SMTP.php';
+		include MODULES.'/PHPMailer/src/Exception.php';
+		include MODULES.'/PHPMailer/src/PHPMailer.php';
+		include MODULES.'/PHPMailer/src/SMTP.php';
 	} else if(substr($class_name,0,4) == "Mpdf") {
 		//require_once MODULES.'/mpdf/vendor/autoload.php';
 	} else {

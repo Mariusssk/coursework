@@ -19,11 +19,20 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^login$ login_logout.php?request=login [QSA,NC,L]
 RewriteRule ^logout$ login_logout.php?request=logout [QSA,NC,L]
 
+RewriteRule ^profile$ user_profile.php?request=profile [QSA,NC,L]
+
 #Storage
 
 RewriteRule ^storage$ storage.php?request=overview [QSA,NC,L]
 RewriteRule ^storage/new$ storage.php?request=new [QSA,NC,L]
 RewriteRule ^storage/edit/([0-9-]+)$ storage.php?request=edit&ID=$1 [QSA,NC,L]
+
+#Settings
+
+RewriteRule ^settings/user$ user_profile.php?request=personal_data [QSA,NC,L]
+
+RewriteRule ^verify$ verify_email_request.php?request=verify [QSA,NC,L]
+RewriteRule ^verify/([A-Z0-9]*)$ verify_email_request.php?request=verify&code=$1 [QSA,NC,L]
 
 #-----------------------------------------
 
@@ -31,6 +40,15 @@ RewriteRule ^storage/edit/([0-9-]+)$ storage.php?request=edit&ID=$1 [QSA,NC,L]
 
 RewriteCond %{THE_REQUEST} ^.*/login_logout\.php [NC]
 RewriteRule ^(.*)login_logout.php$ 404 [R=301,L]
+
+RewriteCond %{THE_REQUEST} ^.*/storage\.php [NC]
+RewriteRule ^(.*)storage.php$ 404 [R=301,L]
+
+RewriteCond %{THE_REQUEST} ^.*/user_profile\.php [NC]
+RewriteRule ^(.*)user_profile.php$ 404 [R=301,L]
+
+RewriteCond %{THE_REQUEST} ^.*/verify_email_request\.php [NC]
+RewriteRule ^(.*)verify_email_request.php$ 404 [R=301,L]
 
 #-----------------------------------------
 

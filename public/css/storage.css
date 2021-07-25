@@ -13,15 +13,27 @@
 
 /* grid */
 
-@media screen and (max-width: 999px) {
-	.page.storage.edit .shelfAlignmentContainer {
+@media screen and (min-width: 1000px) {
+	.page.storage.edit .shelfAlignmentContainer .shelfGrid.mobileGrid{
 		display: none;
 	}
+	
+	.page.storage.edit .shelfAlignmentContainer .openBoxes {
+		display: inline-block;
+	}
+}
+
+@media screen and (max-width: 999px) {
+	.page.storage.edit .shelfAlignmentContainer .openBoxes,
+	.page.storage.edit .shelfAlignmentContainer .shelfGrid.desktopGrid,
+	.page.storage.edit .shelfAlignmentContainer .saveGridButton{
+		display: none;
+	}
+
 }
 
 .page.storage.edit .shelfAlignmentContainer .openBoxes {
 	border: 3px solid #383838;
-	display: inline-block;
 	width: 200px;
 	float: left;
 	min-height: 40px;
@@ -39,11 +51,18 @@
 .page.storage.edit .shelfAlignmentContainer .shelfGrid {
 	border: 3px solid #383838;
 	display: inline-block;
+	overflow-y: hidden;
+	overflow-x: scroll;
+}
+
+.page.storage.edit .shelfAlignmentContainer .shelfGrid.desktopGrid {
 	min-width: 200px;
 	max-width: calc(100% - 230px);
 	margin-left: 10px;
-	overflow-y: hidden;
-	overflow-x: scroll;
+}
+
+.page.storage.edit .shelfAlignmentContainer .shelfGrid.mobileGrid{ 
+	max-width: 100%;
 }
 
 .page.storage.edit .shelfAlignmentContainer .shelfGrid .gridRow{

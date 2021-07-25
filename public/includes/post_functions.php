@@ -40,6 +40,27 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		$session->logout();
 	}
 	
+	//reset password of user
+	
+	else if($request == "resetPassword") {
+		if(isset($_POST['passwordA']) AND !empty($_POST['passwordA']) AND isset($_POST['passwordB']) AND !empty($_POST['passwordB'])) {
+			if($_POST['passwordA'] == $_POST['passwordB']) {
+				if(User::checkPasswordRequirements($_POST['passwordA'])) {
+					$emailRequest = new EmailRequest;
+					if(isset($_POST['code']) AND $emailRequest->loadDataByCode($_POST['code']) AND $emailRequest->isValid()) {
+						$user = new User;
+						if($user->loadData($emailRequest->getUserID()) AND $user->setPassword($_POST['passwordA']) AND $user->saveData())  {
+							echo "success";
+							$emailRequest->verify();
+						}
+					}
+				} else {
+					echo "requirementsFailed";
+				}
+			}
+		}
+	}
+	
 }
 
 ob_flush();

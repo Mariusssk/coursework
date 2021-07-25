@@ -16,6 +16,11 @@ html, body {
 	height: calc(100vh - 50px);
 }
 
+.pageContent .content {
+	overflow-y: scroll;
+    overflow-x: hidden;
+}
+
 hr{
 	display: block;
     height: 1px;
@@ -56,6 +61,12 @@ hr{
 	border-radius: 5px;
 	cursor: pointer;
 	text-align: center;
+	display: block;
+	text-decoration: none;
+}
+
+.generalButton:hover {
+	color: white;
 }
 
 .generalInput  {
@@ -64,6 +75,7 @@ hr{
     border-right: 0px;
     height: 30px;
 	width: max(120px, 100%);
+	padding-left: 10px;
 }
 
 .generalSelect {
@@ -460,8 +472,6 @@ header.header .mobileHeader .fa-user-circle-o {
 
 .mainContainer .pageContent .content .page {
 	padding: 10px;
-	height: 100%;
-	overflow-y: auto;
 }
 
 
@@ -475,4 +485,15 @@ header.header .mobileHeader .fa-user-circle-o {
 	top: 50%;
 	-webkit-transform: translateY(-50%) translateX(-50%);
 }
+
+/* footer */
+
+@supports (-webkit-touch-callout: none) {
+	.mainContainer .pageContent .content footer.footer {
+		margin-top: 100px;
+	}
+}
+
+
+
 

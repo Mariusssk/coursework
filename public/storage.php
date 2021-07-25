@@ -131,15 +131,21 @@ if($session->loggedIn() === True) {
 					loadParentOptions(<?php echo "'".$storage->getTypeID()."','".$storage->getParentID()."'";?>);
 				</script>
 				<?php
+				$storageGrid = new StorageShelf;
+				if($storage->getTypeID() == 2) {
+					$storageGrid = $storage;
+				} else if($storage->getTypeID() == 3 AND !empty($storage->getParentID())) {
+					$storageGrid->loadData($storage->getParentID());
+				}
 				//display grid if type is shelf and size is defined
-				if($storage->getTypeID() == 2 AND $storage->getX() > 0 AND $storage->getY() > 0){
+				if($storageGrid->getTypeID() == 2 AND $storageGrid->getX() > 0 AND $storageGrid->getY() > 0){
 					?>
 					
 					<div class="shelfAlignmentContainer">
 						<hr>
 						<div class="openBoxes" id="openBoxes">
 							<?php
-							$openChilds = $storage->getChildsWithoutPosition();
+							$openChilds = $storageGrid->getChildsWithoutPosition();
 							foreach($openChilds as $tmpChild) {
 								$openChild = new Storage;
 								if($openChild->loadData($tmpChild)) {
@@ -150,26 +156,17 @@ if($session->loggedIn() === True) {
 							}
 							?>
 						</div>
-						<div class="shelfGrid">
-						<?php
-						/*for($x = 1;$x <= $storage->getX();$x++) {
-							?>
-							<div class="gridRow">
-								<?php
-								for($y = 1;$y <= $storage->getY();$y++) {
-									?>
-									<div class="gridBox" data-grid-x="<?php echo $x;?>" data-grid-y="<?php echo $y;?>">
-									</div>
-									<?php
-								}
-								?>
-							</div>
+						<div class="shelfGrid desktopGrid">
 							<?php
-						}*/
-						echo $storage->displayGrid();
-						?>
+							echo $storageGrid->displayGrid();
+							?>
 						</div>
-						<div class="generalButton" onclick="saveGrid()"> <?php echo WORD_SAVE;?> </div>
+						<div class="shelfGrid mobileGrid">
+							<?php
+							echo $storageGrid->displayGrid();
+							?>
+						</div>
+						<div class="generalButton saveGridButton" onclick="saveGrid()"> <?php echo WORD_SAVE;?> </div>
 					</div>
 					
 					<script>

@@ -209,7 +209,7 @@ function setUpGrid() {
 	});
 	
 	// find all grid boxes
-	var gridBoxes = document.querySelectorAll(".page.storage.edit .shelfAlignmentContainer .shelfGrid .gridBox");
+	var gridBoxes = document.querySelectorAll(".page.storage.edit .shelfAlignmentContainer .shelfGrid.desktopGrid .gridBox");
 	
 	for(i = 0;i < Object.keys(gridBoxes).length;i++) {
 		new Sortable(gridBoxes[i], {
@@ -223,7 +223,7 @@ function setUpGrid() {
 
 function saveGrid() {
 	//find all boxes
-	var boxesInGrid = document.querySelectorAll(".page.storage.edit .shelfAlignmentContainer .shelfGrid .gridBox .option");
+	var boxesInGrid = document.querySelectorAll(".page.storage.edit .shelfAlignmentContainer .shelfGrid.desktopGrid .gridBox .option");
 	var openBoxes = document.querySelectorAll(".page.storage.edit .shelfAlignmentContainer .openBoxes .option");
 	
 	var boxes = [];

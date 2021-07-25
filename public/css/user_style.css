@@ -15,6 +15,12 @@
 	margin: calc((100vh - 200px)/ 2) auto;
 }
 
+.page.login .loginFormContainer .resetPasswordBtn {
+	display: inline-block;
+	color: #2271b1;
+	cursor: pointer;
+}
+
 /* Login form */
 
 .loginFormOverlay {
