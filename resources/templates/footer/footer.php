@@ -1,13 +1,16 @@
-			
-			
-				<!-- Footer Section Begin -->
-				<footer class="footer spad">
-					
-				</footer>
-				<!-- Footer Section End -->
 			</div>
 
-		</div>
+		</div>	
+	
+		<!-- Footer Section Begin -->
+		<footer class="footer spad">
+			<div class="langMenu">
+				<div class="flagContainer" onclick="changeLang('de')"><img class="flag" src="<?php echo IMAGES?>/flag_germany.png"></div>
+				<div class="flagContainer" onclick="changeLang('en')"><img class="flag" src="<?php echo IMAGES?>/flag_uk.png"></div>
+			</div>
+		</footer>
+		<!-- Footer Section End -->
+		
 	</div>
 	
 <?php

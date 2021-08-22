@@ -6,10 +6,8 @@
 		<a href="<?php echo URL;?>/notifications"><i class="fa fa-bell" aria-hidden="true"></i></a>
 			<div class="headerProfileInfo">
 				<div class="profileLink">
-					<a href="#">
-						<span class="userInfo"> <?php echo $session->getUserFirstname();?> </span>
-						<i class="fa fa-user-circle-o" aria-hidden="true"></i>
-					</a>
+					<span class="userInfo"> <?php echo $session->getUserFirstname();?> </span>
+					<i class="fa fa-user-circle-o" aria-hidden="true"></i>
 				</div>
 				<div class="userInfoDropdown">
 					<div class="dropdownElement">

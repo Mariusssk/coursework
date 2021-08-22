@@ -31,9 +31,19 @@ class EmailRequest extends SystemClass {
 	
 	//create request for confirming changed email
 	
-	function createEmailConfirmRequest($user_id) {
+	function createEmailConfirmRequest($user_id,$emailType = "email") {
 		//set basic data
-		$this->email_request_type_id = 1;
+		if($emailType == "email") {
+			$this->email_request_type_id = 1;
+			$emailType = "confirmEmail";
+		} else if($emailType == "schoolEmail") {
+			$this->email_request_type_id = 2;
+			$emailType = "confirmSchoolEmail";
+		} else {
+			$this->email_request_type_id = 1;
+			$emailType = "confirmEmail";
+		}
+		
 		$this->user_id = $user_id;
 		
 		
@@ -65,7 +75,8 @@ class EmailRequest extends SystemClass {
 			$attributes = array("verify_link" => URL."/verify","code"=>$this->getCode());
 			
 			$email = new Email;
-			if($email->createEmail("confirmEmail",$this->getUserID(),$attributes)) {
+			
+			if($email->createEmail($emailType,$this->getUserID(),$attributes)) {
 				return(True);
 			}
 		}

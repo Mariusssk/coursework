@@ -23,30 +23,9 @@ if(isset($_GET['request']) AND $_GET['request'] == "logout") {
 		</div>
 	</div>
 	<?php
+	include(TEMPLATES."/footer/footer.php");
 } else {
-	include(TEMPLATES."/header/header_basic.php");
-	
-	
-	?>
-	<div class="page login">
-		<img src="<?php echo IMAGES;?>/background-stage.jpg" class="backgroundImage">
-		
-		<div class="loginFormOverlay loginFormContainer">
-			<div id="loginForm">
-				<?php include TEMPLATES."/user/login_form.php";?>
-			</div>
-			<div id="passwordResetRequest" class="none">
-				<input type="text" class="generalInput" data-input-name="username" placeholder="<?php echo USER_USERNAME;?>">
-				<div class="generalButton"> </div>
-			</div>
-		</div>
-
-	</div>
-	<?php
+	include(TEMPLATES."/page/login.php");
 }
 
-?>
 
-<?php
-
-include(TEMPLATES."/footer/footer.php");

@@ -42,16 +42,60 @@ if($session->loggedIn() === True) {
 					<?php echo WORD_USERNAME;?>*:
 					<input type="text" class="generalInput" data-input-name="username" value="<?php echo $user->getUsername();?>">
 				</div>
-				<div class="col-md-6 col-sm-12 inputBlock">
+				<div class="col-md-6 col-sm-12 col-lg-4 inputBlock">
 					<?php echo WORD_EMAIL;?>*:
 					<input type="text" class="generalInput" data-input-name="email" value="<?php echo $user->getEmail();?>">
 				</div>
-				<div class="col-md-6 col-sm-12 inputBlock">
+				<div class="col-md-6 col-sm-12 col-lg-4 inputBlock">
 					<?php echo SETTINGS_PERSONAL_DATA_INPUT_NAME_SCHOOL_EMAIL;?>:
 					<input type="text" class="generalInput" data-input-name="schoolEmail" value="<?php echo $user->getSchoolEmail();?>">
 				</div>
+				<div class="col-md-6 col-sm-12 col-lg-4 inputBlock">
+					<?php
+					if($user->getPreferredLanguage() == "de") {
+						$deSelect = "selected";
+						$enSelect = "";
+					} else if($user->getPreferredLanguage() == "en") {
+						$deSelect = "";
+						$enSelect = "selected";
+					}
+					echo SETTINGS_PERSONAL_DATA_SELECT_LANGUAGE;?>:
+					<select class="generalSelect" data-input-name="preferredLanguage">
+						<option value="de" <?php echo $deSelect;?>><?php echo LANGUAGE_NAME_GERMAN;?></option>
+						<option value="en" <?php echo $enSelect;?>><?php echo LANGUAGE_NAME_ENGLISH;?></option>
+					</select>
+				</div>
 				<div class="col-12">
 					<div class="generalButton" onclick="saveUserPersonalData()"><?php echo WORD_SAVE;?></div>
+				</div>
+			</div>
+		</div>
+		<?php
+	} else if($request == "profile") {
+		$user = new User;
+		if(isset($_GET['username']) AND !empty($_GET['username'])) {
+			if(!$user->loadUserByUsername($_GET['username'])) {
+				?><h3 class="center"> <?php echo USER_PROFILE_NOT_FOUND;?> </h3><?php
+			}
+		} else {
+			$user->loadData($session->getSessionUserID());
+		}
+		
+		?>
+		<div class="page user profile">
+			<h2> <?php echo HEADER_MENU_USER_PROFILE;?> </h2>
+			<div class="profileContainer">
+				<div class="row">
+					<div class="col-sm-12 col-md-6">
+						<h2><?php echo $user->getUsername();?></h2>
+					</div>
+					<div class="col-sm-12 col-md-6">
+						Name: <?php echo $user->getName(1,1);?><br>
+						<?php echo WORD_COMMENTS.": <span style='color: red'>WIP</span>";?><br>
+						<?php echo USER_PROFILE_REGISTERED_SINCE.": ".$user->getDateCreated();?>
+						<hr>
+						<?php echo SETTINGS_PERSONAL_DATA_INPUT_NAME_SCHOOL_EMAIL.": ".$user->getSchoolEmail();?>
+					</div>
 				</div>
 			</div>
 		</div>

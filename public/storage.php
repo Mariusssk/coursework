@@ -35,7 +35,7 @@ if($session->loggedIn() === True) {
 							<input type="text" class="generalInput searchInput" data-search-name="parentName" placeholder="<?php echo STORAGE_OVERVIEW_SEARCH_PARENT_NAME;?>">
 						</div>
 						<div class="td col-md-4 col-sm-12">
-							<?php echo StorageType::getSelect(array("class"=>"generalSelect searchInput","data"=>array("search-name","type")));?>
+							<?php echo StorageType::getSelect(array("class"=>"generalSelect searchInput","data"=>array("search-name","type")),0,STORAGE_OVERVIEW_SEARCH_TYPE);?>
 						</div>
 						<div class="td d-block d-md-none col-12">
 							<div class="generalButton" onclick="loadStorages()"> <?php echo WORD_SEARCH;?> </div>

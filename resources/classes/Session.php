@@ -2,11 +2,17 @@
 
 class Session {
 	
-	//Check if user is logged in
-	
 	protected $current_user;
 	
+	//Function on construct
+	
 	function __construct() {
+		$this->loadCurrentUserData();
+	}
+	
+	//load data of current user
+	
+	function loadCurrentUserData() {
 		$this->current_user = new User;
 		$this->current_user->loadData($this->getSessionUserID());
 	}

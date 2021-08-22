@@ -58,16 +58,28 @@ function submitLogin() {
 //login user
 
 function submitLogout() {
-	
+	//send new lang to php
 	$.post(INCLUDES+"/post_functions.php",{
 		requestType: "logout"
 	},
 	function(data, status){
 		setLoginOverlay(true);
 	});
-	
 }
 
+//Change session language
+
+function changeLang(lang) {
+	//send lang to php
+	$.post(INCLUDES+"/post_functions.php",{
+		requestType: "setLanguage",
+		lang: lang
+	},
+	function(data, status){
+		//reload page with new lang
+		location.reload();
+	});
+}
 
 //Check if user logged-in on protected page
 

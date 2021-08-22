@@ -23,6 +23,7 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 			
 		//Item
 			defined("HEADER_MENU_ITEM_ITEM_MAIN") ? null :  define("HEADER_MENU_ITEM_ITEM_MAIN", "Item");
+			defined("HEADER_MENU_ITEM_ITEM_CONSUMABLE") ? null :  define("HEADER_MENU_ITEM_ITEM_CONSUMABLE", "Consumeables");
 			defined("HEADER_MENU_ITEM_ITEM_CREATE") ? null :  define("HEADER_MENU_ITEM_ITEM_CREATE", "Create new");
 			defined("HEADER_MENU_ITEM_ITEM_OVERVIEW") ? null :  define("HEADER_MENU_ITEM_ITEM_OVERVIEW", "Overview");
 			defined("HEADER_MENU_ITEM_ITEM_LEND") ? null :  define("HEADER_MENU_ITEM_ITEM_LEND", "Lended");
@@ -77,6 +78,20 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 	defined("USER_PASSWORD_REQUIREMENTS_SPECIAL_CHAR_B") ? null :  define("USER_PASSWORD_REQUIREMENTS_SPECIAL_CHAR_B", "allowed special characters: !?@#$%&*");
 	
 	
+	//Profile
+	
+	defined("USER_PROFILE_NOT_FOUND") ? null :  define("USER_PROFILE_NOT_FOUND", "User Profile not found!");
+	defined("USER_PROFILE_REGISTERED_SINCE") ? null :  define("USER_PROFILE_REGISTERED_SINCE", "Registered since");
+	
+	//Notifications
+	
+	defined("USER_NOTIFICATIONS_HEADLINE") ? null : define("USER_NOTIFICATIONS_HEADLINE", "Notifications");
+	
+	defined("USER_NOTIFICATIONS_SUB_HEADLINE_SYSTEM") ? null : define("USER_NOTIFICATIONS_SUB_HEADLINE_SYSTEM", "System Notifications");
+	defined("USER_NOTIFICATIONS_SUB_HEADLINE_USER") ? null : define("USER_NOTIFICATIONS_SUB_HEADLINE_USER", "User Notifications");
+	
+	defined("USER_NOTIFICATIONS_EMPTY_LIST") ? null : define("USER_NOTIFICATIONS_EMPTY_LIST", "Currently there are no notifications to display");
+	
 //Storage
 
 	//Overview
@@ -96,6 +111,7 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 	//personal data
 		
 		defined("SETTINGS_PERSONAL_DATA_INPUT_NAME_SCHOOL_EMAIL") ? null :  define("SETTINGS_PERSONAL_DATA_INPUT_NAME_SCHOOL_EMAIL", "School E-Mail");
+		defined("SETTINGS_PERSONAL_DATA_SELECT_LANGUAGE") ? null :  define("SETTINGS_PERSONAL_DATA_SELECT_LANGUAGE", "Preferred Language");
 
 //Emails
 
@@ -110,6 +126,11 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 		defined("EMAIL_CONFIRM_EMAIL_BUTTON") ? null :  define("EMAIL_CONFIRM_EMAIL_BUTTON", "Confirm E-Mail");
 		defined("EMAIL_CONFIRM_EMAIL_BOTTOM_INFO") ? null :  define("EMAIL_CONFIRM_EMAIL_BOTTOM_INFO", "The link is valid for 24 hours and can only be used once! If a new link is generated in the meantime the old link gets deactivated.");
 	
+//Language
+	
+	defined("LANGUAGE_NAME_GERMAN") ? null :  define("LANGUAGE_NAME_GERMAN", "German");
+	defined("LANGUAGE_NAME_ENGLISH") ? null :  define("LANGUAGE_NAME_ENGLISH", "English");
+	
 //Basic words
 
 	defined("WORD_WELCOME") ? null :  define("WORD_WELCOME", "Welcome");
@@ -121,6 +142,7 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 	defined("WORD_RESET") ? null :  define("WORD_RESET", "Reset");
 	defined("WORD_EMAIL") ? null :  define("WORD_EMAIL", "E-Mail");
 	defined("WORD_USERNAME") ? null :  define("WORD_USERNAME", "Username");
+	defined("WORD_COMMENTS") ? null :  define("WORD_COMMENTS", "Comments");
 	
 	defined("WORD_FIRSTNAME") ? null :  define("WORD_FIRSTNAME", "Firstname");
 	defined("WORD_LASTNAME") ? null :  define("WORD_LASTNAME", "Lastname");

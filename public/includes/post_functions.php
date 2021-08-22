@@ -61,6 +61,14 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 	}
 	
+	//set session lang
+	
+	else if($request == "setLanguage" AND isset($_POST['lang']) AND !empty($_POST['lang'])) {
+		if(strlen($_POST['lang']) == 2) {
+			$session->setPreferredLanguage($_POST['lang']);
+		}
+	}
+	
 }
 
 ob_flush();

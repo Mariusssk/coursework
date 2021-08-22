@@ -13,12 +13,16 @@ html, body {
 }
 
 .pageContent {
-	height: calc(100vh - 50px);
+	height: calc(100vh - 80px);
 }
 
 .pageContent .content {
 	overflow-y: scroll;
     overflow-x: hidden;
+}
+
+.fullPageContent {
+	height: calc(100vh - 30px);
 }
 
 hr{
@@ -337,7 +341,6 @@ header.header .mobileHeader .fa-user-circle-o {
 	width: 100%;
 	background-color: #1d2327;
 	padding: 10px 0 10px 0;
-	min-height: calc(100vh - 50px);
 	overflow-x: hidden;
 }
 
@@ -474,24 +477,40 @@ header.header .mobileHeader .fa-user-circle-o {
 	padding: 10px;
 }
 
+/* Page with Background Image */
 
-.mainContainer .page .backgroundImage {
-	position: fixed;
-	top: 0px;
-	left: 0px;
-	z-index: -1;
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	-webkit-transform: translateY(-50%) translateX(-50%);
+.mainContainer .page.notFound, .mainContainer .page.loginNeeded {
+	height: 100%;
+	background-size:cover;
 }
 
-/* footer */
+/* Footer */
 
 @supports (-webkit-touch-callout: none) {
 	.mainContainer .pageContent .content footer.footer {
 		margin-top: 100px;
 	}
+}
+
+.footer {
+	background-color: #1d2327;
+	height: 30px;
+}
+
+/* Footer Language */
+
+.footer .flagContainer {
+	float: left;
+	margin: 5px 10px;
+	cursor: pointer;
+	height: 20px;
+}
+
+
+.footer .flagContainer .flag{
+	height: 100%;
+	width: auto;
+	vertical-align: initial;
 }
 
 

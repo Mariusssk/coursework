@@ -57,9 +57,10 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 					} else {
 						$emptyField = 1;
 					}
-					
-					
-					
+
+					if(isset($personalData['preferredLanguage'])) {
+						$user->setPreferredLanguage($personalData['preferredLanguage']);
+					}
 					
 					
 					if($emptyField == 1) {

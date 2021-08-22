@@ -3,7 +3,7 @@
 function saveUserPersonalData() {
 	
 	//select all inputs
-	var inputs = document.querySelectorAll(".page.settings.personalData .generalInput");
+	var inputs = document.querySelectorAll(".page.settings.personalData .generalInput, .page.settings.personalData .generalSelect");
 	
 	var personalData = {};
 	
@@ -46,6 +46,7 @@ function saveUserPersonalData() {
 //verify code of email request 
 
 function verifyEmailRequest() {
+	var container = document.querySelector(".page.verify .verifyContainer");
 	var code = document.getElementById("verifyCode").value;
 	var inputContainer = document.querySelector(".page.verify .inputCodeContainer");
 	var passwordResetContainer = document.querySelector(".page.verify .passwordResetContainer");

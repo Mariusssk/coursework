@@ -7,7 +7,7 @@
 	text-align: center;
 	font-family: Arial, Helvetica, sans-serif;
 	width: 100vw;
-	height: 100vh;
+	height: calc(100vh - 30px);
 	display: inline-block;
 }
 
@@ -73,4 +73,33 @@
 	padding-top: calc((100vh - 245px)/ 2);
 	padding-bottom: calc((100vh - 245px)/ 2);
 	background-color: #e2e2e2e3;
+}
+
+/* User Profile */
+
+.page.user.profile .profileContainer {
+	margin: 10px;
+	width: calc(100% - 20px);
+	padding: 10px;
+	border: 1px solid grey;
+	border-radius: 10px;
+}
+
+
+/* Notifications */
+
+.page.notifications.list .notificationContainer {
+	margin-bottom: 10px;
+	padding: 10px;
+	border: 1px solid #1d2327;
+	border-radius: 5px;
+}
+
+.page.notifications.list .notificationContainer.unread {
+	background-color: #80808033
+}
+
+.page.notifications.list .emptyList {
+	padding: 10px;
+	font-weight: bold;
 }

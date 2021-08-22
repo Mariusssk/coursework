@@ -61,6 +61,9 @@ $( document ).ready(function() {
 			<a href="<?php echo URL;?>/item"><?php echo HEADER_MENU_ITEM_ITEM_MAIN;?></a>
 		</div>
 		<div class="subMenu" data-sub-menu="Items">
+			<div class="menuElement subElement" data-destination="item/consumable">
+				<a href="<?php echo URL;?>/item/consumable"><?php echo HEADER_MENU_ITEM_ITEM_CONSUMABLE;?></a>
+			</div>
 			<?php 
 			if($session->checkRights("create_new_item")) {
 			?>

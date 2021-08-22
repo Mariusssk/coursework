@@ -40,7 +40,14 @@ class User extends SystemClass {
 			$mailFail = 0;
 			if($this->getEMail() != $oldEmail) {
 				$emailRequest = new EmailRequest;
-				if(!$emailRequest->createEmailConfirmRequest($this->getID())) {
+				if(!$emailRequest->createEmailConfirmRequest($this->getID(),"email")) {
+					$mailFail = 1;
+				}
+			}
+			
+			if($this->getSchoolEmail() != $oldSchoolEmail) {
+				$emailRequest = new EmailRequest;
+				if(!$emailRequest->createEmailConfirmRequest($this->getID(),"schoolEmail")) {
 					$mailFail = 1;
 				}
 			}
@@ -99,6 +106,14 @@ class User extends SystemClass {
 		return($this->user_id);
 	}
 	
+	function getDateCreated($format = "") {
+		$created = new DateTime($this->created);
+		if(!empty($format)) {
+			return($created->format($format));
+		}
+		return($created->format("d.m.Y"));
+	}
+	
 	function getName($firstname = 1,$lastname = 1) {
 		$name = "";
 		if($firstname == 1) {
@@ -124,6 +139,10 @@ class User extends SystemClass {
 	
 	function getSchoolEmail() {
 		return($this->school_email);
+	}
+	
+	function getPreferredLanguage() {
+		return($this->preferred_language);
 	}
 	
 	//set functions
@@ -206,6 +225,11 @@ class User extends SystemClass {
 			return(True);
 		}
 		return(False);
+	}
+	
+	function setPreferredLanguage($value) {
+		$this->preferred_language = $value;
+		return(True);
 	}
 	
 	

@@ -20,12 +20,24 @@ RewriteRule ^login$ login_logout.php?request=login [QSA,NC,L]
 RewriteRule ^logout$ login_logout.php?request=logout [QSA,NC,L]
 
 RewriteRule ^profile$ user_profile.php?request=profile [QSA,NC,L]
+RewriteRule ^profile/(.+)$ user_profile.php?request=profile&username=$1 [QSA,NC,L]
+
+RewriteRule ^notifications$ notifications.php?request=list [QSA,NC,L]
 
 #Storage
 
 RewriteRule ^storage$ storage.php?request=overview [QSA,NC,L]
 RewriteRule ^storage/new$ storage.php?request=new [QSA,NC,L]
 RewriteRule ^storage/edit/([0-9-]+)$ storage.php?request=edit&ID=$1 [QSA,NC,L]
+
+
+#Item
+
+RewriteRule ^item$ item.php?request=overview [QSA,NC,L]
+RewriteRule ^item/consumable$ item.php?request=consumable [QSA,NC,L]
+RewriteRule ^item/new$ item.php?request=new [QSA,NC,L]
+RewriteRule ^item/edit/([0-9-]+)$ item.php?request=edit&ID=$1 [QSA,NC,L]
+RewriteRule ^item/lend$ item.php?request=lend [QSA,NC,L]
 
 #Settings
 
@@ -49,6 +61,9 @@ RewriteRule ^(.*)user_profile.php$ 404 [R=301,L]
 
 RewriteCond %{THE_REQUEST} ^.*/verify_email_request\.php [NC]
 RewriteRule ^(.*)verify_email_request.php$ 404 [R=301,L]
+
+RewriteCond %{THE_REQUEST} ^.*/notifications\.php [NC]
+RewriteRule ^(.*)notifications.php$ 404 [R=301,L]
 
 #-----------------------------------------
 
