@@ -26,6 +26,10 @@ var LANG = {
 	
 	STORAGE_DELETE_CHILD_EXISTING: "This storage still has childs and can hence not be deleted",
 	
+	//Items
+	
+	ITEM_OVERVIEW_NON_FOUND: "No items found!",
+	
 	//settings
 	
 	SETTINGS_USER_PERSONAL_DATA_USERNAME_ALREADY_USED: "This username is already used by another user",

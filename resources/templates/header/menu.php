@@ -36,14 +36,14 @@ $( document ).ready(function() {
 			<a href="<?php echo URL;?>/storage">Storage</a>
 		</div>
 		<div class="subMenu" data-sub-menu="Storage">
+			<div class="menuElement subElement" data-destination="storage">
+					<a href="<?php echo URL;?>/storage"><?php echo HEADER_MENU_ITEM_STORAGE_OVERVIEW;?></a>
+				</div>
 			<?php 
 			if($session->checkRights("create_new_storage")) {
 			?>
 				<div class="menuElement subElement" data-destination="storage/new">
 					<a href="<?php echo URL;?>/storage/new"><?php echo HEADER_MENU_ITEM_STORAGE_CREATE;?></a>
-				</div>
-				<div class="menuElement subElement" data-destination="storage">
-					<a href="<?php echo URL;?>/storage"><?php echo HEADER_MENU_ITEM_STORAGE_OVERVIEW;?></a>
 				</div>
 				<?php
 			}
@@ -64,14 +64,14 @@ $( document ).ready(function() {
 			<div class="menuElement subElement" data-destination="item/consumable">
 				<a href="<?php echo URL;?>/item/consumable"><?php echo HEADER_MENU_ITEM_ITEM_CONSUMABLE;?></a>
 			</div>
+			<div class="menuElement subElement" data-destination="item">
+				<a href="<?php echo URL;?>/item"><?php echo HEADER_MENU_ITEM_ITEM_OVERVIEW;?></a>
+			</div>
 			<?php 
 			if($session->checkRights("create_new_item")) {
 			?>
 				<div class="menuElement subElement" data-destination="item/new">
 					<a href="<?php echo URL;?>/item/new"><?php echo HEADER_MENU_ITEM_ITEM_CREATE;?></a>
-				</div>
-				<div class="menuElement subElement" data-destination="item">
-					<a href="<?php echo URL;?>/item"><?php echo HEADER_MENU_ITEM_ITEM_OVERVIEW;?></a>
 				</div>
 				<?php
 			}

@@ -1,0 +1,6 @@
+/* Overview / Consumables */
+
+.page.item.overview .generalTableContentRow,
+.page.item.consumable .generalTableContentRow {
+	cursor: pointer;
+}

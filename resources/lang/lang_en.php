@@ -23,7 +23,7 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 			
 		//Item
 			defined("HEADER_MENU_ITEM_ITEM_MAIN") ? null :  define("HEADER_MENU_ITEM_ITEM_MAIN", "Item");
-			defined("HEADER_MENU_ITEM_ITEM_CONSUMABLE") ? null :  define("HEADER_MENU_ITEM_ITEM_CONSUMABLE", "Consumeables");
+			defined("HEADER_MENU_ITEM_ITEM_CONSUMABLE") ? null :  define("HEADER_MENU_ITEM_ITEM_CONSUMABLE", "Consumables");
 			defined("HEADER_MENU_ITEM_ITEM_CREATE") ? null :  define("HEADER_MENU_ITEM_ITEM_CREATE", "Create new");
 			defined("HEADER_MENU_ITEM_ITEM_OVERVIEW") ? null :  define("HEADER_MENU_ITEM_ITEM_OVERVIEW", "Overview");
 			defined("HEADER_MENU_ITEM_ITEM_LEND") ? null :  define("HEADER_MENU_ITEM_ITEM_LEND", "Lended");
@@ -105,6 +105,21 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 	//Edit/Add
 	
 		defined("STORAGE_PLACEHOLDER_PARENT") ? null :  define("STORAGE_PLACEHOLDER_PARENT", "Parent");
+		
+//Items
+
+	//Overview
+		
+		//search
+		
+		defined("ITEM_OVERVIEW_SEARCH_PLACEHOLDER_NAME") ? null :  define("ITEM_OVERVIEW_SEARCH_PLACEHOLDER_NAME", "Name");
+		defined("ITEM_OVERVIEW_SEARCH_PLACEHOLDER_TYPE") ? null :  define("ITEM_OVERVIEW_SEARCH_PLACEHOLDER_TYPE", "Item Type");
+		defined("ITEM_OVERVIEW_SEARCH_PLACEHOLDER_CONSUMEABLE") ? null :  define("ITEM_OVERVIEW_SEARCH_PLACEHOLDER_CONSUMEABLE", "Only consumable");
+		defined("ITEM_OVERVIEW_SEARCH_PLACEHOLDER_AMOUNT") ? null :  define("ITEM_OVERVIEW_SEARCH_PLACEHOLDER_AMOUNT", "Amount");
+		
+		//Header
+		
+		defined("ITEM_OVERVIEW_HEADER_CONSUMEABLE") ? null :  define("ITEM_OVERVIEW_HEADER_CONSUMEABLE", "Consumable");
 		
 //Settings
 
