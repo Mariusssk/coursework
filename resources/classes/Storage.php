@@ -36,7 +36,7 @@ class Storage extends SystemClass {
 		
 		//set placeholder
 		
-		$post .= '<option value="0"> '.STORAGE_PLACEHOLDER_PARENT.' </option>';
+		$post .= '<option value="0"> '.STORAGE_PLACEHOLDER_SELECT.' </option>';
 		//set all storages as option
 		foreach($storages as $tmpStorage) {
 			$storage = new Storage;

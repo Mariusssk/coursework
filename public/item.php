@@ -37,7 +37,7 @@ if($session->loggedIn() === True) {
 						<div class="td col-md-2 col-sm-12">
 							<div class="generalCheckboxContainer"><?php echo ITEM_OVERVIEW_SEARCH_PLACEHOLDER_CONSUMEABLE;?><input type="checkbox" class="generalCheckbox searchInput" data-search-name="consumable" placeholder="<?php echo ITEM_OVERVIEW_SEARCH_PLACEHOLDER_NAME;?>"></div>
 						</div>
-						<div class="td col-md-2 col-sm-12">
+						<div class="td col-md-2 col-sm-12 d-none d-md-block ">
 							<div class="generalSearchBarButton" onclick="loadItems()"> <?php echo WORD_SEARCH;?> </div>
 						</div>
 						<div class="td d-block d-md-none col-12">
@@ -119,6 +119,69 @@ if($session->loggedIn() === True) {
 					loadItems('consumable');
 				</script>
 				<?php
+			} else {
+				include(TEMPLATES."/user/missing_rights.php");
+			}
+		} else if($request == "new" OR $request == "edit") {
+			//check rights for edit/new
+			if(($request == "edit" AND $session->checkRights("edit_item") == True) OR ($request == "new" AND $session->checkRights("create_new_item") == True)) {
+				$item = new Item;
+				if(isset($_GET['ID'])) {
+					$item->loadData($_GET['ID']);
+				}
+				
+				//display form
+				?>
+				<div class="row">
+					<div class="col-sm-12 col-md-6 inputBlock">
+						<?php echo ITEM_EDIT_INPUTNAME_NAME;?>*:<br>
+						<input type="text" class="generalInput dataInput" data-input-name="name" value="<?php echo $item->getName();?>"><br>
+					</div>
+					<div class="col-sm-6 col-md-3 inputBlock">
+						<?php echo ITEM_EDIT_INPUTNAME_LENGTH;?>:<br>
+						<input type="number" class="generalInput dataInput" data-input-name="length" value="<?php echo $item->getLength();?>"><br>
+					</div>
+					<div class="col-sm-6 col-md-3 inputBlock">
+						<?php echo ITEM_EDIT_INPUTNAME_AMOUNT;?>:<br>
+						<input type="number" class="generalInput dataInput" data-input-name="amount" value="<?php echo $item->getAmount();?>"><br>
+					</div>
+					<div class="col-sm-12 col-md-6 inputBlock" data-input-name="type">
+						<?php echo ITEM_EDIT_INPUTNAME_TYPE;?>*:<br>
+						<?php echo ItemType::getSelect(array("class"=>"generalSelect dataInput","data"=>array("input-name","type")),$item->getTypeID());?>
+					</div>
+					<div class="col-sm-12 col-md-6 inputBlock" data-input-name="storage">
+						<?php echo ITEM_EDIT_INPUTNAME_STORAGE;?>:<br>
+						<?php echo Storage::getSelect(array("class"=>"generalSelect dataInput","data"=>array("input-name","storage")),$item->getStorageID());?>
+					</div>
+					<div class="col-sm-12 inputBlock" data-input-name="storage">
+						<?php echo ITEM_EDIT_INPUTNAME_DESCRIPTION;?>:<br>
+						<textarea class="generalInput dataInput" data-input-name="description"><?php echo $item->getDescription();?></textarea><br>
+					</div>
+					<?php 
+					//check if user has right do delete
+					if($session->checkRights("delete_item") == True AND $request == "edit") {
+						?>
+						<div class="col-12 col-md-6">
+							<div class="generalButton" onclick="saveItemData('<?php echo $item->getID();?>')"> <?php echo WORD_SAVE;?> </div>
+						</div>
+						<div class="col-12 col-md-6" id="checkDeleteContainer">
+							<div class="generalButton" onclick="deleteItem('<?php echo $item->getID();?>','check')"> <?php echo WORD_DELETE;?> </div>
+						</div>
+						<div class="col-12 col-md-6 none" id="confirmDeleteContainer">
+							<div class="generalButton" onclick="deleteItem('<?php echo $item->getID();?>','confirm')"> <?php echo WORD_DELETE;?> </div> <div class="generalButton" onclick="deleteItem('<?php echo $item->getID();?>','abort')"> <?php echo WORD_ABORT;?> </div>
+						</div>
+						<?php
+					} else {
+						?>
+						<div class="col-12">
+							<div class="generalButton" onclick="saveItemData('<?php echo $item->getID();?>')"> <?php echo WORD_SAVE;?> </div>
+						</div>
+						<?php
+					}?>
+					
+				</div>
+				<?php
+				
 			} else {
 				include(TEMPLATES."/user/missing_rights.php");
 			}

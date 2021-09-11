@@ -145,7 +145,7 @@ $( document ).ready(function() {
 	<!-- Settings -->
 	
 	<div class="menuElement" data-sub-menu-parent="Settings" data-destination="settings">
-		<a href="<?php echo URL;?>/settings"><?php echo HEADER_MENU_ITEM_SETTINGS_MAIN;?></a>
+		<a href="<?php echo URL;?>/settings/user"><?php echo HEADER_MENU_ITEM_SETTINGS_MAIN;?></a>
 	</div>
 	<div class="subMenu" data-sub-menu="Settings">
 		<div class="menuElement subElement" data-destination="settings/user">
@@ -326,7 +326,7 @@ $( document ).ready(function() {
 	<!-- Settings -->
 	
 	<div class="menuElement" data-sub-menu-parent="Settings" data-destination="settings">
-		<a href="<?php echo URL;?>/settings"><?php echo HEADER_MENU_ITEM_SETTINGS_MAIN;?></a><i class="fa fa-caret-down" data-sub-menu-button="Settings" aria-hidden="true" onclick="subMenu('Settings')"></i>
+		<a href="<?php echo URL;?>/settings/user"><?php echo HEADER_MENU_ITEM_SETTINGS_MAIN;?></a><i class="fa fa-caret-down" data-sub-menu-button="Settings" aria-hidden="true" onclick="subMenu('Settings')"></i>
 	</div>
 	<div class="subMenu none" data-sub-menu="Settings">
 		<div class="menuElement subElement" data-destination="settings/user">

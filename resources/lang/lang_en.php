@@ -105,6 +105,7 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 	//Edit/Add
 	
 		defined("STORAGE_PLACEHOLDER_PARENT") ? null :  define("STORAGE_PLACEHOLDER_PARENT", "Parent");
+		defined("STORAGE_PLACEHOLDER_SELECT") ? null :  define("STORAGE_PLACEHOLDER_SELECT", "Storage");
 		
 //Items
 
@@ -120,6 +121,18 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 		//Header
 		
 		defined("ITEM_OVERVIEW_HEADER_CONSUMEABLE") ? null :  define("ITEM_OVERVIEW_HEADER_CONSUMEABLE", "Consumable");
+		
+	//EDIT
+	
+		//InputName
+		
+		defined("ITEM_EDIT_INPUTNAME_NAME") ? null :  define("ITEM_EDIT_INPUTNAME_NAME", "Name");
+		defined("ITEM_EDIT_INPUTNAME_LENGTH") ? null :  define("ITEM_EDIT_INPUTNAME_LENGTH", "Length");
+		defined("ITEM_EDIT_INPUTNAME_AMOUNT") ? null :  define("ITEM_EDIT_INPUTNAME_AMOUNT", "Amount");
+		defined("ITEM_EDIT_INPUTNAME_TYPE") ? null :  define("ITEM_EDIT_INPUTNAME_TYPE", "Type");
+		defined("ITEM_EDIT_INPUTNAME_STORAGE") ? null :  define("ITEM_EDIT_INPUTNAME_STORAGE", "Storage");
+		defined("ITEM_EDIT_INPUTNAME_DESCRIPTION") ? null :  define("ITEM_EDIT_INPUTNAME_DESCRIPTION", "Description");
+		
 		
 //Settings
 

@@ -1,6 +1,45 @@
 /* Overview / Consumables */
 
-.page.item.overview .generalTableContentRow,
-.page.item.consumable .generalTableContentRow {
+.page.item.overview .generalTableContentRow {
 	cursor: pointer;
 }
+
+.page.item.consumable .generalTableContentRow .consumableAmount {
+	text-align: center;
+}
+
+.page.item.consumable .generalTableContentRow .consumableAmountButton {
+	text-align: center;
+	cursor: pointer;
+}
+
+/* Colours for consumable amount */
+
+.page.item.consumable .consumableAmount.consumableAmountHigh {
+	background-color: #008000Ac;
+	color: white;
+}
+
+.page.item.consumable .consumableAmount.consumableAmountMedium {
+	background-color: #ffc109Bc;
+	color: white;
+}
+
+.page.item.consumable .consumableAmount.consumableAmountLow {
+	background-color: #ff572Acc;
+	color: white;
+}
+
+.page.item.consumable .consumableAmount.consumableAmountVeryLow {
+	background-color: #f13a00;
+	color: white;
+}
+
+/* edit item */
+
+.page.item.edit .inputBlock,
+.page.item.new .inputBlock {
+	padding: 10px;
+}
+
+
