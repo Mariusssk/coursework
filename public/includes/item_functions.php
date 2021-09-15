@@ -17,16 +17,23 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		if($request == "loadItems") {
 			//check user rights
 			if($session->checkRights("view_all_items") == True) {
-				//load items
-				$items = Item::getAll();
-				$post = array();
 				
+				//set serach parameters
 				if(isset($_POST['search'])) {
 					$search = $_POST['search'];
 				} else {
 					$search = array();
 				}
 				
+				
+				//load items
+				if(isset($search['lend']) AND $search['lend'] == 1) {
+					$items = Lend::getItemsLendByUser($session->getSessionUserID());
+				} else {
+					$items = Item::getAll();
+				}
+				
+				$post = array();
 				//load information for each item
 				foreach($items as $tmpItem) {
 					$item = new Item;

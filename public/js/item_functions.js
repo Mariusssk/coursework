@@ -1,6 +1,6 @@
-//load all storage entrys
+//load all items 
 
-function loadItems(displayType = "item") {
+function loadItems(displayType = "lend") {
 	
 	var search = {};
 	
@@ -23,6 +23,10 @@ function loadItems(displayType = "item") {
 		search['consumable'] = 1;
 	}
 	
+	if(displayType == "lend") {
+		search['lend'] = 1;
+	}
+	
 	//send request to php page
 	$.post(INCLUDES+"/item_functions.php",{
 		requestType: "loadItems",
@@ -43,6 +47,8 @@ function loadItems(displayType = "item") {
 
 			if(displayType == "consumable") {
 				items = displayConsumeable(data);
+			}else if(displayType == "lend") {
+				items = displayLend(data);
 			} else {
 				items = displayItems(data);
 			}
@@ -98,6 +104,31 @@ function displayConsumeable(data) {
 			<div class="td col-2 col-sm-1 consumableAmountButton" onclick="changeItemAmount('`+data[i]['ID']+`','-1')"><i class="fa fa-minus" aria-hidden="true"></i></div>
 			<div class="td col-2 col-sm-2 consumableAmount">`+data[i]['amount']+`</div>
 			<div class="td col-2 col-sm-1 consumableAmountButton" onclick="changeItemAmount('`+data[i]['ID']+`','1')"><i class="fa fa-plus" aria-hidden="true"></i></div>
+		</div>
+		<div class="row"><div class="col-12 hr"><hr></div></div>
+		`;
+	}
+	
+	//return the display data
+	return(items);
+}
+
+function displayLend(data) {
+	var items = "";
+	
+	//run through every item in array
+	for(i = 0; i < Object.keys(data).length;i++) {
+		if(data[i]['consumeable'] == "1") {
+			var consumeable = '<i class="fa fa-check" aria-hidden="true"></i>';
+		} else {
+			var consumeable = "";
+		}
+		items += `
+		<div class="row generalTableContentRow" onclick="viewItem('`+data[i]['ID']+`')" data-item-id="`+data[i]['ID']+`">
+			<div class="td col-6 col-sm-4">`+data[i]['name']+`</div>
+			<div class="td d-none d-sm-block col-sm-4">`+data[i]['typeName']+`</div>
+			<div class="td col-3 col-sm-2">`+consumeable+`</div>
+			<div class="td col-3 col-sm-2">`+data[i]['amount']+`</div>
 		</div>
 		<div class="row"><div class="col-12 hr"><hr></div></div>
 		`;

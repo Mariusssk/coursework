@@ -76,8 +76,8 @@ $( document ).ready(function() {
 				<?php
 			}
 			if($session->checkRights("lend_item")) {
-				?><div class="menuElement subElement" data-destination="item/lend">
-					<a href="<?php echo URL;?>/item/lend"><?php echo HEADER_MENU_ITEM_ITEM_LEND;?></a>
+				?><div class="menuElement subElement" data-destination="item/lended">
+					<a href="<?php echo URL;?>/item/lended"><?php echo HEADER_MENU_ITEM_ITEM_LEND;?></a>
 				</div><?php
 			}
 			?>
@@ -175,37 +175,11 @@ $( document ).ready(function() {
 		
 	</div>
 	
-	<!--<div class="menuElement " data-sub-menu-parent="subMenuTest" data-destination="">
-		<a href="<?php echo URL;?>">Test</a></i>
-	</div>
-	<div class="subMenu" data-sub-menu="subMenuTest">
-		<div class="menuElement subElement" data-destination="">
-			<a href="<?php echo URL;?>">Test</a>
-		</div>
-		<div class="menuElement subElement" data-destination="">
-			<a href="<?php echo URL;?>">Test</a>
-		</div>
-	</div>-->
-	
 </div>
 
 <!-- Mobile menu -->
 
 <div class="mobileMenuContainer none">
-	<!--<div class="menuElement" data-destination="dashbord">
-		<a href="<?php echo URL;?>">Dashbord</a>
-	</div>
-	<div class="menuElement" data-destination="storage">
-		<a href="<?php echo URL;?>/storage">Storage</a><i class="fa fa-caret-down" data-sub-menu-button="Storage" aria-hidden="true" onclick="subMenu('Storage')"></i>
-	</div>
-	<div class="subMenu none" data-sub-menu="Storage">
-		<div class="menuElement subElement" data-destination="storage/new">
-			<a href="<?php echo URL;?>/storage/new"><?php echo HEADER_MENU_ITEM_STORAGE_CREATE;?></a>
-		</div>
-		<div class="menuElement subElement" data-destination="storage">
-			<a href="<?php echo URL;?>/storage"><?php echo HEADER_MENU_ITEM_STORAGE_OVERVIEW;?></a>
-		</div>
-	</div>-->
 	
 	<!-- Dashbord -->
 	<div class="menuElement" data-destination="dashbord">
@@ -257,8 +231,8 @@ $( document ).ready(function() {
 				<?php
 			}
 			if($session->checkRights("lend_item")) {
-				?><div class="menuElement subElement" data-destination="item/lend">
-					<a href="<?php echo URL;?>/item/lend"><?php echo HEADER_MENU_ITEM_ITEM_LEND;?></a>
+				?><div class="menuElement subElement" data-destination="item/lended">
+					<a href="<?php echo URL;?>/item/lended"><?php echo HEADER_MENU_ITEM_ITEM_LEND;?></a>
 				</div><?php
 			}
 			?>

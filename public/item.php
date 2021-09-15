@@ -9,7 +9,7 @@ if($session->loggedIn() === True) {
 	
 	//Check if specific reuqest is send
 	
-	$requestAllowed = array("overview","new","edit","consumable");
+	$requestAllowed = array("overview","new","edit","consumable","lended");
 	if(isset($_GET['request']) AND !empty($_GET['request']) AND in_array($_GET['request'],$requestAllowed)) {
 		$request = $_GET['request'];
 	} else {
@@ -182,6 +182,57 @@ if($session->loggedIn() === True) {
 				</div>
 				<?php
 				
+			} else {
+				include(TEMPLATES."/user/missing_rights.php");
+			}
+		} else if($request == "lended") {
+			if($session->checkRights("lend_item") == True) {
+				?>
+				<div class="generalTable">
+					<div class="row generalTableSearch">
+						<div class="td col-md-4 col-sm-12">
+							<input type="text" class="generalInput searchInput" data-search-name="name" placeholder="<?php echo ITEM_OVERVIEW_SEARCH_PLACEHOLDER_NAME;?>">
+						</div>
+						<div class="td col-md-4 col-sm-12">
+							<?php echo ItemType::getSelect(array("class"=>"generalSelect searchInput","data"=>array("search-name","type")),0,ITEM_OVERVIEW_SEARCH_PLACEHOLDER_TYPE);?>
+						</div>
+						<div class="td col-md-2 col-sm-12">
+							<div class="generalCheckboxContainer"><?php echo ITEM_OVERVIEW_SEARCH_PLACEHOLDER_CONSUMEABLE;?><input type="checkbox" class="generalCheckbox searchInput" data-search-name="consumable" placeholder="<?php echo ITEM_OVERVIEW_SEARCH_PLACEHOLDER_NAME;?>"></div>
+						</div>
+						<div class="td col-md-2 col-sm-12 d-none d-md-block ">
+							<div class="generalSearchBarButton" onclick="loadItems('lend')"> <?php echo WORD_SEARCH;?> </div>
+						</div>
+						<div class="td d-block d-md-none col-12">
+							<div class="generalButton" onclick="loadItems('lend')"> <?php echo WORD_SEARCH;?> </div>
+						</div>
+					</div>
+					<div class="row generalTableHeader">
+						<div class="td col-sm-4 col-6">
+							<?php echo ITEM_OVERVIEW_SEARCH_PLACEHOLDER_NAME;?>
+						</div>
+						<div class="td col-sm-4 d-none d-sm-block">
+							<?php echo ITEM_OVERVIEW_SEARCH_PLACEHOLDER_TYPE;?>
+						</div>
+						<div class="td col-sm-2 col-3">
+							<?php echo ITEM_OVERVIEW_HEADER_CONSUMEABLE;?>
+						</div>
+						<div class="td col-sm-2 col-3">
+							<?php echo ITEM_OVERVIEW_SEARCH_PLACEHOLDER_AMOUNT;?>
+						</div>
+					</div>
+					<div class="tableContent" id="itemList">
+						<div class="row generalTableContentRow">
+							<div class="td col-12">
+								<?php echo WORD_LOADING;?>
+							</div>
+						</div>
+					</div>
+				</div>
+				<script>
+					//Load items
+					loadItems('lend');
+				</script>
+				<?php
 			} else {
 				include(TEMPLATES."/user/missing_rights.php");
 			}
