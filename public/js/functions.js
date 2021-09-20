@@ -107,9 +107,26 @@
 	}
 	
 //Run when loaded
-
+let code = ""
+let reading = ""
 $(document).ready(function() {
-
+	document.addEventListener('keypress', e=>{
+		if (e.keyCode===13 && code.toUpperCase().includes("BANANA")){
+		   alert("David Nooooo!");
+		   code = "";
+		}else{
+			code+=e.key;         
+		}
+		if(!reading){
+			reading=true;
+			setTimeout(()=>{
+				code="";
+				reading=false;
+			}, 10000);
+		}
+	});
 });
+
+
 
 

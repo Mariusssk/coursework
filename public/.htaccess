@@ -38,6 +38,7 @@ RewriteRule ^item/consumable$ item.php?request=consumable [QSA,NC,L]
 RewriteRule ^item/new$ item.php?request=new [QSA,NC,L]
 RewriteRule ^item/edit/([0-9-]+)$ item.php?request=edit&ID=$1 [QSA,NC,L]
 RewriteRule ^item/lended$ item.php?request=lended [QSA,NC,L]
+RewriteRule ^item/lend/add$ item.php?request=addLend [QSA,NC,L]
 
 #Settings
 

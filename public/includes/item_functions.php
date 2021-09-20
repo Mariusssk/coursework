@@ -44,21 +44,27 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 						$tmpItemArray['name'] = $item->getName();
 						$tmpItemArray['typeName'] = $item->getTypeName();
 						$tmpItemArray['consumeable'] = $item->getConsumeable();
-						$tmpItemArray['amount'] = $item->getAmount();
+						
+						if(isset($search['lend']) AND $search['lend'] == 1) {
+							$tmpItemArray['amount'] = Lend::calculateAmountLend($session->getSessionUserID(),$item->getID()); 
+						} else {
+							$tmpItemArray['amount'] = $item->getAmount();
+							
+							if(isset($search['amount']) AND (!empty($search['amount']) OR $search['amount'] == 0)  AND $search['amount'] != $item->getAmount()) {
+								$searchFail = 1;
+							}
+						}
+						
 						
 						if(isset($search['type']) AND !empty($search['type']) AND $search['type'] != $item->getTypeID()) {
 							$searchFail = 1;
 						}
 						
-						if(isset($search['name']) AND !empty($search['name']) AND strpos($tmpItemArray['name'],$search['name']) === False) {
+						if(isset($search['name']) AND !empty($search['name']) AND strpos(strToUpper($tmpItemArray['name']),strToUpper($search['name'])) === False) {
 							$searchFail = 1;
 						}
 						
 						if(isset($search['consumable']) AND !empty($search['consumable']) AND $search['consumable'] != $item->getConsumeable()) {
-							$searchFail = 1;
-						}
-						
-						if(isset($search['amount']) AND (!empty($search['amount']) OR $search['amount'] == 0)  AND $search['amount'] != $item->getAmount()) {
 							$searchFail = 1;
 						}
 						
@@ -80,19 +86,36 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 			
 		}
 		
-		//Change amount of item in storage 
+		//Change amount of item in storage / lended
 		
 		else if($request == "changeItemAmount") {
-			if($session->checkRights("edit_item") == True) {
-				$item = new Item;
-				if(isset($_POST['itemID']) AND $item->loadData($_POST['itemID']) === True AND isset($_POST['amount'])) {
-					$newAmount = $item->getAmount() + $_POST['amount'];
-					if($item->setAmount($newAmount) AND $item->saveData()) {
-						echo $item->getAmount();
+			//Check if storage or lended
+			if(isset($_POST['attribute']) AND $_POST['attribute'] = "lend") {
+				//check user rights
+				if($session->checkRights("lend_item") == True) {
+					$lend = new Lend;
+					if(isset($_POST['itemID']) AND $lend->loadDataByItemID($session->getSessionUserID(), $_POST['itemID']) === True AND isset($_POST['amount'])) {
+						$newAmount = $lend->getAmount() + $_POST['amount'];
+						if($lend->setAmount($newAmount) AND $lend->saveData()) {
+							echo $lend->getAmount();
+						}
 					}
+				} else {
+					echo "missingRights";
 				}
 			} else {
-				echo "missingRights";
+				//check user rights
+				if($session->checkRights("edit_item") == True) {
+					$item = new Item;
+					if(isset($_POST['itemID']) AND $item->loadData($_POST['itemID']) === True AND isset($_POST['amount'])) {
+						$newAmount = $item->getAmount() + $_POST['amount'];
+						if($item->setAmount($newAmount) AND $item->saveData()) {
+							echo $item->getAmount();
+						}
+					}
+				} else {
+					echo "missingRights";
+				}
 			}
 		}
 		
@@ -110,6 +133,52 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 					} else {
 						echo "error";
 					}
+				} else {
+					echo "error";
+				}
+			} else {
+				echo "missingRights";
+			}
+		} 
+		
+		//get name of item
+		
+		else if($request == "loadItemName") {
+			//check user rights
+			if($session->checkRights("view_all_items") == True OR $session->checkRights("view_specific_item") == True) {
+				$item = new Item;
+				//check if item ID is send and valid
+				if(isset($_POST['itemID']) AND $item->loadData($_POST['itemID'])) {
+					//return item name
+					echo $item->getName();
+				} else {
+					echo "error";
+				}
+			} else {
+				echo "missingRights";
+			}
+		}
+		
+		//lend item
+		
+		else if($request == "lendItem") {
+			//check user rights
+			if($session->checkRights("lend_item") == True) {
+				$item = new Item;
+				//check if item ID is send and valid
+				if(isset($_POST['itemID']) AND $item->loadData($_POST['itemID']) AND isset($_POST['amount']) AND is_numeric($_POST['amount'])) {
+					$lend = new Lend;
+					if($lend->loadDataByItemID($session->getSessionUserID(), $item->getID())) {
+						$newAmount = $_POST['amount'] + $lend->getAmount();
+						$lend->setAmount($newAmount);
+						if($lend->saveData()) {
+							echo "success";
+						} else {echo "errror";}
+					} else {
+						$lend = new Lend;
+						
+					}
+					
 				} else {
 					echo "error";
 				}

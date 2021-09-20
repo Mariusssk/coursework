@@ -121,6 +121,8 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 		//Header
 		
 		defined("ITEM_OVERVIEW_HEADER_CONSUMEABLE") ? null :  define("ITEM_OVERVIEW_HEADER_CONSUMEABLE", "Consumable");
+		defined("ITEM_OVERVIEW_HEADER_ADD_LEND") ? null :  define("ITEM_OVERVIEW_HEADER_ADD_LEND", "Lend new");
+		defined("ITEM_OVERVIEW_HEADER_RETURN_LEND") ? null :  define("ITEM_OVERVIEW_HEADER_RETURN_LEND", "Return");
 		
 	//EDIT
 	
@@ -133,6 +135,12 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 		defined("ITEM_EDIT_INPUTNAME_STORAGE") ? null :  define("ITEM_EDIT_INPUTNAME_STORAGE", "Storage");
 		defined("ITEM_EDIT_INPUTNAME_DESCRIPTION") ? null :  define("ITEM_EDIT_INPUTNAME_DESCRIPTION", "Description");
 		
+		
+	//Lend
+	
+		//header
+		
+		defined("ITEM_EDIT_LEND_ADD_HEADLINE") ? null :  define("ITEM_EDIT_LEND_ADD_HEADLINE", "Lend Item:");
 		
 //Settings
 
@@ -171,6 +179,7 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 	defined("WORD_EMAIL") ? null :  define("WORD_EMAIL", "E-Mail");
 	defined("WORD_USERNAME") ? null :  define("WORD_USERNAME", "Username");
 	defined("WORD_COMMENTS") ? null :  define("WORD_COMMENTS", "Comments");
+	defined("WORD_ADD") ? null :  define("WORD_ADD", "Add");
 	
 	defined("WORD_FIRSTNAME") ? null :  define("WORD_FIRSTNAME", "Firstname");
 	defined("WORD_LASTNAME") ? null :  define("WORD_LASTNAME", "Lastname");

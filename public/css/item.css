@@ -1,10 +1,10 @@
-/* Overview / Consumables */
+/* Overview / Consumables  */
 
 .page.item.overview .generalTableContentRow {
 	cursor: pointer;
 }
 
-.page.item.consumable .generalTableContentRow .consumableAmount {
+.page.item.consumable .generalTableContentRow .itemAmountField {
 	text-align: center;
 }
 
@@ -15,24 +15,51 @@
 
 /* Colours for consumable amount */
 
-.page.item.consumable .consumableAmount.consumableAmountHigh {
+.page.item.consumable .itemAmountField.consumableAmountHigh {
 	background-color: #008000Ac;
 	color: white;
 }
 
-.page.item.consumable .consumableAmount.consumableAmountMedium {
+.page.item.consumable .itemAmountField.consumableAmountMedium {
 	background-color: #ffc109Bc;
 	color: white;
 }
 
-.page.item.consumable .consumableAmount.consumableAmountLow {
+.page.item.consumable .itemAmountField.consumableAmountLow {
 	background-color: #ff572Acc;
 	color: white;
 }
 
-.page.item.consumable .consumableAmount.consumableAmountVeryLow {
+.page.item.consumable .itemAmountField.consumableAmountVeryLow {
 	background-color: #f13a00;
 	color: white;
+}
+
+/* Lend Items */
+
+.page.item.lended .generalTableContentRow .itemAmountField {
+	text-align: center;
+}
+
+.page.item.lended .generalTableContentRow .lendAmountButton {
+	text-align: center;
+	cursor: pointer;
+}
+
+.page.item.addLend .generalTableContentRow .addLendButton {
+    background-color: #2271b1;
+    width: 80%;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    display: block;
+    text-decoration: none;
+}
+
+.page.item.addLend .lendNewItemConatiner .td {
+	height: 66px;
+	line-height: 54px;
 }
 
 /* edit item */

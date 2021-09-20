@@ -1,6 +1,6 @@
 //load all items 
 
-function loadItems(displayType = "lend") {
+function loadItems(displayType = "") {
 	
 	var search = {};
 	
@@ -47,8 +47,10 @@ function loadItems(displayType = "lend") {
 
 			if(displayType == "consumable") {
 				items = displayConsumeable(data);
-			}else if(displayType == "lend") {
+			} else if(displayType == "lend") {
 				items = displayLend(data);
+			} else if(displayType == "addLend") {
+				items = displayAddLend(data);
 			} else {
 				items = displayItems(data);
 			}
@@ -102,7 +104,7 @@ function displayConsumeable(data) {
 			<div class="td col-6 col-sm-4">`+data[i]['name']+`</div>
 			<div class="td d-none d-sm-block col-sm-4">`+data[i]['typeName']+`</div>
 			<div class="td col-2 col-sm-1 consumableAmountButton" onclick="changeItemAmount('`+data[i]['ID']+`','-1')"><i class="fa fa-minus" aria-hidden="true"></i></div>
-			<div class="td col-2 col-sm-2 consumableAmount">`+data[i]['amount']+`</div>
+			<div class="td col-2 col-sm-2 itemAmountField">`+data[i]['amount']+`</div>
 			<div class="td col-2 col-sm-1 consumableAmountButton" onclick="changeItemAmount('`+data[i]['ID']+`','1')"><i class="fa fa-plus" aria-hidden="true"></i></div>
 		</div>
 		<div class="row"><div class="col-12 hr"><hr></div></div>
@@ -118,17 +120,33 @@ function displayLend(data) {
 	
 	//run through every item in array
 	for(i = 0; i < Object.keys(data).length;i++) {
-		if(data[i]['consumeable'] == "1") {
-			var consumeable = '<i class="fa fa-check" aria-hidden="true"></i>';
-		} else {
-			var consumeable = "";
-		}
 		items += `
-		<div class="row generalTableContentRow" onclick="viewItem('`+data[i]['ID']+`')" data-item-id="`+data[i]['ID']+`">
+		<div class="row generalTableContentRow" data-item-id="`+data[i]['ID']+`">
 			<div class="td col-6 col-sm-4">`+data[i]['name']+`</div>
 			<div class="td d-none d-sm-block col-sm-4">`+data[i]['typeName']+`</div>
-			<div class="td col-3 col-sm-2">`+consumeable+`</div>
+			<div class="td col-2 col-sm-1 lendAmountButton" onclick="changeItemAmount('`+data[i]['ID']+`','-1','lend')"><i class="fa fa-minus" aria-hidden="true"></i></div>
+			<div class="td col-2 col-sm-2 itemAmountField">`+data[i]['amount']+`</div>
+			<div class="td col-2 col-sm-1 lendAmountButton" onclick="changeItemAmount('`+data[i]['ID']+`','1','lend')"><i class="fa fa-plus" aria-hidden="true"></i></div>
+		</div>
+		<div class="row"><div class="col-12 hr"><hr></div></div>
+		`;
+	}
+	
+	//return the display data
+	return(items);
+}
+
+function displayAddLend(data) {
+	var items = "";
+	
+	//run through every item in array
+	for(i = 0; i < Object.keys(data).length;i++) {
+		items += `
+		<div class="row generalTableContentRow" data-item-id="`+data[i]['ID']+`">
+			<div class="td col-6 col-sm-4">`+data[i]['name']+`</div>
+			<div class="td d-none d-sm-block col-sm-4">`+data[i]['typeName']+`</div>
 			<div class="td col-3 col-sm-2">`+data[i]['amount']+`</div>
+			<div class="td col-3 col-sm-2"><div class="addLendButton" onclick="lendNewItem('`+data[i]['ID']+`')"> Add </div></div>
 		</div>
 		<div class="row"><div class="col-12 hr"><hr></div></div>
 		`;
@@ -140,11 +158,12 @@ function displayLend(data) {
 
 //Change amount of item 
 
-function changeItemAmount(itemID, amount = 0) {
+function changeItemAmount(itemID, amount = 0, attribute) {
 	$.post(INCLUDES+"/item_functions.php",{
 		requestType: "changeItemAmount",
 		itemID: itemID,
-		amount: amount
+		amount: amount,
+		attribute: attribute
 	},
 	function(data, status){
 		var dataCut = parsePostData(data);
@@ -157,7 +176,7 @@ function changeItemAmount(itemID, amount = 0) {
 		} else if(dataCut != "") {
 			var newAmount = dataCut;
 			
-			document.querySelector('[data-item-id="'+itemID+'"] .consumableAmount').innerHTML = newAmount;
+			document.querySelector('[data-item-id="'+itemID+'"] .itemAmountField').innerHTML = newAmount;
 		}
 		
 		setConsumableColour();
@@ -179,7 +198,7 @@ function setConsumableColour() {
 		
 	for(i = 0;i < Object.keys(amounts).length;i++) {
 		//find amount field object
-		var amountField = amounts[i].querySelector(".consumableAmount");
+		var amountField = amounts[i].querySelector(".itemAmountField");
 		if(amountField) {
 			//save amount to var
 			var amount = amountField.innerHTML;
@@ -207,6 +226,61 @@ function removeConsumableColours(amountField) {
 	amountField.classList.remove("consumableAmountMedium");
 	amountField.classList.remove("consumableAmountLow");
 	amountField.classList.remove("consumableAmountVeryLow");
+}
+
+//open lend item form
+
+function lendNewItem(itemID) {
+	var newLendContainer = document.querySelector(".page.item.addLend .lendNewItemConatiner");
+	
+	//getItemName
+	$.post(INCLUDES+"/item_functions.php",{
+		requestType: "loadItemName",
+		itemID: itemID
+	},
+	function(data, status){
+		var dataCut = parsePostData(data);
+		//process request result
+		if(dataCut == "error" || dataCut == "") {
+			headerNotification(LANG.ERROR_REQUEST_FAILED,"red");
+		} else if(dataCut == "missingRights") {
+			headerNotification(LANG.USER_RIGHTS_MISSING,"red");
+		} else {
+			//show form and add name if request was successful
+			newLendContainer.classList.remove("none");
+			newLendContainer.querySelector(".itemName").innerHTML = data;
+			document.getElementById("lendItemFormID").value = itemID;
+			console.log(document.getElementById("lendItemFormID").value);
+		}
+	});
+	
+}
+
+//submit lend item form
+
+function submitLendItem() {
+	var newLendContainer = document.querySelector(".page.item.addLend .lendNewItemConatiner");
+	
+	var itemID = newLendContainer.querySelector("#lendItemFormID").value;
+	var amount = newLendContainer.querySelector("#lendItemFormAmount").value;
+	
+	$.post(INCLUDES+"/item_functions.php",{
+		requestType: "lendItem",
+		itemID: itemID,
+		amount: amount
+	},
+	function(data, status){
+		var options = "";
+		var dataCut = parsePostData(data);
+		//check if request is valid
+		if(dataCut == "error" || dataCut == "") {
+			headerNotification(LANG.ERROR_REQUEST_FAILED,"red");
+		} else if(dataCut == "missingRights") {
+			headerNotification(LANG.USER_RIGHTS_MISSING,"red");
+		} else if(dataCut == "success") {
+			headerNotification(LANG.ITEM_LEND_SUCCESS,"green");
+		}
+	});
 }
 
 
@@ -297,6 +371,16 @@ function saveItemData(itemID) {
 		});
 	}
 	
+}
+
+//Open page to add lend
+
+function addLendItem(returnHome = 0) {
+	if(returnHome == 0) {
+		redirect(URL+"/item/lend/add");
+	} else {
+		redirect(URL+"/item/lended");
+	}
 }
 
 //Functions when page loaded

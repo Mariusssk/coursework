@@ -9,13 +9,12 @@ if($session->loggedIn() === True) {
 	
 	//Check if specific reuqest is send
 	
-	$requestAllowed = array("overview","new","edit","consumable","lended");
+	$requestAllowed = array("overview","new","edit","consumable","lended","addLend");
 	if(isset($_GET['request']) AND !empty($_GET['request']) AND in_array($_GET['request'],$requestAllowed)) {
 		$request = $_GET['request'];
 	} else {
 		$request = "overview";
 	}
-	
 	//Page
 	
 	?>
@@ -196,14 +195,17 @@ if($session->loggedIn() === True) {
 						<div class="td col-md-4 col-sm-12">
 							<?php echo ItemType::getSelect(array("class"=>"generalSelect searchInput","data"=>array("search-name","type")),0,ITEM_OVERVIEW_SEARCH_PLACEHOLDER_TYPE);?>
 						</div>
-						<div class="td col-md-2 col-sm-12">
-							<div class="generalCheckboxContainer"><?php echo ITEM_OVERVIEW_SEARCH_PLACEHOLDER_CONSUMEABLE;?><input type="checkbox" class="generalCheckbox searchInput" data-search-name="consumable" placeholder="<?php echo ITEM_OVERVIEW_SEARCH_PLACEHOLDER_NAME;?>"></div>
-						</div>
 						<div class="td col-md-2 col-sm-12 d-none d-md-block ">
 							<div class="generalSearchBarButton" onclick="loadItems('lend')"> <?php echo WORD_SEARCH;?> </div>
 						</div>
+						<div class="td col-md-2 col-sm-12 d-none d-md-block ">
+							<div class="generalSearchBarButton" style="background-color: green;" onclick="addLendItem()"> <?php echo ITEM_OVERVIEW_HEADER_ADD_LEND;?> </div>
+						</div>
 						<div class="td d-block d-md-none col-12">
-							<div class="generalButton" onclick="loadItems('lend')"> <?php echo WORD_SEARCH;?> </div>
+							<div class="generalSearchBarButton" onclick="loadItems('lend')"> <?php echo WORD_SEARCH;?> </div>
+						</div>
+						<div class="td d-block d-md-none col-12">
+							<div class="generalSearchBarButton" style="background-color: green;" onclick="addLendItem()"> <?php echo ITEM_OVERVIEW_HEADER_ADD_LEND;?> </div>
 						</div>
 					</div>
 					<div class="row generalTableHeader">
@@ -213,10 +215,10 @@ if($session->loggedIn() === True) {
 						<div class="td col-sm-4 d-none d-sm-block">
 							<?php echo ITEM_OVERVIEW_SEARCH_PLACEHOLDER_TYPE;?>
 						</div>
-						<div class="td col-sm-2 col-3">
-							<?php echo ITEM_OVERVIEW_HEADER_CONSUMEABLE;?>
+						<div class="td col-sm-1 col-2">
+							
 						</div>
-						<div class="td col-sm-2 col-3">
+						<div class="td col-sm-3 col-4">
 							<?php echo ITEM_OVERVIEW_SEARCH_PLACEHOLDER_AMOUNT;?>
 						</div>
 					</div>
@@ -231,6 +233,74 @@ if($session->loggedIn() === True) {
 				<script>
 					//Load items
 					loadItems('lend');
+				</script>
+				<?php
+			} else {
+				include(TEMPLATES."/user/missing_rights.php");
+			}
+		} else if($request == "addLend") {
+			if($session->checkRights("lend_item") == True) {
+				?>
+				<div class="generalTable">
+					<div class="row generalTableSearch">
+						<div class="td col-md-4 col-sm-12">
+							<input type="text" class="generalInput searchInput" data-search-name="name" placeholder="<?php echo ITEM_OVERVIEW_SEARCH_PLACEHOLDER_NAME;?>">
+						</div>
+						<div class="td col-md-4 col-sm-12">
+							<?php echo ItemType::getSelect(array("class"=>"generalSelect searchInput","data"=>array("search-name","type")),0,ITEM_OVERVIEW_SEARCH_PLACEHOLDER_TYPE);?>
+						</div>
+						<div class="td col-md-2 col-sm-12 d-none d-md-block ">
+							<div class="generalSearchBarButton" onclick="loadItems('addLend')"> <?php echo WORD_SEARCH;?> </div>
+						</div>
+						<div class="td col-md-2 col-sm-12 d-none d-md-block ">
+							<div class="generalSearchBarButton" style="background-color: green;" onclick="addLendItem('1')"> <?php echo ITEM_OVERVIEW_HEADER_RETURN_LEND;?> </div>
+						</div>
+						<div class="td d-block d-md-none col-12">
+							<div class="generalSearchBarButton" onclick="loadItems('addLend')"> <?php echo WORD_SEARCH;?> </div>
+						</div>
+						<div class="td d-block d-md-none col-12">
+							<div class="generalSearchBarButton" style="background-color: green;" onclick="addLendItem('1')"> <?php echo ITEM_OVERVIEW_HEADER_RETURN_LEND;?> </div>
+						</div>
+					</div>
+					<div class="row lendNewItemConatiner none">
+						<input type="hidden" value="0" id="lendItemFormID">
+						<hr>
+						<h5> <?php echo ITEM_EDIT_LEND_ADD_HEADLINE;?> </h5> 
+						<div class="col-12 col-sm-6 td">
+							<span class="itemName"></span>
+						</div>
+						<div class="col-12 col-sm-3 td">
+							<input type="number" id="lendItemFormAmount" class="generalInput" min="0" placeholder="<?php echo ITEM_OVERVIEW_SEARCH_PLACEHOLDER_AMOUNT;?>">
+						</div>
+						<div class="col-12 col-sm-3">
+							<div class="generalButton" onclick="submitLendItem()"> <?php echo WORD_ADD;?> </div>
+						</div>
+					</div>
+					<div class="row generalTableHeader">
+						<div class="td col-sm-4 col-6">
+							<?php echo ITEM_OVERVIEW_SEARCH_PLACEHOLDER_NAME;?>
+						</div>
+						<div class="td col-sm-4 d-none d-sm-block">
+							<?php echo ITEM_OVERVIEW_SEARCH_PLACEHOLDER_TYPE;?>
+						</div>
+						<div class="td col-sm-2 col-3">
+							<?php echo ITEM_OVERVIEW_SEARCH_PLACEHOLDER_AMOUNT;?>
+						</div>
+						<div class="td col-sm-2 col-3">
+							Action
+						</div>
+					</div>
+					<div class="tableContent" id="itemList">
+						<div class="row generalTableContentRow">
+							<div class="td col-12">
+								<?php echo WORD_LOADING;?>
+							</div>
+						</div>
+					</div>
+				</div>
+				<script>
+					//Load items
+					loadItems("addLend");
 				</script>
 				<?php
 			} else {
