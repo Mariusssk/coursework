@@ -142,6 +142,10 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 		
 		defined("ITEM_EDIT_LEND_ADD_HEADLINE") ? null :  define("ITEM_EDIT_LEND_ADD_HEADLINE", "Lend Item:");
 		
+		//Footer
+		
+		defined("ITEM_EDIT_LEND_INFO_DATE_CHANGE") ? null :  define("ITEM_EDIT_LEND_INFO_DATE_CHANGE", "Please click on the date to change it.");
+		
 //Settings
 
 	//personal data

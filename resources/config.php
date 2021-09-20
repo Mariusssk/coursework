@@ -20,7 +20,7 @@ include "functions.php";
 	
 	defined("URL_PATH") ? null : define("URL_PATH", "/coursework/public");
 	
-	$allowedURL = array("172.20.10.4","10.10.216.72","localhost","192.168.0.116","192.168.137.1");
+	$allowedURL = array("10.10.216.72","10.10.216.72","localhost","192.168.0.116","192.168.137.1");
 
 	if(in_array($_SERVER['SERVER_NAME'],$allowedURL)) {
 		defined("URL") ? null : define("URL", "http://".$_SERVER['SERVER_NAME'].URL_PATH);
@@ -40,7 +40,7 @@ include "functions.php";
 
 	defined("LANG") ? null : define("LANG", __DIR__ . DS . "lang");
 	
-	defined("IMAGES") ? null : define("IMAGES", URL . DS . "images");
+	defined("IMAGES") ? null : define("IMAGES", URL . "/images");
 	
 	defined("CLASSES") ? null : define("CLASSES", __DIR__ . DS . "classes");
 	

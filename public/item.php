@@ -230,6 +230,7 @@ if($session->loggedIn() === True) {
 						</div>
 					</div>
 				</div>
+				<small> <?php echo ITEM_EDIT_LEND_INFO_DATE_CHANGE;?> </small>
 				<script>
 					//Load items
 					loadItems('lend');
@@ -266,11 +267,14 @@ if($session->loggedIn() === True) {
 						<input type="hidden" value="0" id="lendItemFormID">
 						<hr>
 						<h5> <?php echo ITEM_EDIT_LEND_ADD_HEADLINE;?> </h5> 
-						<div class="col-12 col-sm-6 td">
+						<div class="col-12 col-sm-3 td">
 							<span class="itemName"></span>
 						</div>
 						<div class="col-12 col-sm-3 td">
 							<input type="number" id="lendItemFormAmount" class="generalInput" min="0" placeholder="<?php echo ITEM_OVERVIEW_SEARCH_PLACEHOLDER_AMOUNT;?>">
+						</div>
+						<div class="col-12 col-sm-3 td">
+							<input type="date" id="lendItemFormDate" class="generalInput" placeholder="<?php echo ITEM_OVERVIEW_SEARCH_PLACEHOLDER_AMOUNT;?>">
 						</div>
 						<div class="col-12 col-sm-3">
 							<div class="generalButton" onclick="submitLendItem()"> <?php echo WORD_ADD;?> </div>

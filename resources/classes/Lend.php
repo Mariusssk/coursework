@@ -14,6 +14,13 @@ class Lend extends SystemClass {
 	
 	//Functions
 	
+	function createNewData() {
+		if(empty($this->returned)) {
+			$this->returned = 0;
+		}
+		return(Parent::createNewData());
+	}
+	
 	//Load all items lend by user
 	public static function getItemsLendByUser($userID) {
 		$lend = new Lend;
@@ -31,14 +38,14 @@ class Lend extends SystemClass {
 		return($items);
 	}
 	
-	//calculate the amount a user has lend of one item
-	public static function calculateAmountLend($userID, $itemID) {
+	//calculate the total amount lend for an item
+	public static function calculateTotalAmountLend($itemID) {
 		$lend = new Lend;
 		
 		//setup sql
-		$sql = "SELECT SUM(amount) FROM ".$lend->TABLE_NAME." WHERE returned = ? AND user_id = ? AND item_id = ?";
+		$sql = "SELECT SUM(amount) FROM ".$lend->TABLE_NAME." WHERE returned = ? AND item_id = ?";
 		$sqlType = "iii";
-		$sqlParams = array(0,$userID,$itemID);
+		$sqlParams = array(0,$itemID);
 		
 		//get amount from SQL
 		$amount = pdSelect($sql,"mysqli",$sqlType,$sqlParams);
@@ -59,13 +66,25 @@ class Lend extends SystemClass {
 		
 		$lend = $this->mergeResult($lend);
 		
-		return($this->loadData($lend[0]));
+		if(count($lend) > 0) {
+			return($this->loadData($lend[0]));
+		} else {
+			return(False);
+		}
 	}
 	
 	//Get Functions
 	
 	function getAmount() {
 		return($this->amount);
+	}
+	
+	function getReturnDate() {
+		if(!empty($this->return_date)) {
+			$returnDate = new DateTime($this->return_date);
+			return($returnDate->format("d.m.Y"));
+		}
+		return("");
 	}
 	
 	//set

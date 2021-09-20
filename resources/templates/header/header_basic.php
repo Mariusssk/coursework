@@ -28,6 +28,7 @@ error_reporting(E_ALL);
 
 <body>
 	<script> var INCLUDES = "<?php echo INCLUDES;?>" </script>
+	<script> var IMAGES = "<?php echo IMAGES;?>" </script>
 	<script> var URL = "<?php echo URL;?>" </script>
 
 	<noscript>

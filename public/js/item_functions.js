@@ -123,10 +123,11 @@ function displayLend(data) {
 		items += `
 		<div class="row generalTableContentRow" data-item-id="`+data[i]['ID']+`">
 			<div class="td col-6 col-sm-4">`+data[i]['name']+`</div>
-			<div class="td d-none d-sm-block col-sm-4">`+data[i]['typeName']+`</div>
+			<div class="td d-none d-sm-block col-sm-3">`+data[i]['typeName']+`</div>
 			<div class="td col-2 col-sm-1 lendAmountButton" onclick="changeItemAmount('`+data[i]['ID']+`','-1','lend')"><i class="fa fa-minus" aria-hidden="true"></i></div>
-			<div class="td col-2 col-sm-2 itemAmountField">`+data[i]['amount']+`</div>
+			<div class="td col-2 col-sm-1 itemAmountField">`+data[i]['amount']+`</div>
 			<div class="td col-2 col-sm-1 lendAmountButton" onclick="changeItemAmount('`+data[i]['ID']+`','1','lend')"><i class="fa fa-plus" aria-hidden="true"></i></div>
+			<div class="td col-sm-2 col-12 returnDate"> <span onclick="changeReturnDate('`+data[i]['ID']+`')" class="returnDateText">`+data[i]['returnDate']+`</span> </div>
 		</div>
 		<div class="row"><div class="col-12 hr"><hr></div></div>
 		`;
@@ -182,6 +183,21 @@ function changeItemAmount(itemID, amount = 0, attribute) {
 		setConsumableColour();
 	});
 	
+}
+
+//change return date
+
+function changeReturnDate(itemID) {
+	var returnDateField = document.querySelector(".page.item.lended #itemList .generalTableContentRow[data-item-id='"+itemID+"'] .returnDate");
+	var returnDateForm = document.querySelector(".page.item.lended #itemList .generalTableContentRow[data-item-id='"+itemID+"'] .returnDate .returnDateForm");
+	
+	if(!returnDateForm) {
+	
+		returnDateField.innerHTML = '<input type="date" class="returnDateForm generalSelect"> <img src="'+IMAGES+'/icon_tick_small.png" class="generalIcon">';
+	
+	} else {
+		returnDateField.innerHTML = 'save';
+	}
 }
 
 //redirect to page of item
@@ -250,7 +266,6 @@ function lendNewItem(itemID) {
 			newLendContainer.classList.remove("none");
 			newLendContainer.querySelector(".itemName").innerHTML = data;
 			document.getElementById("lendItemFormID").value = itemID;
-			console.log(document.getElementById("lendItemFormID").value);
 		}
 	});
 	
@@ -263,11 +278,13 @@ function submitLendItem() {
 	
 	var itemID = newLendContainer.querySelector("#lendItemFormID").value;
 	var amount = newLendContainer.querySelector("#lendItemFormAmount").value;
+	var returnDate = newLendContainer.querySelector("#lendItemFormDate").value;
 	
 	$.post(INCLUDES+"/item_functions.php",{
 		requestType: "lendItem",
 		itemID: itemID,
-		amount: amount
+		amount: amount,
+		returnDate: returnDate,
 	},
 	function(data, status){
 		var options = "";
@@ -279,6 +296,9 @@ function submitLendItem() {
 			headerNotification(LANG.USER_RIGHTS_MISSING,"red");
 		} else if(dataCut == "success") {
 			headerNotification(LANG.ITEM_LEND_SUCCESS,"green");
+			newLendContainer.classList.add("none");
+		} else {
+			alert(data);
 		}
 	});
 }
