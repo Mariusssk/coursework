@@ -212,14 +212,17 @@ if($session->loggedIn() === True) {
 						<div class="td col-sm-4 col-6">
 							<?php echo ITEM_OVERVIEW_SEARCH_PLACEHOLDER_NAME;?>
 						</div>
-						<div class="td col-sm-4 d-none d-sm-block">
+						<div class="td col-sm-3 d-none d-sm-block">
 							<?php echo ITEM_OVERVIEW_SEARCH_PLACEHOLDER_TYPE;?>
 						</div>
-						<div class="td col-sm-1 col-2">
-							
-						</div>
-						<div class="td col-sm-3 col-4">
+						<div class="td col-sm-2 col-6">
 							<?php echo ITEM_OVERVIEW_SEARCH_PLACEHOLDER_AMOUNT;?>
+						</div>
+						<div class="td col-sm-2 d-none d-sm-block">
+							<?php echo ITEM_EDIT_LEND_HEADLINE_RETURN_DATE;?>
+						</div>
+						<div class="td col-sm-1 d-none d-sm-block">
+							<?php echo ITEM_EDIT_LEND_HEADLINE_RETURN;?>
 						</div>
 					</div>
 					<div class="tableContent" id="itemList">

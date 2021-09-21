@@ -58,9 +58,9 @@ class Lend extends SystemClass {
 
 	//load lending data by item and user ID
 	function loadDataByItemID($userID, $itemID) {
-		$sql = "SELECT ".$this->TABLE_NAME."_id FROM ".$this->TABLE_NAME." WHERE user_id = ? AND item_id = ?";
-		$sqlType = "ii";
-		$sqlParams = array($userID, $itemID);
+		$sql = "SELECT ".$this->TABLE_NAME."_id FROM ".$this->TABLE_NAME." WHERE user_id = ? AND item_id = ? AND returned = ?";
+		$sqlType = "iii";
+		$sqlParams = array($userID, $itemID, 0);
 		
 		$lend = pdSelect($sql,"mysqli",$sqlType,$sqlParams);
 		
@@ -79,10 +79,14 @@ class Lend extends SystemClass {
 		return($this->amount);
 	}
 	
-	function getReturnDate() {
+	function getReturnDate($type = "display") {
 		if(!empty($this->return_date)) {
 			$returnDate = new DateTime($this->return_date);
-			return($returnDate->format("d.m.Y"));
+			if($type == "form") {
+				return($returnDate->format("Y-m-d"));
+			} else {
+				return($returnDate->format("d.m.Y"));
+			}
 		}
 		return("");
 	}
@@ -116,12 +120,21 @@ class Lend extends SystemClass {
 	}
 	
 	function setReturnDate($value) {
-		if(DateTime::createFromFormat('Y-m-d H:i:s', $value) == True) {
+		if(empty($value)) {
+			$this->return_date = "";
+			return(True);
+		} else if(DateTime::createFromFormat('Y-m-d', $value) == True) {
 			$this->return_date = $value;
 			return(True);
 		}
 		return(False);
 	}
 	
-	
+	function setReturned($value) {
+		if($value == 0 OR $value == 1) {
+			$this->returned = $value;
+			return(True);
+		}
+		return(False);
+	}
 }

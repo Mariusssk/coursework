@@ -31,6 +31,7 @@ var LANG = {
 	ITEM_OVERVIEW_NON_FOUND: "No items found!",
 	
 	ITEM_LEND_SUCCESS: "Item was succesfully lended!",
+	ITEM_LEND_RETURN_SUCCESS: "Item was succesfully returned!",
 	
 	//settings
 	

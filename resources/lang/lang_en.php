@@ -141,6 +141,9 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 		//header
 		
 		defined("ITEM_EDIT_LEND_ADD_HEADLINE") ? null :  define("ITEM_EDIT_LEND_ADD_HEADLINE", "Lend Item:");
+		defined("ITEM_EDIT_LEND_HEADLINE_RETURN") ? null :  define("ITEM_EDIT_LEND_HEADLINE_RETURN", "Return");
+		defined("ITEM_EDIT_LEND_HEADLINE_RETURN_DATE") ? null :  define("ITEM_EDIT_LEND_HEADLINE_RETURN_DATE", "Return date");
+		
 		
 		//Footer
 		

@@ -50,6 +50,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 							if($lend->loadDataByItemID($session->getSessionUserID(),$item->getID())) {
 								$tmpItemArray['amount'] = $lend->getAmount(); 
 								$tmpItemArray['returnDate'] = $lend->getReturnDate(); 
+								$tmpItemArray['returnDateForm'] = $lend->getReturnDate('form');
 							}
 						} else {
 							$tmpItemArray['amount'] = $item->getAmount();
@@ -135,6 +136,55 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 				if(isset($_POST['itemID']) AND $item->loadData($_POST['itemID'])) {
 					//check if item has childs
 					if($item->deleteData() == True) {
+						echo "success";
+					} else {
+						echo "error";
+					}
+				} else {
+					echo "error";
+				}
+			} else {
+				echo "missingRights";
+			}
+		} 
+		
+		//save lend return date
+		
+		else if($request == "saveReturnDate") {
+			//check user rights
+			if($session->checkRights("lend_item") == True) {
+				$lend = new Lend;
+				//check if item ID is send and valid
+				if(isset($_POST['itemID']) AND $lend->loadDataByItemID($session->getSessionUserID(), $_POST['itemID']) AND isset($_POST['returnDate'])) {
+					//check if item has childs
+					if($lend->setReturnDate($_POST['returnDate']) == True AND $lend->saveData() == True) {
+						$returnDate = $lend->getReturnDate();
+						if(empty($returnDate)) {
+							echo "empty";
+						} else {
+							echo $returnDate;
+						}
+					} else {
+						echo "error";
+					}
+				} else {
+					echo "error";
+				}
+			} else {
+				echo "missingRights";
+			}
+		} 
+		
+		//return item which was lend
+		
+		else if($request == "returnItemLend") {
+			//check user rights
+			if($session->checkRights("lend_item") == True) {
+				$lend = new Lend;
+				//check if item ID is send and valid
+				if(isset($_POST['itemID']) AND $lend->loadDataByItemID($session->getSessionUserID(), $_POST['itemID'])) {
+					//check if item has childs
+					if($lend->setReturned(1) == True AND $lend->saveData() == True) {
 						echo "success";
 					} else {
 						echo "error";
