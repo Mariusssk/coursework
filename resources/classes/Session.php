@@ -34,7 +34,6 @@ class Session {
 		}
 		return(0);
 	}
-	
 		
 	//Login
 	
@@ -46,6 +45,16 @@ class Session {
 			}
 		}
 		return(False);
+	}
+	
+	//Count notifications
+	
+	function getNotificationCount() {
+		$count = 0;
+		$systemNotifications = new SystemNotifications($this->getSessionUserID());
+		$count += Notification::countUnreadNotifications($this->getSessionUserID());
+		$count += $systemNotifications->countNotifications();
+		return($count);
 	}
 	
 	//logout

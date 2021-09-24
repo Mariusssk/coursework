@@ -30,6 +30,7 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 			
 		//To-Do
 			defined("HEADER_MENU_ITEM_TODO_CREATE") ? null :  define("HEADER_MENU_ITEM_TODO_CREATE", "Create new");
+			defined("HEADER_MENU_ITEM_TODO_CATEGORY") ? null :  define("HEADER_MENU_ITEM_TODO_CATEGORY", "Categories");
 			defined("HEADER_MENU_ITEM_TODO_OVERVIEW") ? null :  define("HEADER_MENU_ITEM_TODO_OVERVIEW", "Overview");
 			
 		//Events
@@ -62,6 +63,8 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 
 	defined("USER_LOGOUT_BTN") ? null :  define("USER_LOGOUT_BTN", "Logout");
 	defined("USER_LOGED_IN_STATUS") ? null :  define("USER_LOGED_IN_STATUS", "Your are logged in");
+	
+	defined("USER_RESET_PASSWORD_BTN") ? null :  define("USER_RESET_PASSWORD_BTN", "Reset Password");
 	
 	//Rights missing
 	
@@ -155,7 +158,11 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 		
 		defined("SETTINGS_PERSONAL_DATA_INPUT_NAME_SCHOOL_EMAIL") ? null :  define("SETTINGS_PERSONAL_DATA_INPUT_NAME_SCHOOL_EMAIL", "School E-Mail");
 		defined("SETTINGS_PERSONAL_DATA_SELECT_LANGUAGE") ? null :  define("SETTINGS_PERSONAL_DATA_SELECT_LANGUAGE", "Preferred Language");
-
+		defined("SETTINGS_PERSONAL_DATA_SET_PASSWORD") ? null :  define("SETTINGS_PERSONAL_DATA_SET_PASSWORD", "Change Password");
+		defined("SETTINGS_PERSONAL_DATA_PASSWORD_CHANGE_INFO") ? null :  define("SETTINGS_PERSONAL_DATA_PASSWORD_CHANGE_INFO", "You succsesfully requested a password change. You can now either enter the following code on the new page opend when you click the button or use the link in the email you will receive.");
+		defined("SETTINGS_PERSONAL_DATA_PASSWORD_CHANGE_BUTTON") ? null :  define("SETTINGS_PERSONAL_DATA_PASSWORD_CHANGE_BUTTON", "Change Password");
+		defined("SETTINGS_PERSONAL_DATA_PASSWORD_CHANGE_CODE") ? null :  define("SETTINGS_PERSONAL_DATA_PASSWORD_CHANGE_CODE", "Code");
+		
 //Emails
 
 	//Basic
@@ -168,6 +175,34 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 		defined("EMAIL_CONFIRM_EMAIL_INTRO") ? null :  define("EMAIL_CONFIRM_EMAIL_INTRO", "Please click the button to confirm your new or changed email address. Alternatively, you can enter the following link in your web browser.");
 		defined("EMAIL_CONFIRM_EMAIL_BUTTON") ? null :  define("EMAIL_CONFIRM_EMAIL_BUTTON", "Confirm E-Mail");
 		defined("EMAIL_CONFIRM_EMAIL_BOTTOM_INFO") ? null :  define("EMAIL_CONFIRM_EMAIL_BOTTOM_INFO", "The link is valid for 24 hours and can only be used once! If a new link is generated in the meantime the old link gets deactivated.");
+
+	//Reset Password
+		defined("EMAIL_PASSWORD_RESET_SUBJECT") ? null :  define("EMAIL_PASSWORD_RESET_SUBJECT", "Aulatechnik System Password Reset");
+		defined("EMAIL_PASSWORD_RESET_INTRO") ? null :  define("EMAIL_PASSWORD_RESET_INTRO", "Please click the button to set a new password. Alternatively, you can enter the following link in your web browser.");
+		defined("EMAIL_PASSWORD_RESET_BUTTON") ? null :  define("EMAIL_PASSWORD_RESET_BUTTON", "Set Password");
+		defined("EMAIL_PASSWORD_RESET_BOTTOM_INFO") ? null :  define("EMAIL_PASSWORD_RESET_BOTTOM_INFO", "The link is valid for 24 hours and can only be used once! If a new link is generated in the meantime the old link gets deactivated.");
+		
+//Notifications
+
+	//System Notifications
+	
+		defined("SYSTEM_NOTIFICATIONS_LEND_OVERDUE_A") ? null: define("SYSTEM_NOTIFICATIONS_LEND_OVERDUE_A", "The return of");
+		defined("SYSTEM_NOTIFICATIONS_LEND_OVERDUE_B") ? null: define("SYSTEM_NOTIFICATIONS_LEND_OVERDUE_B", "overdue by");
+		defined("SYSTEM_NOTIFICATIONS_LEND_OVERDUE_C") ? null: define("SYSTEM_NOTIFICATIONS_LEND_OVERDUE_C", "days");
+		
+		defined("SYSTEM_NOTIFICATIONS_LEND_DUE_TODAY_A") ? null: define("SYSTEM_NOTIFICATIONS_LEND_DUE_TODAY_A", "The return of");
+		defined("SYSTEM_NOTIFICATIONS_LEND_DUE_TODAY_B") ? null: define("SYSTEM_NOTIFICATIONS_LEND_DUE_TODAY_B", "is due today");
+		
+		defined("SYSTEM_NOTIFICATIONS_LEND_DUE_A") ? null: define("SYSTEM_NOTIFICATIONS_LEND_DUE_A", "The return of");
+		defined("SYSTEM_NOTIFICATIONS_LEND_DUE_B") ? null: define("SYSTEM_NOTIFICATIONS_LEND_DUE_B", "is due in");
+		defined("SYSTEM_NOTIFICATIONS_LEND_DUE_C") ? null: define("SYSTEM_NOTIFICATIONS_LEND_DUE_C", "days");
+	
+		defined("SYSTEM_NOTIFICATIONS_CONFIRM_EMAIL_A") ? null: define("SYSTEM_NOTIFICATIONS_CONFIRM_EMAIL_A", "Please confirm your");
+		defined("SYSTEM_NOTIFICATIONS_CONFIRM_EMAIL_B") ? null: define("SYSTEM_NOTIFICATIONS_CONFIRM_EMAIL_B", "Resend confirmation email");
+		
+		defined("SYSTEM_NOTIFICATIONS_CONFIRM_PERSONAL_EMAIL_A") ? null: define("SYSTEM_NOTIFICATIONS_CONFIRM_PERSONAL_EMAIL_A", "personal email address");
+		defined("SYSTEM_NOTIFICATIONS_CONFIRM_SCHOOL_EMAIL_A") ? null: define("SYSTEM_NOTIFICATIONS_CONFIRM_SCHOOL_EMAIL_A", "school email address");
+		
 	
 //Language
 	

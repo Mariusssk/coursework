@@ -15,7 +15,7 @@
 	margin: calc((100vh - 200px)/ 2) auto;
 }
 
-.page.login .loginFormContainer .resetPasswordBtn {
+.loginForm .resetPasswordBtn {
 	display: inline-block;
 	color: #2271b1;
 	cursor: pointer;
@@ -73,6 +73,7 @@
 	padding-top: calc((100vh - 245px)/ 2);
 	padding-bottom: calc((100vh - 245px)/ 2);
 	background-color: #e2e2e2e3;
+	min-height: 100vh;
 }
 
 /* User Profile */

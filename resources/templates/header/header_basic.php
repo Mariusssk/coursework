@@ -52,6 +52,8 @@ error_reporting(E_ALL);
 	<script src="<?php echo JS;?>/sortable.min.js"></script>
 	<script src="<?php echo JS;?>/settings.js"></script>
 	
+	<script src="<?php echo JS;?>/notification_functions.js"></script>
+	
 	<?php
 	// Include js Language file
 	if(isset($_SESSION['lang'])){

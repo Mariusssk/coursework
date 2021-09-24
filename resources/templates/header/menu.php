@@ -98,10 +98,13 @@ $( document ).ready(function() {
 			<?php 
 			if($session->checkRights("create_todo_list")) {
 			?>
-				<div class="menuElement subElement" data-destination="storage/new">
+				<div class="menuElement subElement" data-destination="todo/new">
 					<a href="<?php echo URL;?>/todo/new"><?php echo HEADER_MENU_ITEM_TODO_CREATE;?></a>
 				</div>
-				<div class="menuElement subElement" data-destination="storage">
+				<div class="menuElement subElement" data-destination="todo/category">
+					<a href="<?php echo URL;?>/todo/category"><?php echo HEADER_MENU_ITEM_TODO_CATEGORY;?></a>
+				</div>
+				<div class="menuElement subElement" data-destination="todo">
 					<a href="<?php echo URL;?>/todo"><?php echo HEADER_MENU_ITEM_TODO_OVERVIEW;?></a>
 				</div>
 				<?php

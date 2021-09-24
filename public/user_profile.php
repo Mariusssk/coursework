@@ -68,6 +68,15 @@ if($session->loggedIn() === True) {
 				<div class="col-12">
 					<div class="generalButton" onclick="saveUserPersonalData()"><?php echo WORD_SAVE;?></div>
 				</div>
+				<hr>
+				<div class="col-12 passwordChangeButton">
+					<div class="generalButton" onclick="changePassword()"><?php echo SETTINGS_PERSONAL_DATA_SET_PASSWORD;?></div>
+				</div>
+				<div class="col-12 passwordChangeInfoBox none">
+					<?php echo SETTINGS_PERSONAL_DATA_PASSWORD_CHANGE_INFO;?>
+					<?php echo SETTINGS_PERSONAL_DATA_PASSWORD_CHANGE_CODE;?>: <span class="changeCode"></span>
+					<a class="generalButton" href="<?php echo URL;?>/verify"><?php echo SETTINGS_PERSONAL_DATA_SET_PASSWORD;?></a>
+				</div>
 			</div>
 		</div>
 		<?php

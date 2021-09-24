@@ -38,6 +38,23 @@ class Lend extends SystemClass {
 		return($items);
 	}
 	
+	//Load all items lend by user
+	public static function getAllLendByUser($userID) {
+		$lend = new Lend;
+		
+		//setup SQL
+		$sql = "SELECT lend_id FROM ".$lend->TABLE_NAME." WHERE returned = ? AND user_id = ? ORDER BY return_date ASC";
+		$sqlType = "ii";
+		$sqlParams = array(0,$userID);
+		
+		//load items
+		$items = pdSelect($sql,"mysqli",$sqlType,$sqlParams);
+		
+		$items = $lend->mergeResult($items);
+		
+		return($items);
+	}
+	
 	//calculate the total amount lend for an item
 	public static function calculateTotalAmountLend($itemID) {
 		$lend = new Lend;
@@ -73,10 +90,43 @@ class Lend extends SystemClass {
 		}
 	}
 	
+	//check overdue
+	
+	function checkOverdue() {
+		if(!empty($this->getReturnDate("form"))) {
+			$today = new DateTime();
+			$returnDate = new DateTime($this->getReturnDate("form"));
+			if($today > $returnDate) {
+				return(True);
+			}
+		}
+		return(False);
+	}
+	
+	//days until return date
+	
+	function getDaysUntilReturn() {
+		if(!empty($this->getReturnDate("form"))) {
+			$today = new DateTime();
+			$difference = $today->diff(new DateTime($this->getReturnDate("form")))->days;
+			if($this->checkOverdue()) {
+				$difference = $difference * -1;
+			} else {
+				$difference += 1;
+			}
+			return($difference);
+		}
+		return(False);
+	}
+	
 	//Get Functions
 	
 	function getAmount() {
 		return($this->amount);
+	}
+	
+	function getItemID() {
+		return($this->item_id);
 	}
 	
 	function getReturnDate($type = "display") {
@@ -87,6 +137,14 @@ class Lend extends SystemClass {
 			} else {
 				return($returnDate->format("d.m.Y"));
 			}
+		}
+		return("");
+	}
+	
+	function getItemName() {
+		$item = new Item;
+		if($item->loadData($this->getItemID())) {
+			return($item->getName());
 		}
 		return("");
 	}

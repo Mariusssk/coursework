@@ -10,19 +10,24 @@ if(isset($_GET['code'])) {
 	$code = "";
 }
 ?>
-<div class="page verify">
-	<img src="<?php echo IMAGES;?>/background-stage.jpg" class="backgroundImage">
+<div class="fullPageContent">
+	<div class="page verify" style="background-image: url('<?php echo str_replace("\\","/",IMAGES."/background-stage.jpg");?>')">
 		
-	<div class="verifyContainer">
-		<div class="inputCodeContainer">
-			<div id="verifyInformation" style="color: red;padding-bottom: 8px;"></div>
-			<h4>Verification Code*:</h4>
-			<input type="text" id="verifyCode" class="generalInput" value="<?php echo $code;?>">
-			<div class="generalButton" onclick="verifyEmailRequest()">Verify</div>
+		<div class="verifyContainer">
+			<div class="verifyData">
+				<div class="inputCodeContainer">
+					<div id="verifyInformation" style="color: red;padding-bottom: 8px;"></div>
+					<h4>Verification Code*:</h4>
+					<input type="text" id="verifyCode" class="generalInput" value="<?php echo $code;?>">
+					<div class="generalButton" onclick="verifyEmailRequest()">Verify</div>
+				</div>
+				<div class="passwordResetContainer none">
+					<?php include(TEMPLATES."/user/password_reset_form.php");?>
+				</div>
+			</div>
+			<?php if($session->loggedIn()) {?>
 			<a class="generalButton" href="<?php echo URL;?>">Dashbord</a>
-		</div>
-		<div class="passwordResetContainer none">
-			<?php include(TEMPLATES."/user/password_reset_form.php");?>
+			<?php } ?>
 		</div>
 	</div>
 </div>

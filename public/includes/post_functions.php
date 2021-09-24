@@ -61,6 +61,20 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 	}
 	
+	//request password reset
+	
+	else if($request == "requestPasswordReset") {
+		if(isset($_POST['username']) AND !empty($_POST['username'])) {
+			$user = new User;
+			if($user->loadUserByUsername($_POST['username'])) {
+				$emailRequest = new EmailRequest;
+				$emailRequest->createPasswordResetRequest($user->getID());
+			}
+		} else {
+			echo "empty";
+		}
+	}
+	
 	//set session lang
 	
 	else if($request == "setLanguage" AND isset($_POST['lang']) AND !empty($_POST['lang'])) {

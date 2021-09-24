@@ -32,12 +32,18 @@ if($session->loggedIn() === True) {
 			<div class="profileContainer">
 				<h3> <?php echo USER_NOTIFICATIONS_SUB_HEADLINE_SYSTEM;?> </h3>
 				<div class="row">
-					<!--<div class="col-12 notificationContainer unread">
-						Test
-					</div>-->
-					<div class="col-12 emptyList center">
-						<?php echo USER_NOTIFICATIONS_EMPTY_LIST;?> 
-					</div>
+					<?php 
+					$systemNotification = new SystemNotifications($session->getSessionUserID());
+					if($systemNotification->countNotifications() <= 0) {
+						?>
+						<div class="col-12 emptyList center">
+							<?php echo USER_NOTIFICATIONS_EMPTY_LIST;?> 
+						</div>
+						<?php
+					} else {
+						echo $systemNotification->displayNotifications();
+					}
+					?>
 				</div>
 				<hr>
 				<h3> <?php echo USER_NOTIFICATIONS_SUB_HEADLINE_USER;?> </h3>

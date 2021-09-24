@@ -2,6 +2,29 @@
 		
 	<!-- Desktop header -->
 	
+	<?php 
+	$notificationCount = $session->getNotificationCount();
+	if($notificationCount >= 1) {
+	?>
+		<style>
+		
+		header.header .fa-bell::after {
+			background-color: red;
+			padding: 4px;
+			font-weight: bold;
+			border-radius: 5px;
+			font-family: Arial, Helvetica, sans-serif;
+			font-size: 33%;
+			position: relative;
+			top: -18px;
+			left: -1px;
+			color: white;
+			content: "<?php echo $notificationCount;?>";
+		}
+		
+		</style>
+	<?php } ?>
+	
 	<div class="desktopHeader">
 		<a href="<?php echo URL;?>/notifications"><i class="fa fa-bell" aria-hidden="true"></i></a>
 			<div class="headerProfileInfo">

@@ -41,6 +41,21 @@ class Email {
 				if($this->sendEmail()) {
 					return(True);
 				}
+			} else if($type == "resetPassword") {
+				$this->reciver = array($user->getEmail(),$user->getName(1,1));
+				
+				$this->subject = EMAIL_PASSWORD_RESET_SUBJECT;
+				
+				$content = "";
+				$content .= Template\Email\getEmailHeader($type);
+				$content .= Template\Email\getEmailContent($type,$contentAttributes);
+				$content .= Template\Email\getEmailFooter($type);
+				
+				$this->content = $content;
+				$this->prepareEmail();
+				if($this->sendEmail()) {
+					return(True);
+				}
 			}
 		}
 		return(False);

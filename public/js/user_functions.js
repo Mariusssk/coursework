@@ -39,7 +39,7 @@ function submitLogin() {
 			if(dataCut == "success") {
 				setLoginOverlay(true);
 			} else if(dataCut == "loginWrong") {
-				notice = LANG.USER_LOGIN_WRONG+ ' <div onlick="passwordResetForm()" class="resetPasswordBtn"> Reset password </div>';
+				notice = LANG.USER_LOGIN_WRONG+ ' <div onclick="passwordResetForm()" class="resetPasswordBtn"> Reset password </div>';
 			} else if(dataCut == "error" || data == ""){
 				notice = LANG.USER_LOGIN_FAIL;
 			} else {
@@ -54,6 +54,47 @@ function submitLogin() {
 		});
 	}
 }
+
+//display password reset request form
+
+function passwordResetForm() {
+
+	var loginContainers = document.querySelectorAll(".loginForm");
+	var passwordResetContainers = document.querySelectorAll(".passwordResetRequest");
+
+	//Hide login form
+	for(i = 0; i < Object.keys(loginContainers).length; i++) {
+		loginContainers[i].classList.add("none");
+	}
+	
+	//Display password reset request form
+	for(i = 0; i < Object.keys(passwordResetContainers).length; i++) {
+		passwordResetContainers[i].classList.remove("none");
+	}
+	
+}
+
+//request password reset 
+
+function requestPasswordReset(e) {
+	var resetContainer = e.parentNode;
+	var username = resetContainer.querySelector("input[data-input-name='resetUsername']").value;
+	
+	$.post(INCLUDES+"/post_functions.php",{
+		requestType: "requestPasswordReset",
+		username: username
+	},
+	function(data, status){
+		var dataCut = parsePostData(data);
+		if(dataCut == "empty") {
+			headerNotification(LANG.USER_PASSWORD_RESET_REQUEST_EMPTY,"red");
+		} else {
+			resetContainer.innerHTML = LANG.USER_PASSWORD_RESET_REQUEST_SUCCESS + '<div class="generalButton" onclick="reload()"> '+LANG.WORD_LOGIN+' </div>';
+		}
+		
+	});
+}
+
 
 //login user
 

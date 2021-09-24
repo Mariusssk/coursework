@@ -37,6 +37,12 @@ hr{
 
 /* standard class */
 
+.onclickText {
+	color: #0d6efd;
+    text-decoration: none;
+	cursor: pointer;
+}
+
 .none {
 	display: none;
 }
@@ -176,7 +182,6 @@ header.header .fa-bell::after {
     border-radius: 5px;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 33%;
-    content: "100";
     position: relative;
     top: -18px;
     left: -1px;
@@ -511,7 +516,8 @@ header.header .mobileHeader .fa-user-circle-o {
 
 /* Page with Background Image */
 
-.mainContainer .page.notFound, .mainContainer .page.loginNeeded {
+.mainContainer .page.notFound, .mainContainer .page.loginNeeded,
+.mainContainer .page.verify {
 	height: 100%;
 	background-size:cover;
 }

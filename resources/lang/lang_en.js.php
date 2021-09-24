@@ -19,6 +19,9 @@ var LANG = {
 	USER_PASSWORD_RESET_NOT_EQUAL: "Passwords are not the same",
 	USER_PASSWORD_CHANGE_SUCCESS: "Password was succesfully changed",
 	
+	USER_PASSWORD_RESET_REQUEST_EMPTY: "Please enter a username or email",
+	USER_PASSWORD_RESET_REQUEST_SUCCESS: "The passwort reset has been requested succesfully and you will receive an email soon",
+	
 	//storage
 	STORAGE_OVERVIEW_NON_FOUND: "No storages found!",
 	STORAGE_EDIT_PARENT_NOT_POSSIBLE: "Parents are not available for this type of storage!",
@@ -41,6 +44,10 @@ var LANG = {
 	
 	SETTINGS_VERIFY_CODE_NOT_VALID: "Sorry, this code is not valid. Either has it already been used, is expired or a spelling mistake has been made.",
 	SETTINGS_VERIFY_EMAIL_SUCCESS: "Your E-Mail was succesfully verified!",
+	
+	//Notifications
+	
+	NOTIFICATIONS_CONFIRM_EMAIL_REQUEST_SUCCESS: "The confirmation email has been resend!",
 	
 	//Basic phrases
 	

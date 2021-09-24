@@ -73,6 +73,19 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 					}
 				}
 			}
+		} 
+		
+		//Request password change
+		
+		else if($request == "changePassword") {
+			$emailRequest = new EmailRequest;
+			
+			$requestCreation = $emailRequest->createPasswordResetRequest($session->getSessionUserID());
+			if($requestCreation !== False) {
+				echo $requestCreation;
+			} else {
+				echo "error";
+			}
 		}
 	}
 		
@@ -97,6 +110,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 			}
 		}
 	}
+	
 }
 
 ob_flush();

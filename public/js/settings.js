@@ -43,10 +43,37 @@ function saveUserPersonalData() {
 
 }
 
+//Change password
+
+function changePassword() {
+	$.post(INCLUDES+"/settings_functions.php",{
+		requestType: "changePassword"
+	},
+	function(data, status){
+		var dataCut = parsePostData(data);
+		
+		//check if request is valid
+		if(dataCut == "error" || dataCut == "") {
+			headerNotification(LANG.ERROR_REQUEST_FAILED,"red");
+		} else {
+			var infoBox = document.querySelector(".page.settings.personalData .passwordChangeInfoBox");
+			var changeButton = document.querySelector(".page.settings.personalData .passwordChangeButton");
+			var codeField = document.querySelector(".page.settings.personalData .passwordChangeInfoBox .changeCode");
+			
+			changeButton.classList.add("none");
+			infoBox.classList.remove("none");
+			
+			codeField.innerHTML = data;
+		}
+		
+	});
+}
+
+
 //verify code of email request 
 
 function verifyEmailRequest() {
-	var container = document.querySelector(".page.verify .verifyContainer");
+	var container = document.querySelector(".page.verify .verifyData");
 	var code = document.getElementById("verifyCode").value;
 	var inputContainer = document.querySelector(".page.verify .inputCodeContainer");
 	var passwordResetContainer = document.querySelector(".page.verify .passwordResetContainer");

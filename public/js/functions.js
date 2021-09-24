@@ -12,6 +12,12 @@
 	function redirect(tmpURL = "") {
 		window.location.href = tmpURL;
 	}
+	
+	//reload page
+	
+	function reload() {
+		location.reload();
+	}
 
 //Header notification
 

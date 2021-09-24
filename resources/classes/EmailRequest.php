@@ -11,6 +11,34 @@ class EmailRequest extends SystemClass {
 	
 	//Functions
 	
+	//check if request is open
+	
+	public static function checkOpenRequest($userID, $requestType = "personalEmail") {
+		$request = new EmailRequest;
+		$sql = "SELECT ".$request->TABLE_NAME."_id FROM ".$request->TABLE_NAME." WHERE verified = ? AND user_id = ? AND ".$request->TABLE_NAME."_type_id = ?";
+		$sqlType = "ii";
+		$sqlParams = array(0,$userID);
+		
+		if($requestType == "password") {
+			$sqlType .= "i";
+			array_push($sqlParams, 3);
+		} else if($requestType == "schoolEmail") {
+			$sqlType .= "i";
+			array_push($sqlParams, 2);
+		} else {
+			$sqlType .= "i";
+			array_push($sqlParams, 1);
+		}
+		
+		$openRequests = pdSelect($sql,"mysqli", $sqlType, $sqlParams);
+
+		if(count($openRequests) >= 1) {
+			return(True);
+		}
+		return(False);
+	
+	}
+	
 	//create new email request
 	
 	function createNewRequest() {
@@ -48,6 +76,55 @@ class EmailRequest extends SystemClass {
 		
 		
 		//create unique code
+		$this->createCode();
+		
+		if($this->createNewRequest()) {
+			//Delete all old requests
+			$this->deleteOpenRequests($this->getUserID(), $this->getTypeID(), $this->getID());
+			
+			//create email with confirmation link
+			$attributes = array("verify_link" => URL."/verify","code"=>$this->getCode());
+			
+			$email = new Email;
+			
+			if($email->createEmail($emailType,$this->getUserID(),$attributes)) {
+				return(True);
+			}
+		}
+		return(False);
+	}
+	
+	//create request for password reset
+	
+	function createPasswordResetRequest($user_id) {
+		//set basic data
+		$this->email_request_type_id = 3;
+		$emailType = "resetPassword";
+		
+		$this->user_id = $user_id;
+		
+		
+		//create unique code
+		$this->createCode();
+		
+		if($this->createNewRequest()) {
+			//Delete all old requests
+			$this->deleteOpenRequests($this->getUserID(), $this->getTypeID(), $this->getID());
+			
+			//create email with confirmation link
+			$attributes = array("verify_link" => URL."/verify","code"=>$this->getCode());
+			
+			$email = new Email;
+			
+			if($email->createEmail($emailType,$this->getUserID(),$attributes)) {
+				return($this->getCode());
+			}
+		}
+		return(False);
+	}
+	
+	//create request code 
+	function createCode() {
 		$codeCreated = False;
 		
 		while($codeCreated == False) {
@@ -63,24 +140,19 @@ class EmailRequest extends SystemClass {
 				$codeCreated = True;
 			}
 		}
+		return(True);
+	}
+	
+	//delete all existing requests
+	
+	function deleteOpenRequests($userID, $typeID, $newRequest = 0) {
+		//Delete all old requests
+		$sql = "DELETE FROM ".$this->TABLE_NAME." WHERE email_request_type_id = ? AND user_id = ? AND ".$this->TABLE_NAME."_id != ? AND verified = 0";
+		$sqlType = "iii";
+		$sqlParams = array($typeID,$userID,$newRequest);
+		pdInsert($sql,"mysqli",$sqlType,$sqlParams);
 		
-		if($this->createNewRequest()) {
-			//Delete all old requests
-			$sql = "DELETE FROM ".$this->TABLE_NAME." WHERE email_request_type_id = ? AND user_id = ? AND ".$this->TABLE_NAME."_id != ? AND verified = 0";
-			$sqlType = "iii";
-			$sqlParams = array($this->getTypeID(),$this->getUserID(),$this->getID());
-			pdInsert($sql,"mysqli",$sqlType,$sqlParams);
-			
-			//create email with confirmation link
-			$attributes = array("verify_link" => URL."/verify","code"=>$this->getCode());
-			
-			$email = new Email;
-			
-			if($email->createEmail($emailType,$this->getUserID(),$attributes)) {
-				return(True);
-			}
-		}
-		return(False);
+		return(True);
 	}
 	
 	//find email request ID by code
@@ -102,6 +174,7 @@ class EmailRequest extends SystemClass {
 		}
 		return(False);
 	}
+	
 	
 	//check if request has exired
 	

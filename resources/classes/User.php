@@ -19,7 +19,7 @@ class User extends SystemClass {
 	//check if a password would be valid
 	
 	static function checkPasswordRequirements($password) {
-		if(strlen($password) >= 8 OR strlen($password) <= 20 AND preg_match("/[a-zA-Z]+/",$password) AND preg_match("/[0-9]+/",$password) AND preg_match("/[!?@#$%&*]+/",$password)) {
+		if(strlen($password) >= 8 AND strlen($password) <= 20 AND preg_match("/[a-zA-Z]+/",$password) AND preg_match("/[0-9]+/",$password) AND preg_match("/[!?@#$%&*]+/",$password)) {
 			return(True);
 		}
 		return(False);
@@ -60,6 +60,7 @@ class User extends SystemClass {
 	}
 	
 	
+	
 	//Find user by email for login
 	
 	function loadUserByUsername($username = "") {
@@ -90,6 +91,12 @@ class User extends SystemClass {
 	
 	function checkRights($key = "") {
 		return(UserRole::checkRights($this->role_id,$key));
+	}
+	
+	//check if email verified
+	
+	function checkEmailVerified($emailType = "personal") {
+		
 	}
 	
 	//set session data
