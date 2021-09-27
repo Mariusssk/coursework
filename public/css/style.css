@@ -507,6 +507,39 @@ header.header .mobileHeader .fa-user-circle-o {
 	}
 }
 
+/* Data Box */
+
+.dataBox {
+	background-color: #e6e6e6;
+	color: black;
+	padding: 0px;
+	margin: 10px;
+}
+
+.dataBox .boxHeading {
+	padding: 5px;
+	border-bottom: 1px solid black;
+	font-weight: bold;
+}
+
+.dataBox .boxContent {
+	padding: 5px;
+}
+
+/* Dashbord */
+
+	/* Lend */
+	
+	.dataBox .lendItems {
+		width: 100%;
+		table-layout: fixed;
+	}
+	
+	.dataBox .lendItems td,
+	.dataBox .lendItems th{
+		padding: 2px;
+	}
+
 
 /* page */
 

@@ -10,6 +10,7 @@ class Lend extends SystemClass {
 		
 		//Vars which are allowed to be NULL
 		$this->NULL_VAR = array("return_date");
+
 	}
 	
 	//Functions

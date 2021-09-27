@@ -94,6 +94,13 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 	defined("USER_NOTIFICATIONS_SUB_HEADLINE_USER") ? null : define("USER_NOTIFICATIONS_SUB_HEADLINE_USER", "User Notifications");
 	
 	defined("USER_NOTIFICATIONS_EMPTY_LIST") ? null : define("USER_NOTIFICATIONS_EMPTY_LIST", "Currently there are no notifications to display");
+
+//Dashbord 
+
+	//lend
+	
+	defined("DASHBORD_BOX_LEND_HEADER") ? null : define("DASHBORD_BOX_LEND_HEADER", "Items lend");
+	defined("DASHBORD_BOX_LEND_EMPTY") ? null : define("DASHBORD_BOX_LEND_EMPTY", "You currently have no items lend");
 	
 //Storage
 
@@ -151,6 +158,15 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 		//Footer
 		
 		defined("ITEM_EDIT_LEND_INFO_DATE_CHANGE") ? null :  define("ITEM_EDIT_LEND_INFO_DATE_CHANGE", "Please click on the date to change it.");
+
+//Todo
+
+	//category
+	
+		//Overview
+		
+		defined("TODO_CATEGORY_OVERVIEW_HEADER_NAME") ? null :  define("TODO_CATEGORY_OVERVIEW_HEADER_NAME", "Name");	
+
 		
 //Settings
 
