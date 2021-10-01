@@ -7,6 +7,8 @@ class ToDoCategory extends ObjectType {
 	function __construct() {
 		//Name of the table
 		$this->TABLE_NAME = "todo_list_category";
+		
+		array_push($this->NULL_VAR, "user_id");
 	}
 	
 	//Functions
@@ -18,6 +20,21 @@ class ToDoCategory extends ObjectType {
 			$object = new ToDoCategory;
 		}
 		return(Parent::getAll($object));
+	}
+	
+	//get all categories for specific user
+	
+	static function getUserCategories($userID) {
+		$category = new ToDoCategory;
+		$sql = "SELECT ".$category->TABLE_NAME."_id FROM ".$category->TABLE_NAME." WHERE user_id = ? OR user_id IS NULL";
+		$sqlType = "i";
+		$sqlParams = array($userID);
+		
+		$categories = pdSelect($sql,"mysqli",$sqlType, $sqlParams);
+		
+		$categories = $category->mergeResult($categories);
+		
+		return($categories);
 	}
 	
 	//get a select for types

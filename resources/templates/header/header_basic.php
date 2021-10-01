@@ -22,6 +22,7 @@ error_reporting(E_ALL);
 	<link rel="stylesheet" href="<?php echo CSS;?>/storage.css" type="text/css">
 	<link rel="stylesheet" href="<?php echo CSS;?>/item.css" type="text/css">
 	<link rel="stylesheet" href="<?php echo CSS;?>/settings.css" type="text/css">
+	<link rel="stylesheet" href="<?php echo CSS;?>/todo_style.css" type="text/css">
 	
 	<link rel="icon" href="<?php echo IMAGES;?>/aulatechnik_logo_square.jpg">
 </head>
@@ -49,6 +50,7 @@ error_reporting(E_ALL);
 	<script src="<?php echo JS;?>/user_functions.js"></script>
 	<script src="<?php echo JS;?>/storage_functions.js"></script>
 	<script src="<?php echo JS;?>/item_functions.js"></script>
+	<script src="<?php echo JS;?>/todo_functions.js"></script>
 	<script src="<?php echo JS;?>/sortable.min.js"></script>
 	<script src="<?php echo JS;?>/settings.js"></script>
 	

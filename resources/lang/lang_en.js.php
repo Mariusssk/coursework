@@ -36,6 +36,10 @@ var LANG = {
 	ITEM_LEND_SUCCESS: "Item was succesfully lended!",
 	ITEM_LEND_RETURN_SUCCESS: "Item was succesfully returned!",
 	
+	//ToDO
+	
+	TODO_CATEGORY_OVERVIEW_NOT_FOUND: "No ToDo List categories found!",
+	
 	//settings
 	
 	SETTINGS_USER_PERSONAL_DATA_USERNAME_ALREADY_USED: "This username is already used by another user",

@@ -89,23 +89,38 @@ $( document ).ready(function() {
 	<!-- To Do List -->
 	
 	<?php
-	if($session->checkRights("view_all_todo_lists")) {
+	if($session->checkRights("view_all_todo_lists") OR $session->checkRights("edit_personal_todo_list")) {
 	?>
 		<div class="menuElement" data-sub-menu-parent="Todo" data-destination="todo">
 			<a href="<?php echo URL;?>/todo">To-Do</a>
 		</div>
 		<div class="subMenu" data-sub-menu="Todo">
 			<?php 
-			if($session->checkRights("create_todo_list")) {
+			if($session->checkRights("create_global_todo_list") OR $session->checkRights("edit_personal_todo_list")) {
 			?>
 				<div class="menuElement subElement" data-destination="todo/new">
 					<a href="<?php echo URL;?>/todo/new"><?php echo HEADER_MENU_ITEM_TODO_CREATE;?></a>
 				</div>
+			<?php 
+			}
+			if($session->checkRights("edit_todo_list_categories") OR $session->checkRights("edit_personal_todo_list")) {
+			?>
 				<div class="menuElement subElement" data-destination="todo/category">
 					<a href="<?php echo URL;?>/todo/category"><?php echo HEADER_MENU_ITEM_TODO_CATEGORY;?></a>
 				</div>
+			<?php
+			}
+			if($session->checkRights("view_all_todo_lists")) {
+			?>
 				<div class="menuElement subElement" data-destination="todo">
-					<a href="<?php echo URL;?>/todo"><?php echo HEADER_MENU_ITEM_TODO_OVERVIEW;?></a>
+					<a href="<?php echo URL;?>/todo/group"><?php echo HEADER_MENU_ITEM_TODO_PUBLIC;?></a>
+				</div>
+				<?php
+			}
+			if($session->checkRights("edit_personal_todo_list")) {
+			?>
+				<div class="menuElement subElement" data-destination="todo">
+					<a href="<?php echo URL;?>/todo/personal"><?php echo HEADER_MENU_ITEM_TODO_PERSONAL;?></a>
 				</div>
 				<?php
 			}
@@ -254,13 +269,13 @@ $( document ).ready(function() {
 		</div>
 		<div class="subMenu none" data-sub-menu="Todo">
 			<?php 
-			if($session->checkRights("create_todo_list")) {
+			if($session->checkRights("create_global_todo_list")) {
 			?>
 				<div class="menuElement subElement" data-destination="storage/new">
 					<a href="<?php echo URL;?>/todo/new"><?php echo HEADER_MENU_ITEM_TODO_CREATE;?></a>
 				</div>
 				<div class="menuElement subElement" data-destination="storage">
-					<a href="<?php echo URL;?>/todo"><?php echo HEADER_MENU_ITEM_TODO_OVERVIEW;?></a>
+					<a href="<?php echo URL;?>/todo"><?php echo HEADER_MENU_ITEM_TODO_PUBLIC;?></a>
 				</div>
 				<?php
 			}

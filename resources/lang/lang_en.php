@@ -31,7 +31,8 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 		//To-Do
 			defined("HEADER_MENU_ITEM_TODO_CREATE") ? null :  define("HEADER_MENU_ITEM_TODO_CREATE", "Create new");
 			defined("HEADER_MENU_ITEM_TODO_CATEGORY") ? null :  define("HEADER_MENU_ITEM_TODO_CATEGORY", "Categories");
-			defined("HEADER_MENU_ITEM_TODO_OVERVIEW") ? null :  define("HEADER_MENU_ITEM_TODO_OVERVIEW", "Overview");
+			defined("HEADER_MENU_ITEM_TODO_PUBLIC") ? null :  define("HEADER_MENU_ITEM_TODO_PUBLIC", "Group Lists");
+			defined("HEADER_MENU_ITEM_TODO_PERSONAL") ? null :  define("HEADER_MENU_ITEM_TODO_PERSONAL", "Own Lists");
 			
 		//Events
 			defined("HEADER_MENU_ITEM_EVENT_CREATE") ? null :  define("HEADER_MENU_ITEM_EVENT_CREATE", "Create new");
@@ -166,7 +167,11 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 		//Overview
 		
 		defined("TODO_CATEGORY_OVERVIEW_HEADER_NAME") ? null :  define("TODO_CATEGORY_OVERVIEW_HEADER_NAME", "Name");	
-
+		defined("TODO_CATEGORY_OVERVIEW_HEADER_TYPE") ? null :  define("TODO_CATEGORY_OVERVIEW_HEADER_TYPE", "Type");	
+		
+		defined("TODO_CATEGORY_OVERVIEW_TYPE_GLOBAL") ? null :  define("TODO_CATEGORY_OVERVIEW_TYPE_GLOBAL", "Global");	
+		defined("TODO_CATEGORY_OVERVIEW_TYPE_PERSONAL") ? null :  define("TODO_CATEGORY_OVERVIEW_TYPE_PERSONAL", "Personal");	
+		
 		
 //Settings
 
@@ -231,6 +236,7 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 	defined("WORD_SEARCH") ? null :  define("WORD_SEARCH", "Search");
 	defined("WORD_LOADING") ? null :  define("WORD_LOADING", "Loading...");
 	defined("WORD_SAVE") ? null :  define("WORD_SAVE", "Save");
+	defined("WORD_NEW") ? null :  define("WORD_NEW", "New");
 	defined("WORD_DELETE") ? null :  define("WORD_DELETE", "Delete");
 	defined("WORD_ABORT") ? null :  define("WORD_ABORT", "Abort");
 	defined("WORD_RESET") ? null :  define("WORD_RESET", "Reset");
