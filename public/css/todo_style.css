@@ -1,6 +1,5 @@
 /* ToDo */
 
-
 	/* Categories */
 	
 		/* Overview */
@@ -8,3 +7,113 @@
 		.createNewToDoBtn {
 			background-color: green;
 		}
+		
+		.page.todo.categoryOverview .generalTableContentRow {
+			cursor: pointer;
+		}
+		
+	/* Lists */
+	
+		/* Overview */
+		
+		.page.todo.overviewGlobal, .page.todo.overviewPersonal {
+			height: 100%;
+		}
+		
+		.todo .todoListContainer {
+			overflow-y: hidden;
+			overflow-x: auto;
+			height: 100%;
+			width: 100%;
+			white-space:nowrap;
+		}
+		
+		.todo .todoListContainer .todoListCategoryContainer {
+			height: calc(100% - 20px);
+			width: 350px;
+			display: inline-block;
+			background-color: #d4d4d4;
+			border-radius: 5px;
+			vertical-align: top;
+		}
+		
+		.todo .todoListContainer .todoListCategoryContainer .todoListCategoryHead{
+			border-top-left-radius: 5px;
+			border-top-right-radius: 5px;
+			height: 40px;
+			width: 350px;
+			background-color: #1d2327;
+			color: white;
+			padding: 5px;
+			font-weight: bold;
+		}
+		
+		.todo .todoListContainer .todoListCategoryContainer .todoListCategoryBody{
+			word-wrap: break-word;
+			overflow-y: auto;
+			height: calc(100% - 40px);
+		}
+		
+		.todo .todoListContainer .todoListCategoryContainer .todoListCategoryBody .todoList{ 
+			margin: 5px;
+			padding: 5px;
+			border-radius: 5px;
+			width: calc(100% - 10px);
+			background-color: white;
+			cursor: pointer;
+		}
+		
+		.todo .todoListContainer .todoListCategoryContainer .todoListCategoryBody .todoList .todoListName{ 
+			white-space: initial;
+		}
+		
+		/* Overlay */
+		
+		.todo .overlayContainer {
+			width: 100vw;
+			height: 100vh;
+			background-color: #808080b0;
+			position: fixed;
+			top: 0;
+			left: 0;
+		}
+		
+		.todo .todoListOverlay {
+			width: min(600px, calc(100% - 10px));
+			min-height: 200px;
+			background-color: #f4f5f7;
+			position: fixed;
+			top: 100px;
+			left: calc(50% - (min(600px, 100%) / 2));
+			border-radius: 5px;
+			padding: 10px;
+			margin: 5px;
+		}
+		
+		.todo .todoListOverlay .head {
+			font-size: 150%;
+			font-weight: bold;
+			margin-bottom: 10px;
+		}
+		
+		.todo .todoListOverlay .head .todoListName{
+			width: 80%;
+			display: inline-block;
+		}
+		
+		.todo .todoListOverlay .head .closeButton{
+			width: calc(20% - 20px);
+			display: inline-block;
+			text-align: right;
+		}
+		
+		.todo .todoListOverlay .labels {
+			margin-bottom: 5px;
+		}
+		
+		.todo .todoListOverlay .todoListEntries {
+			margin-bottom: 5px;
+		}
+		
+		
+		

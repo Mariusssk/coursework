@@ -18,6 +18,12 @@
 	function reload() {
 		location.reload();
 	}
+	
+//overlay
+
+function closeOverlay(overlay) {
+	overlay.closest(".overlayContainer").classList.add("none");
+}
 
 //Header notification
 

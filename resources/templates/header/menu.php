@@ -112,14 +112,14 @@ $( document ).ready(function() {
 			}
 			if($session->checkRights("view_all_todo_lists")) {
 			?>
-				<div class="menuElement subElement" data-destination="todo">
-					<a href="<?php echo URL;?>/todo/group"><?php echo HEADER_MENU_ITEM_TODO_PUBLIC;?></a>
+				<div class="menuElement subElement" data-destination="todo/global">
+					<a href="<?php echo URL;?>/todo/global"><?php echo HEADER_MENU_ITEM_TODO_PUBLIC;?></a>
 				</div>
 				<?php
 			}
 			if($session->checkRights("edit_personal_todo_list")) {
 			?>
-				<div class="menuElement subElement" data-destination="todo">
+				<div class="menuElement subElement" data-destination="todo/personal"">
 					<a href="<?php echo URL;?>/todo/personal"><?php echo HEADER_MENU_ITEM_TODO_PERSONAL;?></a>
 				</div>
 				<?php

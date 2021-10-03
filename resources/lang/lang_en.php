@@ -172,6 +172,20 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 		defined("TODO_CATEGORY_OVERVIEW_TYPE_GLOBAL") ? null :  define("TODO_CATEGORY_OVERVIEW_TYPE_GLOBAL", "Global");	
 		defined("TODO_CATEGORY_OVERVIEW_TYPE_PERSONAL") ? null :  define("TODO_CATEGORY_OVERVIEW_TYPE_PERSONAL", "Personal");	
 		
+		//EDIT
+		
+		defined("TODO_CATEGORY_EDIT_NAME") ? null :  define("TODO_CATEGORY_EDIT_NAME", "Name");	
+		defined("TODO_CATEGORY_EDIT_GLOBAL") ? null :  define("TODO_CATEGORY_EDIT_GLOBAL", "Global");	
+		
+	//Lists
+	
+		defined("TODO_LISTS_HEAD_UNCATEGORIZED") ? null :  define("TODO_LISTS_HEAD_UNCATEGORIZED", "Uncategorized");	
+	
+		//personal
+		
+		//global
+		
+		defined("TODO_LISTS__GLOBAL_HEAD_EVENT") ? null :  define("TODO_LISTS__GLOBAL_HEAD_EVENT", "Events");	
 		
 //Settings
 
@@ -244,6 +258,8 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 	defined("WORD_USERNAME") ? null :  define("WORD_USERNAME", "Username");
 	defined("WORD_COMMENTS") ? null :  define("WORD_COMMENTS", "Comments");
 	defined("WORD_ADD") ? null :  define("WORD_ADD", "Add");
+	defined("WORD_LABELS") ? null :  define("WORD_LABELS", "Labels");
+	defined("WORD_COMMENTS") ? null :  define("WORD_COMMENTS", "Comments");
 	
 	defined("WORD_FIRSTNAME") ? null :  define("WORD_FIRSTNAME", "Firstname");
 	defined("WORD_LASTNAME") ? null :  define("WORD_LASTNAME", "Lastname");

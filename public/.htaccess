@@ -42,7 +42,8 @@ RewriteRule ^item/lend/add$ item.php?request=addLend [QSA,NC,L]
 
 #Todo
 
-RewriteRule ^todo$ todo.php?request=overview [QSA,NC,L]
+RewriteRule ^todo/personal$ todo.php?request=overviewPersonal [QSA,NC,L]
+RewriteRule ^todo/global$ todo.php?request=overviewGlobal [QSA,NC,L]
 RewriteRule ^todo/new$ todo.php?request=new [QSA,NC,L]
 RewriteRule ^todo/category$ todo.php?request=categoryOverview [QSA,NC,L]
 RewriteRule ^todo/category/new$ todo.php?request=categoryNew [QSA,NC,L]

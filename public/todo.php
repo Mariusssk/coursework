@@ -9,7 +9,7 @@ if($session->loggedIn() === True) {
 	
 	//Check if specific reuqest is send
 	
-	$requestAllowed = array("overview","new","categoryOverview","categoryNew","categoryEdit");
+	$requestAllowed = array("overviewPersonal","overviewGlobal","new","categoryOverview","categoryNew","categoryEdit");
 	if(isset($_GET['request']) AND !empty($_GET['request']) AND in_array($_GET['request'],$requestAllowed)) {
 		$request = $_GET['request'];
 	} else {
@@ -63,6 +63,162 @@ if($session->loggedIn() === True) {
 					//load all categories
 					loadTodoCategories();
 				</script>
+				<?php
+			} else {
+				include(TEMPLATES."/user/missing_rights.php");
+			}
+		} else if($request == "categoryNew" OR $request == "categoryEdit") {
+			//check rights for edit/new
+			if($session->checkRights("edit_personal_todo_list") == True OR $session->checkRights("edit_todo_list_categories") == True) {
+				$category = new ToDoCategory;
+				if(isset($_GET['ID'])) {
+					$category->loadData($_GET['ID']);
+				}
+				
+				if(($request == "categoryEdit" AND ($session->checkRights("edit_todo_list_categories") == True AND $category->getGlobal() == True) OR ($session->checkRights("edit_personal_todo_list") == True AND $category->getGlobal() == False)) OR $request == "categoryNew") {
+					//display form
+					?>
+					<div class="row">
+						<div class="col-sm-12 inputBlock">
+							<?php echo TODO_CATEGORY_EDIT_NAME;?>*:<br>
+							<input type="text" class="generalInput dataInput" data-input-name="name" value="<?php echo $category->getName();?>"><br>
+						</div>
+						<?php 
+						if($session->checkRights("edit_personal_todo_list") == True AND $session->checkRights("edit_todo_list_categories") == True) {
+							?>
+							
+							<div class="col-sm-12 inputBlock">
+								<br>
+								<?php echo TODO_CATEGORY_EDIT_GLOBAL;?>:
+								<input type="checkbox" class="generalCheckbox dataInput" data-input-name="global" <?php echo $category->getGlobalChecked();?>><br>
+								<br>
+							</div>
+							<?php
+						}
+						//check if user has right do delete
+						if($request == "categoryEdit") {
+							?>
+							<div class="col-12 col-md-6">
+								<div class="generalButton" onclick="saveCategoryData('<?php echo $category->getID();?>')"> <?php echo WORD_SAVE;?> </div>
+							</div>
+							<div class="col-12 col-md-6" id="checkDeleteContainer">
+								<div class="generalButton" onclick="deleteCategory('<?php echo $category->getID();?>','check')"> <?php echo WORD_DELETE;?> </div>
+							</div>
+							<div class="col-12 col-md-6 none" id="confirmDeleteContainer">
+								<div class="generalButton" onclick="deleteCategory('<?php echo $category->getID();?>','confirm')"> <?php echo WORD_DELETE;?> </div> <div class="generalButton" onclick="deleteCategory('<?php echo $category->getID();?>','abort')"> <?php echo WORD_ABORT;?> </div>
+							</div>
+							<?php
+						} else {
+							?>
+							<div class="col-12">
+								<div class="generalButton" onclick="saveCategoryData('<?php echo $category->getID();?>')"> <?php echo WORD_SAVE;?> </div>
+							</div>
+							<?php
+						}?>
+						
+					</div>
+					<?php
+				} else {
+					include(TEMPLATES."/user/missing_rights.php");
+				}
+				
+			} else {
+				include(TEMPLATES."/user/missing_rights.php");
+			}
+		}  
+		
+		//Display todo list
+		
+		else if($request == "overviewPersonal" OR $request == "overviewGlobal") {
+			//check rights to view list
+			if(($request == "overviewPersonal" AND $session->checkRights("edit_personal_todo_list") == True) OR ($request == "overviewGlobal" AND $session->checkRights("view_all_todo_lists") == True)) {
+				//load todo list categories based on view type
+				if($request == "overviewPersonal") {
+					$categories = ToDoCategory::getPersonalCategories($session->getSessionUserID());
+				} else if($request == "overviewGlobal") {
+					$categories = ToDoCategory::getGlobalCategories();
+				}
+				
+				//add overflow categories
+				if($request == "overviewGlobal") {
+					array_unshift($categories, "event");
+					array_unshift($categories, "uncategorized");
+				} else if($request == "overviewGlobal") {
+					array_unshift($categories, "uncategorizedPersonal");
+				}
+				
+				?>
+				<div class="overlayContainer none">
+					<div class="todoListOverlay">
+						<div class="head">
+							<div class="todoListName">
+								<?php echo WORD_LOADING;?>
+							</div>
+							<div class="closeButton">
+								<i class="fa fa-window-close" aria-hidden="true" onclick="closeOverlay(this)"></i>
+							</div>
+						</div>
+						<div class="labels">
+							<span class="labelHead"> <?php echo WORD_LABELS;?></span>
+							<div class="labelContainer"><?php echo WORD_LOADING;?></div>
+						</div>
+						<div class="todoListEntries">
+							<?php echo WORD_LOADING;?>
+						</div>
+						<div class="comments">
+							<span class="commentsHead"> <?php echo WORD_COMMENTS;?></span>
+							<div class="commentsContainer"> <?php echo WORD_LOADING;?> </div>
+						</div>
+					</div>
+				</div>
+				<div class="todoListContainer">
+				<?php
+				
+				//load lists based on category
+				foreach($categories as $tmpCategory) {
+					$category = new ToDoCategory;
+					
+					//set name of category
+					if(is_int($tmpCategory) AND $category->loadData($tmpCategory)) {
+						$name = $category->getName();
+					} else if($tmpCategory == "event") {
+						$name = TODO_LISTS__GLOBAL_HEAD_EVENT;
+					} else if($tmpCategory == "uncategorized" OR $tmpCategory == "uncategorizedPersonal") {
+						$name = TODO_LISTS_HEAD_UNCATEGORIZED;
+					}
+					
+					//check lists are existing in category
+					$lists = ToDoList::findListByCategory($tmpCategory, $session->getSessionUserID());
+					if(count($lists) > 0) {
+						?>
+						<div class="todoListCategoryContainer">
+							<div class="todoListCategoryHead">
+								<span class="todoListCategoryName"> <?php echo $name; ?> </span>
+							</div>
+							<div class="todoListCategoryBody">
+								<?php
+									//Display all lists
+									foreach($lists as $tmpList) {
+										$list = new ToDoList;
+										if($list->loadData($tmpList)) {
+											?>
+											<div class="todoList" onclick="openToDoList('<?php echo $list->getID();?>')">
+												<div class="todoListName">
+													<?php echo $list->getName();?>
+												</div>
+												<div class="todoListTags"></div>
+											</div>
+											<?php
+										}
+									}
+								?>
+							</div>
+						</div>
+						<?php
+					}
+				}
+				?>
+				</div>
 				<?php
 			} else {
 				include(TEMPLATES."/user/missing_rights.php");

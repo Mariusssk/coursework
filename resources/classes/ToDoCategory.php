@@ -37,11 +37,61 @@ class ToDoCategory extends ObjectType {
 		return($categories);
 	}
 	
+	//get all personal categories for specific user
+	
+	static function getPersonalCategories($userID) {
+		$category = new ToDoCategory;
+		$sql = "SELECT ".$category->TABLE_NAME."_id FROM ".$category->TABLE_NAME." WHERE user_id = ?";
+		$sqlType = "i";
+		$sqlParams = array($userID);
+		
+		$categories = pdSelect($sql,"mysqli",$sqlType, $sqlParams);
+		
+		$categories = $category->mergeResult($categories);
+		
+		return($categories);
+	}
+	
+	//get all global categories
+	
+	static function getGlobalCategories() {
+		$category = new ToDoCategory;
+		$sql = "SELECT ".$category->TABLE_NAME."_id FROM ".$category->TABLE_NAME." WHERE user_id IS NULL";
+		
+		$categories = pdSelect($sql,"mysqli");
+		
+		$categories = $category->mergeResult($categories);
+		
+		return($categories);
+	}
+	
 	//get a select for types
 	
 	public static function getSelect($attributes = array(),$option = "0",$placeholder = "") {
 		return(parent::getSelect($attributes,$option,$placeholder));
 		
+	}
+	
+	//set functions
+	
+	function setName($value) {
+		if(!empty($value)) {
+			$this->name = $value;
+			return(True);
+		}
+		return(False);
+	}
+	
+	function setUserID($value = "") {
+		$user = new User;
+		if(!empty($value) AND $user->loadData($value)) {
+			$this->user_id = $value;
+			return(True);
+		} else if(empty($value)) {
+			$this->user_id = "";
+			return(True);
+		}
+		return(False);
 	}
 	
 	
@@ -57,6 +107,20 @@ class ToDoCategory extends ObjectType {
 	
 	function getUserID() {
 		return($this->user_id);
+	}
+	
+	function getGlobalChecked() {
+		if(empty($this->getUserID())) {
+			return("checked");
+		}
+		return("");
+	}
+	
+	function getGlobal() {
+		if(empty($this->getUserID())) {
+			return(True);
+		}
+		return(False);
 	}
 	
 }

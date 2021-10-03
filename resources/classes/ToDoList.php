@@ -2,7 +2,7 @@
 
 class ToDoList extends SystemClass {
 	
-	protected $todo_list_id, $user_id, $event_id, $todo_list_category_id , $created, $name;
+	protected $todo_list_id, $event_id, $user_id, $todo_list_category_id , $created, $name;
 	
 	protected $entries;
 	
@@ -17,9 +17,72 @@ class ToDoList extends SystemClass {
 		array_push($this->IGNORE, "entries");
 	}
 	
-	//change load data function to include load entries
+	//find all todo list for category
 	
-	function loadData($listID) {
+	static function findListByCategory($category = 0, $userID = 0) {
+		$list = new ToDoList;
+		$sql = "SELECT ".$list->TABLE_NAME."_id FROM ".$list->TABLE_NAME;
+		$sqlType = "";
+		$sqlParams = array();
+		
+		if($category == "uncategorized") {
+			$sql .= " WHERE event_id IS NULL AND todo_list_category_id IS NULL AND user_id IS NULL";
+		} else if($category == "uncategorizedPersonal") {
+			$sql .= " WHERE event_id IS NULL AND todo_list_category_id IS NULL AND user_id = ?";
+			$sqlType .= "i";
+			array_push($sqlParams, $userID);
+		} else if($category == "event") {
+			$sql .= " WHERE event_id IS NOT NULL AND todo_list_category_id IS NULL";
+		} else if(is_int($category) AND $category > 0){
+			$sql .= " WHERE todo_list_category_id = ?";
+			$sqlType .= "i";
+			array_push($sqlParams, $category);
+		} else {
+			return(0);
+		}
+		
+		$lists = pdSelect($sql,"mysqli",$sqlType,$sqlParams);
+		
+		$lists = $list->mergeResult($lists);
+		
+		return($lists);
+	}
+	
+	//check rights
+	
+	function checkRights($rightType, $session) {
+		if($rightType == "view") {
+			$category = new ToDoCategory;
+			if(empty($this->getCategoryID())) {
+				if($this->getUserID() == $session->getSessionUserID() AND $session->checkRights('edit_personal_todo_list')) {
+					return(True);
+				} else if($session->checkRights('view_all_todo_lists') == True) {
+					return(True);
+				}
+			} else if($category->loadData($this->getCategoryID())) {
+				if(($category->getGlobal() == True AND $session->checkRights('view_all_todo_lists') == True) OR ($category->getGlobal() == False AND $session->checkRights('edit_personal_todo_list') == True)) {
+					return(True);
+				}
+			}
+		} else if($rightType == "edit") {
+			$category = new ToDoCategory;
+			if(empty($this->getCategoryID())) {
+				if($this->getUserID() == $session->getSessionUserID() AND $session->checkRights('edit_personal_todo_list')) {
+					return(True);
+				} else if($session->checkRights('edit_all_todo_lists') == True) {
+					return(True);
+				}
+			} else if($category->loadData($this->getCategoryID())) {
+				if(($category->getGlobal() == True AND $session->checkRights('edit_all_todo_lists')) OR ($category->getGlobal() == False AND $session->checkRights('edit_personal_todo_list'))) {
+					return(True);
+				}
+			}
+		} 
+		return(False);
+	}
+	
+	//change load data function to include load entries
+	function loadData($listID = 0) {
 		//Run the load data of parent and if succesful try to load entries
 		if(Parent::loadData($listID) === True AND $this->loadEntries() === True) {
 			return(True);
@@ -27,6 +90,7 @@ class ToDoList extends SystemClass {
 			return(False);
 		}
 	}
+	
 	
 	//function load todo list entries
 	function loadEntries() {
@@ -51,6 +115,14 @@ class ToDoList extends SystemClass {
 	
 	function getName() {
 		return($this->name);
+	}
+	
+	function getUserID() {
+		return($this->user_id);
+	}
+	
+	function getEventID() {
+		return($this->event_id);
 	}
 	
 	function getCategoryID() {

@@ -25,7 +25,7 @@ class ToDoListEntry extends SystemClass {
 		$entries = pdSelect($sql,"mysqli",$sqlType,$sqlParams);
 		
 		//clear up result array
-		$entries = $entry->mergeResults($entries);
+		$entries = $entry->mergeResult($entries);
 		return($entries);
 	}
 	
