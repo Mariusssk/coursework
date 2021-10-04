@@ -159,12 +159,14 @@ if($session->loggedIn() === True) {
 							</div>
 						</div>
 						<div class="labels">
-							<span class="labelHead"> <?php echo WORD_LABELS;?></span>
+							<div class="labelHead"> <?php echo WORD_LABELS;?></div>
 							<div class="labelContainer"><?php echo WORD_LOADING;?></div>
 						</div>
+						<hr>
 						<div class="todoListEntries">
 							<?php echo WORD_LOADING;?>
 						</div>
+						<hr>
 						<div class="comments">
 							<span class="commentsHead"> <?php echo WORD_COMMENTS;?></span>
 							<div class="commentsContainer"> <?php echo WORD_LOADING;?> </div>
@@ -174,48 +176,55 @@ if($session->loggedIn() === True) {
 				<div class="todoListContainer">
 				<?php
 				
-				//load lists based on category
-				foreach($categories as $tmpCategory) {
-					$category = new ToDoCategory;
-					
-					//set name of category
-					if(is_int($tmpCategory) AND $category->loadData($tmpCategory)) {
-						$name = $category->getName();
-					} else if($tmpCategory == "event") {
-						$name = TODO_LISTS__GLOBAL_HEAD_EVENT;
-					} else if($tmpCategory == "uncategorized" OR $tmpCategory == "uncategorizedPersonal") {
-						$name = TODO_LISTS_HEAD_UNCATEGORIZED;
-					}
-					
-					//check lists are existing in category
-					$lists = ToDoList::findListByCategory($tmpCategory, $session->getSessionUserID());
-					if(count($lists) > 0) {
-						?>
-						<div class="todoListCategoryContainer">
-							<div class="todoListCategoryHead">
-								<span class="todoListCategoryName"> <?php echo $name; ?> </span>
-							</div>
-							<div class="todoListCategoryBody">
-								<?php
-									//Display all lists
-									foreach($lists as $tmpList) {
-										$list = new ToDoList;
-										if($list->loadData($tmpList)) {
-											?>
-											<div class="todoList" onclick="openToDoList('<?php echo $list->getID();?>')">
-												<div class="todoListName">
-													<?php echo $list->getName();?>
+				if(count($categories) > 0) {
+					//load lists based on category
+					foreach($categories as $tmpCategory) {
+						$category = new ToDoCategory;
+						
+						//set name of category
+						if(is_int($tmpCategory) AND $category->loadData($tmpCategory)) {
+							$name = $category->getName();
+						} else if($tmpCategory == "event") {
+							$name = TODO_LISTS__GLOBAL_HEAD_EVENT;
+						} else if($tmpCategory == "uncategorized" OR $tmpCategory == "uncategorizedPersonal") {
+							$name = TODO_LISTS_HEAD_UNCATEGORIZED;
+						}
+						
+						//check lists are existing in category
+						$lists = ToDoList::findListByCategory($tmpCategory, $session->getSessionUserID());
+						if(count($lists) > 0) {
+							?>
+							<div class="todoListCategoryContainer">
+								<div class="todoListCategoryHead">
+									<span class="todoListCategoryName"> <?php echo $name; ?> </span>
+								</div>
+								<div class="todoListCategoryBody">
+									<?php
+										//Display all lists
+										foreach($lists as $tmpList) {
+											$list = new ToDoList;
+											if($list->loadData($tmpList)) {
+												?>
+												<div class="todoList" onclick="openToDoList('<?php echo $list->getID();?>')">
+													<div class="todoListName">
+														<?php echo $list->getName();?>
+													</div>
+													<div class="todoListTags"></div>
 												</div>
-												<div class="todoListTags"></div>
-											</div>
-											<?php
+												<?php
+											}
 										}
-									}
-								?>
+									?>
+								</div>
 							</div>
-						</div>
-						<?php
+							<?php
+						}
 					}
+					
+				} else {
+					?>
+					<div class="todoEmpty"> <?php echo TODO_LISTS_OVERVIEW_EMPTY;?> </div>
+					<?php
 				}
 				?>
 				</div>

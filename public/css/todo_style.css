@@ -102,13 +102,23 @@
 		}
 		
 		.todo .todoListOverlay .head .closeButton{
-			width: calc(20% - 20px);
-			display: inline-block;
-			text-align: right;
+			height: 100%;
+			float: right;
 		}
 		
 		.todo .todoListOverlay .labels {
 			margin-bottom: 5px;
+		}
+		
+		.todo .todoListOverlay .labels .labelHead{
+			margin-bottom: 3px;
+		}
+		
+		.todo .todoListOverlay .labels .tag{
+			padding: 5px;
+			margin: 2px;
+			border: 1px solid black;
+			border-radius: 3px;
 		}
 		
 		.todo .todoListOverlay .todoListEntries {

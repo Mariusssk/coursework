@@ -98,7 +98,7 @@ class ToDoList extends SystemClass {
 		//check if list ID is set
 		if(!empty($this->getID())) {
 			//Load all entries
-			$entries = ToDoListEntry::loadAllEntriesForList($this->getID());
+			$entries = ToDoListEntry::loadEntriesArray($this->getID());
 			if(count($entries) > 0) {
 				$this->entries = $entries;
 			}
@@ -127,6 +127,10 @@ class ToDoList extends SystemClass {
 	
 	function getCategoryID() {
 		return($this->todo_list_category_id);
+	}
+	
+	function getEntries() {
+		return($this->entries);
 	}
 	
 }

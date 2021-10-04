@@ -179,9 +179,11 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 		
 	//Lists
 	
-		defined("TODO_LISTS_HEAD_UNCATEGORIZED") ? null :  define("TODO_LISTS_HEAD_UNCATEGORIZED", "Uncategorized");	
-	
-		//personal
+		defined("TODO_LISTS_HEAD_UNCATEGORIZED") ? null :  define("TODO_LISTS_HEAD_UNCATEGORIZED", "Uncategorized");
+		
+		//Overview
+		
+		defined("TODO_LISTS_OVERVIEW_EMPTY") ? null :  define("TODO_LISTS_OVERVIEW_EMPTY", "No To-Do lists found!");	
 		
 		//global
 		

@@ -172,6 +172,8 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 			if(isset($_POST['listID']) AND $list->loadData($_POST['listID'])) {
 				if($list->checkRights("view",$session) == True) {
 					$post = array();
+					
+					//Basic data
 					$post['listID'] = $list->getID();
 					$post['name'] = $list->getName();
 					
@@ -180,6 +182,27 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 					} else {
 						$post['rights'] = "view";
 					}
+					
+					//Tags
+					
+					$tags = TagAssignment::loadTagsByAttribute(3,$list->getID());
+					
+					$post['tags'] = array();
+					
+					foreach($tags as $tmpTag) {
+						$tag = new Tag;
+						if($tag->loadData($tmpTag)) {
+							array_push($post['tags'], array("name" => $tag->getName(), "colour" => $tag->getColour()));
+						}
+					}
+					
+					//Entries
+					
+					$entriesArray = ToDoListEntry::loadEntriesArray($list->getID(),"external");
+					
+					$post['entries'] = $entriesArray;
+					
+					
 					
 					echo json_encode($post);
 				} else {

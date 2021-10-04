@@ -101,9 +101,44 @@ function openToDoList(listID) {
 			var overlay = document.querySelector(".todo .overlayContainer");
 			if(typeof(overlay) !== undefined) {
 				overlay.classList.remove("none");
+				
+				//Basic Data
+				overlay.querySelector(".todoListName").innerHTML = data['name'];
+				
+				//Tags
+				
+				if(Object.keys(data['tags']).length > 0) {
+					var tags =  "";
+					for(i = 0; i < Object.keys(data['tags']).length; i++) {
+						var backgroundRGB = hexToRgb(data['tags'][i]['colour']);
+						if((backgroundRGB['r']*0.299)+(backgroundRGB['g']*0.587)+(backgroundRGB['b']*0.114)>186) {
+							var textColour = "black";
+						} else {
+							var textColour = "white";
+						}
+						tags += `<span class="tag" style="background-color: `+data['tags'][i]['colour']+`;color: `+textColour+`;">`+data['tags'][i]['name']+`</span>`;
+					}
+					overlay.querySelector(".labelContainer").innerHTML = tags;
+				}
+				
+				//Entries
+				
+				
+				
+				if(Object.keys(data['entries']).length > 0) {
+					var entries = "";
+					for(i = 0; i < Object.keys(data['entries']).length; i++) {
+						entries += displayToDoListEntries(data['entries'][i]);
+					}
+					overlay.querySelector(".todoListEntries").innerHTML = entries;
+				}
 			}
 		}
 	});
+}
+
+function displayToDoListEntries(entry) {
+	console.log(entry);
 }
 
 //delete category
