@@ -183,19 +183,6 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 						$post['rights'] = "view";
 					}
 					
-					//Tags
-					
-					$tags = TagAssignment::loadTagsByAttribute(3,$list->getID());
-					
-					$post['tags'] = array();
-					
-					foreach($tags as $tmpTag) {
-						$tag = new Tag;
-						if($tag->loadData($tmpTag)) {
-							array_push($post['tags'], array("name" => $tag->getName(), "colour" => $tag->getColour()));
-						}
-					}
-					
 					//Entries
 					
 					$entriesArray = ToDoListEntry::loadEntriesArray($list->getID(),"external");
@@ -214,7 +201,70 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		
+		//Load all tags for specific list
+	
+		else if($request == "loadToDoListTags") {
+			$list = new ToDoList;
+			if(isset($_POST['listID']) AND $list->loadData($_POST['listID'])) {
+				if($list->checkRights("view",$session) == True) {
+					
+					//Tags
+					
+					$post = array();
+					
+					$tags = TagAssignment::loadTagsByAttribute(3,$list->getID());
+					
+					$post['tags'] = array();
+					
+					foreach($tags as $tmpTag) {
+						$tag = new Tag;
+						if($tag->loadData($tmpTag)) {
+							array_push($post['tags'], array("ID" => $tag->getID(), "name" => $tag->getName(), "colour" => $tag->getColour()));
+						}
+					}
+					
+					//Rights
+					
+					if($list->checkRights("edit",$session) == True) {
+						$post['rights'] = "edit";
+					} else {
+						$post['rights'] = "view";
+					}
+					
+					echo json_encode($post);
+				} else {
+					echo "missingRights";
+				}
+			} else {
+				echo "error";
+			}
+		}
+		
+		
+		//Remove tag from list
+		else if($request == "removeToDoListTag") {
+			$assigment = new TagAssignment;
+			$list = new ToDoList;
+			if(isset($_POST['listID']) AND isset($_POST['tagID']) AND 
+				$assigment->loadDataOnTagAndAttributeID($_POST['tagID'],$_POST['listID'],3) AND
+				$list->loadData($_POST['listID'])
+			) {
+				if($list->checkRights("edit",$session) == True) {
+					if($assigment->deleteData()) {
+						echo "success";
+					} else {
+						echo "error";
+					}
+				} else {
+					echo "missingRights";
+				}
+			} else {
+				echo "error";
+			}
+		}
 	} 
+	
+	
 
 	
 }

@@ -83,6 +83,12 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 	}
 	
+	//load all tags
+	
+	else if($request == "loadTags") {
+		echo json_encode(Tag::getSelect(array("class" => "generalSelect")));
+	}
+	
 }
 
 ob_flush();

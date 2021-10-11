@@ -69,61 +69,76 @@
 		
 		/* Overlay */
 		
-		.todo .overlayContainer {
-			width: 100vw;
-			height: 100vh;
-			background-color: #808080b0;
-			position: fixed;
-			top: 0;
-			left: 0;
-		}
-		
-		.todo .todoListOverlay {
-			width: min(600px, calc(100% - 10px));
-			min-height: 200px;
-			background-color: #f4f5f7;
-			position: fixed;
-			top: 100px;
-			left: calc(50% - (min(600px, 100%) / 2));
-			border-radius: 5px;
-			padding: 10px;
-			margin: 5px;
-		}
-		
-		.todo .todoListOverlay .head {
-			font-size: 150%;
-			font-weight: bold;
-			margin-bottom: 10px;
-		}
-		
-		.todo .todoListOverlay .head .todoListName{
-			width: 80%;
-			display: inline-block;
-		}
-		
-		.todo .todoListOverlay .head .closeButton{
-			height: 100%;
-			float: right;
-		}
-		
-		.todo .todoListOverlay .labels {
-			margin-bottom: 5px;
-		}
-		
-		.todo .todoListOverlay .labels .labelHead{
-			margin-bottom: 3px;
-		}
-		
-		.todo .todoListOverlay .labels .tag{
-			padding: 5px;
-			margin: 2px;
-			border: 1px solid black;
-			border-radius: 3px;
-		}
-		
-		.todo .todoListOverlay .todoListEntries {
-			margin-bottom: 5px;
-		}
+			.todo .overlayContainer {
+				width: 100vw;
+				height: 100vh;
+				background-color: #808080b0;
+				position: fixed;
+				top: 0;
+				left: 0;
+			}
+			
+			.todo .todoListOverlay {
+				width: min(600px, calc(100% - 10px));
+				min-height: 200px;
+				background-color: #f4f5f7;
+				position: fixed;
+				top: 100px;
+				left: calc(50% - (min(600px, 100%) / 2));
+				border-radius: 5px;
+				padding: 10px;
+				margin: 5px;
+			}
+			
+			.todo .todoListOverlay .head {
+				font-size: 150%;
+				font-weight: bold;
+				margin-bottom: 10px;
+			}
+			
+			.todo .todoListOverlay .head .todoListName{
+				width: 80%;
+				display: inline-block;
+			}
+			
+			.todo .todoListOverlay .head .closeButton{
+				height: 100%;
+				float: right;
+			}
+			
+			.todo .todoListOverlay .labels {
+				margin-bottom: 5px;
+			}
+			
+			.todo .todoListOverlay .labels .labelHead{
+				margin-bottom: 3px;
+			}
+			
+			.todo .todoListOverlay .labels .tag{
+				padding: 5px;
+				margin: 2px;
+				border: 1px solid black;
+				border-radius: 3px;
+			}
+			
+			.todo .todoListOverlay .labels .editTags {
+				font-size: 130%;
+				margin-left: 10px;
+				cursor: pointer;
+			}
+			
+			.todo .todoListOverlay .labels .addTagFormContainer{
+				padding: 5px 0 5px 0;
+			}
+			
+			.todo .todoListOverlay .labels .addTagFormContainer .addTagSelect {
+				width: calc(100% - 50px);
+				display: inline-block;
+			}
+			
+			.todo .todoListOverlay .todoListEntries {
+				margin-bottom: 5px;
+			}
 		
 		
 		

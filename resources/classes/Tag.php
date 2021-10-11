@@ -16,7 +16,7 @@ class Tag extends ObjectType {
 	//get functions
 	
 	function getID() {
-		return($this->todo_list_category_id);
+		return($this->tag_id);
 	}
 	
 	function getName() {

@@ -105,25 +105,13 @@ function openToDoList(listID) {
 				//Basic Data
 				overlay.querySelector(".todoListName").innerHTML = data['name'];
 				
+				overlay.dataset.todoListId = listID;
+				
 				//Tags
 				
-				if(Object.keys(data['tags']).length > 0) {
-					var tags =  "";
-					for(i = 0; i < Object.keys(data['tags']).length; i++) {
-						var backgroundRGB = hexToRgb(data['tags'][i]['colour']);
-						if((backgroundRGB['r']*0.299)+(backgroundRGB['g']*0.587)+(backgroundRGB['b']*0.114)>186) {
-							var textColour = "black";
-						} else {
-							var textColour = "white";
-						}
-						tags += `<span class="tag" style="background-color: `+data['tags'][i]['colour']+`;color: `+textColour+`;">`+data['tags'][i]['name']+`</span>`;
-					}
-					overlay.querySelector(".labelContainer").innerHTML = tags;
-				}
+				loadListTags(listID,overlay,"view");
 				
 				//Entries
-				
-				
 				
 				if(Object.keys(data['entries']).length > 0) {
 					var entries = "";
@@ -137,8 +125,140 @@ function openToDoList(listID) {
 	});
 }
 
+//Display the todo list entries
 function displayToDoListEntries(entry) {
-	console.log(entry);
+	return(entry['name'])
+}
+
+//load all tags
+
+function loadListTags(listID, overlay, displayType = "view") {
+	//Load tags from PHP
+	$.post(INCLUDES+"/todo_functions.php",{
+		requestType: "loadToDoListTags",
+		listID: listID
+	},
+	function(data, status){
+		var options = "";
+		var dataCut = parsePostData(data);
+		//check if request is valid
+		if(dataCut == "error" || dataCut == "") {
+			headerNotification(LANG.ERROR_REQUEST_FAILED,"red");
+		} else if(dataCut == "missingRights") {
+			headerNotification(LANG.USER_RIGHTS_MISSING,"red");
+		} else {
+			data = JSON.parse(data);
+			var rights = data['rights'];
+			if(displayType == "edit" && rights == "view") {
+				displayType = "view";
+			}
+	
+			//Display Tags
+			
+			var tags =  "";
+			if(Object.keys(data['tags']).length > 0) {
+				for(i = 0; i < Object.keys(data['tags']).length; i++) {
+					var backgroundRGB = hexToRgb(data['tags'][i]['colour']);
+					if((backgroundRGB['r']*0.299)+(backgroundRGB['g']*0.587)+(backgroundRGB['b']*0.114)>186) {
+						var textColour = "black";
+					} else {
+						var textColour = "white";
+					}
+					if(displayType == "edit") {
+						tags += `<span data-tag-id="`+data['tags'][i]['ID']+`" class="tag noselect" style="background-color: `+data['tags'][i]['colour']+`;color: `+textColour+`;">`+data['tags'][i]['name']+` <span onclick="deleteTag('`+data['tags'][i]['ID']+`')" class="editTags"><i class="fa fa-times-circle" aria-hidden="true"></i></span></span>`;
+					} else {
+						tags += `<span data-tag-id="`+data['tags'][i]['ID']+`" class="tag noselect" style="background-color: `+data['tags'][i]['colour']+`;color: `+textColour+`;">`+data['tags'][i]['name']+`</span>`;
+					}
+				}
+			} else {
+				tags = LANG.TODO_LIST_OVERVIEW_NO_TAGS_FOUND;
+			}
+			if(displayType == "view" && rights == "edit") {
+				tags += `<span class="editTags" onclick="editTags('`+listID+`')"><i class="fa fa-pencil" aria-hidden="true"></i></span>`;
+			} else if(displayType == "edit") {
+				tags += `<span class="editTags" onclick="addTagForm('`+listID+`')"><i class="fa fa-plus-square" aria-hidden="true"></i></span>`;
+			}
+			overlay.querySelector(".labelContainer").innerHTML = tags;
+		}
+	});
+}
+
+//Edit todo list tags
+
+function editTags(listID) {
+	var overlay = document.querySelector(".todo .overlayContainer");
+	loadListTags(listID,overlay,"edit");
+}
+
+//add new tag form
+
+function addTagForm() {
+	var overlay = document.querySelector(".todo .overlayContainer");
+	
+	$.post(INCLUDES+"/post_functions.php",{
+		requestType: "loadTags"
+	},
+	function(data, status){
+		var options = "";
+		var dataCut = parsePostData(data);
+		//check if request is valid
+		if(dataCut == "error" || dataCut == "") {
+			headerNotification(LANG.ERROR_REQUEST_FAILED,"red");
+		} else if(dataCut == "missingRights") {
+			headerNotification(LANG.USER_RIGHTS_MISSING,"red");
+		} else {
+			data = JSON.parse(data);
+			
+			//Add select to div
+			
+			data = overlay.querySelector(".labelContainer").innerHTML + `
+			<div class="addTagFormContainer noselect">
+				<div class="addTagSelect">`+data+`</div>
+				<span class="editTags" onclick="addTag()"><i class="fa fa-check-square" aria-hidden="true"></i></span>
+			</div>`;
+			
+			overlay.querySelector(".labelContainer").innerHTML = data;
+		}
+	});
+}
+
+//add tag from 
+
+function addTag() {
+	var overlay = document.querySelector(".todo .overlayContainer");
+	
+	var listID = overlay.dataset.todoListId;
+	var tagID = document.querySelector(".addTagFormContainer .addTagSelect select").value;
+	
+	if(tagID == 0) {
+		headerNotification(LANG.TODO_LIST_OVERVIEW_SELECT_TAG,"red");
+	} else {
+		
+	}
+}
+
+//delete tag from list 
+function deleteTag(tagID) {
+	var overlay = document.querySelector(".todo .overlayContainer");
+	var listID = overlay.dataset.todoListId;
+	
+	$.post(INCLUDES+"/todo_functions.php",{
+		requestType: "removeToDoListTag",
+		listID: listID,
+		tagID: tagID
+	},
+	function(data, status){
+		var dataCut = parsePostData(data);
+		//check if request is valid
+		if(dataCut == "error" || dataCut == "") {
+			headerNotification(LANG.ERROR_REQUEST_FAILED,"red");
+		} else if(dataCut == "missingRights") {
+			headerNotification(LANG.USER_RIGHTS_MISSING,"red");
+		} else if(dataCut == "success") {
+			headerNotification(LANG.TODO_LIST_OVERVIEW_TAG_REMOVED_SUCCESS,"green");
+		}
+	});
+	loadListTags(listID,overlay,"edit");
 }
 
 //delete category

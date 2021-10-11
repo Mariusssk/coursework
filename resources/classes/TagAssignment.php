@@ -27,10 +27,27 @@ class TagAssignment extends SystemClass {
 		return($tags);
 	}
 	
+	function loadDataOnTagAndAttributeID($tagID, $attributeID, $attributeTypeID) {
+		//Find tag assignment
+		$sql = "SELECT ".$this->TABLE_NAME."_id FROM ".$this->TABLE_NAME." WHERE tag_id = ? AND attribute_id = ? AND attribute_type_id = ?";
+		$sqlType = "iii";
+		$sqlParams = array($tagID, $attributeID, $attributeTypeID);
+		
+		$assignments = pdSelect($sql,"mysqli",$sqlType,$sqlParams);
+		
+		$assignments = $this->mergeResult($assignments);
+		
+		//Load data of assignment
+		if(count($assignments) == 1) {
+			return($this->loadData($assignments[0]));
+		}
+		return(False);
+	}
+	
 	//get functions
 	
 	function getID() {
-		return($this->todo_list_entry_id);
+		return($this->tag_assignment_id);
 	}
 	
 }

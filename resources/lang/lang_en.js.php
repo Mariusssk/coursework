@@ -39,6 +39,13 @@ var LANG = {
 	//ToDO
 	
 	TODO_CATEGORY_OVERVIEW_NOT_FOUND: "No ToDo List categories found!",
+	TODO_LIST_OVERVIEW_TAG_REMOVED_SUCCESS: "Tag was succesfully removed!",
+	TODO_LIST_OVERVIEW_NO_TAGS_FOUND: "No Tags assigned",
+	TODO_LIST_OVERVIEW_SELECT_TAG: "Please select a tag",
+	
+	//Tags
+	
+	TAGS_SELECT_NON_FOUND: "No tags found",
 	
 	//settings
 	
