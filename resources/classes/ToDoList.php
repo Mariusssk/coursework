@@ -81,6 +81,12 @@ class ToDoList extends SystemClass {
 		return(False);
 	}
 	
+	//check if list has tag
+	
+	function checkIfListHasTag($tagID) {
+		return(TagAssignment::checkIfAttributeHasTag(3,$this->getID(),$tagID));
+	}
+	
 	//change load data function to include load entries
 	function loadData($listID = 0) {
 		//Run the load data of parent and if succesful try to load entries

@@ -11,6 +11,19 @@ class TagAssignment extends SystemClass {
 	
 	//Functions
 	
+	//Create new tag for todo list
+	function createTagForList($listID, $tagID) {
+		$tag = new Tag();
+		if($tag->loadData($tagID)) {
+			$this->tag_id = $tagID;
+			$this->attribute_id = $listID;
+			$this->attribute_type_id = 3;
+			if($this->createNewData()) {
+				return(True);
+			}
+		}
+		return(False);
+	}
 	
 	//Find all tags for specific attribute type and attribute ID
 	static function loadTagsByAttribute($typeID,$attributeID) {
@@ -25,6 +38,23 @@ class TagAssignment extends SystemClass {
 		$tags = $assignment->mergeResult($tags);
 		
 		return($tags);
+	}
+	
+	//check if attribute has tag
+	
+	static function checkIfAttributeHasTag($typeID,$attributeID,$tagID) {
+		$assignment = new TagAssignment;
+		
+		$sql = "SELECT tag_id FROM ".$assignment->TABLE_NAME." WHERE attribute_type_id = ? AND attribute_id = ? AND tag_id = ?";
+		$sqlType = "iii";
+		$sqlParams = array($typeID,$attributeID,$tagID);
+		
+		$tag = pdSelect($sql,"mysqli",$sqlType,$sqlParams);
+		
+		if(count($tag) > 0) {
+			return(True);
+		}
+		return(False);
 	}
 	
 	function loadDataOnTagAndAttributeID($tagID, $attributeID, $attributeTypeID) {

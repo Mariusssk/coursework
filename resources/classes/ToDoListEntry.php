@@ -112,4 +112,18 @@ class ToDoListEntry extends SystemClass {
 		}
 	}
 	
+	function getListID() {
+		return($this->todo_list_id);
+	}
+	
+	//set function
+	
+	function setChecked($value) {
+		if($value == 0 OR $value == 1) {
+			$this->checked = $value;
+			return(True);
+		}
+		return(False);
+	}
+	
 }

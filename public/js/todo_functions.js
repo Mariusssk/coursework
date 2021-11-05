@@ -113,13 +113,8 @@ function openToDoList(listID) {
 				
 				//Entries
 				
-				if(Object.keys(data['entries']).length > 0) {
-					var entries = "";
-					for(i = 0; i < Object.keys(data['entries']).length; i++) {
-						entries += displayToDoListEntries(data['entries'][i]);
-					}
-					overlay.querySelector(".todoListEntries").innerHTML = entries;
-				}
+				loadListEntries(listID,overlay,"view");
+				
 			}
 		}
 	});
@@ -233,7 +228,25 @@ function addTag() {
 	if(tagID == 0) {
 		headerNotification(LANG.TODO_LIST_OVERVIEW_SELECT_TAG,"red");
 	} else {
-		
+		$.post(INCLUDES+"/todo_functions.php",{
+			requestType: "addToDoListTag",
+			listID: listID,
+			tagID: tagID
+		},
+		function(data, status){
+			var dataCut = parsePostData(data);
+			//check if request is valid
+			if(dataCut == "error" || dataCut == "") {
+				headerNotification(LANG.ERROR_REQUEST_FAILED,"red");
+			} else if(dataCut == "missingRights") {
+				headerNotification(LANG.USER_RIGHTS_MISSING,"red");
+			} else if(dataCut == "alreadyAdded") {
+				headerNotification(LANG.TODO_LIST_OVERVIEW_TAG_ALREADY_ADDED,"red");
+			} else if(dataCut == "success") {
+				headerNotification(LANG.TODO_LIST_OVERVIEW_TAG_ADDED_SUCCESS,"green");
+			}
+		});
+		loadListTags(listID,overlay,"view");
 	}
 }
 
@@ -259,6 +272,120 @@ function deleteTag(tagID) {
 		}
 	});
 	loadListTags(listID,overlay,"edit");
+}
+
+//load all entries of todo list
+
+function loadListEntries(listID, overlay, displayType = "view") {
+	//Load tags from PHP
+	$.post(INCLUDES+"/todo_functions.php",{
+		requestType: "loadToDoListEntries",
+		listID: listID
+	},
+	function(data, status){
+		var options = "";
+		var dataCut = parsePostData(data);
+		//check if request is valid
+		if(dataCut == "error" || dataCut == "") {
+			headerNotification(LANG.ERROR_REQUEST_FAILED,"red");
+		} else if(dataCut == "missingRights") {
+			headerNotification(LANG.USER_RIGHTS_MISSING,"red");
+		} else {
+			data = JSON.parse(data);
+			var rights = data['rights'];
+			if(displayType == "edit" && rights == "view") {
+				displayType = "view";
+			}
+			console.log(data['entries']);
+			//Display entries
+			
+			var entries =  "";
+			
+			entries = displayEntries(data['entries'],entries,rights);
+			
+			overlay.querySelector(".entriesContainer").innerHTML = entries;
+	
+			//detect if checkbox changes
+			$(".page.todo.overviewGlobal .overlayContainer .todoListOverlay .todoListCheckbox, .page.todo.overviewPersonal .overlayContainer .todoListOverlay .todoListCheckbox").change(function() {
+				var entryID = this.dataset.entryId;
+				var checked = +this.checked;
+				todoListEntryStatusChange(entryID,checked,this);
+			});
+		}
+	});
+}
+
+
+//Recoursively display entries
+
+function displayEntries(entryList, entryText = "", displayType) {
+	var tmpText = "";
+	var keyLength = Object.keys(entryList).length;
+	if(keyLength > 0) {
+		tmpText += "<ul>";
+		for(var x = 0; x < keyLength; x++) {
+			tmpText += "<li>";
+			
+			//check if checked
+			
+			var checked = "";
+			if(entryList[x]['checked'] == "1") {
+				checked = "checked";
+			}
+			
+			//Add entry text
+			
+			tmpText += '<span class="todoListEntryNameBox '+checked+'">';
+			
+			if(displayType == "edit") {
+				tmpText += '<input type="checkbox" class="todoListCheckbox" data-entry-id="'+entryList[x]['currentID']+'" '+checked+'>';
+			} else {
+				tmpText += '<input disabled type="checkbox" class="todoListCheckbox" data-entry-id="'+entryList[x]['currentID']+'" '+checked+'>';
+			}
+			
+			tmpText += '&nbsp&nbsp'+entryList[x]['name']+'</span>';
+
+			//Load child entries
+			
+			if(typeof entryList[x]['children'] !== "undefined") {
+				if(Object.keys(entryList[x]['children']).length > 0) {
+					var children = displayEntries(entryList[x]['children'],"",displayType);
+					tmpText += children;
+				}
+			}
+			
+			tmpText += "</li>";
+		}
+		tmpText += "</ul>";
+	}
+	return(entryText + tmpText);
+}
+
+//list entry check or uncheck
+
+function todoListEntryStatusChange(entryID, checked, object) {
+	$.post(INCLUDES+"/todo_functions.php",{
+		requestType: "changeEntryStatus",
+		entryID: entryID,
+		checked: checked
+	},
+	function(data, status){
+		var options = "";
+		var dataCut = parsePostData(data);
+		//check if request is valid
+		if(dataCut == "error" || dataCut == "") {
+			headerNotification(LANG.ERROR_REQUEST_FAILED,"red");
+		} else if(dataCut == "missingRights") {
+			headerNotification(LANG.USER_RIGHTS_MISSING,"red");
+		} else if(dataCut == "success") {
+			var nameBox = object.parentNode;
+			if(checked == 1) {
+				nameBox.classList.add("checked");
+			} else {
+				nameBox.classList.remove("checked");
+			}
+		}
+	});
 }
 
 //delete category
@@ -366,5 +493,6 @@ $(document).ready(function() {
 			loadTodoCategories();
 		}
 	});
+
 });
 

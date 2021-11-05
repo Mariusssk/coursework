@@ -164,7 +164,7 @@ if($session->loggedIn() === True) {
 						</div>
 						<hr>
 						<div class="todoListEntries">
-							<?php echo WORD_LOADING;?>
+							<div class="entriesContainer"><?php echo WORD_LOADING;?></div>
 						</div>
 						<hr>
 						<div class="comments">

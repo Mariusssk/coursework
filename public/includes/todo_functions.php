@@ -240,6 +240,36 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 			}
 		}
 		
+		//Load all entries for specific list
+	
+		else if($request == "loadToDoListEntries") {
+			$list = new ToDoList;
+			if(isset($_POST['listID']) AND $list->loadData($_POST['listID'])) {
+				if($list->checkRights("view",$session) == True) {
+					
+					//Entries
+					
+					$entriesArray = ToDoListEntry::loadEntriesArray($list->getID(),"external");
+					
+					$post['entries'] = $entriesArray;
+					
+					//Rights
+					
+					if($list->checkRights("edit",$session) == True) {
+						$post['rights'] = "edit";
+					} else {
+						$post['rights'] = "view";
+					}
+					
+					echo json_encode($post);
+				} else {
+					echo "missingRights";
+				}
+			} else {
+				echo "error";
+			}
+		}
+		
 		
 		//Remove tag from list
 		else if($request == "removeToDoListTag") {
@@ -257,6 +287,59 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 					}
 				} else {
 					echo "missingRights";
+				}
+			} else {
+				echo "error";
+			}
+		}
+		
+		//add tag to list
+		else if($request == "addToDoListTag") {
+			$assigment = new TagAssignment;
+			$list = new ToDoList;
+			if(isset($_POST['listID']) AND isset($_POST['tagID']) AND 
+				$list->loadData($_POST['listID'])
+			) {
+				if($list->checkRights("edit",$session) == True) {
+					if($list->checkIfListHasTag($_POST['tagID']) == False) {
+						if($assigment->createTagForList($_POST['listID'],$_POST['tagID'])) {
+							echo "success";
+						} else {
+							echo "error";
+						}
+					} else {
+						echo "alreadyAdded";
+					}	
+				} else {
+					echo "missingRights";
+				}
+			} else {
+				echo "error";
+			}
+		}
+		
+		//change checked status of todo list entry
+		
+		else if($request == "changeEntryStatus") {
+			$entry = new ToDoListEntry;
+			if(isset($_POST['entryID']) AND $entry->loadData($_POST['entryID'])) {
+				$list = new ToDoList;
+				if($list->loadData($entry->getListID())) {
+					if($list->checkRights("edit",$session) == True) {
+						if(
+							isset($_POST['checked']) AND
+							$entry->setChecked($_POST['checked']) AND
+							$entry->saveData()
+						) {
+							echo "success";
+						} else {
+							echo "error";
+						}
+					} else {
+						echo "missingRights";
+					}
+				} else {
+					echo "error";
 				}
 			} else {
 				echo "error";
