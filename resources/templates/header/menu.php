@@ -96,13 +96,6 @@ $( document ).ready(function() {
 		</div>
 		<div class="subMenu" data-sub-menu="Todo">
 			<?php 
-			if($session->checkRights("create_global_todo_list") OR $session->checkRights("edit_personal_todo_list")) {
-			?>
-				<div class="menuElement subElement" data-destination="todo/new">
-					<a href="<?php echo URL;?>/todo/new"><?php echo HEADER_MENU_ITEM_TODO_CREATE;?></a>
-				</div>
-			<?php 
-			}
 			if($session->checkRights("edit_todo_list_categories") OR $session->checkRights("edit_personal_todo_list")) {
 			?>
 				<div class="menuElement subElement" data-destination="todo/category">

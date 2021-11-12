@@ -183,6 +183,12 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 						$post['rights'] = "view";
 					}
 					
+					if(empty($list->getUserID())) {
+						$post['listType'] = "global";
+					} else {
+						$post['listType'] = "personal";
+					}
+					
 					//Entries
 					
 					$entriesArray = ToDoListEntry::loadEntriesArray($list->getID(),"external");
@@ -340,6 +346,173 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 					}
 				} else {
 					echo "error";
+				}
+			} else {
+				echo "error";
+			}
+		}
+		
+		
+		//Add new entry to todo list
+		
+		else if($request == "saveNewListEntry") {
+			$list = new ToDoList;
+			if(
+				isset($_POST['listID']) AND
+				$list->loadData($_POST['listID'])
+			) {
+				if($list->checkRights("edit",$session) == True) {
+					$entry = new ToDoListEntry;
+					
+					if(
+						isset($_POST['name']) AND $entry->setName($_POST['name']) AND
+						isset($_POST['parentID']) AND $entry->setParentID($_POST['parentID']) AND
+						isset($_POST['listID']) AND $entry->setListID($_POST['listID']) AND
+						$entry->createNewData()
+					) {
+						echo "success";
+					} else {
+						echo "error";
+					}
+				} else {
+					echo "missingRights";
+				}
+			} else {
+				echo "error";
+			}
+		}
+		
+		//remove entry from todo list
+		
+		else if($request == "removeListEntry") {
+			$list = new ToDoList;
+			$entry = new ToDoListEntry;
+			if(
+				isset($_POST['listID']) AND $list->loadData($_POST['listID']) AND
+				isset($_POST['entryID']) AND $entry->loadData($_POST['entryID'])
+			) {
+				if($list->checkRights("edit",$session) == True) {
+					if($list->getID() == $entry->getListID()) {
+						if(count($entry->getChilds()) > 0) {
+							echo "hasChildren";
+						} else if($entry->deleteData()){
+							echo "success";
+						} else {
+							echo "error";
+						}
+					} else {
+						echo "error";
+					}
+				} else {
+					echo "missingRights";
+				}
+			} else {
+				echo "error";
+			}
+		}
+		
+		
+		//create new todo list
+		else if($request == "createNewToDoList") {
+			if(
+				isset($_POST['type']) AND
+				($_POST['type'] == "personal" AND $session->checkRights("edit_personal_todo_list") == True) OR 
+				($_POST['type'] == "global" AND $session->checkRights("create_global_todo_list") == True)
+			) {
+				$list = new ToDoList;
+				if(
+					(($_POST['type'] == "personal" AND $list->setUserID($session->getSessionUserID())) OR
+					$_POST['type'] == "global") AND
+					$list->createNewList()
+				) {
+					echo "success";
+				} else {
+					echo "error";
+				}
+				
+			} else {
+				echo "missingRights";
+			}
+		}
+		
+		//save name of todo list
+		
+		else if($request == "editToDoListName") {
+			$list = new ToDoList;
+			if(
+				isset($_POST['listID']) AND $list->loadData($_POST['listID'])
+			) {
+				if($list->checkRights("edit",$session) == True) {
+					if(
+						isset($_POST['name']) AND
+						$list->setName($_POST['name']) AND
+						isset($_POST['category']) AND
+						$list->setCategoryID($_POST['category']) AND
+						$list->saveData()
+					) {
+						echo "success";
+					} else {
+						echo "error";
+					}
+				} else {
+					echo "missingRights";
+				}
+			} else {
+				echo "error";
+			}
+		}
+		
+		//get all possible categories for todo list
+		
+		else if($request == "getToDoListCategories") {
+			$list = new ToDoList;
+			if(
+				isset($_POST['listID']) AND $list->loadData($_POST['listID'])
+			) {
+				if($list->checkRights("edit",$session) == True) {
+					if(empty($list->getUserID())) {
+						$categories = ToDoCategory::getGlobalCategories();
+					} else {
+						$categories = ToDoCategory::getPersonalCategories($list->getUserID());
+					}
+					
+					$post = array();
+					
+					foreach($categories as $tmpCategory) {
+						$category = new ToDoCategory;
+						if($category->loadData($tmpCategory)) {
+							$selected = "";
+							if($category->getID() == $list->getCategoryID()) {
+								$selected = "selected";
+							}
+							array_push($post, array("categoryID" => $category->getID(), "name" => $category->getName(), "selected" => $selected));
+						}
+					}
+					
+					echo json_encode($post);
+					
+				} else {
+					echo "missingRights";
+				}
+			} else {
+				echo "error";
+			}
+		}
+		
+		//delete todo list
+		
+		else if($request == "deleteToDoList") {
+			$list = new ToDoList;
+			if(
+				isset($_POST['listID']) AND $list->loadData($_POST['listID'])
+			) {
+				if($list->checkRights("edit",$session) == True) {
+					if($list->deleteList()) {
+						echo "success";
+					}
+					
+				} else {
+					echo "missingRights";
 				}
 			} else {
 				echo "error";

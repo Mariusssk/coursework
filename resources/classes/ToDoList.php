@@ -17,6 +17,14 @@ class ToDoList extends SystemClass {
 		array_push($this->IGNORE, "entries");
 	}
 	
+	//create new template todo list
+	
+	function createNewList() {
+		$this->setDateCreated();
+		$this->setName(TODO_LISTS_OVERVIEW_NEW_LIST_NAME);
+		return($this->createNewData());
+	}
+	
 	//find all todo list for category
 	
 	static function findListByCategory($category = 0, $userID = 0) {
@@ -113,6 +121,50 @@ class ToDoList extends SystemClass {
 		return(False);
 	}
 	
+	
+	//load todo list tags
+	function loadTags() {
+		$tags = array();
+		//check if list ID is set
+		if(!empty($this->getID())) {
+			//Load all entries
+			$tags = TagAssignment::loadTagsByAttribute(3,$this->getID());
+		}
+		return($tags);
+	}
+	
+	//delete todo list
+	
+	function deleteList() {
+		
+		$entries = ToDoListEntry::loadEntriesArray($this->getID());
+		
+		foreach($entries as $tmpEntry){
+			$this->recursiveDeleteEntry($tmpEntry);
+		}
+		
+		//Delete Attributes
+		
+		//Delete comments
+		
+		return($this->deleteData());
+	}
+	
+	//recursiveley delete todo lis entries
+	
+	function recursiveDeleteEntry($tmpArray) {
+		if(isset($tmpArray['children']) AND count($tmpArray['children']) > 0) {
+			foreach($tmpArray['children'] as $tmpChildren) {
+				$this->recursiveDeleteEntry($tmpChildren);
+			}
+		}
+		$entry = new ToDoListEntry;
+		if($entry->loadData($tmpArray['currentID'])) {
+			$entry->deleteData();
+		}
+		return;
+	}
+	
 	//get functions
 	
 	function getID() {
@@ -137,6 +189,42 @@ class ToDoList extends SystemClass {
 	
 	function getEntries() {
 		return($this->entries);
+	}
+	
+	// set function
+	
+	function setUserID($value) {
+		$user = new User;
+		if($user->loadData($value)) {
+			$this->user_id = $value;
+			return(True);
+		}
+		return(False);
+	}
+	
+	function setCategoryID($value) {
+		$category = new ToDoCategory;
+		if($category->loadData($value)) {
+			$this->todo_list_category_id = $value;
+			return(True);
+		} else if($value == 0) {
+			$this->todo_list_category_id = NULL;
+			return(True);
+		}
+		return(False);
+	}
+	
+	function setDateCreated() {
+		$now = new DateTime;
+		$this->created = $now->format("Y-m-d H:i:s");
+	}
+	
+	function setName($value) {
+		if(!empty($value)) {
+			$this->name = $value;
+			return(True);
+		}
+		return(False);
 	}
 	
 }

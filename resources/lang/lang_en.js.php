@@ -45,6 +45,12 @@ var LANG = {
 	TODO_LIST_OVERVIEW_NO_TAGS_FOUND: "No Tags assigned",
 	TODO_LIST_OVERVIEW_NO_ENTRIES_FOUND: "List has no entries",
 	TODO_LIST_OVERVIEW_SELECT_TAG: "Please select a tag",
+	TODO_LIST_OVERVIEW_PLACEHOLDE_ADD_ENTRY_NAME: "Entry Name",
+	TODO_LIST_OVERVIEW_PLACEHOLDE_ADD_ENTRY_PARENT: "Entry Parent",
+	TODO_LIST_OVERVIEW_PLACEHOLDE_CATEGORY: "ToDo List Category",
+	TODO_LIST_OVERVIEW_ADD_ENTRY_NAME_NEEDED: "The entry needs to have a name",
+	TODO_LIST_OVERVIEW_REMOVE_ENTRY_ERROR_CHILDREN: "The children of the entry need to be deleted first",
+	TODO_LIST_OVERVIEW_EDIT_LIST_NAME_ERROR: "Pleas put in ToDo List name",
 	
 	//Tags
 	
@@ -70,7 +76,11 @@ var LANG = {
 	
 	//basic word
 	
-	WORD_LOGIN: "Login"
+	WORD_LOGIN: "Login",
+	WORD_EDIT: "Edit",
+	WORD_ADD: "Add",
+	WORD_ABORT: "Abort",
+	WORD_SAVE: "Save"
 };
 
 </script>

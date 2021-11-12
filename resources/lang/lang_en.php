@@ -184,6 +184,7 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 		//Overview
 		
 		defined("TODO_LISTS_OVERVIEW_EMPTY") ? null :  define("TODO_LISTS_OVERVIEW_EMPTY", "No To-Do lists found!");	
+		defined("TODO_LISTS_OVERVIEW_NEW_LIST_NAME") ? null :  define("TODO_LISTS_OVERVIEW_NEW_LIST_NAME", "New ToDo List");	
 		
 		//global
 		

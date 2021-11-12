@@ -16,56 +16,67 @@
 	
 		/* Overview */
 		
-		.page.todo.overviewGlobal, .page.todo.overviewPersonal {
-			height: 100%;
-		}
-		
-		.todo .todoListContainer {
-			overflow-y: hidden;
-			overflow-x: auto;
-			height: 100%;
-			width: 100%;
-			white-space:nowrap;
-		}
-		
-		.todo .todoListContainer .todoListCategoryContainer {
-			height: calc(100% - 20px);
-			width: 350px;
-			display: inline-block;
-			background-color: #d4d4d4;
-			border-radius: 5px;
-			vertical-align: top;
-		}
-		
-		.todo .todoListContainer .todoListCategoryContainer .todoListCategoryHead{
-			border-top-left-radius: 5px;
-			border-top-right-radius: 5px;
-			height: 40px;
-			width: 350px;
-			background-color: #1d2327;
-			color: white;
-			padding: 5px;
-			font-weight: bold;
-		}
-		
-		.todo .todoListContainer .todoListCategoryContainer .todoListCategoryBody{
-			word-wrap: break-word;
-			overflow-y: auto;
-			height: calc(100% - 40px);
-		}
-		
-		.todo .todoListContainer .todoListCategoryContainer .todoListCategoryBody .todoList{ 
-			margin: 5px;
-			padding: 5px;
-			border-radius: 5px;
-			width: calc(100% - 10px);
-			background-color: white;
-			cursor: pointer;
-		}
-		
-		.todo .todoListContainer .todoListCategoryContainer .todoListCategoryBody .todoList .todoListName{ 
-			white-space: initial;
-		}
+			.page.todo.overviewGlobal, .page.todo.overviewPersonal {
+				height: 100%;
+			}
+			
+			.todo .todoListContainer {
+				overflow-y: hidden;
+				overflow-x: auto;
+				height: 100%;
+				width: 100%;
+				white-space:nowrap;
+			}
+			
+			.todo .todoListContainer .todoListCategoryContainer {
+				height: calc(100% - 20px);
+				width: 350px;
+				display: inline-block;
+				background-color: #d4d4d4;
+				border-radius: 5px;
+				vertical-align: top;
+			}
+			
+			.todo .todoListContainer .todoListCategoryContainer .todoListCategoryHead{
+				border-top-left-radius: 5px;
+				border-top-right-radius: 5px;
+				height: 40px;
+				width: 350px;
+				background-color: #1d2327;
+				color: white;
+				padding: 5px;
+				font-weight: bold;
+			}
+			
+			.todo .todoListContainer .todoListCategoryContainer .todoListCategoryBody{
+				word-wrap: break-word;
+				overflow-y: auto;
+				height: calc(100% - 40px);
+			}
+			
+			.todo .todoListContainer .todoListCategoryContainer .todoListCategoryBody .todoList{ 
+				margin: 5px;
+				padding: 5px;
+				border-radius: 5px;
+				width: calc(100% - 10px);
+				background-color: white;
+				cursor: pointer;
+			}
+			
+			.todo .todoListContainer .todoListCategoryContainer .todoListCategoryBody .todoList .todoListTags{ 
+				width: 89%;
+				margin-left: 5%;
+			}
+			
+			.todo .todoListContainer .todoListCategoryContainer .todoListCategoryBody .todoList .todoListTags .tag{ 
+				margin: 0 2px 0 2px;
+				border-radius: 2px;
+				line-height: 5px;
+			}
+			
+			.todo .todoListContainer .todoListCategoryContainer .todoListCategoryBody .todoList .todoListName{ 
+				white-space: initial;
+			}
 		
 		/* Overlay */
 		
@@ -106,6 +117,10 @@
 				.todo .todoListOverlay .head .closeButton{
 					height: 100%;
 					float: right;
+				}
+				
+				.todo .todoListOverlay .head .editToDoListName{
+					cursor: pointer;
 				}
 			
 			/* Labels */
@@ -155,6 +170,21 @@
 				.todo .todoListOverlay .todoListEntryNameBox.checked {
 					background-color: #c1c1c1;
 				}
+				
+				.todo .todoListOverlay .todoListEntryNameBox .removeToDoListEntryButton {
+					cursor: pointer;
+				}
+				
+				/* Add Entry Form */
+				
+					.todo .todoListOverlay .todoListEntries .editEntriesContainer .newToDoListEntryForm .entryParent,
+					.todo .todoListOverlay .todoListEntries .editEntriesContainer .newToDoListEntryForm .entryName					{
+						margin-top: 5px;
+						margin-bottom: 5px;
+						background-color: #f4f5f7;
+					}
+					
+				
 				
 		
 		

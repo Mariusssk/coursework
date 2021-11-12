@@ -9,7 +9,7 @@ if($session->loggedIn() === True) {
 	
 	//Check if specific reuqest is send
 	
-	$requestAllowed = array("overviewPersonal","overviewGlobal","new","categoryOverview","categoryNew","categoryEdit");
+	$requestAllowed = array("overviewPersonal","overviewGlobal","categoryOverview","categoryNew","categoryEdit");
 	if(isset($_GET['request']) AND !empty($_GET['request']) AND in_array($_GET['request'],$requestAllowed)) {
 		$request = $_GET['request'];
 	} else {
@@ -135,15 +135,17 @@ if($session->loggedIn() === True) {
 				//load todo list categories based on view type
 				if($request == "overviewPersonal") {
 					$categories = ToDoCategory::getPersonalCategories($session->getSessionUserID());
+					$requestType = "personal";
 				} else if($request == "overviewGlobal") {
 					$categories = ToDoCategory::getGlobalCategories();
+					$requestType = "global";
 				}
 				
 				//add overflow categories
 				if($request == "overviewGlobal") {
 					array_unshift($categories, "event");
 					array_unshift($categories, "uncategorized");
-				} else if($request == "overviewGlobal") {
+				} else if($request == "overviewPersonal") {
 					array_unshift($categories, "uncategorizedPersonal");
 				}
 				
@@ -155,6 +157,7 @@ if($session->loggedIn() === True) {
 								<?php echo WORD_LOADING;?>
 							</div>
 							<div class="closeButton">
+								<i class="fa fa-trash" aria-hidden="true" onclick="deleteToDoList()"></i>
 								<i class="fa fa-window-close" aria-hidden="true" onclick="closeOverlay(this)"></i>
 							</div>
 						</div>
@@ -165,6 +168,7 @@ if($session->loggedIn() === True) {
 						<hr>
 						<div class="todoListEntries">
 							<div class="entriesContainer"><?php echo WORD_LOADING;?></div>
+							<div class="editEntriesContainer"><?php echo WORD_LOADING;?></div>
 						</div>
 						<hr>
 						<div class="comments">
@@ -174,8 +178,8 @@ if($session->loggedIn() === True) {
 					</div>
 				</div>
 				<div class="todoListContainer">
+					
 				<?php
-				
 				if(count($categories) > 0) {
 					//load lists based on category
 					foreach($categories as $tmpCategory) {
@@ -192,7 +196,7 @@ if($session->loggedIn() === True) {
 						
 						//check lists are existing in category
 						$lists = ToDoList::findListByCategory($tmpCategory, $session->getSessionUserID());
-						if(count($lists) > 0) {
+						if(count($lists) > 0 OR $tmpCategory == "uncategorized" OR $tmpCategory == "uncategorizedPersonal") {
 							?>
 							<div class="todoListCategoryContainer">
 								<div class="todoListCategoryHead">
@@ -200,16 +204,37 @@ if($session->loggedIn() === True) {
 								</div>
 								<div class="todoListCategoryBody">
 									<?php
+									if(
+										($tmpCategory == "uncategorized" OR $tmpCategory == "uncategorizedPersonal") AND (
+											($request == "overviewPersonal" AND $session->checkRights("edit_personal_todo_list") == True) OR ($request == "overviewGlobal" AND $session->checkRights("create_global_todo_list") == True)
+										)
+									) {
+										?>
+										<div class="generalButton createNewToDoBtn" onclick="createNewTodoList('<?php echo $requestType;?>')"> <?php echo WORD_NEW;?> </div>
+										<?php
+									}
 										//Display all lists
 										foreach($lists as $tmpList) {
 											$list = new ToDoList;
 											if($list->loadData($tmpList)) {
+												$tags = $list->loadTags();
 												?>
-												<div class="todoList" onclick="openToDoList('<?php echo $list->getID();?>')">
+												<div class="todoList container" onclick="openToDoList('<?php echo $list->getID();?>')">
+													<div class="todoListTags row">
+														<?php
+														foreach($tags as $tmpTag) {
+															$tag = new Tag;
+															if($tag->loadData($tmpTag)) {
+																?>
+																<div class="col tag" style="background-color: <?php echo $tag->getColour();?>"> &nbsp </div>
+																<?php
+															}
+														}
+														?>
+													</div>
 													<div class="todoListName">
 														<?php echo $list->getName();?>
 													</div>
-													<div class="todoListTags"></div>
 												</div>
 												<?php
 											}
@@ -221,11 +246,8 @@ if($session->loggedIn() === True) {
 						}
 					}
 					
-				} else {
-					?>
-					<div class="todoEmpty"> <?php echo TODO_LISTS_OVERVIEW_EMPTY;?> </div>
-					<?php
-				}
+				} 
+
 				?>
 				</div>
 				<?php

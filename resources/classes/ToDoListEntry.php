@@ -2,7 +2,7 @@
 
 class ToDoListEntry extends SystemClass {
 	
-	protected $todo_list_entry_id, $todo_list_id, $parent_entry_id, $date_due, $name, $checked;
+	protected $todo_list_entry_id, $todo_list_id, $parent_entry_id, $name, $checked;
 	
 	function __construct() {
 		//Name of the table
@@ -13,6 +13,16 @@ class ToDoListEntry extends SystemClass {
 	}
 	
 	//Functions
+	
+	//overriden create new data to acomplish for checked 0
+	
+	function createNewData() {
+		if(empty($this->checked)) {
+			$this->checked = 0;
+		}
+		
+		return(parent::createNewData());
+	}
 	
 	//load all entries linked to specific todo list
 	public static function loadEntriesArray($listID, $displayType = "internal") {
@@ -54,6 +64,17 @@ class ToDoListEntry extends SystemClass {
 			return($childs);
 		} 
 		return(array());
+	}
+	
+	//delete all entries for todo list
+	
+	static function deleteAllEntriesForList($listID) {
+		$entry = new ToDoListEntry;
+		$sql = "DELETE FROM ".$entry->TABLE_NAME." WHERE todo_list_id = ?";
+		$sqlType = "i";
+		$sqlParams = array($listID);
+		
+		pdInsert($sql, "mysqli", $sqlType, $sqlParams);
 	}
 	
 	
@@ -105,18 +126,39 @@ class ToDoListEntry extends SystemClass {
 		return($this->checked);
 	}
 	
-	function getDateDue($type = "display") {
-		if($type == "display") {
-			$dueDate = new DateTime($this->date_due);
-			return($dueDate->format("d.m.Y"));
-		}
-	}
-	
 	function getListID() {
 		return($this->todo_list_id);
 	}
 	
 	//set function
+	
+	function setName($value) {
+		if(!empty($value)){
+			$this->name = $value;
+			return(True);
+		}
+		return(False);
+	}
+	
+	function setListID($value) {
+		$list = new ToDoList;
+		if($list->loadData($value)) {
+			$this->todo_list_id = $value;
+			return(True);
+		}
+		return(False);
+	}
+	
+	function setParentID($value) {
+		$entry = new ToDoListEntry;
+		if($entry->loadData($value)) {
+			$this->parent_entry_id = $value;
+			return(True);
+		} else if($value == 0) {
+			return(True);
+		}
+		return(False);
+	}
 	
 	function setChecked($value) {
 		if($value == 0 OR $value == 1) {

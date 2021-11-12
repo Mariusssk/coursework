@@ -79,7 +79,29 @@ function createNewCategory(ID) {
 	redirect(URL+"/todo/category/new");
 }
 
-//open overlay for todo listStyleType
+//create new todo list
+
+function createNewTodoList(type) {
+	$.post(INCLUDES+"/todo_functions.php",{
+		requestType: "createNewToDoList",
+		type: type
+	},
+	function(data, status){
+		var options = "";
+		var dataCut = parsePostData(data);
+		//check if request is valid
+		if(dataCut == "error" || dataCut == "") {
+			headerNotification(LANG.ERROR_REQUEST_FAILED,"red");
+		} else if(dataCut == "missingRights") {
+			headerNotification(LANG.USER_RIGHTS_MISSING,"red");
+		} else if(dataCut == "success") {
+			location.reload();
+		}
+	});
+	
+}
+
+//open overlay for todo list
 
 function openToDoList(listID) {
 	//request list data from php
@@ -102,8 +124,20 @@ function openToDoList(listID) {
 			if(typeof(overlay) !== undefined) {
 				overlay.classList.remove("none");
 				
+				if(data['listType'] == "global") {
+					overlay.querySelector(".comments").classList.remove("none");
+				} else if(data['listType'] == "personal") {
+					overlay.querySelector(".comments").classList.add("none");
+				}
+				
 				//Basic Data
-				overlay.querySelector(".todoListName").innerHTML = data['name'];
+				overlay.querySelector(".todoListName").innerHTML = '<span class="nameContainer">'+data['name']+'</span>';
+				
+				if(data['rights'] == "edit") {
+					overlay.querySelector(".todoListName").innerHTML += `
+						<span class="editToDoListName pointer" onclick="editToDoListName('`+listID+`')"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+					`;
+				}
 				
 				overlay.dataset.todoListId = listID;
 				
@@ -113,17 +147,288 @@ function openToDoList(listID) {
 				
 				//Entries
 				
-				loadListEntries(listID,overlay,"view");
+				loadListEntries(listID,overlay,"edit");
+				
+				//Edit Entries
+				
+				if(data['rights'] == "edit") {
+					closeToDoListEdit(listID, 1);
+				} else {
+					overlay.querySelector(".editEntriesContainer").innerHTML = "";
+				}
 				
 			}
 		}
 	});
 }
 
-//Display the todo list entries
-function displayToDoListEntries(entry) {
-	return(entry['name'])
+function deleteToDoList() {
+	var overlay = document.querySelector(".todo .overlayContainer");
+	
+	listID = overlay.dataset.todoListId;
+	
+	$.post(INCLUDES+"/todo_functions.php",{
+		requestType: "deleteToDoList",
+		listID: listID
+	},
+	function(data, status){
+		var options = "";
+		var dataCut = parsePostData(data);
+		//check if request is valid
+		if(dataCut == "error" || dataCut == "") {
+			headerNotification(LANG.ERROR_REQUEST_FAILED,"red");
+		} else if(dataCut == "missingRights") {
+			headerNotification(LANG.USER_RIGHTS_MISSING,"red");
+		} else if(dataCut == "success") {
+			location.reload();
+		} else {
+			console.log(data);
+		}
+	});
+	
 }
+
+function editToDoListName(listID, saveData = 0) {
+	var overlay = document.querySelector(".todo .overlayContainer");
+	if(saveData == 0) {
+		var nameContainer = overlay.querySelector(".todoListName .nameContainer");
+		var nameDiv = overlay.querySelector(".todoListName");
+		var name = nameContainer.innerHTML;
+		
+		$.post(INCLUDES+"/todo_functions.php",{
+			requestType: "getToDoListCategories",
+			listID: listID
+		},
+		function(data, status){
+			var options = "";
+			var dataCut = parsePostData(data);
+			//check if request is valid
+			if(dataCut == "error" || dataCut == "") {
+				headerNotification(LANG.ERROR_REQUEST_FAILED,"red");
+			} else if(dataCut == "missingRights") {
+				headerNotification(LANG.USER_RIGHTS_MISSING,"red");
+			} else {
+				data = JSON.parse(data);
+				
+				categories = "";
+				
+				for(i = 0; i < Object.keys(data).length;i++) {
+					categories += `<option value="`+data[i]['categoryID']+`" `+data[i]['selected']+`> `+data[i]['name']+` </option>`;
+				}
+				
+				nameDiv.innerHTML = `
+					<input type="text" class="todoListNameInput generalInput" value="`+name+`">
+					<select class="generalSelect todoListCategoryInput">
+						<option value="0">`+LANG.TODO_LIST_OVERVIEW_PLACEHOLDE_CATEGORY+`</option>
+						`+categories+`
+					</select>
+					<span class="editToDoListName pointer" onclick="editToDoListName('`+listID+`',1)"><i class="fa fa-check-square" aria-hidden="true"></i></span>
+				`;
+			}
+		});
+		
+	} else if(saveData == 1) {
+		var name = overlay.querySelector(".todoListName .todoListNameInput").value;
+		var category = overlay.querySelector(".todoListName .todoListCategoryInput").value;
+		if(name == "") {
+			headerNotification(LANG.TODO_LIST_OVERVIEW_EDIT_LIST_NAME_ERROR,"red");
+		} else {
+			$.post(INCLUDES+"/todo_functions.php",{
+				requestType: "editToDoListName",
+				name: name,
+				category: category,
+				listID: listID
+			},
+			function(data, status){
+				var options = "";
+				var dataCut = parsePostData(data);
+				//check if request is valid
+				if(dataCut == "error" || dataCut == "") {
+					headerNotification(LANG.ERROR_REQUEST_FAILED,"red");
+				} else if(dataCut == "missingRights") {
+					headerNotification(LANG.USER_RIGHTS_MISSING,"red");
+				} else if(dataCut == "success") {
+					location.reload();
+				}
+			});
+		}
+	}
+}
+
+
+//display todo list edit view
+
+function openTodoListEdit(listID) {
+	var overlay = document.querySelector(".todo .overlayContainer");
+	
+	loadListEntries(listID,overlay,"remove");
+	
+	var editEntriesButton = `
+	<div class="row">
+		<div class="col-6">
+			<div class="generalButton" onclick="closeToDoListEdit('`+listID+`')"> `+LANG.WORD_ABORT+` </div>
+		</div>
+		<div class="col-6">
+			<div class="generalButton" onclick="addEntryToListForm('`+listID+`')"> `+LANG.WORD_ADD+` </div>
+		</div>
+	</div>`;
+	
+	
+	overlay.querySelector(".editEntriesContainer").innerHTML = editEntriesButton;
+}
+
+//close todo list edit mode
+
+function closeToDoListEdit(listID, init = 0) {
+	var overlay = document.querySelector(".todo .overlayContainer");
+	var editEntriesButton = `<div class="generalButton" onclick="openTodoListEdit('`+listID+`')"> `+LANG.WORD_EDIT+` </div>`;
+	
+	overlay.querySelector(".editEntriesContainer").innerHTML = editEntriesButton;
+
+	if(init == 0) {
+		loadListEntries(listID,overlay,"edit");
+	}
+}
+
+//Display add entry form
+
+function addEntryToListForm(listID) {
+	
+	var overlay = document.querySelector(".todo .overlayContainer");
+	
+	//Load entries from PHP
+	$.post(INCLUDES+"/todo_functions.php",{
+		requestType: "loadToDoListEntries",
+		listID: listID
+	},
+	function(data, status){
+		var options = "";
+		var dataCut = parsePostData(data);
+		//check if request is valid
+		if(dataCut == "error" || dataCut == "") {
+			headerNotification(LANG.ERROR_REQUEST_FAILED,"red");
+		} else if(dataCut == "missingRights") {
+			headerNotification(LANG.USER_RIGHTS_MISSING,"red");
+		} else {
+			data = JSON.parse(data);
+			
+			var options = "";
+			
+			var entries = data['entries'];
+			
+			options = displayEntriesForSelect(entries)
+	
+			var editEntriesForm = `
+			<div class="row newToDoListEntryForm">
+				<div class="col-12">
+					<select class="entryParent generalSelect">
+						<option value="0" selected> `+LANG.TODO_LIST_OVERVIEW_PLACEHOLDE_ADD_ENTRY_PARENT+` </option>
+						`+options+`
+					</select>
+				</div>
+				<div class="col-12">
+					<input type="text" placeholder="`+LANG.TODO_LIST_OVERVIEW_PLACEHOLDE_ADD_ENTRY_NAME+`" class="entryName generalInput">
+				</div>
+				<div class="col-6">
+					<div class="generalButton" onclick="openTodoListEdit('`+listID+`')"> `+LANG.WORD_ABORT+` </div>
+				</div>
+				<div class="col-6">
+					<div class="generalButton" onclick="saveToDoListEntry('`+listID+`')"> `+LANG.WORD_SAVE+` </div>
+				</div>
+			</div>
+			`;
+			
+			overlay.querySelector(".editEntriesContainer").innerHTML = editEntriesForm;
+			
+		}
+	});
+}
+
+//Save new entry to todo list
+
+function saveToDoListEntry(listID) {
+	var overlayForm = document.querySelector(".todo .overlayContainer .newToDoListEntryForm");
+	var name = overlayForm.querySelector(".entryName").value;
+	var parentID = overlayForm.querySelector(".entryParent").value;
+	
+	if(name == "") {
+		headerNotification(LANG.TODO_LIST_OVERVIEW_ADD_ENTRY_NAME_NEEDED,"red"); 
+	} else {
+		
+		$.post(INCLUDES+"/todo_functions.php",{
+			requestType: "saveNewListEntry",
+			name: name,
+			parentID: parentID,
+			listID: listID
+		},
+		function(data, status){
+			var options = "";
+			var dataCut = parsePostData(data);
+			//check if request is valid
+			if(dataCut == "error" || dataCut == "") {
+				headerNotification(LANG.ERROR_REQUEST_FAILED,"red");
+			} else if(dataCut == "missingRights") {
+				headerNotification(LANG.USER_RIGHTS_MISSING,"red");
+			} else if(dataCut == "success") {
+				closeToDoListEdit(listID);
+			}
+		});
+	}
+}
+
+
+//delete element from todo list
+
+function removeToDoListEntry(entryID) {
+	var overlay = document.querySelector(".todo .overlayContainer");
+	
+	listID = overlay.dataset.todoListId;
+	
+	
+	$.post(INCLUDES+"/todo_functions.php",{
+		requestType: "removeListEntry",
+		entryID: entryID,
+		listID: listID
+	},
+	function(data, status){
+		var options = "";
+		var dataCut = parsePostData(data);
+		//check if request is valid
+		if(dataCut == "error" || dataCut == "") {
+			headerNotification(LANG.ERROR_REQUEST_FAILED,"red");
+		} else if(dataCut == "missingRights") {
+			headerNotification(LANG.USER_RIGHTS_MISSING,"red");
+		} else if(dataCut == "hasChildren") {
+			headerNotification(LANG.TODO_LIST_OVERVIEW_REMOVE_ENTRY_ERROR_CHILDREN,"red");
+		} else if(dataCut == "success") {
+			closeToDoListEdit(listID);
+		}
+	});
+}
+
+//display entries in format for the select
+
+function displayEntriesForSelect(entryList, level = 0, entryText = "") {
+	var tmpText = "";
+	var keyLength = Object.keys(entryList).length;
+	if(keyLength > 0) {
+		for(var x = 0; x < keyLength; x++) {
+			
+			tmpText += `<option value="`+entryList[x]['currentID']+`">`+"--".repeat(level)+` `+entryList[x]['name']+`</option>`;
+			
+			//Load child entries
+			
+			if(typeof entryList[x]['children'] !== "undefined") {
+				if(Object.keys(entryList[x]['children']).length > 0) {
+					var children = displayEntriesForSelect(entryList[x]['children'],level + 1);
+					tmpText += children;
+				}
+			}
+		}
+	}
+	return(entryText + tmpText);
+}
+
 
 //load all tags
 
@@ -277,7 +582,7 @@ function deleteTag(tagID) {
 //load all entries of todo list
 
 function loadListEntries(listID, overlay, displayType = "view") {
-	//Load tags from PHP
+	//Load entries from PHP
 	$.post(INCLUDES+"/todo_functions.php",{
 		requestType: "loadToDoListEntries",
 		listID: listID
@@ -293,15 +598,15 @@ function loadListEntries(listID, overlay, displayType = "view") {
 		} else {
 			data = JSON.parse(data);
 			var rights = data['rights'];
-			if(displayType == "edit" && rights == "view") {
+			if((displayType == "edit" || displayType == "remove") && rights == "view") {
 				displayType = "view";
 			}
-			console.log(data['entries']);
+
 			//Display entries
 			
 			var entries =  "";
 			
-			entries = displayEntries(data['entries'],entries,rights);
+			entries = displayEntries(data['entries'],entries,displayType);
 			
 			overlay.querySelector(".entriesContainer").innerHTML = entries;
 	
@@ -339,8 +644,12 @@ function displayEntries(entryList, entryText = "", displayType) {
 			
 			if(displayType == "edit") {
 				tmpText += '<input type="checkbox" class="todoListCheckbox" data-entry-id="'+entryList[x]['currentID']+'" '+checked+'>';
-			} else {
+			} else if(displayType != "remove") {
 				tmpText += '<input disabled type="checkbox" class="todoListCheckbox" data-entry-id="'+entryList[x]['currentID']+'" '+checked+'>';
+			}
+			
+			if(displayType == "remove") {
+				tmpText += `<span class="removeToDoListEntryButton" onclick="removeToDoListEntry('`+entryList[x]['currentID']+`')"><i class="fa fa-trash" aria-hidden="true"></i></span>`;
 			}
 			
 			tmpText += '&nbsp&nbsp'+entryList[x]['name']+'</span>';
