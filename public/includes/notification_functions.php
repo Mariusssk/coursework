@@ -32,7 +32,62 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 			} else {
 				echo "error";
 			}
-		}	
+		}
+
+		//Load all notifications of user_error
+		
+		else if($request == "loadPersonalNotifications") {
+			$notifications = Notification::getAllNotificationsForUser($session->getSessionUserID());
+			
+			$post = array();
+			$post['notifications'] = array();
+			
+			foreach($notifications as $tmpNotification) {
+				$notification = new Notification;
+				if($notification->loadData($tmpNotification)) {
+					$notificationArray = array();
+					
+					//seen
+					$notificationArray['seen'] = $notification->getSeenAsBoolean();
+					
+					$attributeTypeID = $notification->getAttributeTypeID();
+					
+					//Attribute Data
+					
+					if($attributeTypeID == 1) {
+						$notificationArray['type'] = "event";
+					} else if($attributeTypeID == 3) {
+						$notificationArray['type'] = "todoList";
+						$todo = new ToDoList;
+						if($todo->loadData($notification->getAttributeID())) {
+							$notificationArray['name'] = $todo->getName();
+							$notificationArray['URL'] = $todo->getURL();
+						}
+					}
+					
+					array_push($post['notifications'], $notificationArray);
+				}
+			}
+			
+			echo json_encode($post);
+		}
+		
+		//Mark unread notifications as read
+		
+		else if($request == "markNotificationsAsRead") {
+			$notifications = Notification::getAllNotificationsForUser($session->getSessionUserID());
+			
+			foreach($notifications as $tmpNotification) {
+				$notification = new Notification;
+				if(
+					$notification->loadData($tmpNotification) AND
+					$notification->setSeen(1) AND
+					$notification->saveData()
+				) {
+					echo "success";
+				}
+			}
+		}
 	} 
 }
 

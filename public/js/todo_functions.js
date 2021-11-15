@@ -141,6 +141,12 @@ function openToDoList(listID) {
 				
 				overlay.dataset.todoListId = listID;
 				
+				//Comments
+				
+				var commentContainer = overlay.querySelector(".commentsContainer");
+				
+				loadCommentSection("todoList",listID,"commentSection");
+				
 				//Tags
 				
 				loadListTags(listID,overlay,"view");

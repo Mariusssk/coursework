@@ -87,14 +87,8 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 	defined("USER_PROFILE_NOT_FOUND") ? null :  define("USER_PROFILE_NOT_FOUND", "User Profile not found!");
 	defined("USER_PROFILE_REGISTERED_SINCE") ? null :  define("USER_PROFILE_REGISTERED_SINCE", "Registered since");
 	
-	//Notifications
 	
-	defined("USER_NOTIFICATIONS_HEADLINE") ? null : define("USER_NOTIFICATIONS_HEADLINE", "Notifications");
 	
-	defined("USER_NOTIFICATIONS_SUB_HEADLINE_SYSTEM") ? null : define("USER_NOTIFICATIONS_SUB_HEADLINE_SYSTEM", "System Notifications");
-	defined("USER_NOTIFICATIONS_SUB_HEADLINE_USER") ? null : define("USER_NOTIFICATIONS_SUB_HEADLINE_USER", "User Notifications");
-	
-	defined("USER_NOTIFICATIONS_EMPTY_LIST") ? null : define("USER_NOTIFICATIONS_EMPTY_LIST", "Currently there are no notifications to display");
 
 //Dashbord 
 
@@ -240,7 +234,17 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 		
 		defined("SYSTEM_NOTIFICATIONS_CONFIRM_PERSONAL_EMAIL_A") ? null: define("SYSTEM_NOTIFICATIONS_CONFIRM_PERSONAL_EMAIL_A", "personal email address");
 		defined("SYSTEM_NOTIFICATIONS_CONFIRM_SCHOOL_EMAIL_A") ? null: define("SYSTEM_NOTIFICATIONS_CONFIRM_SCHOOL_EMAIL_A", "school email address");
-		
+	
+	//User notification
+	
+	defined("USER_NOTIFICATIONS_HEADLINE") ? null : define("USER_NOTIFICATIONS_HEADLINE", "Notifications");
+	
+	defined("USER_NOTIFICATIONS_SUB_HEADLINE_SYSTEM") ? null : define("USER_NOTIFICATIONS_SUB_HEADLINE_SYSTEM", "System Notifications");
+	defined("USER_NOTIFICATIONS_SUB_HEADLINE_USER") ? null : define("USER_NOTIFICATIONS_SUB_HEADLINE_USER", "User Notifications");
+	
+	defined("USER_NOTIFICATIONS_EMPTY_LIST") ? null : define("USER_NOTIFICATIONS_EMPTY_LIST", "Currently there are no notifications to display");
+	
+	defined("USER_NOTIFICATIONS_BUTTON_MARK_READ") ? null : define("USER_NOTIFICATIONS_BUTTON_MARK_READ", "Mark as read");
 	
 //Language
 	

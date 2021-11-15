@@ -173,7 +173,7 @@ if($session->loggedIn() === True) {
 						<hr>
 						<div class="comments">
 							<span class="commentsHead"> <?php echo WORD_COMMENTS;?></span>
-							<div class="commentsContainer"> <?php echo WORD_LOADING;?> </div>
+							<div class="commentsContainer" id="commentSection"> <?php echo WORD_LOADING;?> </div>
 						</div>
 					</div>
 				</div>
@@ -193,6 +193,8 @@ if($session->loggedIn() === True) {
 						} else if($tmpCategory == "uncategorized" OR $tmpCategory == "uncategorizedPersonal") {
 							$name = TODO_LISTS_HEAD_UNCATEGORIZED;
 						}
+						
+						
 						
 						//check lists are existing in category
 						$lists = ToDoList::findListByCategory($tmpCategory, $session->getSessionUserID());
@@ -244,6 +246,14 @@ if($session->loggedIn() === True) {
 							</div>
 							<?php
 						}
+						
+						$list = new ToDoList;
+						if(isset($_GET['listID']) AND !empty($_GET['listID']) AND $list->loadData($_GET['listID'])) {
+							?>
+							<script> openToDoList('<?php echo $list->getID();?>');</script>
+							<?php
+						} 
+						
 					}
 					
 				} 

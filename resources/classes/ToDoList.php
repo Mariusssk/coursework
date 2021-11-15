@@ -150,6 +150,16 @@ class ToDoList extends SystemClass {
 		return($this->deleteData());
 	}
 	
+	//create link to todo list
+	
+	function getURL() {
+		if(empty($this->getUserID())) {
+			return(URL."/todo/global/".$this->getID());
+		} else {
+			return(URL."/todo/personal/".$this->getID());
+		}
+	}
+	
 	//recursiveley delete todo lis entries
 	
 	function recursiveDeleteEntry($tmpArray) {

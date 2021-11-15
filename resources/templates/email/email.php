@@ -73,39 +73,3 @@ function getEmailContent($type,$attributes = array()) {
 	return($email);
 }
 
-function getOrderFacts($order) {
-	ob_start();
-	
-	?>
-	<div class="column" style="width:100%;max-width:780px;display:inline-block;vertical-align:middle; margin: 5px">
-		<div style="padding:10px;font-size:14px;line-height:18px;text-align:left;" valign="middle" align="center">
-			<!--[if mso]>
-			<table style="width: 100%;">
-			<tr><td height="5" colspan="3"></tr>
-			<tr><td width="10"></td>
-			<td width="370">
-			<![endif]-->
-			<div style="width: 49%;display:inline-block;" align="left">
-				<p style="margin-top:0;margin-bottom:12px;font-family:Arial,sans-serif;font-weight:bold;">Bestellcode </p>
-				<p style="margin-top:0;margin-bottom:12px;font-family:Arial,sans-serif;font-weight:bold;">Bestelldatum </p>
-				<p style="margin-top:0;margin-bottom:12px;font-family:Arial,sans-serif;font-weight:bold;">Status </p>
-			</div>
-			<!--[if mso]>
-			</td>
-			<td width="370">
-			<![endif]-->
-			<div style="width: 50%;display:inline-block;" align="right">
-				<p style="margin-top:0;margin-bottom:14px;font-family:Arial,sans-serif;"><?php echo $order->getOrderCode();?></p>
-				<p style="margin-top:0;margin-bottom:14px;font-family:Arial,sans-serif;"><?php echo $order->getOrderDate();?></p>
-				<p style="margin-top:0;margin-bottom:14px;font-family:Arial,sans-serif;"><?php echo $order->getOrderStatusName();?></p>
-			</div>
-			<!--[if mso]>
-			</td><td width="10"></td></tr></table>
-			<![endif]-->
-		</div>
-	</div>
-	<?php
-	$facts = ob_get_contents();
-	ob_end_clean();
-	return($facts);
-}

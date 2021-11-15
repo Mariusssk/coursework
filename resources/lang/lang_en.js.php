@@ -68,11 +68,22 @@ var LANG = {
 	//Notifications
 	
 	NOTIFICATIONS_CONFIRM_EMAIL_REQUEST_SUCCESS: "The confirmation email has been resend!",
+	NOTIFICATIONS_PERSONAL_NEW_COMMENT_TODO_LIST: "There is a new comment for the todo list",
+	NOTIFICATIONS_PERSONAL_NEW_COMMENT_EVENT: "There is a new comment for the event",
+	NOTIFICATIONS_NON_FOUND: "Currently there are no notifications to display",
+	
+	//Comments
+	
+	COMMENTS_INPUTS_NEW_COMMENT_HEADLINE: "New comment",
+	COMMENTS_INPUTS_NEW_COMMENT_PLACEHOLDER: "Please put in new Comment",
+	COMMENTS_INPUTS_NEW_COMMENT_BUTTON: "New comment",
+	COMMENTS_INPUTS_NEW_COMMENT_SAVED_SUCCESS: "New comment saved succesfull",
 	
 	//Basic phrases
 	
 	PHRASE_FILL_ALL: "All fields maked with a * must be filled!",
 	PHRASE_SAVED_SUCCESS: "Data was succesfully saved!",
+	PHRASE_REQUEST_SUCCSESSFUL: "Your request was succesfull",
 	
 	//basic word
 	

@@ -1,0 +1,20 @@
+/* Comments */
+
+	/* Overlay */
+	
+		/* Comments List */
+		
+			.commentSection .commentsList {
+				margin-bottom: 10px;
+			}
+			
+		/* New Comment*/
+		
+			.commentSection .commentInputContainer .generalInput.newComment {
+				width: calc(100% - 30px);
+			}
+			
+			.commentSection .commentInputContainer .saveComment i {
+				font-size: 130%;
+				cursor: pointer;
+			}

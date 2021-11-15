@@ -6,21 +6,36 @@ class NotificationRequest extends SystemClass {
 	
 	function __construct() {
 		//Name of the table
-		$this->TABLE_NAME = "notification";
+		$this->TABLE_NAME = "notification_request";
+	}
+	
+	//get all requests for specific user_error
+	
+	public static function loadRequestsByUserID($userID) {
+		$request = new NotificationRequest;
+		
+		$sql = "SELECT ".$request->TABLE_NAME."_id FROM ".$request->TABLE_NAME." WHERE user_id = ?";
+		$sqlType = "i";
+		$sqlParams = array($userID);
+		
+		$requests = pdSelect($sql,"mysqli",$sqlType,$sqlParams);
+		
+		$requests = $request->mergeResult($requests);
+		
+		return($requests);
 	}
 	
 	//get functions
 	
 	function getID() {
-		return($this->notification_id);
+		return($this->notification_request);
+	}
+
+	function getAttributeID() {
+		return($this->attribute_id);
 	}
 	
-	function getSeenAsBoolean() {
-		if($this->seen == 1) {
-			return(True);
-		}
-		return(False);
+	function getAttributeTypeID() {
+		return($this->attribute_type_id);
 	}
-	
-	
 }

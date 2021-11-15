@@ -13,12 +13,13 @@ error_reporting(E_ALL);
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Aulatechnik</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="<?php echo CSS;?>/font-awesome.min.css" type="text/css">
+	<link rel="stylesheet" href="<?php echo CSS;?>/bootstrap/bootstrap.min.css" type="text/css">
+	<link rel="stylesheet" href="<?php echo CSS;?>/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="<?php echo CSS;?>/style.css" type="text/css">
 	<link rel="stylesheet" href="<?php echo CSS;?>/nice-select.css" type="text/css">
 	
 	<link rel="stylesheet" href="<?php echo CSS;?>/user_style.css" type="text/css">
+	<link rel="stylesheet" href="<?php echo CSS;?>/comment_style.css" type="text/css">
 	<link rel="stylesheet" href="<?php echo CSS;?>/storage.css" type="text/css">
 	<link rel="stylesheet" href="<?php echo CSS;?>/item.css" type="text/css">
 	<link rel="stylesheet" href="<?php echo CSS;?>/settings.css" type="text/css">
@@ -44,7 +45,6 @@ error_reporting(E_ALL);
 	<!-- Js Plugins -->
 	<script src="<?php echo JS;?>/jquery.min.js"></script>
 	
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 	<script src="<?php echo JS;?>/jquery.nice-select.min.js"></script>
 	<script src="<?php echo JS;?>/functions.js"></script>
 	<script src="<?php echo JS;?>/user_functions.js"></script>
@@ -53,6 +53,7 @@ error_reporting(E_ALL);
 	<script src="<?php echo JS;?>/todo_functions.js"></script>
 	<script src="<?php echo JS;?>/sortable.min.js"></script>
 	<script src="<?php echo JS;?>/settings.js"></script>
+	<script src="<?php echo JS;?>/comment_functions.js"></script>
 	
 	<script src="<?php echo JS;?>/notification_functions.js"></script>
 	

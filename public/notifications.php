@@ -46,17 +46,19 @@ if($session->loggedIn() === True) {
 					?>
 				</div>
 				<hr>
-				<h3> <?php echo USER_NOTIFICATIONS_SUB_HEADLINE_USER;?> </h3>
-				<div class="row">
-					<div class="col-12 notificationContainer">
-						Test
-					</div>
-					<div class="col-12 notificationContainer">
-						Test
-					</div>
+				<div class="headerPersonal">
+					<h3> <?php echo USER_NOTIFICATIONS_SUB_HEADLINE_USER;?> </h3>
+					<div class="generalButton markReadButton" onclick="markNotificationsAsRead()"> <?php echo USER_NOTIFICATIONS_BUTTON_MARK_READ;?> </div>
+				</div>
+				<div style="clear:both;"></div>
+				<div class="row personalNotifications">
+					
 				</div>
 			</div>
 		</div>
+		<script>
+			loadPersonalNotifications();
+		</script>
 		<?php
 	}
 

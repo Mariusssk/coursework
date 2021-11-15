@@ -89,6 +89,91 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		echo json_encode(Tag::getSelect(array("class" => "generalSelect")));
 	}
 	
+	//load comments for specific attribute type and attribute
+	
+	else if($request == "") {
+		if(
+			isset($_POST['type']) AND isset($_POST['attributeID'])
+		) {
+			if($_POST['type'] == "todoList") {
+				$type = 3;
+			} else {
+				$type = 0;
+			}
+			
+			$todo = new ToDoList;
+			
+			if(
+				$type != 0 AND
+				(
+					($type == 3 AND $todo->loadData($_POST['attributeID']))
+				)
+			) {
+				$comments = Comment::loadCommentsForTypeAndAttribute($type, $_POST['attributeID']);
+				
+				$post = array();
+				$post['comments'] = array();
+				
+				foreach($comments as $tmpComment) {
+					$comment = new Comment;
+					if($comment->loadData($tmpComment)) {
+						$tmpCommentArray = array();
+						
+						if($comment->getUserID() == $session->getSessionUserID()) {
+							$tmpCommentArray['edit'] = True;
+						} else {
+							$tmpCommentArray['edit'] = False;
+						}
+						
+						$tmpCommentArray['data'] = $comment->getData();
+						$tmpCommentArray['timestamp'] = $comment->getTimestap();
+						
+						array_push($post['comments'], $tmpCommentArray);
+					}
+				}
+				
+				echo json_encode($post);
+			} else {
+				echo "error";
+			}
+		} else {
+			echo "error";
+		}
+	}
+	
+	//Save new comment
+	
+	else if($request == "saveNewComment") {
+		$todo = new ToDoList;
+		
+		$type = 0;
+
+		if(isset($_POST['type'])) {
+
+			if($_POST['type'] == "todoList") {
+				$type = 3;
+			}
+		
+		}
+		
+		if(
+			isset($_POST['attributeID']) AND
+			(
+				($type == 3 AND $todo->loadData($_POST['attributeID']))
+			) AND
+			isset($_POST['comment']) AND !empty($_POST['comment'])
+		) {
+			$comment = new Comment;
+			if($comment->createNewComment($type, $_POST['attributeID'], $_POST['comment'], $session->getSessionUserID())) {
+				echo "success";
+			} else {
+				echo "error";
+			}
+		} else {
+			echo "error";
+		}
+	}
+	
 }
 
 ob_flush();

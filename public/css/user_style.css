@@ -89,6 +89,16 @@
 
 /* Notifications */
 
+.page.notifications.list .headerPersonal h3 {
+	float: left;
+}
+
+.page.notifications.list .markReadButton {
+	float: right;
+	width: max(50%, 200px);
+}
+
+
 .page.notifications.list .notificationContainer {
 	margin-bottom: 10px;
 	padding: 10px;

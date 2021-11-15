@@ -43,7 +43,9 @@ RewriteRule ^item/lend/add$ item.php?request=addLend [QSA,NC,L]
 #Todo
 
 RewriteRule ^todo/personal$ todo.php?request=overviewPersonal [QSA,NC,L]
+RewriteRule ^todo/personal/([0-9-]+)$ todo.php?request=overviewPersonal&listID=$1 [QSA,NC,L]
 RewriteRule ^todo/global$ todo.php?request=overviewGlobal [QSA,NC,L]
+RewriteRule ^todo/global/([0-9-]+)$ todo.php?request=overviewGlobal&listID=$1 [QSA,NC,L]
 RewriteRule ^todo/category$ todo.php?request=categoryOverview [QSA,NC,L]
 RewriteRule ^todo/category/new$ todo.php?request=categoryNew [QSA,NC,L]
 RewriteRule ^todo/category/edit/([0-9-]+)$ todo.php?request=categoryEdit&ID=$1 [QSA,NC,L]
