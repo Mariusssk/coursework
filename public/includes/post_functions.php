@@ -91,7 +91,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 	
 	//load comments for specific attribute type and attribute
 	
-	else if($request == "") {
+	else if($request == "loadComments") {
 		if(
 			isset($_POST['type']) AND isset($_POST['attributeID'])
 		) {
@@ -119,6 +119,8 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 					if($comment->loadData($tmpComment)) {
 						$tmpCommentArray = array();
 						
+						$tmpCommentArray['commentID'] = $comment->getID();
+						
 						if($comment->getUserID() == $session->getSessionUserID()) {
 							$tmpCommentArray['edit'] = True;
 						} else {
@@ -126,7 +128,8 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 						}
 						
 						$tmpCommentArray['data'] = $comment->getData();
-						$tmpCommentArray['timestamp'] = $comment->getTimestap();
+						$tmpCommentArray['timestamp'] = $comment->getTimestamp();
+						$tmpCommentArray['username'] = $comment->getUsername();
 						
 						array_push($post['comments'], $tmpCommentArray);
 					}
@@ -169,6 +172,94 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 			} else {
 				echo "error";
 			}
+		} else {
+			echo "error";
+		}
+	}
+	
+	//Save edited comment
+	
+	else if($request == "saveEditedComment") {
+		$comment = new Comment;
+		if(
+			isset($_POST['commentID']) AND $comment->loadData($_POST['commentID']) AND
+			isset($_POST['comment']) AND !empty($_POST['comment'])
+		) {
+			if($comment->getUserID() == $session->getSessionUserID()) {
+				$comment->setData($_POST['comment']);
+				$post = array();
+				$post['attributeID'] = $comment->getAttributeID();
+				
+				if($comment->getTypeID() == 3) {
+					$post['type'] = "todoList";
+				}
+				
+				if($comment->saveData()) {
+					echo json_encode($post);
+				} else {
+					echo "error";
+				}
+			} else {
+				echo "missingRights";
+			}
+		} else {
+			echo "error";
+		}
+	}
+	
+	//toggle notifications for comments on specific attribute
+	
+	else if($request == "toggleCommentNotifications") {
+		$todo = new ToDoList;
+		
+		$type = 0;
+
+		if(isset($_POST['type'])) {
+
+			if($_POST['type'] == "todoList") {
+				$type = 3;
+			}
+		
+		}
+		
+		if(
+			isset($_POST['attributeID']) AND
+			(
+				($type == 3 AND $todo->loadData($_POST['attributeID']))
+			)
+		) {
+			$currentState = NotificationRequest::checkIfRequestActivated($session->getSessionUserID(), $type, $_POST['attributeID']);
+			
+			$newState = filter_var($_POST['newState'], FILTER_VALIDATE_BOOLEAN);
+			
+			//Check if new state is transmitted
+			
+			$result = "";
+			
+			if(isset($_POST['newState']) AND !empty($_POST['newState'])) {
+				if($newState == $currentState) {
+					$result = True;
+				} else if($newState == True) {
+					$result = NotificationRequest::createRequest($session->getSessionUserID(), $type, $_POST['attributeID']);
+				} else if($newState == False) {
+					$result = NotificationRequest::deleteRequest($session->getSessionUserID(), $type, $_POST['attributeID']);
+				}
+			} 
+			
+			//Otherwise tooggle state
+			
+			else if($currentState == True) {
+				$result = NotificationRequest::deleteRequest($session->getSessionUserID(), $type, $_POST['attributeID']);
+			} else if($currentState == False) {
+				$result = NotificationRequest::createRequest($session->getSessionUserID(), $type, $_POST['attributeID']);
+			}
+			
+			if($result == True) {
+				echo "success";
+			} else {
+				echo "error";
+			}
+			
 		} else {
 			echo "error";
 		}

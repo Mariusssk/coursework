@@ -2,7 +2,7 @@
 
 class Notification extends SystemClass{
 	
-	protected $notification_id, $notification_request_id , $email_sent, $seen;
+	protected $notification_id, $notification_request_id , $email_sent, $seen, $time_posted;
 	
 	function __construct() {
 		//Name of the table
@@ -55,7 +55,7 @@ class Notification extends SystemClass{
 			
 			$sql .= "(".$whereRequest.")";
 			
-			$sql .= " ORDER BY ".$notification->TABLE_NAME."_id ASC";
+			$sql .= " ORDER BY time_posted DESC";
 			
 			$notifications = pdSelect($sql,"mysqli",$sqlType, $sqlParams);
 			
@@ -64,6 +64,42 @@ class Notification extends SystemClass{
 			return($notifications);
 		}
 		return(array());
+	}
+	
+	//detele all notifications for sepcific request
+	
+	public static function deleteAllNotificationsForRequest($requestID) {
+		$notification = new Notification;
+		$sql = "DELETE FROM ".$notification->TABLE_NAME." WHERE notification_request_id = ?";
+		$sqlType = "i";
+		$sqlParams = array($requestID);
+		
+		pdInsert($sql, "mysqli", $sqlType, $sqlParams);
+		
+		return(True);
+	}
+	
+	//Create a new notification
+	
+	function createNewNotification($requestID) {
+		$request = new NotificationRequest;
+		if($request->loadData($requestID)) {
+			$this->setRequestID($request->getID());
+			$this->setSeen(0);
+			
+			$this->setTimePostedNow();
+			
+			if($request->getEmailUpdate() == 1) {
+				$this->setEmailSent(0);
+			} else {
+				$this->setEmailSent(1);
+			}
+			
+			if($this->createNewData()) {
+				return(True);
+			}
+		}
+		return(False);
 	}
 	
 	//get functions
@@ -97,7 +133,27 @@ class Notification extends SystemClass{
 		}
 	}
 	
+	function getTimePosted($type) {
+		if($type == "external") {
+			$posted = new DateTime($this->time_posted);
+			return($posted->format("d.m.Y H:i"));
+		}
+	}
+	
 	//Set functions
+	
+	function setEmailSent($value) {
+		if($value == 1 OR $value == 0) {
+			$this->email_sent = $value;
+			return(true);
+		} 
+		return(False);
+	}
+	
+	function setRequestID($value) {
+		$this->notification_request_id = $value;
+		return(True);
+	}
 	
 	function setSeen($value) {
 		if($value == 1 OR $value == 0) {
@@ -105,6 +161,11 @@ class Notification extends SystemClass{
 			return(true);
 		} 
 		return(False);
+	}
+	
+	function setTimePostedNow() {
+		$now = new DateTime();
+		$this->time_posted = $now->format("Y-m-d H:i:s");
 	}
 
 	

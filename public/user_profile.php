@@ -100,7 +100,7 @@ if($session->loggedIn() === True) {
 					</div>
 					<div class="col-sm-12 col-md-6">
 						Name: <?php echo $user->getName(1,1);?><br>
-						<?php echo WORD_COMMENTS.": <span style='color: red'>WIP</span>";?><br>
+						<?php echo WORD_COMMENTS.": ".Comment::countUserComments($session->getSessionUserID());?><br>
 						<?php echo USER_PROFILE_REGISTERED_SINCE.": ".$user->getDateCreated();?>
 						<hr>
 						<?php echo SETTINGS_PERSONAL_DATA_INPUT_NAME_SCHOOL_EMAIL.": ".$user->getSchoolEmail();?>

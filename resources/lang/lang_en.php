@@ -237,14 +237,21 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 	
 	//User notification
 	
-	defined("USER_NOTIFICATIONS_HEADLINE") ? null : define("USER_NOTIFICATIONS_HEADLINE", "Notifications");
-	
-	defined("USER_NOTIFICATIONS_SUB_HEADLINE_SYSTEM") ? null : define("USER_NOTIFICATIONS_SUB_HEADLINE_SYSTEM", "System Notifications");
-	defined("USER_NOTIFICATIONS_SUB_HEADLINE_USER") ? null : define("USER_NOTIFICATIONS_SUB_HEADLINE_USER", "User Notifications");
-	
-	defined("USER_NOTIFICATIONS_EMPTY_LIST") ? null : define("USER_NOTIFICATIONS_EMPTY_LIST", "Currently there are no notifications to display");
-	
-	defined("USER_NOTIFICATIONS_BUTTON_MARK_READ") ? null : define("USER_NOTIFICATIONS_BUTTON_MARK_READ", "Mark as read");
+		defined("USER_NOTIFICATIONS_HEADLINE") ? null : define("USER_NOTIFICATIONS_HEADLINE", "Notifications");
+		
+		defined("USER_NOTIFICATIONS_SUB_HEADLINE_SYSTEM") ? null : define("USER_NOTIFICATIONS_SUB_HEADLINE_SYSTEM", "System Notifications");
+		defined("USER_NOTIFICATIONS_SUB_HEADLINE_USER") ? null : define("USER_NOTIFICATIONS_SUB_HEADLINE_USER", "User Notifications");
+		
+		defined("USER_NOTIFICATIONS_EMPTY_LIST") ? null : define("USER_NOTIFICATIONS_EMPTY_LIST", "Currently there are no notifications to display");
+		
+		defined("USER_NOTIFICATIONS_BUTTON_MARK_READ") ? null : define("USER_NOTIFICATIONS_BUTTON_MARK_READ", "Mark as read");
+		
+	//Notifications List
+		
+		defined("NOTIFICATION_REQUEST_LIST_HEADLINE_TYPE") ? null : define("NOTIFICATION_REQUEST_LIST_HEADLINE_TYPE", "Type");
+		defined("NOTIFICATION_REQUEST_LIST_HEADLINE_NAME") ? null : define("NOTIFICATION_REQUEST_LIST_HEADLINE_NAME", "Name");
+		defined("NOTIFICATION_REQUEST_LIST_HEADLINE_EMAIL_UPDATE") ? null : define("NOTIFICATION_REQUEST_LIST_HEADLINE_EMAIL_UPDATE", "Update by e-mail");
+		defined("NOTIFICATION_REQUEST_LIST_HEADLINE_DAILY_UPDATE") ? null : define("NOTIFICATION_REQUEST_LIST_HEADLINE_DAILY_UPDATE", "Daily update");
 	
 //Language
 	
@@ -267,6 +274,8 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 	defined("WORD_ADD") ? null :  define("WORD_ADD", "Add");
 	defined("WORD_LABELS") ? null :  define("WORD_LABELS", "Labels");
 	defined("WORD_COMMENTS") ? null :  define("WORD_COMMENTS", "Comments");
+	defined("WORD_TODO_LIST") ? null :  define("WORD_TODO_LIST", "ToDo List");
+	defined("WORD_EVENT") ? null :  define("WORD_EVENT", "Events");
 	
 	defined("WORD_FIRSTNAME") ? null :  define("WORD_FIRSTNAME", "Firstname");
 	defined("WORD_LASTNAME") ? null :  define("WORD_LASTNAME", "Lastname");

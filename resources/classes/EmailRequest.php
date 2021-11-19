@@ -43,12 +43,12 @@ class EmailRequest extends SystemClass {
 	
 	function createNewRequest() {
 		$now = new DateTime;
-		$this->request_created = $now->format("Y-m-d H-i-s");
+		$this->request_created = $now->format("Y-m-d H:i:s");
 		$this->verified = 0;
 		
 		if(empty($this->request_expiry)) {
 			$tomorrow = $now->modify("+1 day");
-			$this->request_expiry = $now->format("Y-m-d H-i-s");
+			$this->request_expiry = $now->format("Y-m-d H:i:s");
 		}
 		
 		if($this->createNewData()) {

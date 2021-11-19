@@ -51,6 +51,8 @@ function loadPersonalNotifications() {
 				}
 				
 				tmpNotification += '<div class="col-12 notificationContainer '+seen+'">';
+				
+				tmpNotification += notifications[i]['timePosted']+ ": "
 
 				if(notifications[i]['type'] == "todoList"){
 					tmpNotification += LANG.NOTIFICATIONS_PERSONAL_NEW_COMMENT_TODO_LIST
@@ -93,8 +95,66 @@ function markNotificationsAsRead() {
 			headerNotification(LANG.ERROR_REQUEST_FAILED,"red");
 		} else if(dataCut == "success") {
 			headerNotification(LANG.PHRASE_REQUEST_SUCCSESSFUL,"green");
+			loadPersonalNotifications();
+		}
+		
+	});
+}
+
+//Load list of all notification requests 
+
+function loadNotificationRequestList() {
+	
+	var requestTypeID = document.querySelector('.page.notifications.requestList .searchInput[data-search-name="typeID"]').value;
+	var attributeName = document.querySelector('.page.notifications.requestList .searchInput[data-search-name="attributeName"]').value;
+
+	
+	$.post(INCLUDES+"/notification_functions.php",{
+		requestType: "loadNotificationRequestList",
+		requestTypeID: requestTypeID,
+		attributeName: attributeName
+	},
+	function(data, status){
+		var dataCut = parsePostData(data);
+		
+		//check if request is valid
+		if(dataCut == "error" || dataCut == "") {
+			headerNotification(LANG.ERROR_REQUEST_FAILED,"red");
+		} else if(dataCut == "success") {
+			headerNotification(LANG.NOTIFICATIONS_CONFIRM_EMAIL_REQUEST_SUCCESS,"green");
 		} else {
-			headerNotification(data,"red");
+			data = JSON.parse(data);
+			
+			requests = data['requests'];
+			
+			var requestString = "";
+			
+			for(i = 0;i < Object.keys(requests).length;i++) {
+				var tmpRequest = "";
+				
+				
+				if(requests[i]['type'] != "") {
+					tmpRequest += `<div class="td col-sm-4 col-6">`;
+					
+					if(requests[i]['type'] == "todoList") {
+						tmpRequest += LANG.WORD_TODO_LIST;
+					} else if(requests[i]['type'] == "event") {
+						tmpRequest += LANG.WORD_EVENT;
+					}
+					
+					tmpRequest += `</div>`;
+					
+					requestString += tmpRequest;
+				}
+				
+				
+			}
+			
+			if(requestString.length == 0) {
+				requestString = LANG.NOTIFICATION_REQUEST_LIST_NON_FOUND
+			} 
+			
+			document.querySelector(".page.notifications.requestList .requestListContainer").innerHTML = requestString;
 		}
 		
 	});

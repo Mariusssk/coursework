@@ -50,7 +50,11 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 					//seen
 					$notificationArray['seen'] = $notification->getSeenAsBoolean();
 					
-					$attributeTypeID = $notification->getAttributeTypeID();
+					$attributeTypeID = $notification->getAttributeTypeID();#
+					
+					//Date posted
+					
+					$notificationArray['timePosted'] = $notification->getTimePosted("external");
 					
 					//Attribute Data
 					
@@ -77,16 +81,51 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		else if($request == "markNotificationsAsRead") {
 			$notifications = Notification::getAllNotificationsForUser($session->getSessionUserID());
 			
+			$failed = 0;
+			
 			foreach($notifications as $tmpNotification) {
 				$notification = new Notification;
 				if(
-					$notification->loadData($tmpNotification) AND
-					$notification->setSeen(1) AND
-					$notification->saveData()
+					!$notification->loadData($tmpNotification) OR
+					!$notification->setSeen(1) OR
+					!$notification->saveData()
 				) {
-					echo "success";
+					$failed += 1;
 				}
 			}
+			
+			if($failed == 0) {
+				echo "success";
+			}
+		}
+		
+		//load all notification requsts for specific user_error
+		
+		else if($request == "loadNotificationRequestList") {
+			$requests = NotificationRequest::loadRequestsByUserID($session->getSessionUserID());
+			
+			$post = array();
+			$post['requests'] = array();
+			
+			foreach($requests as $tmpRequest) {
+				$request = new NotificationRequest;
+				if($request->loadData($tmpRequest)) {
+					$tmpArray = array();
+					
+					if($request->getAttributeTypeID() == 3) {
+						$tmpArray['type'] = "todoList";
+					} else if($request->getAttributeTypeID() == 1){
+						$tmpArray['type'] = "even";
+					} else {
+						$tmpArray['type'] = "";
+					}
+					
+					
+					array_push($post['requests'], $tmpArray);
+				}
+			}
+			
+			echo json_encode($post);
 		}
 	} 
 }

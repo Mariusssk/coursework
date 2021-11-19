@@ -117,6 +117,7 @@
 				.todo .todoListOverlay .head .closeButton{
 					height: 100%;
 					float: right;
+					cursor: pointer;
 				}
 				
 				.todo .todoListOverlay .head .editToDoListName{

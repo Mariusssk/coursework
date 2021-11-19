@@ -189,6 +189,12 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 						$post['listType'] = "personal";
 					}
 					
+					if(NotificationRequest::checkIfRequestActivated($session->getSessionUserID(), 3, $list->getID())) {
+						$post['notifications'] = True;
+					} else {
+						$post['notifications'] = False;
+					}
+					
 					//Entries
 					
 					$entriesArray = ToDoListEntry::loadEntriesArray($list->getID(),"external");

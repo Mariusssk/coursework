@@ -22,7 +22,7 @@ RewriteRule ^logout$ login_logout.php?request=logout [QSA,NC,L]
 RewriteRule ^profile$ user_profile.php?request=profile [QSA,NC,L]
 RewriteRule ^profile/(.+)$ user_profile.php?request=profile&username=$1 [QSA,NC,L]
 
-RewriteRule ^notifications$ notifications.php?request=list [QSA,NC,L]
+RewriteRule ^notifications$ notifications_page.php?request=list [QSA,NC,L]
 
 #Storage
 
@@ -53,6 +53,7 @@ RewriteRule ^todo/category/edit/([0-9-]+)$ todo.php?request=categoryEdit&ID=$1 [
 #Settings
 
 RewriteRule ^settings/user$ user_profile.php?request=personal_data [QSA,NC,L]
+RewriteRule ^settings/notifications$ notifications_page.php?request=requestList [QSA,NC,L]
 
 RewriteRule ^verify$ verify_email_request.php?request=verify [QSA,NC,L]
 RewriteRule ^verify/([A-Z0-9]*)$ verify_email_request.php?request=verify&code=$1 [QSA,NC,L]
@@ -73,8 +74,8 @@ RewriteRule ^(.*)user_profile.php$ 404 [R=301,L]
 RewriteCond %{THE_REQUEST} ^.*/verify_email_request\.php [NC]
 RewriteRule ^(.*)verify_email_request.php$ 404 [R=301,L]
 
-RewriteCond %{THE_REQUEST} ^.*/notifications\.php [NC]
-RewriteRule ^(.*)notifications.php$ 404 [R=301,L]
+RewriteCond %{THE_REQUEST} ^.*/notifications_page\.php [NC]
+RewriteRule ^(.*)notifications_page.php$ 404 [R=301,L]
 
 #-----------------------------------------
 

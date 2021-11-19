@@ -141,6 +141,30 @@ function openToDoList(listID) {
 				
 				overlay.dataset.todoListId = listID;
 				
+				//Notifications
+				
+				var bellContainer = overlay.querySelector(".bellContainer");
+				
+				var notificationsBell = "";
+				
+				notificationsBell += `<span onclick="toggleToDoListNotifications('todoList','`+listID+`',`+data['notifications']+`)">`;
+				
+				if(data['notifications'] == true) {
+					notificationsBell += `<i class="fa fa-bell" aria-hidden="true"></i>`;
+				} else {
+					notificationsBell += `<i class="fa fa-bell-slash" aria-hidden="true"></i>`;
+				}
+				
+				notificationsBell += `</span>`;
+				
+				if(data['listType'] == "global") {
+				
+					bellContainer.innerHTML = notificationsBell;
+					
+				} else {
+					bellContainer.innerHTML = "";
+				}
+				
 				//Comments
 				
 				var commentContainer = overlay.querySelector(".commentsContainer");
@@ -168,6 +192,34 @@ function openToDoList(listID) {
 	});
 }
 
+//toggle notifications for todo list
+
+function toggleToDoListNotifications(type, attributeID, currentState) {
+	
+	var overlay = document.querySelector(".todo .overlayContainer");
+	
+	var bellContainer = overlay.querySelector(".bellContainer");
+				
+	var notificationsBell = "";
+	
+	notificationsBell += `<span onclick="toggleToDoListNotifications('todoList','`+attributeID+`',`+!currentState+`)">`;
+	
+	if(currentState == false) {
+		notificationsBell += `<i class="fa fa-bell" aria-hidden="true"></i>`;
+	} else {
+		notificationsBell += `<i class="fa fa-bell-slash" aria-hidden="true"></i>`;
+	}
+	
+	notificationsBell += `</span>`;
+	
+	toggleCommentNotifications(type, attributeID, !currentState);
+	
+	bellContainer.innerHTML = notificationsBell;
+}
+
+
+//Delete ToDo list
+
 function deleteToDoList() {
 	var overlay = document.querySelector(".todo .overlayContainer");
 	
@@ -193,6 +245,8 @@ function deleteToDoList() {
 	});
 	
 }
+
+//Edit name of Todo list
 
 function editToDoListName(listID, saveData = 0) {
 	var overlay = document.querySelector(".todo .overlayContainer");

@@ -72,12 +72,20 @@ var LANG = {
 	NOTIFICATIONS_PERSONAL_NEW_COMMENT_EVENT: "There is a new comment for the event",
 	NOTIFICATIONS_NON_FOUND: "Currently there are no notifications to display",
 	
+	//Notification request
+	
+	NOTIFICATION_REQUEST_LIST_NON_FOUND: "There are currently no requests",
+
 	//Comments
 	
 	COMMENTS_INPUTS_NEW_COMMENT_HEADLINE: "New comment",
 	COMMENTS_INPUTS_NEW_COMMENT_PLACEHOLDER: "Please put in new Comment",
 	COMMENTS_INPUTS_NEW_COMMENT_BUTTON: "New comment",
 	COMMENTS_INPUTS_NEW_COMMENT_SAVED_SUCCESS: "New comment saved succesfull",
+	COMMENTS_INPUTS_EDITED_COMMENT_SAVED_SUCCESS: "Edited comment saved succesfull",
+	COMMENTS_NOTIFICATIONS_REQUEST_CHANGE_SUCCESS: "Notification request was changed succesfully",
+	
+	COMMENTS_LIST_EMPTY: "There are no comments",
 	
 	//Basic phrases
 	
@@ -91,7 +99,9 @@ var LANG = {
 	WORD_EDIT: "Edit",
 	WORD_ADD: "Add",
 	WORD_ABORT: "Abort",
-	WORD_SAVE: "Save"
+	WORD_SAVE: "Save",
+	WORD_TODO_LIST: "ToDo List",
+	WORD_EVENT: "Event"
 };
 
 </script>

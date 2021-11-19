@@ -9,7 +9,7 @@ if($session->loggedIn() === True) {
 	
 	//Check if specific reuqest is send
 	
-	$requestAllowed = array("list");
+	$requestAllowed = array("list","requestList");
 	if(isset($_GET['request']) AND !empty($_GET['request']) AND in_array($_GET['request'],$requestAllowed)) {
 		$request = $_GET['request'];
 	} else {
@@ -59,6 +59,48 @@ if($session->loggedIn() === True) {
 		<script>
 			loadPersonalNotifications();
 		</script>
+		<?php
+	} else if($request == "requestList") {
+		?>
+		<div class="page notifications requestList">
+			<div class="generalTable">
+				<div class="row generalTableSearch">
+					<div class="td col-md-6 col-sm-12">
+						<?php echo AttributeType::getSelect(array("class"=>"generalSelect searchInput","data"=>array("search-name","typeID")),0,NOTIFICATION_REQUEST_LIST_HEADLINE_TYPE);?>
+					</div>
+					<div class="td col-md-6 col-sm-12">
+						<input type="text" class="generalInput searchInput" data-search-name="attributeName" placeholder="<?php echo NOTIFICATION_REQUEST_LIST_HEADLINE_NAME;?>">
+					</div>
+					<div class="td d-block d-md-none col-12">
+						<div class="generalButton" onclick="loadNotificationRequestList()"> <?php echo WORD_SEARCH;?> </div>
+					</div>
+				</div>
+				<div class="row generalTableHeader">
+					<div class="td col-sm-4 col-6">
+						<?php echo NOTIFICATION_REQUEST_LIST_HEADLINE_TYPE;?>
+					</div>
+					<div class="td col-sm-4 d-none d-sm-block">
+						<?php echo NOTIFICATION_REQUEST_LIST_HEADLINE_NAME;?>
+					</div>
+					<div class="td col-sm-2 col-3">
+						<?php echo NOTIFICATION_REQUEST_LIST_HEADLINE_EMAIL_UPDATE;?>
+					</div>
+					<div class="td col-sm-2 col-3">
+						<?php echo NOTIFICATION_REQUEST_LIST_HEADLINE_DAILY_UPDATE;?>
+					</div>
+				</div>
+				<div class="tableContent requestListContainer">
+					<div class="row generalTableContentRow">
+						<div class="td col-12">
+							<?php echo WORD_LOADING;?>
+						</div>
+					</div>
+				</div>
+			</div>
+			<script>
+				loadNotificationRequestList();
+			</script>
+		</div>
 		<?php
 	}
 

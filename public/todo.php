@@ -152,11 +152,12 @@ if($session->loggedIn() === True) {
 				?>
 				<div class="overlayContainer none">
 					<div class="todoListOverlay">
-						<div class="head">
+						<div class="head noselect">
 							<div class="todoListName">
 								<?php echo WORD_LOADING;?>
 							</div>
 							<div class="closeButton">
+								<span class="bellContainer"></span>
 								<i class="fa fa-trash" aria-hidden="true" onclick="deleteToDoList()"></i>
 								<i class="fa fa-window-close" aria-hidden="true" onclick="closeOverlay(this)"></i>
 							</div>

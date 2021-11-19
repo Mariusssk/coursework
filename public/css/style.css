@@ -536,6 +536,38 @@ header.header .mobileHeader .fa-user-circle-o {
 	padding: 5px;
 }
 
+/* Comments */
+
+.commentSection .commentsList {
+	max-height: 200px;
+	width: 100%;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.commentSection .commentsList .commentContainer {
+	border: 1px solid black;
+	padding: 3px;
+	margin: 3px 3px 14px 3px;
+	border-radius: 5px;
+}
+
+.commentSection .commentsList .commentContainer .commentEdit {
+	float: right;
+	margin-right: 10px;
+	font-size: 120%;
+	cursor: pointer;
+}
+
+.commentSection .commentsList .commentContainer .commentInfo {
+	font-size: 80%;
+	line-height: 80%;
+}
+
+.commentSection .commentsList .commentContainer .editCommentInput {
+	max-width: calc(100% - 40px);
+}
+
 /* Dashbord */
 
 	/* Lend */
