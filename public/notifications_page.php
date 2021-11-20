@@ -76,10 +76,10 @@ if($session->loggedIn() === True) {
 					</div>
 				</div>
 				<div class="row generalTableHeader">
-					<div class="td col-sm-4 col-6">
+					<div class="td col-sm-4 d-none d-sm-block">
 						<?php echo NOTIFICATION_REQUEST_LIST_HEADLINE_TYPE;?>
 					</div>
-					<div class="td col-sm-4 d-none d-sm-block">
+					<div class="td col-sm-4 col-6">
 						<?php echo NOTIFICATION_REQUEST_LIST_HEADLINE_NAME;?>
 					</div>
 					<div class="td col-sm-2 col-3">

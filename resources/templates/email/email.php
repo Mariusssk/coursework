@@ -66,6 +66,31 @@ function getEmailContent($type,$attributes = array()) {
 			</div>
 		</div>
 		';
+	} else if($type == "notification") {
+		
+		$notifications = $attribute['notifications'];
+
+		echo '
+		<div style="width: 100%;text-align: center;">
+			<div style="width:100%;max-width:780px;display:inline-block;vertical-align:middle; margin: 5px; font-family: arial,sans-serif;">
+				<div style="padding:10px;font-size:14px;line-height:18px;text-align:center;" valign="middle" align="center">
+					<!--[if mso]>
+					<table style="width: 100%;">
+					<tr><td height="5" colspan="3"></tr>
+					<tr><td width="10"></td>
+					<td width="740">
+					<![endif]-->
+						<h2>'.EMAIL_PASSWORD_RESET_SUBJECT.'!</h2>
+						<div class="notificationsList">
+						'.$notifications.'
+						</div>
+					<!--[if mso]>
+					</td><td width="10"></td></tr></table>
+					<![endif]-->
+				</div>
+			</div>
+		</div>
+		';
 	}
 	
 	$email = ob_get_contents();

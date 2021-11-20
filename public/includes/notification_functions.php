@@ -112,22 +112,66 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 				if($request->loadData($tmpRequest)) {
 					$tmpArray = array();
 					
-					if($request->getAttributeTypeID() == 3) {
-						$tmpArray['type'] = "todoList";
-					} else if($request->getAttributeTypeID() == 1){
-						$tmpArray['type'] = "even";
-					} else {
-						$tmpArray['type'] = "";
+					if(
+						(
+							(isset($_POST['requestTypeID']) AND $_POST['requestTypeID'] != 0 AND $_POST['requestTypeID'] == $request->getAttributeTypeID()) OR
+							!isset($_POST['requestTypeID']) OR empty($_POST['requestTypeID']) OR $_POST['requestTypeID'] == 0
+						) 
+					){
+						if($request->getAttributeTypeID() == 3) {
+							$tmpArray['type'] = "todoList";
+						} else if($request->getAttributeTypeID() == 1){
+							$tmpArray['type'] = "even";
+						} else {
+							$tmpArray['type'] = "";
+						}
+						
+						$tmpArray['requestID'] = $request->getID();
+						
+						$tmpArray['name'] = $request->getAttributeName();
+
+						$tmpArray['emailUpdate'] = $request->getEmailUpdate();
+						
+						$tmpArray['dailyUpdate'] = $request->getDailyUpdate();
+						
+						array_push($post['requests'], $tmpArray);
 					}
-					
-					
-					array_push($post['requests'], $tmpArray);
 				}
 			}
 			
 			echo json_encode($post);
 		}
+		
+		//change updates of notifications request as email update
+	
+		else if($request == "changeNotificationsRequestUpdates") {
+			$request = new NotificationRequest;
+			if(
+				isset($_POST['requestID']) AND $request->loadData($_POST['requestID']) AND
+				isset($_POST['newState'])
+			) {
+				if($_POST['changeType'] == "emailUpdate") {
+					if($request->updateEmailRequest($_POST['newState'])) {
+						echo "success";
+					} else {
+						echo "error";
+					}
+				} else if($_POST['changeType'] == "dailyUpdate") {
+					if($request->updateDailyRequest($_POST['newState'])) {
+						echo "success";
+					} else {
+						echo "error";
+					}
+				} else {
+					echo "error";
+				}
+			} else {
+				echo "error";
+			}
+		}
 	} 
+
 }
+
 
 ob_flush();

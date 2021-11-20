@@ -134,13 +134,53 @@ function loadNotificationRequestList() {
 				
 				
 				if(requests[i]['type'] != "") {
-					tmpRequest += `<div class="td col-sm-4 col-6">`;
+					tmpRequest += `<div class="row" data-request-id="`+requests[i]['requestID']+`">`;
+					
+					//Type
+					
+					tmpRequest += `<div class="td col-sm-4 d-none d-sm-block">`;
 					
 					if(requests[i]['type'] == "todoList") {
 						tmpRequest += LANG.WORD_TODO_LIST;
 					} else if(requests[i]['type'] == "event") {
 						tmpRequest += LANG.WORD_EVENT;
 					}
+					
+					tmpRequest += `</div>`;
+					
+					//Name
+					
+					tmpRequest += `<div class="td col-sm-4 col-6">`+requests[i]['name']+`</div>`;
+					
+					//Email update
+					
+					tmpRequest += `
+					<div class="td col-sm-2 col-3">
+					<input type="checkbox" class="generalCheckbox inputCheckbox" data-input-name="emailUpdate" `;
+					
+					if(requests[i]['emailUpdate'] == "1") {
+						tmpRequest += "checked";
+					}
+					
+					tmpRequest += `
+					>
+					</div>`;
+					
+					//daily update
+					
+					tmpRequest += `
+					<div class="td col-sm-2 col-3">
+					<input type="checkbox" class="generalCheckbox inputCheckbox" data-input-name="dailyUpdate" `;
+					
+					if(requests[i]['dailyUpdate'] == "1") {
+						tmpRequest += "checked";
+					} 
+					
+					tmpRequest += `
+					>
+					</div>`;
+					
+					//End
 					
 					tmpRequest += `</div>`;
 					
@@ -155,7 +195,44 @@ function loadNotificationRequestList() {
 			} 
 			
 			document.querySelector(".page.notifications.requestList .requestListContainer").innerHTML = requestString;
+		
+			//detect change on checkbox
+			$('.page.notifications.requestList .requestListContainer .inputCheckbox').on('change', function() { 
+				var requestID = $(this).parent().parent().data("request-id");
+				var changeType = $(this).data("input-name");
+				
+				var checked = +$(this).is( ':checked' );
+				
+				$.post(INCLUDES+"/notification_functions.php",{
+					requestType: "changeNotificationsRequestUpdates",
+					changeType: changeType,
+					requestID: requestID,
+					newState: checked
+				},
+				function(data, status){
+					var dataCut = parsePostData(data);
+					
+					if(dataCut == "error" || dataCut == "") {
+						headerNotification(LANG.ERROR_REQUEST_FAILED,"red");
+					} 
+				});
+				
+			});
+			
 		}
 		
 	});
 }
+
+
+//Functions when page loaded
+
+$(document).ready(function() {
+	//detect enter on search
+	$(".page.notifications.requestList .searchInput").on('keyup', function (e) {
+		if (e.key === 'Enter' || e.keyCode === 13) {
+			loadNotificationRequestList();
+		}
+	});
+	
+});

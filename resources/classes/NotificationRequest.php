@@ -134,6 +134,22 @@ class NotificationRequest extends SystemClass {
 		return(False);
 	}
 	
+	//Update function
+	
+	function updateEmailRequest($value) {
+		if($value == 1 OR $value == 0) {
+			return($this->updateData("email_update",$value));
+		}
+		return(False);
+	}
+	
+	function updateDailyRequest($value) {
+		if($value == 1 OR $value == 0) {
+			return($this->updateData("daily_update",$value));
+		}
+		return(False);
+	}
+	
 	//get functions
 	
 	function getID() {
@@ -152,7 +168,21 @@ class NotificationRequest extends SystemClass {
 		return($this->email_update);
 	}
 	
+	function getDailyUpdate() {
+		return($this->daily_update);
+	}
+	
 	function getUserID() {
 		return($this->user_id);
+	}
+	
+	function getAttributeName() {
+		if($this->getAttributeTypeID() == 3) {
+			$todo = new ToDoList;
+			if($todo->loadData($this->getAttributeID())) {
+				return($todo->getName());
+			}
+		}
+		return("");
 	}
 }

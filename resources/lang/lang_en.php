@@ -214,6 +214,12 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 		defined("EMAIL_PASSWORD_RESET_BUTTON") ? null :  define("EMAIL_PASSWORD_RESET_BUTTON", "Set Password");
 		defined("EMAIL_PASSWORD_RESET_BOTTOM_INFO") ? null :  define("EMAIL_PASSWORD_RESET_BOTTOM_INFO", "The link is valid for 24 hours and can only be used once! If a new link is generated in the meantime the old link gets deactivated.");
 		
+	//Notification
+	
+		defined("EMAIL_NOTIFICATION_SUBJECT") ? null :  define("EMAIL_NOTIFICATION_SUBJECT", "Aulatechnik New Notification");
+		
+	
+	
 //Notifications
 
 	//System Notifications
