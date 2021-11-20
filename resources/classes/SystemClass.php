@@ -234,7 +234,11 @@ class SystemClass {
 	
 	//return all table entry ids
 	
-	static function getAll($object) {
+	static function getAll($object = "") {
+		if(empty($object)) {
+			$className = static::class;
+			$object = new $className;
+		}
 		//Create SQL statment
 		$sql = "SELECT ".$object->TABLE_NAME."_id FROM ".$object->TABLE_NAME;
 		//query SQL databse

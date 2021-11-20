@@ -252,6 +252,8 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 		
 		defined("USER_NOTIFICATIONS_BUTTON_MARK_READ") ? null : define("USER_NOTIFICATIONS_BUTTON_MARK_READ", "Mark as read");
 		
+		
+		
 	//Notifications List
 		
 		defined("NOTIFICATION_REQUEST_LIST_HEADLINE_TYPE") ? null : define("NOTIFICATION_REQUEST_LIST_HEADLINE_TYPE", "Type");

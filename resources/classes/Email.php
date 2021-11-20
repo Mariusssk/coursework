@@ -56,6 +56,21 @@ class Email {
 				if($this->sendEmail()) {
 					return(True);
 				}
+			} else if($type == "notification") {
+				$this->reciver = array($user->getEmail(),$user->getName(1,1));
+				
+				$this->subject = EMAIL_NOTIFICATION_SUBJECT;
+				
+				$content = "";
+				$content .= Template\Email\getEmailHeader($type);
+				$content .= Template\Email\getEmailContent($type,$contentAttributes);
+				$content .= Template\Email\getEmailFooter($type);
+				
+				$this->content = $content;
+				$this->prepareEmail();
+				if($this->sendEmail()) {
+					return(True);
+				}
 			}
 		}
 		return(False);

@@ -68,7 +68,7 @@ function getEmailContent($type,$attributes = array()) {
 		';
 	} else if($type == "notification") {
 		
-		$notifications = $attribute['notifications'];
+		$notifications = $attributes['notificationText'];
 
 		echo '
 		<div style="width: 100%;text-align: center;">
@@ -80,10 +80,11 @@ function getEmailContent($type,$attributes = array()) {
 					<tr><td width="10"></td>
 					<td width="740">
 					<![endif]-->
-						<h2>'.EMAIL_PASSWORD_RESET_SUBJECT.'!</h2>
+						<h2>'.EMAIL_NOTIFICATION_SUBJECT.'!</h2>
 						<div class="notificationsList">
 						'.$notifications.'
 						</div>
+						<br><br>
 					<!--[if mso]>
 					</td><td width="10"></td></tr></table>
 					<![endif]-->

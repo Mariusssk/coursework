@@ -119,6 +119,10 @@ class Notification extends SystemClass{
 		return($this->notification_request_id);
 	}
 	
+	function getEmailSent() {
+		return($this->email_sent);
+	}
+	
 	function getAttributeID() {
 		$request = new NotificationRequest;
 		if($request->loadData($this->getRequestID())) {
@@ -138,6 +142,17 @@ class Notification extends SystemClass{
 			$posted = new DateTime($this->time_posted);
 			return($posted->format("d.m.Y H:i"));
 		}
+	}
+	
+	//update
+	
+	function updateEmailSent($value) {
+		if($value == 0 OR $value == 1) {
+			if($this->updateData("email_sent",$value)) {
+				return(True);
+			}
+		}
+		return(False);
 	}
 	
 	//Set functions
