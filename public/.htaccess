@@ -26,29 +26,29 @@ RewriteRule ^notifications$ notifications_page.php?request=list [QSA,NC,L]
 
 #Storage
 
-RewriteRule ^storage$ storage.php?request=overview [QSA,NC,L]
-RewriteRule ^storage/new$ storage.php?request=new [QSA,NC,L]
-RewriteRule ^storage/edit/([0-9-]+)$ storage.php?request=edit&ID=$1 [QSA,NC,L]
+RewriteRule ^storage$ storage_page.php?request=overview [QSA,NC,L]
+RewriteRule ^storage/new$ storage_page.php?request=new [QSA,NC,L]
+RewriteRule ^storage/edit/([0-9-]+)$ storage_page.php?request=edit&ID=$1 [QSA,NC,L]
 
 
 #Item
 
-RewriteRule ^item$ item.php?request=overview [QSA,NC,L]
-RewriteRule ^item/consumable$ item.php?request=consumable [QSA,NC,L]
-RewriteRule ^item/new$ item.php?request=new [QSA,NC,L]
-RewriteRule ^item/edit/([0-9-]+)$ item.php?request=edit&ID=$1 [QSA,NC,L]
-RewriteRule ^item/lended$ item.php?request=lended [QSA,NC,L]
-RewriteRule ^item/lend/add$ item.php?request=addLend [QSA,NC,L]
+RewriteRule ^item$ item_page.php?request=overview [QSA,NC,L]
+RewriteRule ^item/consumable$ item_page.php?request=consumable [QSA,NC,L]
+RewriteRule ^item/new$ item_page.php?request=new [QSA,NC,L]
+RewriteRule ^item/edit/([0-9-]+)$ item_page.php?request=edit&ID=$1 [QSA,NC,L]
+RewriteRule ^item/lended$ item_page.php?request=lended [QSA,NC,L]
+RewriteRule ^item/lend/add$ item_page.php?request=addLend [QSA,NC,L]
 
 #Todo
 
-RewriteRule ^todo/personal$ todo.php?request=overviewPersonal [QSA,NC,L]
-RewriteRule ^todo/personal/([0-9-]+)$ todo.php?request=overviewPersonal&listID=$1 [QSA,NC,L]
-RewriteRule ^todo/global$ todo.php?request=overviewGlobal [QSA,NC,L]
-RewriteRule ^todo/global/([0-9-]+)$ todo.php?request=overviewGlobal&listID=$1 [QSA,NC,L]
-RewriteRule ^todo/category$ todo.php?request=categoryOverview [QSA,NC,L]
-RewriteRule ^todo/category/new$ todo.php?request=categoryNew [QSA,NC,L]
-RewriteRule ^todo/category/edit/([0-9-]+)$ todo.php?request=categoryEdit&ID=$1 [QSA,NC,L]
+RewriteRule ^todo/personal$ todo_page.php?request=overviewPersonal [QSA,NC,L]
+RewriteRule ^todo/personal/([0-9-]+)$ todo_page.php?request=overviewPersonal&listID=$1 [QSA,NC,L]
+RewriteRule ^todo/global$ todo_page.php?request=overviewGlobal [QSA,NC,L]
+RewriteRule ^todo/global/([0-9-]+)$ todo_page.php?request=overviewGlobal&listID=$1 [QSA,NC,L]
+RewriteRule ^todo/category$ todo_page.php?request=categoryOverview [QSA,NC,L]
+RewriteRule ^todo/category/new$ todo_page.php?request=categoryNew [QSA,NC,L]
+RewriteRule ^todo/category/edit/([0-9-]+)$ todo_page.php?request=categoryEdit&ID=$1 [QSA,NC,L]
 
 #Settings
 
@@ -65,14 +65,21 @@ RewriteRule ^verify/([A-Z0-9]*)$ verify_email_request.php?request=verify&code=$1
 RewriteCond %{THE_REQUEST} ^.*/login_logout\.php [NC]
 RewriteRule ^(.*)login_logout.php$ 404 [R=301,L]
 
-RewriteCond %{THE_REQUEST} ^.*/storage\.php [NC]
-RewriteRule ^(.*)storage.php$ 404 [R=301,L]
+RewriteCond %{THE_REQUEST} ^.*/storage_page\.php [NC]
+RewriteRule ^(.*)storage_page.php$ 404 [R=301,L]
+
+RewriteCond %{THE_REQUEST} ^.*/item_page\.php [NC]
+RewriteRule ^(.*)item_page.php$ 404 [R=301,L]
+
 
 RewriteCond %{THE_REQUEST} ^.*/user_profile\.php [NC]
 RewriteRule ^(.*)user_profile.php$ 404 [R=301,L]
 
 RewriteCond %{THE_REQUEST} ^.*/verify_email_request\.php [NC]
 RewriteRule ^(.*)verify_email_request.php$ 404 [R=301,L]
+
+RewriteCond %{THE_REQUEST} ^.*/todo_page\.php [NC]
+RewriteRule ^(.*)todo_page.php$ 404 [R=301,L]
 
 RewriteCond %{THE_REQUEST} ^.*/notifications_page\.php [NC]
 RewriteRule ^(.*)notifications_page.php$ 404 [R=301,L]
