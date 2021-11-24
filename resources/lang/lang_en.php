@@ -42,6 +42,7 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 		//Settings
 			defined("HEADER_MENU_ITEM_SETTINGS_MAIN") ? null :  define("HEADER_MENU_ITEM_SETTINGS_MAIN", "Settings");
 			defined("HEADER_MENU_ITEM_SETTINGS_USER") ? null :  define("HEADER_MENU_ITEM_SETTINGS_USER", "Personal data");
+			defined("HEADER_MENU_ITEM_SETTINGS_TAGS") ? null :  define("HEADER_MENU_ITEM_SETTINGS_TAGS", "Tags");
 			defined("HEADER_MENU_ITEM_SETTINGS_NOTIFICATIONS") ? null :  define("HEADER_MENU_ITEM_SETTINGS_NOTIFICATIONS", "Notifications");
 			defined("HEADER_MENU_ITEM_SETTINGS_CREATE_USER") ? null :  define("HEADER_MENU_ITEM_SETTINGS_CREATE_USER", "Create User");
 			defined("HEADER_MENU_ITEM_SETTINGS_USER_OVERVIEW") ? null :  define("HEADER_MENU_ITEM_SETTINGS_USER_OVERVIEW", "List User");
@@ -195,6 +196,16 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 		defined("SETTINGS_PERSONAL_DATA_PASSWORD_CHANGE_BUTTON") ? null :  define("SETTINGS_PERSONAL_DATA_PASSWORD_CHANGE_BUTTON", "Change Password");
 		defined("SETTINGS_PERSONAL_DATA_PASSWORD_CHANGE_CODE") ? null :  define("SETTINGS_PERSONAL_DATA_PASSWORD_CHANGE_CODE", "Code");
 		
+	//Tags
+		
+		defined("TAG_LIST_HEADLINE_NAME") ? null :  define("TAG_LIST_HEADLINE_NAME", "Tag Name");
+		defined("TAG_LIST_HEADLINE_COLOR") ? null :  define("TAG_LIST_HEADLINE_COLOR", "Color");
+		
+	//New TAG
+		defined("TAG_NEW_NAME") ? null :  define("TAG_NEW_NAME", "New Tag");
+	
+
+		
 //Emails
 
 	//Basic
@@ -269,6 +280,7 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 //Basic words
 
 	defined("WORD_WELCOME") ? null :  define("WORD_WELCOME", "Welcome");
+	defined("WORD_ACTION") ? null :  define("WORD_ACTION", "Action");
 	defined("WORD_SEARCH") ? null :  define("WORD_SEARCH", "Search");
 	defined("WORD_LOADING") ? null :  define("WORD_LOADING", "Loading...");
 	defined("WORD_SAVE") ? null :  define("WORD_SAVE", "Save");

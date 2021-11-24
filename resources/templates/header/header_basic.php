@@ -54,6 +54,8 @@ error_reporting(E_ALL);
 	<script src="<?php echo JS;?>/sortable.min.js"></script>
 	<script src="<?php echo JS;?>/settings.js"></script>
 	<script src="<?php echo JS;?>/comment_functions.js"></script>
+	<script src="<?php echo JS;?>/tag_functions.js"></script>
+	<script src="<?php echo JS;?>/qr-reader.js"></script>
 	
 	<script src="<?php echo JS;?>/notification_functions.js"></script>
 	

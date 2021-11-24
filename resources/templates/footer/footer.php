@@ -8,6 +8,9 @@
 				<div class="flagContainer" onclick="changeLang('de')"><img class="flag" src="<?php echo IMAGES?>/flag_germany.png"></div>
 				<div class="flagContainer" onclick="changeLang('en')"><img class="flag" src="<?php echo IMAGES?>/flag_uk.png"></div>
 			</div>
+			<div class="scannerIcon">
+				<a href="<?php echo URL;?>/scan/open"><i class="fa fa-qrcode" aria-hidden="true"></i></a>
+			</div>
 		</footer>
 		<!-- Footer Section End -->
 		

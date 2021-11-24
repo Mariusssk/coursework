@@ -87,6 +87,113 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 				echo "error";
 			}
 		}
+		
+		//return all tags available
+		
+		else if($request == "loadTagList") {
+			
+			$tags = Tag::getAll();
+			
+			$post = array("tags" => array());
+			
+			foreach($tags as $tmpTag) {
+				$tag = new Tag;
+				if($tag->loadData($tmpTag)) {
+					$tagArray = array();
+					
+					$tagArray['tagID'] = $tag->getID();
+					$tagArray['name'] = $tag->getName();
+					$tagArray['colour'] = $tag->getColour();
+					
+					if(
+						isset($_POST['tagName'])  AND
+						(empty($_POST['tagName']) OR strpos(strtoupper($tagArray['name']), strtoupper($_POST['tagName'])) !== False)
+					) {
+						array_push($post['tags'], $tagArray);
+					}
+				}
+			}
+			
+			echo json_encode($post);
+			
+		}
+		
+		//sava data of tag
+		
+		else if($request == "saveTagData") {
+			
+			$tag = new Tag;
+			
+			if($session->checkRights("edit_tags") == True) {
+			
+				if(isset($_POST['tagID']) AND $tag->loadData($_POST['tagID'])) {
+					if(
+						$_POST['tagName'] AND $tag->setName($_POST['tagName']) AND
+						$_POST['tagColor'] AND $tag->setColor($_POST['tagColor']) AND
+						$tag->saveData()
+					) {
+						echo "success";
+					} else {
+						echo "error";
+					}
+				} else {
+					echo "error";
+				}
+				
+			} else {
+				echo "missingRights";
+			}
+			
+		}
+		
+		//delete tag
+		
+		else if($request == "deleteTag") {
+			
+			$tag = new Tag;
+			
+			if($session->checkRights("edit_tags") == True) {
+			
+				if(isset($_POST['tagID']) AND $tag->loadData($_POST['tagID'])) {
+					if($tag->checkIfUsed() == True) {
+						echo "used";
+					} else if($tag->deleteData()) {
+						echo "success";
+					} else {
+						echo "error";
+					}
+				} else {
+					echo "error";
+				}
+				
+			} else {
+				echo "missingRights";
+			}
+			
+		}
+		
+		//create a new tag
+		
+		else if($request == "createNewTag") {
+			
+			$tag = new Tag;
+			
+			if($session->checkRights("edit_tags") == True) {
+			
+				$tag->setName(TAG_NEW_NAME);
+				$tag->setColor("#000000");
+				
+				if($tag->createNewData()) {
+					echo "success";
+				} else {
+					echo "error";
+				}
+				
+			} else {
+				echo "missingRights";
+			}
+			
+		}
 	}
 		
 	//verify code in email

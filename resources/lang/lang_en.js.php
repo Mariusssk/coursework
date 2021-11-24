@@ -87,9 +87,16 @@ var LANG = {
 	
 	COMMENTS_LIST_EMPTY: "There are no comments",
 	
+	//TAGS
+	
+	TAG_LIST_NON_FOUND: "No tags found",
+	TAG_LIST_COLOR: "Color",
+	TAG_LIST_CURRENTLY_USED: "Tag can not be deleted as it is still used",
+	
 	//Basic phrases
 	
 	PHRASE_FILL_ALL: "All fields maked with a * must be filled!",
+	PHRASE_INPUT_EMPTY: "All inputs must be filled!",
 	PHRASE_SAVED_SUCCESS: "Data was succesfully saved!",
 	PHRASE_REQUEST_SUCCSESSFUL: "Your request was succesfull",
 	

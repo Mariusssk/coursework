@@ -133,7 +133,7 @@ class ToDoList extends SystemClass {
 		return($tags);
 	}
 	
-	//delete todo list
+	//delete todo list and the connected data
 	
 	function deleteList() {
 		
@@ -143,9 +143,33 @@ class ToDoList extends SystemClass {
 			$this->recursiveDeleteEntry($tmpEntry);
 		}
 		
-		//Delete Attributes
+		//Delete tag
+		
+		TagAssignment::deleteTagsForAttribute(3,$this->getID());
+		
 		
 		//Delete comments
+		
+		$requests = NotificationRequest::getRequestsForTypeAndAttribute(3,$this->getID());
+		
+		foreach($requests as $tmpRequest) {
+			$request = new NotificationRequest;
+			if($request->loadData($tmpRequest)) {
+				$request->deleteAllNotifications();
+				$request->deleteData();
+			}
+		}
+		
+		//Comments 
+		
+		$comments = Comment::loadCommentsForTypeAndAttribute(3,$this->getID());
+		
+		foreach($comments as $tmpComment) {
+			$comment = new Comment;
+			if($comment->loadData($tmpComment)) {
+				$comment->deleteData();
+			}
+		}
 		
 		return($this->deleteData());
 	}

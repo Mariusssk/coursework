@@ -214,7 +214,7 @@ class User extends SystemClass {
 		$users = pdSelect($sql,"mysqli",$sqlType,$sqlParams);
 		
 		//check if users were found
-		if(count($users) > 0) {
+		if(count($users) > 0 AND !empty($value)) {
 			return("alreadyInUse");
 		} else if(empty($value)) {
 			return(False);

@@ -58,6 +58,9 @@ if($session->loggedIn() === True) {
 					} else if($user->getPreferredLanguage() == "en") {
 						$deSelect = "";
 						$enSelect = "selected";
+					} else {
+						$deSelect = "";
+						$enSelect = "";
 					}
 					echo SETTINGS_PERSONAL_DATA_SELECT_LANGUAGE;?>:
 					<select class="generalSelect" data-input-name="preferredLanguage">

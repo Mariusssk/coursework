@@ -525,7 +525,7 @@ function loadListTags(listID, overlay, displayType = "view") {
 						var textColour = "white";
 					}
 					if(displayType == "edit") {
-						tags += `<span data-tag-id="`+data['tags'][i]['ID']+`" class="tag noselect" style="background-color: `+data['tags'][i]['colour']+`;color: `+textColour+`;">`+data['tags'][i]['name']+` <span onclick="deleteTag('`+data['tags'][i]['ID']+`')" class="editTags"><i class="fa fa-times-circle" aria-hidden="true"></i></span></span>`;
+						tags += `<span data-tag-id="`+data['tags'][i]['ID']+`" class="tag noselect" style="background-color: `+data['tags'][i]['colour']+`;color: `+textColour+`;">`+data['tags'][i]['name']+` <span onclick="deleteTodoListTag('`+data['tags'][i]['ID']+`')" class="editTags"><i class="fa fa-times-circle" aria-hidden="true"></i></span></span>`;
 					} else {
 						tags += `<span data-tag-id="`+data['tags'][i]['ID']+`" class="tag noselect" style="background-color: `+data['tags'][i]['colour']+`;color: `+textColour+`;">`+data['tags'][i]['name']+`</span>`;
 					}
@@ -616,7 +616,7 @@ function addTag() {
 }
 
 //delete tag from list 
-function deleteTag(tagID) {
+function deleteTodoListTag(tagID) {
 	var overlay = document.querySelector(".todo .overlayContainer");
 	var listID = overlay.dataset.todoListId;
 	

@@ -12,18 +12,39 @@ html, body {
 	width: 100vw;
 }
 
-.pageContent {
-	height: calc(100vh - 80px);
-}
 
 .pageContent .content {
 	overflow-y: scroll;
     overflow-x: hidden;
 }
 
-.fullPageContent {
-	height: calc(100vh - 30px);
+/* Apple */
+
+@supports (-webkit-touch-callout: none) {
+	.fullPageContent {
+		height: calc(100vh - 100px);
+	}
+	
+	.pageContent {
+		height: calc(100vh - 200px);
+	}
 }
+
+/* None Apple */
+
+@supports not (-webkit-touch-callout: none) {
+	
+	.fullPageContent {
+		height: calc(100vh - 30px);
+	}
+	
+	.pageContent {
+		height: calc(100vh - 80px);
+	}
+}
+
+
+
 
 hr{
 	display: block;
@@ -568,6 +589,48 @@ header.header .mobileHeader .fa-user-circle-o {
 	max-width: calc(100% - 40px);
 }
 
+/* Scanner */
+		
+.barcodeReaderContainer {
+	width: 100vw;
+	height: 100vh;
+	background-color: #808080b0;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 100000;
+}
+
+.barcodeReaderContainer .closeWindow {
+	font-size: 30px;
+	left: calc(50% - (min(600px, 100%) / 2) + 10px);
+	position: fixed;
+	top: 60px;
+	z-index: 100;
+	cursor: pointer;
+}
+
+.barcodeReaderContainer .barcodeReader {
+	width: min(600px, calc(100% - 10px));
+	min-height: 200px;
+	background-color: #f4f5f7;
+	position: fixed;
+	top: 100px;
+	left: calc(50% - (min(600px, 100%) / 2));
+	border-radius: 5px;
+	padding: 10px;
+	margin: 5px;
+	text-align: center;
+	z-index: 10;
+}
+
+.barcodeReaderContainer .barcodeReader video {
+	max-width: 100%;
+	max-height: 100%;
+	height: auto;
+	width: auto !important;
+}
+
 /* Dashbord */
 
 	/* Lend */
@@ -605,10 +668,26 @@ header.header .mobileHeader .fa-user-circle-o {
 	}
 }
 
-.footer {
-	background-color: #1d2327;
-	height: 30px;
+/* Apple */
+
+@supports (-webkit-touch-callout: none) {
+	.footer {
+		background-color: #1d2327;
+		height: 60px;
+	}
 }
+
+/* None Apple */
+
+@supports not (-webkit-touch-callout: none) {
+	
+	.footer {
+		background-color: #1d2327;
+		height: 30px;
+	}
+}
+
+
 
 /* Footer Language */
 
@@ -617,6 +696,7 @@ header.header .mobileHeader .fa-user-circle-o {
 	margin: 5px 10px;
 	cursor: pointer;
 	height: 20px;
+	max-width: 80px;
 }
 
 
@@ -624,6 +704,17 @@ header.header .mobileHeader .fa-user-circle-o {
 	height: 100%;
 	width: auto;
 	vertical-align: initial;
+}
+
+.footer .scannerIcon {
+	font-size: 23px;
+	margin-left: 10px;
+	cursor: pointer;
+}
+
+.footer .scannerIcon a{
+	font-style: none;
+	color: white;
 }
 
 

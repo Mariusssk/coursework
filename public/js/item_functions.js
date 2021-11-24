@@ -84,7 +84,7 @@ function displayItems(data) {
 			<div class="td col-6 col-sm-4">`+data[i]['name']+`</div>
 			<div class="td d-none d-sm-block col-sm-4">`+data[i]['typeName']+`</div>
 			<div class="td col-3 col-sm-2">`+consumeable+`</div>
-			<div class="td col-3 col-sm-2">`+data[i]['amount']+`</div>
+			<div class="td col-3 col-sm-2">`+data[i]['actualAmount']+` (`+data[i]['amount']+`)</div>
 		</div>
 		<div class="row"><div class="col-12 hr"><hr></div></div>
 		`;

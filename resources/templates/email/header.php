@@ -40,7 +40,7 @@ HTML;
 	$header .= '	
 	<body style="margin:0;padding:0;word-spacing:normal;background-color:#ffffff;">
 		<table border="0" cellpadding="0" cellspacing="0"><tr style="background-color: #f5f5f5"><td style="width: 10%"></td><td height="50" width="3000">
-			<img src="'.IMAGES.'/aulatechnik_logo_squared.jpg" height="120" />
+			<img src="'.IMAGES.'/aulatechnik_logo_square.jpg" height="120" />
 		</td></tr></table>
 		<!--[if mso]>
 		<div role="article" aria-roledescription="email" lang="en" style="-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;background-color:#ffffff;">

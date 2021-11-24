@@ -62,7 +62,7 @@ class Lend extends SystemClass {
 		
 		//setup sql
 		$sql = "SELECT SUM(amount) FROM ".$lend->TABLE_NAME." WHERE returned = ? AND item_id = ?";
-		$sqlType = "iii";
+		$sqlType = "ii";
 		$sqlParams = array(0,$itemID);
 		
 		//get amount from SQL

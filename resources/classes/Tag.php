@@ -12,6 +12,11 @@ class Tag extends ObjectType {
 	//Functions
 	
 
+	//check if tag is currently used
+	
+	function checkIfUsed() {
+		return(TagAssignment::checkIfTagUsed($this->getID()));
+	}
 
 	//get functions
 	
@@ -25,6 +30,24 @@ class Tag extends ObjectType {
 	
 	function getColour() {
 		return($this->colour);
+	}
+	
+	//Set functions
+	
+	function setName($value) {
+		if(!empty($value)) {
+			$this->name = $value;
+			return(True);
+		}
+		return(False);
+	}
+	
+	function setColor($value) {
+		if(!empty($value)) {
+			$this->colour = $value;
+			return(True);
+		}
+		return(False);
 	}
 	
 }

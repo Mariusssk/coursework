@@ -53,6 +53,8 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 								$tmpItemArray['returnDateForm'] = $lend->getReturnDate('form');
 							}
 						} else {
+							$tmpItemArray['actualAmount'] = $item->getAmount() - Lend::calculateTotalAmountLend($item->getID());
+							
 							$tmpItemArray['amount'] = $item->getAmount();
 							
 							if(isset($search['amount']) AND (!empty($search['amount']) OR $search['amount'] == 0)  AND $search['amount'] != $item->getAmount()) {

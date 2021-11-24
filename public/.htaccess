@@ -54,6 +54,7 @@ RewriteRule ^todo/category/edit/([0-9-]+)$ todo_page.php?request=categoryEdit&ID
 
 RewriteRule ^settings/user$ user_profile.php?request=personal_data [QSA,NC,L]
 RewriteRule ^settings/notifications$ notifications_page.php?request=requestList [QSA,NC,L]
+RewriteRule ^settings/tags$ tag_page.php?request=tagList [QSA,NC,L]
 
 RewriteRule ^verify$ verify_email_request.php?request=verify [QSA,NC,L]
 RewriteRule ^verify/([A-Z0-9]*)$ verify_email_request.php?request=verify&code=$1 [QSA,NC,L]

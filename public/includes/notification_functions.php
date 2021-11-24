@@ -111,11 +111,13 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 				$request = new NotificationRequest;
 				if($request->loadData($tmpRequest)) {
 					$tmpArray = array();
-					
+
 					if(
 						(
-							(isset($_POST['requestTypeID']) AND $_POST['requestTypeID'] != 0 AND $_POST['requestTypeID'] == $request->getAttributeTypeID()) OR
-							!isset($_POST['requestTypeID']) OR empty($_POST['requestTypeID']) OR $_POST['requestTypeID'] == 0
+							((isset($_POST['requestTypeID']) AND $_POST['requestTypeID'] != 0 AND $_POST['requestTypeID'] == $request->getAttributeTypeID()) OR
+							!isset($_POST['requestTypeID']) OR empty($_POST['requestTypeID']) OR $_POST['requestTypeID'] == 0) AND
+							((isset($_POST['attributeName']) AND !empty($_POST['attributeName']) AND strpos(strtoupper($request->getAttributeName()),strtoupper($_POST['attributeName'])) !== False) OR
+							!isset($_POST['attributeName']) OR empty($_POST['attributeName']))
 						) 
 					){
 						if($request->getAttributeTypeID() == 3) {
@@ -133,6 +135,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 						$tmpArray['emailUpdate'] = $request->getEmailUpdate();
 						
 						$tmpArray['dailyUpdate'] = $request->getDailyUpdate();
+						
 						
 						array_push($post['requests'], $tmpArray);
 					}

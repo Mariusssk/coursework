@@ -162,13 +162,13 @@ $( document ).ready(function() {
 		<div class="menuElement subElement" data-destination="settings/user">
 			<a href="<?php echo URL;?>/settings/user"><?php echo HEADER_MENU_ITEM_SETTINGS_USER;?></a>
 		</div>
-		<div class="menuElement subElement" data-destination="settings/user/new">
+		<div class="menuElement subElement" data-destination="settings/notifications">
 			<a href="<?php echo URL;?>/settings/notifications"><?php echo HEADER_MENU_ITEM_SETTINGS_NOTIFICATIONS;?></a>
 		</div>
-		<?php 
-		if($session->checkRights("create_user")) {
-			?><div class="menuElement subElement" data-destination="settings/user/new">
-				<a href="<?php echo URL;?>/settings/user/new"><?php echo HEADER_MENU_ITEM_SETTINGS_CREATE_USER;?></a>
+		<?php 		
+		if($session->checkRights("edit_tags")) {
+			?><div class="menuElement subElement" data-destination="settings/tags">
+				<a href="<?php echo URL;?>/settings/tags"><?php echo HEADER_MENU_ITEM_SETTINGS_TAGS;?></a>
 			</div><?php
 		}
 		
