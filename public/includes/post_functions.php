@@ -265,6 +265,40 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 	}
 	
+	
+	//decode data of qr-code scanner
+	
+	else if($request == "decodeScanData") {
+		if(isset($_POST['data']) AND !empty($_POST['data'])) {
+			$data = $_POST['data'];
+			
+			$data = explode("#",$data);
+			
+			$post = array();
+			
+			if(count($data) == 2) {
+				$type = strtolower($data[0]);
+				$identifier = $data[1];
+				if($type == "item") {
+					$item = new Item;
+					if($item->loadData($identifier)) {
+						$post['result'] = "success";
+						$post['action'] = "redirect";
+						$post['URL'] = URL."/scan/display/".$type."/".$item->getID();
+					}
+				}
+			} 
+			
+			if(!isset($post['result']) OR empty($post['result'])) {
+				$post['result'] = "error";
+			}
+			
+			echo json_encode($post);
+		} else {
+			echo "error";
+		}
+	}
+	
 }
 
 ob_flush();

@@ -126,7 +126,9 @@ if($session->loggedIn() === True) {
 			if(($request == "edit" AND $session->checkRights("edit_item") == True) OR ($request == "new" AND $session->checkRights("create_new_item") == True)) {
 				$item = new Item;
 				if(isset($_GET['ID'])) {
-					$item->loadData($_GET['ID']);
+					if(!$item->loadData($_GET['ID'])) {
+						echo '<h2 class="red">'.ITEM_EDIT_DATA_LOAD_FAILURE."</h2>";
+					}
 				}
 				
 				//display form

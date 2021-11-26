@@ -134,6 +134,8 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 	
 		//InputName
 		
+		defined("ITEM_EDIT_DATA_LOAD_FAILURE") ? null :  define("ITEM_EDIT_DATA_LOAD_FAILURE", "The Item could not be found!");
+		
 		defined("ITEM_EDIT_INPUTNAME_NAME") ? null :  define("ITEM_EDIT_INPUTNAME_NAME", "Name");
 		defined("ITEM_EDIT_INPUTNAME_LENGTH") ? null :  define("ITEM_EDIT_INPUTNAME_LENGTH", "Length");
 		defined("ITEM_EDIT_INPUTNAME_AMOUNT") ? null :  define("ITEM_EDIT_INPUTNAME_AMOUNT", "Amount");
@@ -204,7 +206,13 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 	//New TAG
 		defined("TAG_NEW_NAME") ? null :  define("TAG_NEW_NAME", "New Tag");
 	
-
+	//Scanner
+	
+		//View scanner
+		
+			defined("SCANNER_SCAN_OPEN_SCANNER") ? null :  define("SCANNER_SCAN_OPEN_SCANNER", "Open scanner");
+			defined("SCANNER_SCAN_FIND_DATA") ? null :  define("SCANNER_SCAN_FIND_DATA", "Find data");
+			defined("SCANNER_SCAN_DATA_INPUT") ? null :  define("SCANNER_SCAN_DATA_INPUT", "Scan Code");
 		
 //Emails
 

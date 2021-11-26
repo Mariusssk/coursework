@@ -59,6 +59,10 @@ RewriteRule ^settings/tags$ tag_page.php?request=tagList [QSA,NC,L]
 RewriteRule ^verify$ verify_email_request.php?request=verify [QSA,NC,L]
 RewriteRule ^verify/([A-Z0-9]*)$ verify_email_request.php?request=verify&code=$1 [QSA,NC,L]
 
+RewriteRule ^scan/$ scanner.php?request=displayScanner [QSA,NC,L]
+RewriteRule ^scan/([A-Z]*)/([0-9]*)$ scanner.php?request=displayScanner&type=$1&attribute=$2 [QSA,NC,L]
+RewriteRule ^scan/display/(item|storage)/([0-9]*)$ scanner.php?request=displayAttribute&type=$1&attribute=$2 [QSA,NC,L]
+
 #-----------------------------------------
 
 #Block
@@ -84,6 +88,9 @@ RewriteRule ^(.*)todo_page.php$ 404 [R=301,L]
 
 RewriteCond %{THE_REQUEST} ^.*/notifications_page\.php [NC]
 RewriteRule ^(.*)notifications_page.php$ 404 [R=301,L]
+
+RewriteCond %{THE_REQUEST} ^.*/scanner\.php [NC]
+RewriteRule ^(.*)scanner.php$ 404 [R=301,L]
 
 #-----------------------------------------
 

@@ -21,7 +21,7 @@ function openScanner(type) {
 		});
 		if(type == "scan") {
 			
-			console.log(decodedText);
+			findScanData(decodedText);
 		}
 	};
 	const config = { fps: 20, qrbox: { width: 200, height: 200 } };
@@ -36,5 +36,40 @@ function closeScanner() {
 		document.querySelector(".barcodeReaderContainer").classList.add("none");
 	}).catch((err) => {
 	  // Stop failed, handle it.
+	});
+}
+
+function findScanData(data = "") {
+	if(data == "") {
+		data = document.querySelector(".page.scan.displayScanner .generalInput[data-input-name='scanData']").value;
+	}
+	
+	console.log(data);
+	
+	$.post(INCLUDES+"/post_functions.php",{
+		requestType: "decodeScanData",
+		data: data
+	},
+	function(data, status){
+		var categories = "";
+		var dataCut = parsePostData(data);
+		//check if request is valid
+		if(dataCut == "error" || dataCut == "") {
+			headerNotification(LANG.ERROR_REQUEST_FAILED,"red");
+		} else if(dataCut == "missingRights") {
+			headerNotification(LANG.USER_RIGHTS_MISSING,"red");
+		} else if(dataCut != "") {
+			data = JSON.parse(data);
+
+			if(data['result'] && data['result'] == "success") {
+				if(data['action'] == "redirect") {
+					redirect(data['URL']);
+				}
+			} else {
+				headerNotification(LANG.SCAN_DECODE_DATA_FAILED,"red");
+				console.log(data);
+			}
+			
+		}
 	});
 }

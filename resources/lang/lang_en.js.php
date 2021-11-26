@@ -93,6 +93,10 @@ var LANG = {
 	TAG_LIST_COLOR: "Color",
 	TAG_LIST_CURRENTLY_USED: "Tag can not be deleted as it is still used",
 	
+	//Scan
+	
+	SCAN_DECODE_DATA_FAILED: "The code could not be decoded",
+	
 	//Basic phrases
 	
 	PHRASE_FILL_ALL: "All fields maked with a * must be filled!",
