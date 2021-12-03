@@ -45,7 +45,7 @@ class User extends SystemClass {
 				}
 			}
 			
-			if($this->getSchoolEmail() != $oldSchoolEmail) {
+			if($this->getSchoolEmail() != $oldSchoolEmail AND !empty($this->getSchoolEmail())) {
 				$emailRequest = new EmailRequest;
 				if(!$emailRequest->createEmailConfirmRequest($this->getID(),"schoolEmail")) {
 					$mailFail = 1;
@@ -91,12 +91,6 @@ class User extends SystemClass {
 	
 	function checkRights($key = "") {
 		return(UserRole::checkRights($this->role_id,$key));
-	}
-	
-	//check if email verified
-	
-	function checkEmailVerified($emailType = "personal") {
-		
 	}
 	
 	//set session data
@@ -195,8 +189,9 @@ class User extends SystemClass {
 		$sqlParams = array($this->getID(),$value);
 		$users = pdSelect($sql,"mysqli",$sqlType,$sqlParams);
 		
+		
 		//check if users were found
-		if(count($users) > 0) {
+		if(count($users) > 0 AND empty($value)) {
 			return("alreadyInUse");
 		} else if(empty($value)) {
 			return(False);
@@ -204,6 +199,7 @@ class User extends SystemClass {
 			//save if no users found and not empty
 			$this->email = $value;
 		}
+		return(True);
 	}
 	
 	function setSchoolEmail($value) {
@@ -217,11 +213,12 @@ class User extends SystemClass {
 		if(count($users) > 0 AND !empty($value)) {
 			return("alreadyInUse");
 		} else if(empty($value)) {
-			return(False);
+			$this->school_email = "";
 		} else {
 			//save if no users found and not empty
 			$this->school_email = $value;
 		}
+		return(True);
 	}
 	
 	function setPassword($value) {

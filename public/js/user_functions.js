@@ -205,4 +205,110 @@ function resetPassword() {
 	}
 }
 
+
+//Load list of all user roles
+
+function loadRoles() {
+	var name = document.querySelector('.page.role.roleList .searchInput[data-search-name="roleName"]').value;
+
+	
+	$.post(INCLUDES+"/user_functions.php",{
+		requestType: "loadRoleList",
+		name: name
+	},
+	function(data, status){
+		var dataCut = parsePostData(data);
+		
+		//check if request is valid
+		if(dataCut == "error" || dataCut == "") {
+			headerNotification(LANG.ERROR_REQUEST_FAILED,"red");
+		} else if(dataCut == "success") {
+			headerNotification(LANG.NOTIFICATIONS_CONFIRM_EMAIL_REQUEST_SUCCESS,"green");
+		} else {
+			data = JSON.parse(data);
+			
+			roles = data['roles'];
+			
+			var roleString = "";
+
+			//run trough every tag send back by php
+			
+			for(i = 0;i < Object.keys(roles).length;i++) {
+				var tmpRole = "";
+				
+				//create tag html elment
+				tmpRole += `<div class="row tagContainer" data-request-id="`+roles[i]['ID']+`">`;
+				
+				
+				//Name
+				
+				tmpRole += `<div class="tagName td col-sm-6 col-7">`+roles[i]['name']+`</div>`;
+				
+				//Pre defined
+				
+				if(roles[i]['preDefined'] == true) {
+					tmpRole += `
+					<div class="tagName td col-sm-4 col-5"><span class="icon generalIcon"><i class="fa fa-check-square" aria-hidden="true"></i></span></div>
+					<div class="td col-sm-2 col-12">
+					</div>
+					`;
+				} else {
+					tmpRole += `
+					<div class="tagName td col-sm-4 col-5"></div>
+					<div class="td col-sm-2 col-12 tagActions noselect">
+						<span class="editRole icon generalIcon" onclick="editRole('`+roles[i]['ID']+`')">
+							<i class="fa fa-pencil-square" aria-hidden="true"></i>
+						</span>
+					</div>
+					`;
+				}
+
+				tmpRole += `</div>`;
+				
+				roleString += tmpRole;
+				
+			}
+			
+			//check if there are any roles
+			
+			if(roleString.length == 0) {
+				roleString = LANG.TAG_LIST_NON_FOUND
+			} 
+			
+			document.querySelector(".page.role.roleList .roleListContainer").innerHTML = roleString;
+			
+		}
+		
+	});
+}
+
+//redirect to edit role page
+
+function editRole(roleID) {
+	redirect(URL+"/settings/user/roles/edit/"+roleID);
+}
+
+//Create new template of role 
+
+function createNewRole() {
+	$.post(INCLUDES+"/user_functions.php",{
+		requestType: "createNewRole"
+	},
+	function(data, status){
+		//get return from PHP
+		var dataCut = parsePostData(data);
+		
+		//check if request is valid
+		if(dataCut == "error" || dataCut == "") {
+			headerNotification(LANG.ERROR_REQUEST_FAILED,"red");
+		} else if(dataCut == "success") {
+			headerNotification(LANG.PHRASE_SAVED_SUCCESS,"green");
+			loadRoles();
+		} else {
+			headerNotification(data,"red");
+		}
+	});
+}
+
+
 	

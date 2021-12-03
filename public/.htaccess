@@ -43,7 +43,7 @@ RewriteRule ^item/lend/add$ item_page.php?request=addLend [QSA,NC,L]
 #Todo
 
 RewriteRule ^todo/personal$ todo_page.php?request=overviewPersonal [QSA,NC,L]
-RewriteRule ^todo/personal/([0-9-]+)$ todo_page.php?request=overviewPersonal&listID=$1 [QSA,NC,L]
+RewriteRule ^todo/personal/([0-9]+)$ todo_page.php?request=overviewPersonal&listID=$1 [QSA,NC,L]
 RewriteRule ^todo/global$ todo_page.php?request=overviewGlobal [QSA,NC,L]
 RewriteRule ^todo/global/([0-9-]+)$ todo_page.php?request=overviewGlobal&listID=$1 [QSA,NC,L]
 RewriteRule ^todo/category$ todo_page.php?request=categoryOverview [QSA,NC,L]
@@ -53,6 +53,12 @@ RewriteRule ^todo/category/edit/([0-9-]+)$ todo_page.php?request=categoryEdit&ID
 #Settings
 
 RewriteRule ^settings/user$ user_profile.php?request=personal_data [QSA,NC,L]
+
+RewriteRule ^settings/user/list$ user_settings.php?request=listUser [QSA,NC,L]
+RewriteRule ^settings/user/edit/([0-9]+)$ user_settings.php?request=editUser&ID=$1 [QSA,NC,L]
+RewriteRule ^settings/user/roles$ user_settings.php?request=listUserRoles [QSA,NC,L]
+RewriteRule ^settings/user/roles/edit/([0-9]+)$ user_settings.php?request=editUserRole&ID=$1 [QSA,NC,L]
+
 RewriteRule ^settings/notifications$ notifications_page.php?request=requestList [QSA,NC,L]
 RewriteRule ^settings/tags$ tag_page.php?request=tagList [QSA,NC,L]
 

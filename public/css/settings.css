@@ -64,3 +64,10 @@
 		margin: 0px 10px 0px 10px;
 		padding: 5px;
 	}
+	
+/* Roles */
+
+	/* List Roles */
+		.page.roles.roleList .newRoleButton {
+			background-color: green;
+		}

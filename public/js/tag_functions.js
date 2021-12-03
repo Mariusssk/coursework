@@ -15,8 +15,6 @@ function loadTagList() {
 		//check if request is valid
 		if(dataCut == "error" || dataCut == "") {
 			headerNotification(LANG.ERROR_REQUEST_FAILED,"red");
-		} else if(dataCut == "success") {
-			headerNotification(LANG.NOTIFICATIONS_CONFIRM_EMAIL_REQUEST_SUCCESS,"green");
 		} else {
 			data = JSON.parse(data);
 			

@@ -203,8 +203,8 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 		defined("TAG_LIST_HEADLINE_NAME") ? null :  define("TAG_LIST_HEADLINE_NAME", "Tag Name");
 		defined("TAG_LIST_HEADLINE_COLOR") ? null :  define("TAG_LIST_HEADLINE_COLOR", "Color");
 		
-	//New TAG
-		defined("TAG_NEW_NAME") ? null :  define("TAG_NEW_NAME", "New Tag");
+		//New TAG
+			defined("TAG_NEW_NAME") ? null :  define("TAG_NEW_NAME", "New Tag");
 	
 	//Scanner
 	
@@ -213,6 +213,21 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 			defined("SCANNER_SCAN_OPEN_SCANNER") ? null :  define("SCANNER_SCAN_OPEN_SCANNER", "Open scanner");
 			defined("SCANNER_SCAN_FIND_DATA") ? null :  define("SCANNER_SCAN_FIND_DATA", "Find data");
 			defined("SCANNER_SCAN_DATA_INPUT") ? null :  define("SCANNER_SCAN_DATA_INPUT", "Scan Code");
+			
+	//Roles
+		
+		defined("ROLE_LIST_HEADLINE_NAME") ? null :  define("ROLE_LIST_HEADLINE_NAME", "Role Name");
+		defined("ROLE_LIST_HEADLINE_PRE_DEFINED") ? null :  define("ROLE_LIST_HEADLINE_PRE_DEFINED", "Pre-defined");
+		
+		defined("ROLE_LIST_TEMPLATE_NEW_ROLE_NAME") ? null :  define("ROLE_LIST_TEMPLATE_NEW_ROLE_NAME", "New Role");
+		
+		//edit
+		
+			defined("ROLE_EDIT_NOT_FOUND") ? null :  define("ROLE_EDIT_NOT_FOUND", "The role could not be found / The role data could not be loaded");
+			defined("ROLE_EDIT_FORM_PLACEHOLDER_NAME") ? null :  define("ROLE_EDIT_FORM_PLACEHOLDER_NAME", "Name");
+		
+		
+		
 		
 //Emails
 

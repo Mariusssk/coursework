@@ -39,12 +39,12 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 							$emptyField = 2;
 						} else {
 							if(isset($personalData['email']) AND !empty($personalData['email'])) {
-								if($user->setEmail($personalData['email']) == "alreadyInUse") {
+								if($user->setEmail($personalData['email']) === "alreadyInUse") {
 									echo "emailAlreadyUsed";
 									$emptyField = 2;
 								} else {
 									if(isset($personalData['schoolEmail'])) {
-										if($user->setSchoolEmail($personalData['schoolEmail']) == "alreadyInUse") {
+										if($user->setSchoolEmail($personalData['schoolEmail']) === "alreadyInUse") {
 											echo "schoolEmailAlreadyUsed";
 											$emptyField = 2;
 										}

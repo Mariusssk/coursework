@@ -92,7 +92,7 @@ $( document ).ready(function() {
 	if($session->checkRights("view_all_todo_lists") OR $session->checkRights("edit_personal_todo_list")) {
 	?>
 		<div class="menuElement" data-sub-menu-parent="Todo" data-destination="todo">
-			<a href="<?php echo URL;?>/todo">To-Do</a>
+			<a href="#">To-Do</a>
 		</div>
 		<div class="subMenu" data-sub-menu="Todo">
 			<?php 
@@ -112,7 +112,7 @@ $( document ).ready(function() {
 			}
 			if($session->checkRights("edit_personal_todo_list")) {
 			?>
-				<div class="menuElement subElement" data-destination="todo/personal"">
+				<div class="menuElement subElement" data-destination="todo/personal">
 					<a href="<?php echo URL;?>/todo/personal"><?php echo HEADER_MENU_ITEM_TODO_PERSONAL;?></a>
 				</div>
 				<?php

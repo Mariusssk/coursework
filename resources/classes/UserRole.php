@@ -1,6 +1,6 @@
 <?php
 
-class UserRole extends SystemClass {
+class UserRole extends ObjectType {
 	
 	protected $user_role_id, $name, $pre_defined;
 	
@@ -24,6 +24,47 @@ class UserRole extends SystemClass {
 			if(count($rights) == 1 AND isset($rights[0][$rightsKey]) AND $rights[0][$rightsKey] == 1) {
 				return(True);
 			}
+		}
+		return(False);
+	}
+	
+	//create a new role
+	
+	function createNewRole() {
+		$this->setName(ROLE_LIST_TEMPLATE_NEW_ROLE_NAME);
+		$this->getPreDefined(0);
+		
+		return($this->createNewData());
+	}
+	
+	//get functions
+	
+	function getID() {
+		return($this->user_role_id);
+	}
+	
+	function getName() {
+		return($this->name);
+	}
+	
+	function getPreDefined() {
+		return($this->pre_defined);
+	}
+	
+	//set function
+	
+	function setName($value) {
+		if(!empty($value)) {
+			$this->name = $value;
+			return(True);
+		}
+		return(False);
+	}
+	
+	function setPreDefined($value) {
+		if($value == 0 OR $value == 1) {
+			$this->pre_defined = $value;
+			return(True);
 		}
 		return(False);
 	}

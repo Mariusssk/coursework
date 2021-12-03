@@ -106,7 +106,11 @@ if($session->loggedIn() === True) {
 						<?php echo WORD_COMMENTS.": ".Comment::countUserComments($session->getSessionUserID());?><br>
 						<?php echo USER_PROFILE_REGISTERED_SINCE.": ".$user->getDateCreated();?>
 						<hr>
-						<?php echo SETTINGS_PERSONAL_DATA_INPUT_NAME_SCHOOL_EMAIL.": ".$user->getSchoolEmail();?>
+						<?php 
+						if(!empty($user->getSchoolEmail())) {
+							echo SETTINGS_PERSONAL_DATA_INPUT_NAME_SCHOOL_EMAIL.": ".$user->getSchoolEmail();
+						}
+						?>
 					</div>
 				</div>
 			</div>
