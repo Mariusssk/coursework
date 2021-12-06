@@ -18,7 +18,7 @@ async function checkCameraAndOpenScanner() {
 
 	try {
 		stream = await navigator.mediaDevices.getUserMedia(constraints);
-		console.log(stream);
+		
 		html5QrCode = new Html5Qrcode("barcodeReader");
 
 		const qrCodeSuccessCallback = (decodedText, decodedResult) => {
