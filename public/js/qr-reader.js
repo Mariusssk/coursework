@@ -10,12 +10,17 @@ var _;(()=>{"use strict";var A,e={d:(A,t)=>{for(var i in t)e.o(t,i)&&!e.o(A,i)&&
 
 var html5QrCode = "";
 
-function openScanner(type) {
-	navigator.mediaDevices.getUserMedia()
-	.then(function(stream) {
+//check if device has camera, if yes open scanner, if not promt error
 
+async function checkCameraAndOpenScanner() {
+	let stream = null;
+	var constraints = {video: true }
+
+	try {
+		stream = await navigator.mediaDevices.getUserMedia(constraints);
+		console.log(stream);
 		html5QrCode = new Html5Qrcode("barcodeReader");
-		
+
 		const qrCodeSuccessCallback = (decodedText, decodedResult) => {
 			html5QrCode.stop().then((ignore) => {
 				document.querySelector(".barcodeReaderContainer").classList.add("none");
@@ -28,17 +33,20 @@ function openScanner(type) {
 			}
 		};
 		const config = { fps: 20, qrbox: { width: 200, height: 200 } };
-		
-		html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
-		
-		document.querySelector(".barcodeReaderContainer").classList.remove("none");
-			
-	})
-	.catch(function(err) {
-		headerNotification(LANG.SCAN_NO_CAMERA,"red");
-	});
 
+		html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
+
+		document.querySelector(".barcodeReaderContainer").classList.remove("none");
+	} catch(err) {
+		headerNotification(LANG.SCAN_NO_CAMERA,"red");
+	}
 }
+
+function checkCameraAndOpenScanner(type) {
+	checkCameraAndOpen();
+}
+
+//close scanner
 
 function closeScanner() {
 	html5QrCode.stop().then((ignore) => {
@@ -47,6 +55,8 @@ function closeScanner() {
 	  // Stop failed, handle it.
 	});
 }
+
+//load data for scanner input
 
 function findScanData(data = "") {
 	if(data == "") {
