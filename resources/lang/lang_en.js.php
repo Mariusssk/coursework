@@ -96,6 +96,7 @@ var LANG = {
 	//Scan
 	
 	SCAN_DECODE_DATA_FAILED: "The code could not be decoded",
+	SCAN_NO_CAMERA: "This feature can only be used if the device has a camera",
 	
 	//User ROles
 	

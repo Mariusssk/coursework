@@ -211,10 +211,13 @@ function resetPassword() {
 function loadRoles() {
 	var name = document.querySelector('.page.role.roleList .searchInput[data-search-name="roleName"]').value;
 
+	var search = {};
+	
+	search['name'] = name;
 	
 	$.post(INCLUDES+"/user_functions.php",{
 		requestType: "loadRoleList",
-		name: name
+		search: search
 	},
 	function(data, status){
 		var dataCut = parsePostData(data);

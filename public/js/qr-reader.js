@@ -11,24 +11,33 @@ var _;(()=>{"use strict";var A,e={d:(A,t)=>{for(var i in t)e.o(t,i)&&!e.o(A,i)&&
 var html5QrCode = "";
 
 function openScanner(type) {
-	html5QrCode = new Html5Qrcode("barcodeReader");
-	
-	const qrCodeSuccessCallback = (decodedText, decodedResult) => {
-		html5QrCode.stop().then((ignore) => {
-			document.querySelector(".barcodeReaderContainer").classList.add("none");
-		}).catch((err) => {
-			console.log("Failed to close scanner!");
-		});
-		if(type == "scan") {
+	navigator.mediaDevices.getUserMedia()
+	.then(function(stream) {
+
+		html5QrCode = new Html5Qrcode("barcodeReader");
+		
+		const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+			html5QrCode.stop().then((ignore) => {
+				document.querySelector(".barcodeReaderContainer").classList.add("none");
+			}).catch((err) => {
+				console.log("Failed to close scanner!");
+			});
+			if(type == "scan") {
+				
+				findScanData(decodedText);
+			}
+		};
+		const config = { fps: 20, qrbox: { width: 200, height: 200 } };
+		
+		html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
+		
+		document.querySelector(".barcodeReaderContainer").classList.remove("none");
 			
-			findScanData(decodedText);
-		}
-	};
-	const config = { fps: 20, qrbox: { width: 200, height: 200 } };
-	
-	html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
-	
-	document.querySelector(".barcodeReaderContainer").classList.remove("none");
+	})
+	.catch(function(err) {
+		headerNotification(LANG.SCAN_NO_CAMERA,"red");
+	});
+
 }
 
 function closeScanner() {

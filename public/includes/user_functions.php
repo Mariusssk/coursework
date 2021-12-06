@@ -48,8 +48,11 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 						} else {
 							$tmpRoleArray['preDefined'] = False;
 						}
-				
 						
+						if(isset($search['name']) AND !empty($search['name']) AND strpos(strtoupper($tmpRoleArray['name']),strtoupper($search['name'])) === False) {
+							$searchFail = 1;
+						}
+					
 						if($searchFail == 0) {
 							array_push($post['roles'], $tmpRoleArray);
 						}
