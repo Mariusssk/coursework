@@ -73,13 +73,53 @@ if($session->loggedIn() === True) {
 			<?php
 			$role = new UserRole;
 			if(isset($_GET['ID']) AND !empty($_GET['ID']) AND $role->loadData($_GET['ID'])) {
-				?>
-				<div class="row editRoleContainer">
-					<div class="col-12">
-						<input type="text" class="generalInput" data-input-name="name" placeholder="<?php echo ROLE_EDIT_FORM_PLACEHOLDER_NAME;?>">
+				if($role->getPreDefined() == 0){
+					?>
+					<div class="row editRoleContainer">
+						<div class="col-12">
+							<input type="text" class="generalInput" value="<?php echo $role->getName();?>" data-input-name="name" placeholder="<?php echo ROLE_EDIT_FORM_PLACEHOLDER_NAME;?>">
+						</div>
+						<?php
+						$options = $role->getRightOptions();
+					
+						foreach($options as $tmpOption) {
+							?>
+							<div class="col-8 col-md-6 rightName">
+								<?php echo $tmpOption['name'];?>
+							</div>
+							<div class="col-4 col-md-6 rightInput">
+								<?php
+								$checked = "";
+								if($tmpOption['value'] == 1) {
+									$checked = "checked";
+								}
+								?>
+								<input type="checkbox" class="generalCheckbox" <?php echo $checked;?>>
+							</div>
+							<?php
+						}
+						?>
+						<div class="col-12 col-md-6">
+							<div class="generalButton" onclick="saveRoleData()"><?php echo WORD_SAVE;?></div>
+						</div>
+						<div class="col-12 col-md-6 questionDeleteButton">
+							<div class="generalButton" onclick="deleteRole()"><?php echo WORD_DELETE;?></div>
+						</div>
+						<div class="col-12 deleteButtons none">
+							<div class="generalButton" onclick="deleteRole('delete','<?php echo $role->getID();?>')"><?php echo WORD_DELETE;?></div>
+							<div class="generalButton" onclick="deleteRole('abort')"><?php echo WORD_ABORT;?></div>
+						</div>
+						
 					</div>
-				</div>
-				<?php
+					<?php
+				} else {
+					?>
+					<br>
+					<div class="center">
+						<h3> <?php echo ROLE_EDIT_PRE_DEFINED;?> </h3>
+					</div>
+					<?php
+				}
 			} else {
 				?>
 				<br>

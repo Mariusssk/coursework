@@ -97,6 +97,10 @@ var LANG = {
 	
 	SCAN_DECODE_DATA_FAILED: "The code could not be decoded",
 	
+	//User ROles
+	
+	USER_ROLE_EDIT_USED: "This role is still used and hence can not be deleted",
+	
 	//Basic phrases
 	
 	PHRASE_FILL_ALL: "All fields maked with a * must be filled!",

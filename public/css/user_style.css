@@ -118,10 +118,20 @@
 /* Settings */
 
 	/* User Roles */
-	.page.role.roleList .newRoleButton {
-		background-color: green;
-	}
 	
-	.page.role.roleList .roleListContainer .icon.editRole {
-		cursor: pointer;
-	}
+		/* List */
+		
+			.page.role.roleList .newRoleButton {
+				background-color: green;
+			}
+			
+			.page.role.roleList .roleListContainer .icon.editRole {
+				cursor: pointer;
+			}
+			
+		/* Edit */
+			
+			.page.role.editRole .editRoleContainer .rightName , 
+			.page.role.editRole .editRoleContainer .rightInput {
+				padding-top: 5px;
+			}

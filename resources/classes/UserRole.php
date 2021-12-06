@@ -12,6 +12,34 @@ class UserRole extends ObjectType {
 		$this->TABLE_NAME = "user_role";
 	}
 	
+	//Get list of all rights options and values
+	
+	function getRightOptions () {
+		$sql = "SELECT * FROM ".$this->TABLE_NAME." WHERE ".$this->TABLE_NAME."_id = ?";
+		$sqlType = "i";
+		$sqlParams = array($this->getID());
+		
+		$options = pdSelect($sql, "mysqli", $sqlType, $sqlParams);
+		
+		$options = $options[0];
+		
+		$post = array();
+		
+		foreach($options as $key => $value) {
+			if(!isset($this->$key)) {
+				array_push($post, array("name" => $key, "value" => $value));
+			}
+		}
+		
+		return($post);
+	}
+	
+	//check if role is curretly used
+	
+	function checkIfUsed() {
+		return(User::checkIfRoleIsUsed($this->getID()));
+	}
+	
 	//check rights
 	
 	static function checkRights($roleID = 0,$rightsKey = "") {

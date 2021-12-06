@@ -89,6 +89,31 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 			}
 		}
 		
+		//delete role if unused
+		
+		
+		else if($request == "deleteRole") {
+			//check user rights
+			if($session->checkRights("edit_user_role") == True) {
+				//load role data
+				$role = new UserRole;
+				if(isset($_POST['roleID']) AND $role->loadData($_POST['roleID'])) {
+					if($role->checkIfUsed()) {
+						echo "inUse";
+					} else if($role->deleteData()) {
+						echo "success";
+					} else {
+						echo "error";
+					}
+				} else {
+					echo "error";
+				}
+				
+			} else {
+				echo "missingRights";
+			}
+		}
+		
 	} 
 	
 	
@@ -97,3 +122,4 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 }
 
 ob_flush();
+ 

@@ -25,6 +25,22 @@ class User extends SystemClass {
 		return(False);
 	}
 	
+	//check if any user has specific role
+	
+	static function checkIfRoleIsUsed($roleID) {
+		$user = new User;
+		$sql = "SELECT ".$user->TABLE_NAME."_id FROM ".$user->TABLE_NAME." WHERE role_id = ?";
+		$sqlType = "i";
+		$sqlParams = array($roleID);
+		
+		$users = pdSelect($sql, "mysqli", $sqlType, $sqlParams);
+		
+		if(count($users) > 0) {
+			return(True);
+		}
+		return(False);
+	}
+	
 	//save function with included email confirmation
 	
 	function saveData() {

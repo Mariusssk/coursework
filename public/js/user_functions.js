@@ -288,6 +288,43 @@ function editRole(roleID) {
 	redirect(URL+"/settings/user/roles/edit/"+roleID);
 }
 
+//Delete user role/display delete form
+
+function deleteRole(action = "", roleID = 0) {
+	var containerV1 = document.querySelector(".page.role.editRole .questionDeleteButton");
+	var containerV2 = document.querySelector(".page.role.editRole .deleteButtons");
+
+	if(action == ""){
+		containerV1.classList.add("none");
+		containerV2.classList.remove("none");
+	} else if(action == "abort") {
+		containerV1.classList.remove("none");
+		containerV2.classList.add("none");
+	} else if(action == "delete" && roleID != 0) {
+		$.post(INCLUDES+"/user_functions.php",{
+			requestType: "deleteRole",
+			roleID: roleID
+		},
+		function(data, status){
+			//get return from PHP
+			var dataCut = parsePostData(data);
+			
+			//check if request is valid
+			if(dataCut == "error" || dataCut == "") {
+				headerNotification(LANG.ERROR_REQUEST_FAILED,"red");
+			} else if(dataCut == "inUse") {
+				headerNotification(LANG.USER_ROLE_EDIT_USED,"red");
+			} else if(dataCut == "success") {
+				redirect(URL+"/settings/user/roles");
+			} else {
+				headerNotification(data,"red");
+			}
+		});
+	} else {
+		headerNotification(LANG.ERROR_REQUEST_FAILED,"red");
+	}
+}
+
 //Create new template of role 
 
 function createNewRole() {

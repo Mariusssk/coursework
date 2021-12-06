@@ -224,6 +224,7 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 		//edit
 		
 			defined("ROLE_EDIT_NOT_FOUND") ? null :  define("ROLE_EDIT_NOT_FOUND", "The role could not be found / The role data could not be loaded");
+			defined("ROLE_EDIT_PRE_DEFINED") ? null :  define("ROLE_EDIT_PRE_DEFINED", "Pre-defined roles can not be edited");
 			defined("ROLE_EDIT_FORM_PLACEHOLDER_NAME") ? null :  define("ROLE_EDIT_FORM_PLACEHOLDER_NAME", "Name");
 		
 		
