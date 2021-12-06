@@ -42,8 +42,8 @@ async function checkCameraAndOpenScanner() {
 	}
 }
 
-function checkCameraAndOpenScanner(type) {
-	checkCameraAndOpen();
+function openScanner(type) {
+	checkCameraAndOpenScanner();
 }
 
 //close scanner
