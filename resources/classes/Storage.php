@@ -108,6 +108,30 @@ class Storage extends SystemClass {
 		return(True);
 	}
 	
+	//Create string of storages
+	
+	function createStorageString() {
+		$post = "";
+		
+		
+		if($this->getTypeID() == 3 OR $this->getTypeID() == 2) {
+			$parent = new Storage;
+			if($parent->loadData($this->getParentID())) {
+				if($this->getTypeID() == 3) {
+					$parentL2 = new Storage;
+					if($parentL2->loadData($parent->getParentID())) {
+						$post .= $parentL2->getName(). " > ";
+					}
+				}
+				$post .= $parent->getName(). " > ";
+			}
+		}
+		
+		$post .= $this->getName();
+		
+		return($post);
+	}
+	
 	
 	
 	//Functions

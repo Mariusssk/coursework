@@ -218,6 +218,12 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 			defined("SCANNER_SCAN_FIND_DATA") ? null :  define("SCANNER_SCAN_FIND_DATA", "Find data");
 			defined("SCANNER_SCAN_DATA_INPUT") ? null :  define("SCANNER_SCAN_DATA_INPUT", "Scan Code");
 			
+		// View data
+			
+			defined("SCANNER_VIEW_TYPE_NOT_VALID") ? null :  define("SCANNER_VIEW_TYPE_NOT_VALID", "The type given ist not valid");
+			defined("SCANNER_VIEW_DATA_NOT_FOUND") ? null :  define("SCANNER_VIEW_DATA_NOT_FOUND", "The system could not find any data for the type and attribute given");
+			
+			
 	//Roles
 		
 		defined("ROLE_LIST_HEADLINE_NAME") ? null :  define("ROLE_LIST_HEADLINE_NAME", "Role Name");

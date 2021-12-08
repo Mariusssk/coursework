@@ -71,3 +71,88 @@
 		.page.roles.roleList .newRoleButton {
 			background-color: green;
 		}
+		
+/* Scan */
+
+	/* Display data */
+	
+		/* grid */
+
+			@media screen and (min-width: 1000px) {
+				.page.scan.displayAttribute .shelfAlignmentContainer .shelfGrid.mobileGrid{
+					display: none;
+				}
+				
+				.page.scan.displayAttribute .shelfAlignmentContainer .openBoxes {
+					display: inline-block;
+				}
+			}
+
+			@media screen and (max-width: 999px) {
+				.page.scan.displayAttribute .shelfAlignmentContainer .openBoxes,
+				.page.scan.displayAttribute .shelfAlignmentContainer .shelfGrid.desktopGrid,
+				.page.scan.displayAttribute .shelfAlignmentContainer .saveGridButton{
+					display: none;
+				}
+
+			}
+
+			.page.scan.displayAttribute .shelfAlignmentContainer .openBoxes {
+				border: 3px solid #383838;
+				width: 200px;
+				float: left;
+				min-height: 40px;
+			}
+
+			.page.scan.displayAttribute .shelfAlignmentContainer .openBoxes .option{
+				padding: 5px;
+				background-color: #2271b1;
+				color: white;
+				border-bottom: 2px solid #383838;
+				text-align: center;
+
+			}
+
+			.page.scan.displayAttribute .shelfAlignmentContainer .shelfGrid {
+				border: 3px solid #383838;
+				display: inline-block;
+				overflow-y: hidden;
+				overflow-x: scroll;
+			}
+
+			.page.scan.displayAttribute .shelfAlignmentContainer .shelfGrid.desktopGrid {
+				min-width: 200px;
+				max-width: calc(100% - 230px);
+				margin-left: 10px;
+			}
+
+			.page.scan.displayAttribute .shelfAlignmentContainer .shelfGrid.mobileGrid{ 
+				max-width: 100%;
+			}
+
+			.page.scan.displayAttribute .shelfAlignmentContainer .shelfGrid .gridRow{
+				height: 100px;
+				white-space:nowrap;
+			}
+
+			.page.scan.displayAttribute .shelfAlignmentContainer .shelfGrid .gridRow .gridBox{
+				height: 100px;
+				width: 100px;
+				border: 1px solid #383838;
+				display: inline-block;
+				line-height: 100px;
+				text-align: center;
+			}
+
+			.page.scan.displayAttribute .shelfAlignmentContainer .shelfGrid .gridRow .gridBox .positionInfo{ 
+				z-index: 2;
+			}
+
+			.page.scan.displayAttribute .shelfAlignmentContainer .shelfGrid .gridRow .gridBox .option{
+				width: 100%;
+				height: 100%;
+				background-color: #2271b1;
+				color: white;
+				display: table;
+				z-index: 5;
+			}

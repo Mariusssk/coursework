@@ -15,11 +15,19 @@ class Item extends SystemClass {
 	
 	//Functions
 	
+	//get all items
+	
 	static function getAll($object = "") {
 		if(empty($object)) {
 			$object = new Item;
 		}
 		return(Parent::getAll($object));
+	}
+	
+	//get actual amount of items in storage
+	
+	function getActualAmount() {
+		return($this->getAmount() - Lend::calculateTotalAmountLend($this->getID()));
 	}
 	
 	
@@ -53,6 +61,22 @@ class Item extends SystemClass {
 		$itemType = new ItemType;
 		if($itemType->loadData($this->getTypeID())) {
 			return($itemType->getName());
+		}
+		return("");
+	}
+	
+	function getStorageName() {
+		$storage = new Storage;
+		if($storage->loadData($this->getStorageID())) {
+			return($storage->getName());
+		}
+		return("");
+	}
+	
+	function getStorageString() {
+		$storage = new Storage;
+		if($storage->loadData($this->getStorageID())) {
+			return($storage->createStorageString());
 		}
 		return("");
 	}

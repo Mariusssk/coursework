@@ -70,6 +70,8 @@ RewriteRule ^scan/$ scanner.php?request=displayScanner [QSA,NC,L]
 RewriteRule ^scan/([A-Z]*)/([0-9]*)$ scanner.php?request=displayScanner&type=$1&attribute=$2 [QSA,NC,L]
 RewriteRule ^scan/display/(item|storage)/([0-9]*)$ scanner.php?request=displayAttribute&type=$1&attribute=$2 [QSA,NC,L]
 
+RewriteRule ^scan/generate/(item|storage)/([0-9]*)$ qr-generator.php?request=generateCode&type=$1&attribute=$2 [QSA,NC,L]
+
 #-----------------------------------------
 
 #Block

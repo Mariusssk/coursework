@@ -294,6 +294,13 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 						$post['action'] = "redirect";
 						$post['URL'] = URL."/scan/display/".$type."/".$item->getID();
 					}
+				} else if($type == "storage") {
+					$storage = new Storage;
+					if($storage->loadData($identifier)) {
+						$post['result'] = "success";
+						$post['action'] = "redirect";
+						$post['URL'] = URL."/scan/display/".$type."/".$storage->getID();
+					}
 				}
 			} 
 			

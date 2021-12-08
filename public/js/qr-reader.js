@@ -12,7 +12,7 @@ var html5QrCode = "";
 
 //check if device has camera, if yes open scanner, if not promt error
 
-async function checkCameraAndOpenScanner() {
+async function checkCameraAndOpenScanner(type) {
 	let stream = null;
 	var constraints = {video: true }
 
@@ -43,7 +43,7 @@ async function checkCameraAndOpenScanner() {
 }
 
 function openScanner(type) {
-	checkCameraAndOpenScanner();
+	checkCameraAndOpenScanner(type);
 }
 
 //close scanner
