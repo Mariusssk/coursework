@@ -33,6 +33,13 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 					$items = Item::getAll();
 				}
 				
+				if(isset($search['storages'])) {
+					$storageList = explode(";",$search['storages']);
+					$storageList = array_filter($storageList);
+				} else {
+					$storageList = array();
+				}
+				
 				$post = array();
 				//load information for each item
 				foreach($items as $tmpItem) {
@@ -68,6 +75,10 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 						}
 						
 						if(isset($search['name']) AND !empty($search['name']) AND strpos(strToUpper($tmpItemArray['name']),strToUpper($search['name'])) === False) {
+							$searchFail = 1;
+						}
+						
+						if(count($storageList) > 0 AND !in_array($item->getStorageID(), $storageList)) {
 							$searchFail = 1;
 						}
 						

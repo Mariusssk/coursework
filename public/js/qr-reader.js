@@ -86,7 +86,6 @@ function findScanData(data = "") {
 				}
 			} else {
 				headerNotification(LANG.SCAN_DECODE_DATA_FAILED,"red");
-				console.log(data);
 			}
 			
 		}

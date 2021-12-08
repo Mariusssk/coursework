@@ -9,7 +9,7 @@ if($session->loggedIn() === True) {
 	
 	//Check if specific reuqest is send
 	
-	$requestAllowed = array("listUser","editUser","listUserRoles","editUserRole");
+	$requestAllowed = array("listUser","editUser","listUserRoles","editUserRole","viewUserRole");
 	if(isset($_GET['request']) AND !empty($_GET['request']) AND in_array($_GET['request'],$requestAllowed)) {
 		$request = $_GET['request'];
 	} else {
@@ -66,60 +66,69 @@ if($session->loggedIn() === True) {
 		} else {
 			include(TEMPLATES."/user/missing_rights.php");
 		}
-	} else if($request == "editUserRole") {
+	} else if($request == "editUserRole" OR $request == "viewUserRole") {
 		if($session->checkRights("edit_user_role") == True) {
 			?>
 			<div class="page role editRole">
 			<?php
 			$role = new UserRole;
 			if(isset($_GET['ID']) AND !empty($_GET['ID']) AND $role->loadData($_GET['ID'])) {
-				if($role->getPreDefined() == 0){
-					?>
-					<div class="row editRoleContainer">
-						<div class="col-12">
-							<input type="text" class="generalInput" value="<?php echo $role->getName();?>" data-input-name="name" placeholder="<?php echo ROLE_EDIT_FORM_PLACEHOLDER_NAME;?>">
+				if($role->getPreDefined() == 1 AND $request == "editUserRole") {
+					$request = "viewUserRole";
+				}
+				
+				$disabled = "";
+				if($request == "viewUserRole") {
+					$disabled = "disabled";
+				}
+				?>
+				<div class="row editRoleContainer">
+					<div class="col-12">
+						<input type="text" class="generalInput" value="<?php echo $role->getName();?>" <?php echo $disabled;?> data-input-name="name" placeholder="<?php echo ROLE_EDIT_FORM_PLACEHOLDER_NAME;?>">
+					</div>
+					<?php
+					$options = $role->getRightOptions();
+				
+					foreach($options as $tmpOption) {
+						?>
+						<div class="col-8 col-md-6 rightName">
+							<?php echo $tmpOption['name'];?>
+						</div>
+						<div class="col-4 col-md-6 rightInput">
+							<?php
+							$checked = "";
+							if($tmpOption['value'] == 1) {
+								$checked = "checked";
+							}
+							?>
+							<input type="checkbox" data-right-name="<?php echo $tmpOption['name'];?>" <?php echo $disabled;?> class="generalCheckbox rightInput" <?php echo $checked;?>>
 						</div>
 						<?php
-						$options = $role->getRightOptions();
-					
-						foreach($options as $tmpOption) {
-							?>
-							<div class="col-8 col-md-6 rightName">
-								<?php echo $tmpOption['name'];?>
-							</div>
-							<div class="col-4 col-md-6 rightInput">
-								<?php
-								$checked = "";
-								if($tmpOption['value'] == 1) {
-									$checked = "checked";
-								}
-								?>
-								<input type="checkbox" class="generalCheckbox" <?php echo $checked;?>>
-							</div>
-							<?php
-						}
-						?>
-						<div class="col-12 col-md-6">
-							<div class="generalButton" onclick="saveRoleData()"><?php echo WORD_SAVE;?></div>
-						</div>
-						<div class="col-12 col-md-6 questionDeleteButton">
-							<div class="generalButton" onclick="deleteRole()"><?php echo WORD_DELETE;?></div>
-						</div>
-						<div class="col-12 deleteButtons none">
-							<div class="generalButton" onclick="deleteRole('delete','<?php echo $role->getID();?>')"><?php echo WORD_DELETE;?></div>
-							<div class="generalButton" onclick="deleteRole('abort')"><?php echo WORD_ABORT;?></div>
-						</div>
-						
-					</div>
-					<?php
-				} else {
+					}
+					if($request == "editUserRole") {
 					?>
-					<br>
-					<div class="center">
-						<h3> <?php echo ROLE_EDIT_PRE_DEFINED;?> </h3>
+					<div class="col-12 col-md-6">
+						<div class="generalButton" onclick="saveRoleData(<?php echo $role->getID();?>)"><?php echo WORD_SAVE;?></div>
+					</div>
+					<div class="col-12 col-md-6 questionDeleteButton">
+						<div class="generalButton" onclick="deleteRole()"><?php echo WORD_DELETE;?></div>
+					</div>
+					<div class="col-12 deleteButtons none">
+						<div class="generalButton" onclick="deleteRole('delete','<?php echo $role->getID();?>')"><?php echo WORD_DELETE;?></div>
+						<div class="generalButton" onclick="deleteRole('abort')"><?php echo WORD_ABORT;?></div>
 					</div>
 					<?php
-				}
+					} else {
+						?>
+					<div class="col-12">
+						<a href="<?php echo URL;?>/settings/user/roles"><div class="generalButton"><?php echo WORD_BACK;?></div></a>
+					</div>
+					<?php
+					}
+					?>
+					
+				</div>
+				<?php
 			} else {
 				?>
 				<br>

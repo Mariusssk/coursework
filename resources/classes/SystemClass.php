@@ -182,7 +182,7 @@ class SystemClass {
 	
 	//Update single values of object to DB
 	
-	protected function updateData($cellName,$value) {
+	function updateData($cellName,$value) {
 		if($this->dataFullyLoaded()){
 			//check if data is or can be NULL
 			

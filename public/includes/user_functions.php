@@ -117,6 +117,49 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 			}
 		}
 		
+		//save role data after editing
+		
+		else if($request == "saveRoleData") {
+			//check user rights
+			if($session->checkRights("edit_user_role") == True) {
+				//load role data
+				$role = new UserRole;
+				if(isset($_POST['roleID']) AND $role->loadData($_POST['roleID'])) {
+					
+					if(isset($_POST['rights']) AND isset($_POST['roleName']) AND !empty($_POST['roleName'])) {
+						
+						//Save role name
+						$rights = $_POST['rights'];
+						$role->setName($_POST['roleName']);
+						if($role->saveData()) {
+							//Save role rights
+							$rightSaveSuccess = True;
+							foreach($rights as $rightKey => $tmpRight) {
+								if(!$role->updateData($rightKey,$tmpRight)) {
+									$rightSaveSuccess = False;
+								}
+							}
+							
+							if($rightSaveSuccess == True) {
+								echo "success";
+							} else {
+								echo "errorSavingRights";
+							}
+							
+						} else {
+							echo "error";
+						}
+					}
+					
+				} else {
+					echo "error";
+				}
+				
+			} else {
+				echo "missingRights";
+			}
+		}
+		
 	} 
 	
 	

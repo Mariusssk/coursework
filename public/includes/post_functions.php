@@ -271,9 +271,17 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 	else if($request == "decodeScanData") {
 		if(isset($_POST['data']) AND !empty($_POST['data'])) {
 			$data = $_POST['data'];
+			$post = array();
 			
+			//Turn URL into decodeable string
+			if(substr($data,0,4) == "http") {
+				$data = substr($data, (strpos($data, "scan/") + 5));
+				$data = str_replace("/","#",$data);
+			}
+			
+			//decode data
 			$data = explode("#",$data);
-			
+		
 			$post = array();
 			
 			if(count($data) == 2) {
@@ -292,6 +300,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 			if(!isset($post['result']) OR empty($post['result'])) {
 				$post['result'] = "error";
 			}
+			
 			
 			echo json_encode($post);
 		} else {

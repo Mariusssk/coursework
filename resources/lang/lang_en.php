@@ -113,6 +113,10 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 		defined("STORAGE_PLACEHOLDER_PARENT") ? null :  define("STORAGE_PLACEHOLDER_PARENT", "Parent");
 		defined("STORAGE_PLACEHOLDER_SELECT") ? null :  define("STORAGE_PLACEHOLDER_SELECT", "Storage");
 		
+	//Item list
+	
+		defined("STORAGE_LIST_STORAGE_NOT_FOUND") ? null :  define("STORAGE_LIST_STORAGE_NOT_FOUND", "The storage could not be found!");
+		
 //Items
 
 	//Overview
@@ -320,6 +324,7 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 	defined("WORD_COMMENTS") ? null :  define("WORD_COMMENTS", "Comments");
 	defined("WORD_TODO_LIST") ? null :  define("WORD_TODO_LIST", "ToDo List");
 	defined("WORD_EVENT") ? null :  define("WORD_EVENT", "Events");
+	defined("WORD_BACK") ? null :  define("WORD_BACK", "Back");
 	
 	defined("WORD_FIRSTNAME") ? null :  define("WORD_FIRSTNAME", "Firstname");
 	defined("WORD_LASTNAME") ? null :  define("WORD_LASTNAME", "Lastname");

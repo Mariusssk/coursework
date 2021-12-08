@@ -29,6 +29,7 @@ RewriteRule ^notifications$ notifications_page.php?request=list [QSA,NC,L]
 RewriteRule ^storage$ storage_page.php?request=overview [QSA,NC,L]
 RewriteRule ^storage/new$ storage_page.php?request=new [QSA,NC,L]
 RewriteRule ^storage/edit/([0-9-]+)$ storage_page.php?request=edit&ID=$1 [QSA,NC,L]
+RewriteRule ^storage/list/([0-9]+)$ storage_page.php?request=listItems&ID=$1 [QSA,NC,L]
 
 
 #Item

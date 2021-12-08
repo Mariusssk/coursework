@@ -31,10 +31,11 @@ function loadStorages() {
 			//run through every item in array
 			for(i = 0; i < Object.keys(data).length;i++) {
 				storages += `
-				<div class="row generalTableContentRow" onclick="viewStorage('`+data[i]['ID']+`')">
-					<div class="td col-6 col-sm-4">`+data[i]['name']+`</div>
-					<div class="td d-none d-sm-block col-sm-4">`+data[i]['parentName']+`</div>
-					<div class="td col-6 col-sm-4">`+data[i]['typeName']+`</div>
+				<div class="row generalTableContentRow">
+					<div class="td col-6 col-sm-4" onclick="viewStorage('`+data[i]['ID']+`')">`+data[i]['name']+`</div>
+					<div class="td col-sm-3 d-none d-sm-block"  onclick="viewStorage('`+data[i]['ID']+`')">`+data[i]['parentName']+`</div>
+					<div class="td col-sm-3 col-4" onclick="viewStorage('`+data[i]['ID']+`')">`+data[i]['typeName']+`</div>
+					<div class="td col-sm-2 col-2" onclick="listStorageItems('`+data[i]['ID']+`')"><i class="fa fa-archive" aria-hidden="true"></i></div>
 				</div>
 				<div class="row"><div class="col-12 hr"><hr></div></div>
 				`;
@@ -48,6 +49,12 @@ function loadStorages() {
 		
 		document.getElementById("storageList").innerHTML = storages;
 	});
+}
+
+//open page listing all items which are in one storage
+
+function listStorageItems(storageID) {
+	redirect(URL+"/storage/list/"+storageID);
 }
 
 //load options for parent elment based on storage type

@@ -9,7 +9,7 @@ if($session->loggedIn() === True) {
 	
 	//Check if specific reuqest is send
 	
-	$requestAllowed = array("overview","new","edit");
+	$requestAllowed = array("overview","new","edit","listItems");
 	if(isset($_GET['request']) AND !empty($_GET['request']) AND in_array($_GET['request'],$requestAllowed)) {
 		$request = $_GET['request'];
 	} else {
@@ -45,11 +45,14 @@ if($session->loggedIn() === True) {
 						<div class="td col-sm-4 col-6">
 							<?php echo STORAGE_OVERVIEW_SEARCH_NAME;?>
 						</div>
-						<div class="td col-sm-4 d-none d-sm-block">
+						<div class="td col-sm-3 d-none d-sm-block">
 							<?php echo STORAGE_OVERVIEW_SEARCH_PARENT_NAME;?>
 						</div>
-						<div class="td col-sm-4 col-6">
+						<div class="td col-sm-3 col-4">
 							<?php echo STORAGE_OVERVIEW_SEARCH_TYPE;?>
+						</div>
+						<div class="td col-sm-2 col-2">
+							<?php echo WORD_ACTION;?>
 						</div>
 					</div>
 					<div class="tableContent" id="storageList">
@@ -172,6 +175,84 @@ if($session->loggedIn() === True) {
 					<script>
 						setUpGrid();
 					</script>
+					<?php
+				}
+			} else {
+				include(TEMPLATES."/user/missing_rights.php");
+			}
+		} else if($request == "listItems") {
+			if($session->checkRights("view_items_specific_storage") == True) {
+				$storage = new Storage;
+				//load data of storage
+				if(isset($_GET['ID']) AND $storage->loadData($_GET['ID'])) {
+					
+					$subStorages = $storage->loadSubStorages();
+					array_push($subStorages, $storage->getID());
+					
+					//create string from storages
+					
+					$storageString = "";
+					
+					foreach($subStorages as $tmpStorage) {
+						if(!empty($storageString)) {$storageString .= ";";}
+						$storageString .= $tmpStorage;
+					}
+					
+					
+					?>
+					<div class="generalTable">
+						<div class="row generalTableSearch">
+							<div class="td col-md-4 col-sm-12">
+								<input type="text" class="generalInput searchInput" data-search-name="name" placeholder="<?php echo ITEM_OVERVIEW_SEARCH_PLACEHOLDER_NAME;?>">
+							</div>
+							<div class="td col-md-4 col-sm-12">
+								<?php echo ItemType::getSelect(array("class"=>"generalSelect searchInput","data"=>array("search-name","type")),0,ITEM_OVERVIEW_SEARCH_PLACEHOLDER_TYPE);?>
+							</div>
+							<div class="td col-md-2 col-sm-12">
+								<div class="generalCheckboxContainer"><?php echo ITEM_OVERVIEW_SEARCH_PLACEHOLDER_CONSUMEABLE;?><input type="checkbox" class="generalCheckbox searchInput" data-search-name="consumable" placeholder="<?php echo ITEM_OVERVIEW_SEARCH_PLACEHOLDER_NAME;?>"></div>
+							</div>
+							<div class="td col-md-2 col-sm-12 d-none d-md-block ">
+								<div class="generalSearchBarButton" onclick="loadItems('view')"> <?php echo WORD_SEARCH;?> </div>
+							</div>
+							<div class="td d-block d-md-none col-12">
+								<div class="generalButton" onclick="loadItems('view')"> <?php echo WORD_SEARCH;?> </div>
+							</div>
+							
+							<input type="hidden" class="generalInput searchInput none" data-search-name="storages" value="<?php echo $storageString;?>">
+						</div>
+						<div class="row generalTableHeader">
+							<div class="td col-sm-4 col-6">
+								<?php echo ITEM_OVERVIEW_SEARCH_PLACEHOLDER_NAME;?>
+							</div>
+							<div class="td col-sm-4 d-none d-sm-block">
+								<?php echo ITEM_OVERVIEW_SEARCH_PLACEHOLDER_TYPE;?>
+							</div>
+							<div class="td col-sm-2 col-3">
+								<?php echo ITEM_OVERVIEW_HEADER_CONSUMEABLE;?>
+							</div>
+							<div class="td col-sm-2 col-3">
+								<?php echo ITEM_OVERVIEW_SEARCH_PLACEHOLDER_AMOUNT;?>
+							</div>
+						</div>
+						<div class="tableContent" id="itemList">
+							<div class="row generalTableContentRow">
+								<div class="td col-12">
+									<?php echo WORD_LOADING;?>
+								</div>
+							</div>
+						</div>
+					</div>
+					<script>
+						//Load items
+						loadItems("view");
+					</script>
+					<?php
+				
+				} else {
+					?>
+					<div class="center">
+						<h3> <?php echo STORAGE_LIST_STORAGE_NOT_FOUND;?> </h3>
+					</div>
 					<?php
 				}
 			} else {

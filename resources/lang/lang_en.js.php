@@ -101,6 +101,7 @@ var LANG = {
 	//User ROles
 	
 	USER_ROLE_EDIT_USED: "This role is still used and hence can not be deleted",
+	USER_ROLE_EDIT_RIGHTS_SAVE_ERROR: "Not all changes could be saved succesfull",
 	
 	//Basic phrases
 	

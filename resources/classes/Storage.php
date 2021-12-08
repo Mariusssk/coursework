@@ -59,20 +59,50 @@ class Storage extends SystemClass {
 		
 	}
 	
-	//check if storage has childs before deleting
+	//create list with all sub storages
 	
-	function checkForChilds() {
+	function loadSubStorages() {
+		$children = $this->getListOfChildren();
+		
+		$childrenList = array();
+		
+		$childrenList = array_merge($childrenList, $children);
+		
+		if(count($children) > 0) {
+			foreach($children as $tmpChildren) {
+				$tmpStorage = new Storage;
+				if($tmpStorage->loadData($tmpChildren)) {
+					if(count($tmpStorage->getListOfChildren()) > 0) {
+						$childrenList = array_merge($childrenList , $tmpStorage->loadSubStorages());
+					}
+				}
+			}
+		}
+		
+		return($childrenList);
+	}
+	
+	//create list of all direct children
+	
+	function getListOfChildren() {
 		//prepare SQL query
 		$sql = "SELECT ".$this->TABLE_NAME."_id FROM ".$this->TABLE_NAME." WHERE ".$this->TABLE_NAME."_parent_id = ?";
 		$sqlType = "i";
 		$sqlParams = array($this->storage_id);
 		
 		//send SQL query
-		$childs = pdSelect($sql,"mysqli",$sqlType,$sqlParams);
+		$children = pdSelect($sql,"mysqli",$sqlType,$sqlParams);
 		
+		$children = $this->mergeResult($children);
 		
+		return($children);
+	}
+	
+	//check if storage has childs before deleting
+	
+	function checkForChilds() {
 		//check if childs are found
-		if(count($childs) == 0) {
+		if(count($this->getListOfChildren()) == 0) {
 			return(False);
 		}
 		return(True);

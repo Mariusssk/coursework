@@ -253,6 +253,9 @@ function loadRoles() {
 					tmpRole += `
 					<div class="tagName td col-sm-4 col-5"><span class="icon generalIcon"><i class="fa fa-check-square" aria-hidden="true"></i></span></div>
 					<div class="td col-sm-2 col-12">
+						<span class="editRole icon generalIcon" onclick="editRole('`+roles[i]['ID']+`')">
+							<i class="fa fa-eye" aria-hidden="true"></i>
+						</span>
 					</div>
 					`;
 				} else {
@@ -348,6 +351,50 @@ function createNewRole() {
 			headerNotification(data,"red");
 		}
 	});
+}
+
+//save data of role after edit
+
+function saveRoleData(roleID) {
+	var rights = {};
+	
+	var rightInputs = document.querySelectorAll(".page.role.editRole .editRoleContainer .generalCheckbox.rightInput");
+	
+	for(var i = 0; i < Object.keys(rightInputs).length; i++) {
+		var rightKey = rightInputs[i].dataset.rightName;
+		var rightValue = rightInputs[i].checked ? 1 : 0;
+		rights[rightKey] = rightValue;
+	}
+	
+	var roleName = document.querySelector(".page.role.editRole .editRoleContainer .generalInput[data-input-name='name']").value;
+
+	if(roleName == "") {
+		headerNotification(LANG.PHRASE_INPUT_EMPTY,"red");
+	} else {
+
+		$.post(INCLUDES+"/user_functions.php",{
+			requestType: "saveRoleData",
+			rights: rights,
+			roleName: roleName,
+			roleID: roleID
+		},
+		function(data, status){
+			//get return from PHP
+			var dataCut = parsePostData(data);
+			
+			//check if request is valid
+			if(dataCut == "error" || dataCut == "") {
+				headerNotification(LANG.ERROR_REQUEST_FAILED,"red");
+			} else if(dataCut == "errorSavingRights") {
+				headerNotification(LANG.USER_ROLE_EDIT_RIGHTS_SAVE_ERROR,"red");
+			} else if(dataCut == "success") {
+				redirect(URL+"/settings/user/roles");
+			} else {
+				headerNotification(data,"red");
+			}
+		});
+		
+	}
 }
 
 

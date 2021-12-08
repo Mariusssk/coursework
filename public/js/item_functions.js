@@ -51,6 +51,8 @@ function loadItems(displayType = "") {
 				items = displayLend(data);
 			} else if(displayType == "addLend") {
 				items = displayAddLend(data);
+			} else if(displayType == "view") {
+				items = displayView(data);
 			} else {
 				items = displayItems(data);
 			}
@@ -81,6 +83,31 @@ function displayItems(data) {
 		}
 		items += `
 		<div class="row generalTableContentRow" onclick="viewItem('`+data[i]['ID']+`')" data-item-id="`+data[i]['ID']+`">
+			<div class="td col-6 col-sm-4">`+data[i]['name']+`</div>
+			<div class="td d-none d-sm-block col-sm-4">`+data[i]['typeName']+`</div>
+			<div class="td col-3 col-sm-2">`+consumeable+`</div>
+			<div class="td col-3 col-sm-2">`+data[i]['actualAmount']+` (`+data[i]['amount']+`)</div>
+		</div>
+		<div class="row"><div class="col-12 hr"><hr></div></div>
+		`;
+	}
+	
+	//return the display data
+	return(items);
+}
+
+function displayView(data) {
+	var items = "";
+	
+	//run through every item in array
+	for(i = 0; i < Object.keys(data).length;i++) {
+		if(data[i]['consumeable'] == "1") {
+			var consumeable = '<i class="fa fa-check" aria-hidden="true"></i>';
+		} else {
+			var consumeable = "";
+		}
+		items += `
+		<div class="row generalTableContentRow">
 			<div class="td col-6 col-sm-4">`+data[i]['name']+`</div>
 			<div class="td d-none d-sm-block col-sm-4">`+data[i]['typeName']+`</div>
 			<div class="td col-3 col-sm-2">`+consumeable+`</div>
