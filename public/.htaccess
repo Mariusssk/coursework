@@ -51,6 +51,12 @@ RewriteRule ^todo/category$ todo_page.php?request=categoryOverview [QSA,NC,L]
 RewriteRule ^todo/category/new$ todo_page.php?request=categoryNew [QSA,NC,L]
 RewriteRule ^todo/category/edit/([0-9-]+)$ todo_page.php?request=categoryEdit&ID=$1 [QSA,NC,L]
 
+#event
+
+RewriteRule ^events$ event_page.php?request=overview [QSA,NC,L]
+RewriteRule ^events/locations$ event_page.php?request=locations [QSA,NC,L]
+RewriteRule ^events/clients$ event_page.php?request=clients [QSA,NC,L]
+
 #Settings
 
 RewriteRule ^settings/user$ user_profile.php?request=personal_data [QSA,NC,L]

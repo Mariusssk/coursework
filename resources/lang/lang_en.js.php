@@ -52,6 +52,13 @@ var LANG = {
 	TODO_LIST_OVERVIEW_REMOVE_ENTRY_ERROR_CHILDREN: "The children of the entry need to be deleted first",
 	TODO_LIST_OVERVIEW_EDIT_LIST_NAME_ERROR: "Pleas put in ToDo List name",
 	
+	//Events
+	
+	EVENTS_CLIENT_LIST_NON_FOUND: "No clients found!",
+	
+	EVENT_CLIENT_LIST_DESCRIPTION_READ_MORE: "Read more",
+	EVENT_CLIENT_LIST_DESCRIPTION_READ_LESS: "Read less",
+	
 	//Tags
 	
 	TAGS_SELECT_NON_FOUND: "No tags found",

@@ -97,7 +97,15 @@ if($session->loggedIn() === True) {
 											<b><?php echo ITEM_EDIT_INPUTNAME_AMOUNT;?>:</b>
 										</div>
 										<div class="col-6">
-											<?php echo $item->getLength();?>
+											<?php 
+											$length = $item->getLength();
+											
+											if(empty($length)) {
+												$length = "N/A";
+											}	
+
+											echo $length;
+											?>
 										</div>
 										<div class="col-6">
 											<?php echo $item->getActualAmount()." (".$item->getAmount().")";?>
@@ -120,7 +128,15 @@ if($session->loggedIn() === True) {
 											<b><?php echo ITEM_EDIT_INPUTNAME_STORAGE;?>:</b>
 										</div>
 										<div class="col-12">
-											<?php echo $item->getStorageString();?>
+											<?php 
+											$storage = $item->getStorageString();
+											
+											if(empty($storage)) {
+												$storage = "N/A";
+											}	
+
+											echo $storage;
+											?>
 										</div>
 									</div>
 								</div>
@@ -130,7 +146,15 @@ if($session->loggedIn() === True) {
 											<b><?php echo ITEM_EDIT_INPUTNAME_DESCRIPTION;?>:</b>
 										</div>
 										<div class="col-12">
-											<?php echo $item->getDescription();?>
+											<?php 
+											$description = $item->getDescription();
+											
+											if(empty($description)) {
+												$description = "N/A";
+											}	
+
+											echo $description;
+											?>
 										</div>
 									</div>
 								</div>
@@ -170,6 +194,17 @@ if($session->loggedIn() === True) {
 							
 							?>
 							<div class="generalTable">
+								<div class="row storageData">
+									<div class="col-12 col-md-6">
+										<b><?php echo SCANNER_VIEW_STORAGE_LOCATION;?>:</b>
+									</div>
+									<div class="col-12 col-md-6">
+										<?php echo $storage->createStorageString();?>
+									</div>
+									<div class="col-12">
+										<hr>
+									</div>
+								</div>
 								<div class="row generalTableSearch">
 									<div class="td col-md-4 col-sm-12">
 										<input type="text" class="generalInput searchInput" data-search-name="name" placeholder="<?php echo ITEM_OVERVIEW_SEARCH_PLACEHOLDER_NAME;?>">

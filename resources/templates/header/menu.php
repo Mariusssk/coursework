@@ -133,18 +133,19 @@ $( document ).ready(function() {
 		</div>
 		<div class="subMenu" data-sub-menu="Events">
 			<div class="menuElement subElement" data-destination="event">
-				<a href="<?php echo URL;?>/event"><?php echo HEADER_MENU_ITEM_EVENT_OVERVIEW;?></a>
+				<a href="<?php echo URL;?>/events"><?php echo HEADER_MENU_ITEM_EVENT_OVERVIEW;?></a>
 			</div>
 			<?php 
-			if($session->checkRights("create_event")) {
-				?><div class="menuElement subElement" data-destination="event/new">
-					<a href="<?php echo URL;?>/event/new"><?php echo HEADER_MENU_ITEM_EVENT_CREATE;?></a>
-				</div><?php
-			}
 			
 			if($session->checkRights("edit_event_locations")) {
 				?><div class="menuElement subElement" data-destination="event/locations">
-					<a href="<?php echo URL;?>/event/locations"><?php echo HEADER_MENU_ITEM_EVENT_LOCATIONS;?></a>
+					<a href="<?php echo URL;?>/events/locations"><?php echo HEADER_MENU_ITEM_EVENT_LOCATIONS;?></a>
+				</div><?php
+			}
+			
+			if($session->checkRights("edit_event_clients")) {
+				?><div class="menuElement subElement" data-destination="event/locations">
+					<a href="<?php echo URL;?>/events/clients"><?php echo HEADER_MENU_ITEM_EVENT_CLIENT;?></a>
 				</div><?php
 			}?>
 			

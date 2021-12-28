@@ -24,6 +24,7 @@ error_reporting(E_ALL);
 	<link rel="stylesheet" href="<?php echo CSS;?>/item.css" type="text/css">
 	<link rel="stylesheet" href="<?php echo CSS;?>/settings.css" type="text/css">
 	<link rel="stylesheet" href="<?php echo CSS;?>/todo_style.css" type="text/css">
+	<link rel="stylesheet" href="<?php echo CSS;?>/event_style.css" type="text/css">
 	
 	<link rel="icon" href="<?php echo IMAGES;?>/aulatechnik_logo_square.jpg">
 </head>
@@ -55,6 +56,7 @@ error_reporting(E_ALL);
 	<script src="<?php echo JS;?>/settings.js"></script>
 	<script src="<?php echo JS;?>/comment_functions.js"></script>
 	<script src="<?php echo JS;?>/tag_functions.js"></script>
+	<script src="<?php echo JS;?>/event_functions.js"></script>
 	<script src="<?php echo JS;?>/qr-reader.js"></script>
 	
 	<script src="<?php echo JS;?>/notification_functions.js"></script>

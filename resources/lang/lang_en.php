@@ -38,6 +38,7 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 			defined("HEADER_MENU_ITEM_EVENT_CREATE") ? null :  define("HEADER_MENU_ITEM_EVENT_CREATE", "Create new");
 			defined("HEADER_MENU_ITEM_EVENT_OVERVIEW") ? null :  define("HEADER_MENU_ITEM_EVENT_OVERVIEW", "Overview");
 			defined("HEADER_MENU_ITEM_EVENT_LOCATIONS") ? null :  define("HEADER_MENU_ITEM_EVENT_LOCATIONS", "Locations");
+			defined("HEADER_MENU_ITEM_EVENT_CLIENT") ? null :  define("HEADER_MENU_ITEM_EVENT_CLIENT", "Clients");
 	
 		//Settings
 			defined("HEADER_MENU_ITEM_SETTINGS_MAIN") ? null :  define("HEADER_MENU_ITEM_SETTINGS_MAIN", "Settings");
@@ -191,6 +192,15 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 		
 		defined("TODO_LISTS__GLOBAL_HEAD_EVENT") ? null :  define("TODO_LISTS__GLOBAL_HEAD_EVENT", "Events");	
 		
+		
+//Events
+
+	//Clients
+	
+		defined("EVENT_CLIENT_LIST_HEADER_NAME") ? null :  define("EVENT_CLIENT_LIST_HEADER_NAME", "Name");
+		defined("EVENT_CLIENT_LIST_HEADER_EXTERNAL") ? null :  define("EVENT_CLIENT_LIST_HEADER_EXTERNAL", "External");
+		defined("EVENT_CLIENT_LIST_HEADER_DESCRIPTION") ? null :  define("EVENT_CLIENT_LIST_HEADER_DESCRIPTION", "Description");
+		
 //Settings
 
 	//personal data
@@ -222,6 +232,10 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 			
 			defined("SCANNER_VIEW_TYPE_NOT_VALID") ? null :  define("SCANNER_VIEW_TYPE_NOT_VALID", "The type given ist not valid");
 			defined("SCANNER_VIEW_DATA_NOT_FOUND") ? null :  define("SCANNER_VIEW_DATA_NOT_FOUND", "The system could not find any data for the type and attribute given");
+			
+			//Storage
+			
+				defined("SCANNER_VIEW_STORAGE_LOCATION") ? null :  define("SCANNER_VIEW_STORAGE_LOCATION", "Location");
 			
 			
 	//Roles
