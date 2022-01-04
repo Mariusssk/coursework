@@ -128,7 +128,7 @@ $( document ).ready(function() {
 	<?php
 	if($session->checkRights("view_all_events") OR $session->checkRights("view_own_events")) {
 	?>
-		<div class="menuElement" data-sub-menu-parent="Events" data-destination="event">
+		<div class="menuElement" data-sub-menu-parent="Events" data-destination="events">
 			<a href="<?php echo URL;?>/events">Events</a>
 		</div>
 		<div class="subMenu" data-sub-menu="Events">
@@ -138,13 +138,13 @@ $( document ).ready(function() {
 			<?php 
 			
 			if($session->checkRights("edit_event_locations")) {
-				?><div class="menuElement subElement" data-destination="event/locations">
+				?><div class="menuElement subElement" data-destination="events/locations">
 					<a href="<?php echo URL;?>/events/locations"><?php echo HEADER_MENU_ITEM_EVENT_LOCATIONS;?></a>
 				</div><?php
 			}
 			
 			if($session->checkRights("edit_event_clients")) {
-				?><div class="menuElement subElement" data-destination="event/locations">
+				?><div class="menuElement subElement" data-destination="events/clients">
 					<a href="<?php echo URL;?>/events/clients"><?php echo HEADER_MENU_ITEM_EVENT_CLIENT;?></a>
 				</div><?php
 			}?>

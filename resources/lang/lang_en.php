@@ -201,6 +201,12 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 		defined("EVENT_CLIENT_LIST_HEADER_EXTERNAL") ? null :  define("EVENT_CLIENT_LIST_HEADER_EXTERNAL", "External");
 		defined("EVENT_CLIENT_LIST_HEADER_DESCRIPTION") ? null :  define("EVENT_CLIENT_LIST_HEADER_DESCRIPTION", "Description");
 		
+		defined("EVENT_CLIENT_NEW_TEMPLATE_NAME") ? null :  define("EVENT_CLIENT_NEW_TEMPLATE_NAME", "New client");
+		
+	//Locations
+	
+		defined("EVENT_LOCATION_NEW_TEMPLATE_NAME") ? null :  define("EVENT_LOCATION_NEW_TEMPLATE_NAME", "New location");
+		
 //Settings
 
 	//personal data

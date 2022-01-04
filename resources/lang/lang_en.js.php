@@ -59,6 +59,12 @@ var LANG = {
 	EVENT_CLIENT_LIST_DESCRIPTION_READ_MORE: "Read more",
 	EVENT_CLIENT_LIST_DESCRIPTION_READ_LESS: "Read less",
 	
+	EVENT_CLIENT_EDIT_NAME_EMPTY: "The client must have a name",
+	
+	EVENT_DELETE_STILL_USED: "This object is still used and hence can not be deleted",
+	
+	EVENTS_LOCATION_LIST_NON_FOUND: "No locations found!",
+	
 	//Tags
 	
 	TAGS_SELECT_NON_FOUND: "No tags found",

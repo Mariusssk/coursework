@@ -32,7 +32,7 @@ if($session->loggedIn() === True) {
 							<input type="text" class="generalInput searchInput" data-search-name="name" placeholder="<?php echo EVENT_CLIENT_LIST_HEADER_NAME;?>">
 						</div>
 						<div class="td col-md-2 col-sm-12">
-								<div class="generalCheckboxContainer"><?php echo EVENT_CLIENT_LIST_HEADER_EXTERNAL;?><input type="checkbox" class="generalCheckbox searchInput" data-search-name="external" placeholder="<?php echo ITEM_OVERVIEW_SEARCH_PLACEHOLDER_NAME;?>"></div>
+								<div class="generalCheckboxContainer"><?php echo EVENT_CLIENT_LIST_HEADER_EXTERNAL;?><input type="checkbox" class="generalCheckbox searchInput" data-search-name="external"></div>
 							</div>
 						<div class="td d-none d-md-block col-md-3">
 							<div class="generalSearchBarButton" onclick="loadClientList()"> <?php echo WORD_SEARCH;?> </div>
@@ -41,10 +41,10 @@ if($session->loggedIn() === True) {
 							<div class="generalButton" onclick="loadClientList()"> <?php echo WORD_SEARCH;?> </div>
 						</div>
 						<div class="td d-none d-md-block col-md-3">
-							<div class="generalSearchBarButton createNewToDoBtn" onclick="createNewClient()"> <?php echo WORD_NEW;?> </div>
+							<div class="generalSearchBarButton createNewToDoBtn" onclick="createNew('client')"> <?php echo WORD_NEW;?> </div>
 						</div>
 						<div class="td d-block d-md-none col-12">
-							<div class="generalButton createNewToDoBtn" onclick="createNewClient()"> <?php echo WORD_NEW;?> </div>
+							<div class="generalButton createNewToDoBtn" onclick="createNew('client')"> <?php echo WORD_NEW;?> </div>
 						</div>
 					</div>
 					<div class="row generalTableHeader">
@@ -77,6 +77,107 @@ if($session->loggedIn() === True) {
 			} else {
 				include(TEMPLATES."/user/missing_rights.php");
 			}
+		} else if($request == "locations") {
+			if($session->checkRights("edit_event_locations") == True) {
+				//Load list of all event location
+				?>
+				<div class="generalTable">
+					<div class="row generalTableSearch">
+						<div class="td col-md-6 col-sm-12">
+							<input type="text" class="generalInput searchInput" data-search-name="name" placeholder="<?php echo EVENT_CLIENT_LIST_HEADER_NAME;?>">
+						</div>
+						<div class="td d-none d-md-block col-md-3">
+							<div class="generalSearchBarButton" onclick="loadLocationList()"> <?php echo WORD_SEARCH;?> </div>
+						</div>
+						<div class="td d-block d-md-none col-12">
+							<div class="generalButton" onclick="loadLocationList()"> <?php echo WORD_SEARCH;?> </div>
+						</div>
+						<div class="td d-none d-md-block col-md-3">
+							<div class="generalSearchBarButton createNewToDoBtn" onclick="createNew('location')"> <?php echo WORD_NEW;?> </div>
+						</div>
+						<div class="td d-block d-md-none col-12">
+							<div class="generalButton createNewToDoBtn" onclick="createNew('location')"> <?php echo WORD_NEW;?> </div>
+						</div>
+					</div>
+					<div class="row generalTableHeader">
+						<div class="td col-12 col-md-5">
+							<?php echo EVENT_CLIENT_LIST_HEADER_NAME;?>
+						</div>
+						<div class="td col-12 col-md-5">
+							<?php echo EVENT_CLIENT_LIST_HEADER_DESCRIPTION;?>
+						</div>
+						<div class="td col-12 col-md-2">
+							<?php echo WORD_ACTION;?>
+						</div>
+					</div>
+					<div class="tableContent" id="locationList">
+						<div class="row generalTableContentRow">
+							<div class="td col-12">
+								<?php echo WORD_LOADING;?>
+							</div>
+						</div>
+					</div>
+				</div>
+				<script>
+					//load all clients
+					loadLocationList();
+				</script>
+				<?php
+			} else {
+				include(TEMPLATES."/user/missing_rights.php");
+			}
+		} else if($request == "overview") {
+			//display overview of all events
+			$events = Event::createTimeListAllEvents();
+			
+			?>
+			<div class="eventsContainer">
+			<?php
+				foreach($events as $tmpCategoryName => $tmpEvents) {
+					?>
+					<div class="eventCategoryContainer">
+						<div class="categoryHeader">
+							test
+						</div>
+						<div class="categoryContent">
+							<?php
+							foreach($tmpEvents as $tmpEvent) {
+								$event = new Event;
+								if($event->loadData($tmpEvent)) {
+									?>
+									<div class="container event">
+										<div class="eventTags row">
+											
+										</div>
+										<div class="eventName">
+											<?php echo $event->getName();?>
+										</div>
+										<div class="eventTimes row">
+											<div class="col-6  ">
+												--
+											</div>
+											<div class="col-6 endTime">
+												--
+											</div>
+											<div class="col-6 startTime">
+												<?php echo $event->getDisplayTime("start");?>
+											</div>
+											<div class="col-6 endTime">
+												<?php echo $event->getDisplayTime("end");?>
+											</div>
+										</div>
+									</div>
+									<?php
+								}
+							}
+							?>
+						</div>
+					</div>
+					<?php
+				}
+			?>
+			</div>
+			<?php
 		}
 		?>
 	</div>

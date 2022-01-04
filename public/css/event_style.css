@@ -1,24 +1,85 @@
 /* Events */
 
-	/* Clients */
-	
-		/* List */
+	/* Clients / Locations */
 		
-			.page.event.clients .descriptionButton {
-				cursor: pointer;
-				color: blue;
-				text-decoration: underline;
-			}
-			
-			.page.event.clients .descriptionFull {
-				white-space: pre-wrap;
-			}
-			
-			.page.event.clients .actionButtons {
-				text-align: center;
-			}
-			
-			.page.event.clients .actionButtons .icon {
-				margin: 0 5px;
-				cursor: pointer;
-			}
+		.page.event.clients .descriptionButton,
+		.page.event.locations .descriptionButton {
+			cursor: pointer;
+			color: blue;
+			text-decoration: underline;
+		}
+		
+		.page.event.clients .descriptionFull,
+		.page.event.locations .descriptionFull {
+			white-space: pre-wrap;
+		}
+		
+		.page.event.clients .actionButtons,
+		.page.event.locations .actionButtons {
+			text-align: center;
+		}
+		
+		.page.event.clients .actionButtons .icon, 
+		.page.event.locations .actionButtons .icon {
+			margin: 0 5px;
+			cursor: pointer;
+		}
+		
+	/* Events Overview */
+	
+		.page.event.overview {
+			height: 100%;
+		}
+	
+		.page.event.overview .eventsContainer {
+			overflow-y: hidden;
+			overflow-x: auto;
+			height: 100%;
+			width: 100%;
+			white-space: nowrap;
+		}
+		
+		.page.event.overview .eventsContainer .eventCategoryContainer {
+			height: calc(100% - 20px);
+			width: 350px;
+			display: inline-block;
+			background-color: #d4d4d4;
+			border-radius: 5px;
+			vertical-align: top;
+		}
+		
+		.page.event.overview .eventsContainer .eventCategoryContainer .categoryHeader {
+			border-top-left-radius: 5px;
+			border-top-right-radius: 5px;
+			height: 40px;
+			width: 350px;
+			background-color: #1d2327;
+			color: white;
+			padding: 5px;
+			font-weight: bold;
+		}
+		
+		.page.event.overview .eventsContainer .eventCategoryContainer .categoryContent {
+			word-wrap: break-word;
+			overflow-y: auto;
+			height: calc(100% - 40px);
+		}
+		
+		.page.event.overview .eventsContainer .eventCategoryContainer .categoryContent .event {
+			margin: 5px;
+			padding: 5px;
+			border-radius: 5px;
+			width: calc(100% - 10px);
+			background-color: white;
+			cursor: pointer;
+		}
+		
+		.page.event.overview .eventsContainer .eventCategoryContainer .categoryContent .event .eventTags {
+			width: 89%;
+			margin-left: 5%;
+		}
+		
+		.page.event.overview .eventsContainer .eventCategoryContainer .categoryContent .event .eventTimes .endTime {
+			text-align: right;
+		}
+		

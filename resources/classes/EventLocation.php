@@ -1,12 +1,12 @@
 <?php
 
-class EventClient extends ObjectType {
+class EventLocation extends ObjectType {
 	
-	protected $event_client_id, $name, $description, $external;
+	protected $event_location_id, $name, $description;
 	
 	function __construct() {
 		//Name of the table
-		$this->TABLE_NAME = "event_client";
+		$this->TABLE_NAME = "event_location";
 		
 		array_push($this->NULL_VAR, "description");
 	}
@@ -23,7 +23,7 @@ class EventClient extends ObjectType {
 	//check if event client is used
 	
 	function checkIfUsed() {
-		if(count(Event::selectAllEventsWithClient($this->getID())) > 0) {
+		if(count(Event::selectAllEventsWithLocation($this->getID())) > 0) {
 			return(True);
 		}
 		return(False);
@@ -32,16 +32,13 @@ class EventClient extends ObjectType {
 	//get functions
 	
 	function getID() {
-		return($this->event_client_id);
+		return($this->event_location_id);
 	}
 	
 	function getName() {
 		return($this->name);
 	}
 
-	function getExternal() {
-		return($this->external);
-	}
 	
 	function getDescription() {
 		return($this->description);
@@ -61,13 +58,6 @@ class EventClient extends ObjectType {
 		$this->description = $value;
 		return(True);
 	}
-	
-	function setExternal($value) {
-		if($value == 0 OR $value == 1) {
-			$this->external = $value;
-			return(True);
-		}
-		return(False);
-	}
+
 	
 }
