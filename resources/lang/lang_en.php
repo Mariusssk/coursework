@@ -206,7 +206,16 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 	//Locations
 	
 		defined("EVENT_LOCATION_NEW_TEMPLATE_NAME") ? null :  define("EVENT_LOCATION_NEW_TEMPLATE_NAME", "New location");
+	
+	//Overview
 		
+		defined("EVENT_OVERVIEW_CONTAINER_STARTTIME") ? null :  define("EVENT_OVERVIEW_CONTAINER_STARTTIME", "From");
+		defined("EVENT_OVERVIEW_CONTAINER_ENDTIME") ? null :  define("EVENT_OVERVIEW_CONTAINER_ENDTIME", "Until");
+		defined("EVENT_OVERVIEW_CONTAINER_LOCATION") ? null :  define("EVENT_OVERVIEW_CONTAINER_LOCATION", "Location");
+		defined("EVENT_OVERVIEW_CONTAINER_CLIENT") ? null :  define("EVENT_OVERVIEW_CONTAINER_CLIENT", "Client");
+		defined("EVENT_OVERVIEW_CONTAINER_EXTERNAL") ? null :  define("EVENT_OVERVIEW_CONTAINER_EXTERNAL", "external");
+	
+	
 //Settings
 
 	//personal data

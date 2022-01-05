@@ -83,6 +83,13 @@ class Event extends ObjectType {
 		return($eventList);
 	}
 	
+	//load all tags for this event
+	
+	function loadTags() {
+		$tags = TagAssignment::loadTagsByAttribute(1, $this->getID());
+		return($tags);
+	}
+	
 	//get functions
 	
 	function getID() {
@@ -93,6 +100,43 @@ class Event extends ObjectType {
 		return($this->name);
 	}
 	
+	function getLocationID() {
+		return($this->event_location_id);
+	}
+	
+	//load location to get location name
+	
+	function getLocationName() {
+		$location = new EventLocation;
+		if(!empty($this->getLocationID()) AND $location->loadData($this->getLocationID())) {
+			return($location->getName());
+		}
+		return("");
+	}
+	
+	function getClientID() {
+		return($this->event_client_id);
+	}
+	
+	//load client to get client name
+	
+	function getClientName() {
+		$client = new EventClient;
+		if(!empty($this->getClientID()) AND $client->loadData($this->getClientID())) {
+			return($client->getName());
+		}
+		return("");
+	}
+	
+	//load client to get client extern
+	
+	function getClientExternal() {
+		$client = new EventClient;
+		if(!empty($this->getClientID()) AND $client->loadData($this->getClientID())) {
+			return($client->getExternal());
+		}
+		return("");
+	}
 	
 	//get start/end time of event
 	//generate end time if not set

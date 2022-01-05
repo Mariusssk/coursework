@@ -144,20 +144,32 @@ if($session->loggedIn() === True) {
 							foreach($tmpEvents as $tmpEvent) {
 								$event = new Event;
 								if($event->loadData($tmpEvent)) {
+									$tags = $event->loadTags();
+									$client = $event->getClientName();
+									$location = $event->getLocationName();
 									?>
 									<div class="container event">
 										<div class="eventTags row">
-											
+											<?php
+											foreach($tags as $tmpTag) {
+												$tag = new Tag;
+												if($tag->loadData($tmpTag)) {
+													?>
+													<div class="col tag" style="background-color: <?php echo $tag->getColour();?>"> &nbsp; </div>
+													<?php
+												}
+											}
+											?>
 										</div>
 										<div class="eventName">
 											<?php echo $event->getName();?>
 										</div>
 										<div class="eventTimes row">
 											<div class="col-6  ">
-												--
+												<?php echo EVENT_OVERVIEW_CONTAINER_STARTTIME;?>
 											</div>
 											<div class="col-6 endTime">
-												--
+												<?php echo EVENT_OVERVIEW_CONTAINER_ENDTIME;?>
 											</div>
 											<div class="col-6 startTime">
 												<?php echo $event->getDisplayTime("start");?>
@@ -165,6 +177,31 @@ if($session->loggedIn() === True) {
 											<div class="col-6 endTime">
 												<?php echo $event->getDisplayTime("end");?>
 											</div>
+											<?php
+											if(!empty($location)) {
+											?>
+											<div class="col-12">
+												<?php echo EVENT_OVERVIEW_CONTAINER_LOCATION;?>
+											</div>
+											<div class="col-12">
+												<?php echo $location;?>
+											</div>
+											<?php
+											}
+											?>
+											<?php
+											if(!empty($client)) {
+											?>
+											<div class="col-12">
+												<?php echo EVENT_OVERVIEW_CONTAINER_CLIENT;?>
+											</div>
+											<div class="col-12">
+												<?php echo $client;?>
+												<?php if($event->getClientExternal() == 1) echo " (".EVENT_OVERVIEW_CONTAINER_EXTERNAL.")";?>
+											</div>
+											<?php
+											}
+											?>
 										</div>
 									</div>
 									<?php
