@@ -97,16 +97,20 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		) {
 			if($_POST['type'] == "todoList") {
 				$type = 3;
+			} else if($_POST['type'] == "event") {
+				$type = 1;
 			} else {
 				$type = 0;
 			}
 			
 			$todo = new ToDoList;
+			$event = new Event;
 			
 			if(
 				$type != 0 AND
 				(
-					($type == 3 AND $todo->loadData($_POST['attributeID']))
+					($type == 3 AND $todo->loadData($_POST['attributeID'])) OR 
+					($type == 1 AND $event->loadData($_POST['attributeID']))
 				)
 			) {
 				$comments = Comment::loadCommentsForTypeAndAttribute($type, $_POST['attributeID']);
@@ -148,6 +152,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 	
 	else if($request == "saveNewComment") {
 		$todo = new ToDoList;
+		$event = new Event;
 		
 		$type = 0;
 
@@ -155,6 +160,8 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 
 			if($_POST['type'] == "todoList") {
 				$type = 3;
+			}else if($_POST['type'] == "event") {
+				$type = 1;
 			}
 		
 		}
@@ -162,7 +169,8 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		if(
 			isset($_POST['attributeID']) AND
 			(
-				($type == 3 AND $todo->loadData($_POST['attributeID']))
+				($type == 3 AND $todo->loadData($_POST['attributeID'])) OR 
+				($type == 1 AND $event->loadData($_POST['attributeID']))
 			) AND
 			isset($_POST['comment']) AND !empty($_POST['comment'])
 		) {
@@ -192,6 +200,8 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 				
 				if($comment->getTypeID() == 3) {
 					$post['type'] = "todoList";
+				} else if($comment->getTypeID() == 1) {
+					$post['type'] = "event";
 				}
 				
 				if($comment->saveData()) {
@@ -211,6 +221,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 	
 	else if($request == "toggleCommentNotifications") {
 		$todo = new ToDoList;
+		$event = new Event;
 		
 		$type = 0;
 
@@ -218,14 +229,16 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 
 			if($_POST['type'] == "todoList") {
 				$type = 3;
+			} else if($_POST['type'] == "event") {
+				$type = 1;
 			}
 		
 		}
-		
 		if(
 			isset($_POST['attributeID']) AND
 			(
-				($type == 3 AND $todo->loadData($_POST['attributeID']))
+				($type == 3 AND $todo->loadData($_POST['attributeID'])) OR 
+				($type == 1 AND $event->loadData($_POST['attributeID']))
 			)
 		) {
 			$currentState = NotificationRequest::checkIfRequestActivated($session->getSessionUserID(), $type, $_POST['attributeID']);

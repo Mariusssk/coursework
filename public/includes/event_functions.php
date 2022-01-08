@@ -265,7 +265,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 				$event = new Event;
 				
 				$event->setName(EVENT_CREATION_TEMPLATE_NAME);
-				$event->setStartTime("1000-01-01");
+				$event->setStartTime("1000-01-01","00:00");
 				
 				if($event->createNewData()) {
 					echo "success";
@@ -393,6 +393,57 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 					if($responsible->deleteData()) {
 						echo "success";
 					}
+				} else {
+					echo "missingRights";
+				}
+			} else {
+				echo "error";
+			}
+			
+		}
+		
+		//save event data after it was editied
+		
+		else if($request == "saveEventData") {
+			$event = new Event;
+			
+			if(
+				isset($_POST['eventID']) AND $event->loadData($_POST['eventID']) 
+			) {
+				
+				if($event->checkRights($session, "edit")) {
+					
+					$name = "";
+					$locationID = 0;
+					$clientID = 0;
+					$startDate = "";
+					$endDate = "";
+					$startTime = "";
+					$endTime = "";
+					$description = "";
+					
+					$dataValues = ["name","locationID","clientID","startDate","endDate","startTime","endTime","description"];
+					
+					foreach($dataValues as $tmpValue) {
+						if(isset($_POST[$tmpValue])) {
+							${$tmpValue} = $_POST[$tmpValue];
+						}
+					}
+					
+					
+					if(
+						$event->setName($name) AND
+						$event->setLocation($locationID) AND
+						$event->setClient($clientID) AND
+						$event->setStartTime($startDate,$startTime) AND
+						$event->setEndTime($endDate, $endTime) AND
+						$event->setDescription($description) AND
+						$event->saveData()
+					) {
+						echo "success";
+					}
+					
+					
 				} else {
 					echo "missingRights";
 				}

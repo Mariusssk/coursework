@@ -668,3 +668,81 @@ function deleteEventResponsible(userID, eventID) {
 		}
 	});
 }
+
+//save edited event data
+
+function saveEventData(eventID) {
+	
+	var container = document.querySelector(".page.event.editEvent .editEventContainer");
+	
+	var name = container.querySelector(".dataInput[data-input-name='name']").value;
+	var locationID = container.querySelector(".dataInput[data-input-name='location']").value;
+	var clientID = container.querySelector(".dataInput[data-input-name='client']").value;
+	var startDate = container.querySelector(".dataInput[data-input-name='startDate']").value;
+	var endDate = container.querySelector(".dataInput[data-input-name='endDate']").value;
+	var startTime = container.querySelector(".dataInput[data-input-name='startTime']").value;
+	var endTime = container.querySelector(".dataInput[data-input-name='endTime']").value;
+	var description = container.querySelector(".dataInput[data-input-name='description']").value;
+	
+
+	if(startDate == "" | startTime == "" | name == "") {
+		headerNotification(LANG.EVENTS_EDIT_MANDATORY_EMPTY,"red");
+	} else {
+		//send data to PHP
+		$.post(INCLUDES+"/event_functions.php",{
+			requestType: "saveEventData",
+			eventID: eventID,
+			name: name,
+			locationID: locationID,
+			clientID: clientID,
+			startDate: startDate,
+			endDate: endDate,
+			startTime: startTime,
+			endTime: endTime,
+			description: description
+		},
+		function(data, status){
+			var options = "";
+			var dataCut = parsePostData(data);
+			//check if request is valid
+			if(dataCut == "error" || dataCut == "") {
+				headerNotification(LANG.ERROR_REQUEST_FAILED,"red");
+			} else if(dataCut == "missingRights") {
+				headerNotification(LANG.USER_RIGHTS_MISSING,"red");
+			} else if(dataCut == "success") {
+				headerNotification(LANG.PHRASE_SAVED_SUCCESS,"green");
+			} else {
+				console.log(data);
+			}
+		});
+	}
+	
+}
+
+//toggle comment notifications for event
+
+//toggle notifications for todo list
+
+function toggleEventNotifications(type, attributeID, currentState) {
+	
+	var overlay = document.querySelector(".page.event.editEvent");
+	
+	var bellContainer = overlay.querySelector(".bellContainer");
+				
+	var notificationsBell = "";
+	
+	notificationsBell += `<span class="onclick generalIcon" onclick="toggleEventNotifications('event','`+attributeID+`',`+!currentState+`)">`;
+	
+	if(currentState == false) {
+		notificationsBell += `<i class="fa fa-bell" aria-hidden="true"></i>`;
+	} else {
+		notificationsBell += `<i class="fa fa-bell-slash" aria-hidden="true"></i>`;
+	}
+	
+	notificationsBell += `</span>`;
+	
+	toggleCommentNotifications(type, attributeID, !currentState);
+	
+	bellContainer.innerHTML = notificationsBell;
+}
+

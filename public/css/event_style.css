@@ -107,4 +107,8 @@
 		.page.event.editEvent .editEventContainer .addResposibleContainer{
 			margin-top: 10px;
 		}
+		.page.event.editEvent .editEventContainer .commentsHeadline h4 {
+			display: inline-block;
+			margin-right: 10px;
+		}
 		

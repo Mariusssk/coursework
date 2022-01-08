@@ -236,6 +236,16 @@ class Event extends ObjectType {
 		return("");
 	}
 	
+	function getDescription() {
+		return($this->description);
+	}
+	
+	//create url
+	
+	function getURL() {
+		return(URL."/events/edit/".$this->getID());
+	}
+	
 	//set functions
 	
 	
@@ -247,12 +257,53 @@ class Event extends ObjectType {
 		return(False);
 	}
 	
-	function setStartTime($value) {
-		if(!empty($value)) {
-			$date = new DateTime($value);
+	function setLocation($value) {
+		$location = new EventLocation;
+		if($location->loadData($value) OR $value === "") {
+			$this->event_location_id = $value;
+			return(True);
+		} else if(empty($value) OR $value == 0) {
+			$this->event_location_id = "";
+			return(True);
+		}
+		return(False);
+	}
+	
+	function setClient($value) {
+		$client = new EventClient;
+		if($client->loadData($value) OR $value === "") {
+			$this->event_client_id = $value;
+			return(True);
+		} else if(empty($value) OR $value == 0) {
+			$this->event_client_id = "";
+			return(True);
+		}
+		return(False);
+	}
+	
+	function setStartTime($date,$time) {
+		if(!empty($date) AND !empty($time)) {
+			$date = new DateTime($date." ".$time);
 			$this->start_time = $date->format("Y-m-d H:i:s");
 			return(True);
 		}
 		return(False);
+	}
+	
+	function setEndTime($date,$time) {
+		if(!empty($date) AND !empty($time)) {
+			$date = new DateTime($date." ".$time);
+			$this->end_time = $date->format("Y-m-d H:i:s");
+			return(True);
+		} else if(empty($date) AND empty($time)) {
+			$this->end_time = "";
+			return(True);
+		}
+		return(False);
+	}
+	
+	function setDescription($value) {
+		$this->description = $value;
+		return(True);
 	}
 }

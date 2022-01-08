@@ -182,6 +182,11 @@ class NotificationRequest extends SystemClass {
 			if($todo->loadData($this->getAttributeID())) {
 				return($todo->getName());
 			}
+		} else if($this->getAttributeTypeID() == 1) {
+			$event = new Event;
+			if($event->loadData($this->getAttributeID())) {
+				return($event->getName());
+			}
 		}
 		return("");
 	}

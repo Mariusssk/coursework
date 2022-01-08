@@ -60,6 +60,11 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 					
 					if($attributeTypeID == 1) {
 						$notificationArray['type'] = "event";
+						$event = new Event;
+						if($event->loadData($notification->getAttributeID())) {
+							$notificationArray['name'] = $event->getName();
+							$notificationArray['URL'] = $event->getURL();
+						}
 					} else if($attributeTypeID == 3) {
 						$notificationArray['type'] = "todoList";
 						$todo = new ToDoList;
@@ -123,7 +128,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 						if($request->getAttributeTypeID() == 3) {
 							$tmpArray['type'] = "todoList";
 						} else if($request->getAttributeTypeID() == 1){
-							$tmpArray['type'] = "even";
+							$tmpArray['type'] = "event";
 						} else {
 							$tmpArray['type'] = "";
 						}

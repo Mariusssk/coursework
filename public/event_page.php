@@ -244,10 +244,10 @@ if($session->loggedIn() === True) {
 							<input class="generalInput dataInput" type="text" data-input-name="name" value="<?php echo $event->getName();?>" placeholder="<?php echo EVENT_EDIT_PLACEHOLDER_NAME;?>">
 						</div>
 						<div class="col-12 col-md-6 inputRow">
-							<?php echo EventLocation::getSelect(["class" => "generalSelect dataInput", "attribute" => ["input-name", "location"]],$event->getLocationID(),EVENT_EDIT_PLACEHOLDER_LOCATION);?>
+							<?php echo EventLocation::getSelect(["class" => "generalSelect dataInput", "data" => ["input-name", "location"]],$event->getLocationID(),EVENT_EDIT_PLACEHOLDER_LOCATION);?>
 						</div>
 						<div class="col-12 col-md-6 inputRow">
-							<?php echo EventClient::getSelect(["class" => "generalSelect dataInput", "attribute" => ["input-name", "client"]],$event->getClientID(),EVENT_EDIT_PLACEHOLDER_CLIENT);?>
+							<?php echo EventClient::getSelect(["class" => "generalSelect dataInput", "data" => ["input-name", "client"]],$event->getClientID(),EVENT_EDIT_PLACEHOLDER_CLIENT);?>
 						</div>
 						<div class="col-12 col-md-6 inputRow">
 							<?php echo EVENT_EDIT_PLACEHOLDER_STARTDATE;?>:<br>
@@ -267,13 +267,12 @@ if($session->loggedIn() === True) {
 						</div>
 						<div class="col-12 inputRow">
 							<?php echo EVENT_EDIT_PLACEHOLDER_DESCRIPTION;?>:<br>
-							<textarea class="generalTextarea dataInput" data-input-name="description">
-							</textarea>
+							<textarea class="generalTextarea dataInput" data-input-name="description"><?php echo $event->getDescription();?></textarea>
 						</div>
 						<div class="col-12 inputRow buttonConatiner">
 							<div class="row saveButtonBox">
 								<div class="col-12 col-md-6">
-									<div class="generalButton" onclick="saveEventData('<?php $event->getID();?>')"> <?php echo WORD_SAVE;?> </div>
+									<div class="generalButton" onclick="saveEventData('<?php echo $event->getID();?>')"> <?php echo WORD_SAVE;?> </div>
 								</div>
 								<div class="col-12 col-md-6">
 									<div class="generalButton" onclick="deleteEvent('','openForm')"> <?php echo WORD_DELETE;?> </div>
@@ -383,8 +382,28 @@ if($session->loggedIn() === True) {
 							</div>
 						<?php
 						}
+						
+						$notificationsActive = NotificationRequest::checkIfRequestActivated($session->getSessionUserID(),1,$event->getID());
+						
+						$active = "false";
+						$bell = '<i class="fa fa-bell-slash" aria-hidden="true"></i>';
+						if($notificationsActive == True) {
+							$active = "true";
+							$bell =  '<i class="fa fa-bell" aria-hidden="true"></i>';
+						}
 						?>
+						<div class="col-12">
+							<hr class="hr">
+						</div>
+						<div class="col-12 commentsHeadline">
+							<span><h4><?php echo WORD_COMMENTS;?></h4> <span class="bellContainer"><span class="generalIcon onclick" onclick="toggleEventNotifications('event','<?php echo $event->getID();?>',<?php echo $active;?>)"><?php echo $bell;?></span></span></span>
+						</div>
+						<div class="col-12" id="commentContainer">
+						</div>
 					</div>
+					<script>
+						loadCommentSection("event", <?php echo $event->getID();?>,"commentContainer");
+					</script>
 					<?php
 				} else {
 					include(TEMPLATES."/user/missing_rights.php");

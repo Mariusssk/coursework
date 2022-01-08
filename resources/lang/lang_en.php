@@ -241,6 +241,7 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 		
 		defined("EVENT_EDIT_HEADLINE_TAGS") ? null :  define("EVENT_EDIT_HEADLINE_TAGS", "Tags");
 		defined("EVENT_EDIT_HEADLINE_RESPONSIBLES") ? null :  define("EVENT_EDIT_HEADLINE_RESPONSIBLES", "Event responsibles");
+		
 	
 //Settings
 
