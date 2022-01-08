@@ -485,4 +485,186 @@ function saveLocationData(locationID) {
 	}
 }
 
+//create new template event
 
+function createNewEvent() {
+	
+	//send data to PHP
+	$.post(INCLUDES+"/event_functions.php",{
+		requestType: "createNewEvent"
+	},
+	function(data, status){
+		var options = "";
+		var dataCut = parsePostData(data);
+		//check if request is valid
+		if(dataCut == "error" || dataCut == "") {
+			headerNotification(LANG.ERROR_REQUEST_FAILED,"red");
+		} else if(dataCut == "missingRights") {
+			headerNotification(LANG.USER_RIGHTS_MISSING,"red");
+		} else if(dataCut == "success") {
+			location.reload();
+		}
+	});
+
+}
+
+//open page to edit event data
+
+function openEventPage(eventID) {
+	redirect(URL+"/events/edit/"+eventID);
+}
+
+//display delete form and delete if selected
+
+function deleteEvent(eventID, request) {
+	var buttonContainer = document.querySelector(".page.event.editEvent .buttonConatiner");
+	
+	var saveBox = buttonContainer.querySelector(".saveButtonBox");
+	var deleteBox = buttonContainer.querySelector(".deleteButtonBox");
+	
+	if(request == "openForm") {
+		saveBox.classList.add("none");
+		deleteBox.classList.remove("none");
+	} else if(request == "abort") {
+		saveBox.classList.remove("none");
+		deleteBox.classList.add("none");
+	} else if(request == "delete") {
+		//send data to PHP
+		$.post(INCLUDES+"/event_functions.php",{
+			requestType: "deleteEvent",
+			eventID: eventID
+		},
+		function(data, status){
+			var options = "";
+			var dataCut = parsePostData(data);
+			//check if request is valid
+			if(dataCut == "error" || dataCut == "") {
+				headerNotification(LANG.ERROR_REQUEST_FAILED,"red");
+			} else if(dataCut == "missingRights") {
+				headerNotification(LANG.USER_RIGHTS_MISSING,"red");
+			} else if(dataCut == "success") {
+				redirect(URL+"/events");
+			} else {
+				console.log(data);
+			}
+		});
+	}
+}
+
+
+//remove a tag from event
+
+function deleteEventTag(tagID, eventID) {
+	//send data to PHP
+	$.post(INCLUDES+"/event_functions.php",{
+		requestType: "deleteTag",
+		tagID: tagID,
+		eventID: eventID
+	},
+	function(data, status){
+		var options = "";
+		var dataCut = parsePostData(data);
+		//check if request is valid
+		if(dataCut == "error" || dataCut == "") {
+			headerNotification(LANG.ERROR_REQUEST_FAILED,"red");
+		} else if(dataCut == "missingRights") {
+			headerNotification(LANG.USER_RIGHTS_MISSING,"red");
+		} else if(dataCut == "success") {
+			location.reload();
+		}
+	});
+}
+
+//display form to add a tag
+
+function addEventTagForm() {
+	document.querySelector(".page.event.editEvent .addTagContainer").classList.toggle("none");
+}
+
+//add tag to event 
+
+function addEventTag(eventID) {
+	var tagID = document.querySelector(".page.event.editEvent .addTagContainer .addTagSelect").value;
+	//send data to PHP
+	$.post(INCLUDES+"/event_functions.php",{
+		requestType: "addTag",
+		tagID: tagID,
+		eventID: eventID
+	},
+	function(data, status){
+		var options = "";
+		var dataCut = parsePostData(data);
+		//check if request is valid
+		if(dataCut == "error" || dataCut == "") {
+			headerNotification(LANG.ERROR_REQUEST_FAILED,"red");
+		} else if(dataCut == "missingRights") {
+			headerNotification(LANG.USER_RIGHTS_MISSING,"red");
+		} else if(dataCut == "success") {
+			location.reload();
+		} else if(dataCut == "alreadyUsed") {
+			headerNotification(LANG.EVENTS_EDIT_TAGS_ALREADY_USED,"red");
+		} else {
+			console.log(data);
+		}
+	});
+}
+
+//display form to add a event responsible
+
+function addResposibleForm() {
+	document.querySelector(".page.event.editEvent .addResposibleContainer").classList.toggle("none");
+}
+
+
+//add tag to event 
+
+function addEventResponsible(eventID) {
+	var userID = document.querySelector(".page.event.editEvent .addResposibleContainer .addResponsibleSelect").value;
+	//send data to PHP
+	$.post(INCLUDES+"/event_functions.php",{
+		requestType: "addResponsible",
+		userID: userID,
+		eventID: eventID
+	},
+	function(data, status){
+		var options = "";
+		var dataCut = parsePostData(data);
+		//check if request is valid
+		if(dataCut == "error" || dataCut == "") {
+			headerNotification(LANG.ERROR_REQUEST_FAILED,"red");
+		} else if(dataCut == "missingRights") {
+			headerNotification(LANG.USER_RIGHTS_MISSING,"red");
+		} else if(dataCut == "success") {
+			location.reload();
+		} else if(dataCut == "alreadyUsed") {
+			headerNotification(LANG.EVENTS_EDIT_USER_ALREADY_ADDED,"red");
+		} else {
+			console.log(data);
+		}
+	});
+}
+
+//remove a responsible user from event
+
+function deleteEventResponsible(userID, eventID) {
+	//send data to PHP
+	$.post(INCLUDES+"/event_functions.php",{
+		requestType: "deleteResponsible",
+		userID: userID,
+		eventID: eventID
+	},
+	function(data, status){
+		var options = "";
+		var dataCut = parsePostData(data);
+		//check if request is valid
+		if(dataCut == "error" || dataCut == "") {
+			headerNotification(LANG.ERROR_REQUEST_FAILED,"red");
+		} else if(dataCut == "missingRights") {
+			headerNotification(LANG.USER_RIGHTS_MISSING,"red");
+		} else if(dataCut == "success") {
+			location.reload();
+		} else {
+			console.log(data);
+		}
+	});
+}

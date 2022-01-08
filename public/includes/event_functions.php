@@ -256,6 +256,151 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 				echo "missingRights";
 			}
 		}
+		
+		//create template new event
+		
+		else if($request == "createNewEvent") {
+			//check user rights
+			if($session->checkRights("create_event") == True) {
+				$event = new Event;
+				
+				$event->setName(EVENT_CREATION_TEMPLATE_NAME);
+				$event->setStartTime("1000-01-01");
+				
+				if($event->createNewData()) {
+					echo "success";
+				} else {
+					echo "error";
+				}
+			} else {
+				echo "missingRights";
+			}
+		}
+		
+		//delete event and attributes as tags
+		
+		else if($request == "deleteEvent") {
+			$event = new Event;
+			if(isset($_POST['eventID']) AND $event->loadData($_POST['eventID'])) {
+				
+				if($event->checkRights($session, "delete")) {
+					if($event->deleteEvent()) {
+						echo "success";
+					}
+				} else {
+					echo "missingRights";
+				}
+			} else {
+				echo "error";
+			}
+			
+		}
+		
+		//delete specific tag from event
+		
+		else if($request == "deleteTag") {
+			$event = new Event;
+			$tag = new Tag;
+			$assignment = new TagAssignment;
+			if(
+				isset($_POST['eventID']) AND $event->loadData($_POST['eventID']) AND
+				isset($_POST['tagID']) AND $tag->loadData($_POST['tagID']) AND
+				$assignment->loadDataOnTagAndAttributeID($tag->getID(), $event->getID(), 1)
+			) {
+				
+				if($event->checkRights($session, "edit")) {
+					if($assignment->deleteData()) {
+						echo "success";
+					}
+				} else {
+					echo "missingRights";
+				}
+			} else {
+				echo "error";
+			}
+			
+		}
+		
+		//add tag to event if not already added
+		
+		else if($request == "addTag") {
+			$event = new Event;
+			$tag = new Tag;
+			if(
+				isset($_POST['eventID']) AND $event->loadData($_POST['eventID']) AND
+				isset($_POST['tagID']) AND $tag->loadData($_POST['tagID']) 
+			) {
+				
+				if($event->checkRights($session, "edit")) {
+					$assignment = new TagAssignment;
+					if(TagAssignment::checkIfAttributeHasTag(1,$event->getID(),$tag->getID())) {
+						echo "alreadyUsed";
+					} else if($assignment->createTagForEvent($event->getID(), $tag->getID())) {
+						echo "success";
+					}
+				} else {
+					echo "missingRights";
+				}
+			} else {
+				echo "error";
+			}
+			
+		}
+		
+		//add resonsible user to event if not already added
+		
+		else if($request == "addResponsible") {
+			$event = new Event;
+			$user = new User;
+			if(
+				isset($_POST['eventID']) AND $event->loadData($_POST['eventID']) AND
+				isset($_POST['userID']) AND $user->loadData($_POST['userID']) 
+			) {
+				
+				if($event->checkRights($session, "edit") AND $session->checkRights("edit_event_responsibles") == True) {
+					$responsible = new EventResponsible;
+					if(EventResponsible::checkIfIsResponsible($user->getID(),$event->getID())) {
+						echo "alreadyUsed";
+					} else if(
+						$responsible->setUserID($user->getID()) AND
+						$responsible->setEventID($event->getID()) AND
+						$responsible->createNewData()
+					) {
+						echo "success";
+					}
+				} else {
+					echo "missingRights";
+				}
+			} else {
+				echo "error";
+			}
+			
+		}
+		
+		//delete specific event responsible from event
+		
+		else if($request == "deleteResponsible") {
+			$event = new Event;
+			$user = new User;
+			$responsible = new EventResponsible;
+			if(
+				isset($_POST['eventID']) AND $event->loadData($_POST['eventID']) AND
+				isset($_POST['userID']) AND $user->loadData($_POST['userID']) AND
+				$responsible->loadDataOnUserAndEventID($user->getID(), $event->getID())
+			) {
+				
+				if($event->checkRights($session, "edit") AND $session->checkRights("edit_event_responsibles") == True) {
+					if($responsible->deleteData()) {
+						echo "success";
+					}
+				} else {
+					echo "missingRights";
+				}
+			} else {
+				echo "error";
+			}
+			
+		}
 
 	} 
 	

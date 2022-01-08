@@ -55,6 +55,7 @@ RewriteRule ^todo/category/edit/([0-9-]+)$ todo_page.php?request=categoryEdit&ID
 
 RewriteRule ^events$ event_page.php?request=overview [QSA,NC,L]
 RewriteRule ^events/locations$ event_page.php?request=locations [QSA,NC,L]
+RewriteRule ^events/edit/([0-9]+)$ event_page.php?request=editEvent&ID=$1 [QSA,NC,L]
 RewriteRule ^events/clients$ event_page.php?request=clients [QSA,NC,L]
 
 #Settings

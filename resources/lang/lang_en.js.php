@@ -65,6 +65,9 @@ var LANG = {
 	
 	EVENTS_LOCATION_LIST_NON_FOUND: "No locations found!",
 	
+	EVENTS_EDIT_TAGS_ALREADY_USED: "This tag is already added",
+	EVENTS_EDIT_USER_ALREADY_ADDED: "This user is already added",
+	
 	//Tags
 	
 	TAGS_SELECT_NON_FOUND: "No tags found",

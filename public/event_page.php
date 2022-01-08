@@ -9,7 +9,7 @@ if($session->loggedIn() === True) {
 	
 	//Check if specific reuqest is send
 	
-	$requestAllowed = array("overview","locations","clients");
+	$requestAllowed = array("overview","locations","clients","editEvent");
 	if(isset($_GET['request']) AND !empty($_GET['request']) AND in_array($_GET['request'],$requestAllowed)) {
 		$request = $_GET['request'];
 	} else {
@@ -128,27 +128,44 @@ if($session->loggedIn() === True) {
 			}
 		} else if($request == "overview") {
 			//display overview of all events
-			$events = Event::createTimeListAllEvents();
+			$events = Event::createTimeListAllEvents($session);
 			
 			?>
 			<div class="eventsContainer">
 			<?php
 				foreach($events as $tmpCategoryName => $tmpEvents) {
+					if(count($tmpEvents) > 0 OR $tmpCategoryName == "uncategorized") {
 					?>
 					<div class="eventCategoryContainer">
 						<div class="categoryHeader">
-							test
+							<?php
+							if($tmpCategoryName == "running")
+								echo EVENT_OVERVIEW_CATEGORY_RUNNING;
+							else if($tmpCategoryName == "soon")
+								echo EVENT_OVERVIEW_CATEGORY_SOON;
+							else if($tmpCategoryName == "future")
+								echo EVENT_OVERVIEW_CATEGORY_FUTURE;
+							else if($tmpCategoryName == "past")
+								echo EVENT_OVERVIEW_CATEGORY_PAST;
+							else if($tmpCategoryName == "uncategorized")
+								echo EVENT_OVERVIEW_CATEGORY_UNCATEGORIZED;
+							?>
 						</div>
 						<div class="categoryContent">
 							<?php
+							if($tmpCategoryName == "uncategorized" AND $session->checkRights("create_event") == True) {
+								?>
+								<div class="generalButton createNewToDoBtn" onclick="createNewEvent()"> New </div>
+								<?php
+							}
 							foreach($tmpEvents as $tmpEvent) {
 								$event = new Event;
-								if($event->loadData($tmpEvent)) {
+								if($event->loadData($tmpEvent) AND $event->checkRights($session, "view")) {
 									$tags = $event->loadTags();
 									$client = $event->getClientName();
 									$location = $event->getLocationName();
 									?>
-									<div class="container event">
+									<div class="container event" onclick="openEventPage('<?php echo $event->getID();?>')">
 										<div class="eventTags row">
 											<?php
 											foreach($tags as $tmpTag) {
@@ -211,11 +228,176 @@ if($session->loggedIn() === True) {
 						</div>
 					</div>
 					<?php
+					}
 				}
 			?>
 			</div>
 			<?php
+		} else if($request == "editEvent") {
+			//display page to edit event
+			$event = new Event;
+			if(isset($_GET['ID']) AND $event->loadData($_GET['ID'])) {
+				if($event->checkRights($session, "edit")) {
+					?>
+					<div class="editEventContainer row">
+						<div class="col-12 inputRow">
+							<input class="generalInput dataInput" type="text" data-input-name="name" value="<?php echo $event->getName();?>" placeholder="<?php echo EVENT_EDIT_PLACEHOLDER_NAME;?>">
+						</div>
+						<div class="col-12 col-md-6 inputRow">
+							<?php echo EventLocation::getSelect(["class" => "generalSelect dataInput", "attribute" => ["input-name", "location"]],$event->getLocationID(),EVENT_EDIT_PLACEHOLDER_LOCATION);?>
+						</div>
+						<div class="col-12 col-md-6 inputRow">
+							<?php echo EventClient::getSelect(["class" => "generalSelect dataInput", "attribute" => ["input-name", "client"]],$event->getClientID(),EVENT_EDIT_PLACEHOLDER_CLIENT);?>
+						</div>
+						<div class="col-12 col-md-6 inputRow">
+							<?php echo EVENT_EDIT_PLACEHOLDER_STARTDATE;?>:<br>
+							<input type="date" class="generalDateinput dataInput" data-input-name="startDate" value="<?php echo $event->getTime("start","formDate");?>">
+						</div>
+						<div class="col-12 col-md-6 inputRow">
+							<?php echo EVENT_EDIT_PLACEHOLDER_ENDDATE;?>:<br>
+							<input type="date" class="generalDateinput dataInput" data-input-name="endDate" value="<?php echo $event->getTime("end","formDate");?>">
+						</div>
+						<div class="col-12 col-md-6 inputRow">
+							<?php echo EVENT_EDIT_PLACEHOLDER_STARTTIME;?>:<br>
+							<input type="time" class="generalDateinput dataInput" data-input-name="startTime" value="<?php echo $event->getTime("start","formTime");?>">
+						</div>
+						<div class="col-12 col-md-6 inputRow">
+							<?php echo EVENT_EDIT_PLACEHOLDER_ENDTIME;?>:<br>
+							<input type="time" class="generalDateinput dataInput" data-input-name="endTime" value="<?php echo $event->getTime("end","formTime");?>">
+						</div>
+						<div class="col-12 inputRow">
+							<?php echo EVENT_EDIT_PLACEHOLDER_DESCRIPTION;?>:<br>
+							<textarea class="generalTextarea dataInput" data-input-name="description">
+							</textarea>
+						</div>
+						<div class="col-12 inputRow buttonConatiner">
+							<div class="row saveButtonBox">
+								<div class="col-12 col-md-6">
+									<div class="generalButton" onclick="saveEventData('<?php $event->getID();?>')"> <?php echo WORD_SAVE;?> </div>
+								</div>
+								<div class="col-12 col-md-6">
+									<div class="generalButton" onclick="deleteEvent('','openForm')"> <?php echo WORD_DELETE;?> </div>
+								</div>
+							</div>
+							<div class="row deleteButtonBox none">
+								<div class="col-12 col-md-6">
+									<div class="generalButton" onclick="deleteEvent('','abort')"> <?php echo WORD_ABORT;?> </div>
+								</div>
+								<div class="col-12 col-md-6">
+									<div class="generalButton" onclick="deleteEvent('<?php echo $event->getID();?>','delete')"> <?php echo WORD_DELETE;?> </div>
+								</div>
+							</div>
+						</div>
+						<div class="col-12">
+							<hr class="hr">
+						</div>
+						<div class="col-12">
+							<h4><?php echo EVENT_EDIT_HEADLINE_TAGS;?></h4>
+							<div class="tagsList">
+								<?php
+								$allTags = Tag::getAll();
+								$tags = $event->getTags();
+								foreach($tags as $tmpTag) {
+									$tag = new Tag;
+									if($tag->loadData($tmpTag)) {
+										?>
+										<span class="tag noselect" style="color: <?php echo getContrastColor($tag->getColour());?> ;background-color: <?php echo $tag->getColour();?>">
+											<?php echo $tag->getName();?>
+											<span onclick="deleteEventTag('<?php echo $tag->getID();?>','<?php echo $event->getID();?>')" class="generalIcon onclick"><i class="fa fa-times-circle" aria-hidden="true"></i></span>
+										</span>
+										<?php
+									}
+								}
+								?>
+								<span class="generalIcon onclick" onclick="addEventTagForm()"><i class="fa fa-plus-square" aria-hidden="true"></i></span>
+							</div>
+							<div class="addTagContainer row none">
+								<div class="col-10">
+									<select class="addTagSelect generalSelect">
+										<?php
+										foreach($allTags as $tmpTag) {
+											$tag = new Tag;
+											if($tag->loadData($tmpTag)) {
+												?>
+												<option value="<?php echo $tag->getID();?>">
+													<?php echo $tag->getName();?>
+												</option>
+												<?php
+											}
+										}
+										?>
+									</select>
+								</div>
+								<div class="col-2">
+									<span class="generalIcon onclick" onclick="addEventTag('<?php echo $event->getID();?>')"><i class="fa fa-check-square" aria-hidden="true"></i></span>
+								</div>
+							</div>
+						</div>
+						<?php
+						if($session->checkRights("edit_event_responsibles") == True) {
+						?>
+							<div class="col-12">
+								<hr class="hr">
+							</div>
+							<div class="col-12">
+								<h4><?php echo EVENT_EDIT_HEADLINE_RESPONSIBLES;?></h4>
+								<div class="responsibleList">
+									<?php
+									$allUser = User::getAll();
+									$responsible = $event->getResponsible();
+									foreach($responsible as $tmpUser) {
+										$user = new User;
+										if($user->loadData($tmpUser)) {
+											?>
+											<span class="tag noselect" >
+												<?php echo $user->getName(1,1);?>
+												<span onclick="deleteEventResponsible('<?php echo $user->getID();?>','<?php echo $event->getID();?>')" class="generalIcon onclick"><i class="fa fa-times-circle" aria-hidden="true"></i></span>
+											</span>
+											<?php
+										}
+									}
+									?>
+									<span class="generalIcon onclick" onclick="addResposibleForm()"><i class="fa fa-plus-square" aria-hidden="true"></i></span>
+								</div>
+								<div class="addResposibleContainer row none">
+									<div class="col-10">
+										<select class="addResponsibleSelect generalSelect">
+											<?php
+											foreach($allUser as $tmpUser) {
+												$user = new User;
+												if($user->loadData($tmpUser)) {
+													?>
+													<option value="<?php echo $user->getID();?>">
+														<?php echo $user->getName(1,1);?>
+													</option>
+													<?php
+												}
+											}
+											?>
+										</select>
+									</div>
+									<div class="col-2">
+										<span class="generalIcon onclick" onclick="addEventResponsible('<?php echo $event->getID();?>')"><i class="fa fa-check-square" aria-hidden="true"></i></span>
+									</div>
+								</div>
+							</div>
+						<?php
+						}
+						?>
+					</div>
+					<?php
+				} else {
+					include(TEMPLATES."/user/missing_rights.php");
+				}
+			} else {
+				?>
+				<div class="center">
+					<h3> <?php echo EVENT_EDIT_ERROR_LOADING_DATA;?> </h3>
+				</div>
+				<?php
+			}
 		}
+		
 		?>
 	</div>
 	<?php

@@ -25,6 +25,20 @@ class TagAssignment extends SystemClass {
 		return(False);
 	}
 	
+	//Create new tag for event
+	function createTagForEvent($eventID, $tagID) {
+		$tag = new Tag();
+		if($tag->loadData($tagID)) {
+			$this->tag_id = $tagID;
+			$this->attribute_id = $eventID;
+			$this->attribute_type_id = 1;
+			if($this->createNewData()) {
+				return(True);
+			}
+		}
+		return(False);
+	}
+	
 	//check if tags is used
 	static function checkIfTagUsed($tagID) {
 		$assignment = new TagAssignment;

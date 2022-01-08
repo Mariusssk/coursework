@@ -215,6 +215,32 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 		defined("EVENT_OVERVIEW_CONTAINER_CLIENT") ? null :  define("EVENT_OVERVIEW_CONTAINER_CLIENT", "Client");
 		defined("EVENT_OVERVIEW_CONTAINER_EXTERNAL") ? null :  define("EVENT_OVERVIEW_CONTAINER_EXTERNAL", "external");
 	
+		//Category Names
+		
+			defined("EVENT_OVERVIEW_CATEGORY_RUNNING") ? null :  define("EVENT_OVERVIEW_CATEGORY_RUNNING", "Running");
+			defined("EVENT_OVERVIEW_CATEGORY_SOON") ? null :  define("EVENT_OVERVIEW_CATEGORY_SOON", "Soon");
+			defined("EVENT_OVERVIEW_CATEGORY_FUTURE") ? null :  define("EVENT_OVERVIEW_CATEGORY_FUTURE", "Future");
+			defined("EVENT_OVERVIEW_CATEGORY_PAST") ? null :  define("EVENT_OVERVIEW_CATEGORY_PAST", "Past");
+			defined("EVENT_OVERVIEW_CATEGORY_UNCATEGORIZED") ? null :  define("EVENT_OVERVIEW_CATEGORY_UNCATEGORIZED", "Uncategorized");
+			
+	//create
+		
+		defined("EVENT_CREATION_TEMPLATE_NAME") ? null :  define("EVENT_CREATION_TEMPLATE_NAME", "New event");
+		
+	//EDIT
+	
+		defined("EVENT_EDIT_ERROR_LOADING_DATA") ? null :  define("EVENT_EDIT_ERROR_LOADING_DATA", "The data for the event could not be loaded");
+		defined("EVENT_EDIT_PLACEHOLDER_NAME") ? null :  define("EVENT_EDIT_PLACEHOLDER_NAME", "Name");
+		defined("EVENT_EDIT_PLACEHOLDER_LOCATION") ? null :  define("EVENT_EDIT_PLACEHOLDER_LOCATION", "Location");
+		defined("EVENT_EDIT_PLACEHOLDER_CLIENT") ? null :  define("EVENT_EDIT_PLACEHOLDER_CLIENT", "Client");
+		defined("EVENT_EDIT_PLACEHOLDER_STARTDATE") ? null :  define("EVENT_EDIT_PLACEHOLDER_STARTDATE", "Start date");
+		defined("EVENT_EDIT_PLACEHOLDER_ENDDATE") ? null :  define("EVENT_EDIT_PLACEHOLDER_ENDDATE", "End date");
+		defined("EVENT_EDIT_PLACEHOLDER_STARTTIME") ? null :  define("EVENT_EDIT_PLACEHOLDER_STARTTIME", "Start time");
+		defined("EVENT_EDIT_PLACEHOLDER_ENDTIME") ? null :  define("EVENT_EDIT_PLACEHOLDER_ENDTIME", "End time");
+		defined("EVENT_EDIT_PLACEHOLDER_DESCRIPTION") ? null :  define("EVENT_EDIT_PLACEHOLDER_DESCRIPTION", "Description");
+		
+		defined("EVENT_EDIT_HEADLINE_TAGS") ? null :  define("EVENT_EDIT_HEADLINE_TAGS", "Tags");
+		defined("EVENT_EDIT_HEADLINE_RESPONSIBLES") ? null :  define("EVENT_EDIT_HEADLINE_RESPONSIBLES", "Event responsibles");
 	
 //Settings
 

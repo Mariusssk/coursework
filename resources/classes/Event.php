@@ -43,16 +43,35 @@ class Event extends ObjectType {
 		return($events);
 	}
 	
+	//load a list of all tags
+	
+	function getTags() {
+		$tags = TagAssignment::loadTagsByAttribute(1,$this->getID());
+		return($tags);
+	}
+	
+	//load a list of responsible user
+	
+	function getResponsible() {
+		$user = EventResponsible::loadResponsibleForEvent($this->getID());
+		return($user);
+	}
+	
 	//create array of all events by time
 	
-	public static function createTimeListAllEvents() {
+	public static function createTimeListAllEvents($session) {
+		$event = new Event;
 		$eventList = array("running" => array(), "soon" => array(), "future" => array(), "past" => array(), "uncategorized" => array());
 		
-		$events = Event::getALL();
+		$sql = "SELECT ".$event->TABLE_NAME."_id FROM ".$event->TABLE_NAME." ORDER BY start_time ASC";
+		
+		$events = pdSelect($sql, "mysqli");
+		
+		$events = $event->mergeResult($events);
 		
 		foreach($events as $tmpEvent) {
 			$event = new Event;
-			if($event->loadData($tmpEvent)) {
+			if($event->loadData($tmpEvent) AND $event->checkRights($session, "view")) {
 				$now = new DateTime();
 				
 				$startTime = new DateTime($event->getTime("start"));
@@ -63,7 +82,9 @@ class Event extends ObjectType {
 				
 				$type = "";
 				
-				if($now > $endTime) {
+				if($startTime->format("Y") == 1000) {
+					$type = "uncategorized";
+				} else if($now > $endTime) {
 					$type = "past";
 				} else if($now > $startTime AND $now < $endTime) {
 					$type = "running";
@@ -81,6 +102,48 @@ class Event extends ObjectType {
 		}
 		
 		return($eventList);
+	}
+	
+	//check event specific rights
+	
+	function checkRights($session, $rightType) {
+		$eventResponsible = EventResponsible::checkIfIsResponsible($session->getSessionUserID(),$this->getID());
+		if($rightType == "view") {
+			if(
+				$session->checkRights("view_all_events") == True OR
+				($session->checkRights("view_own_events") == True AND $eventResponsible)
+			) {
+				return(True);
+			}
+		} else if($rightType == "edit") {
+			if(
+				$session->checkRights("edit_all_events") == True OR
+				($session->checkRights("edit_own_events") == True AND $eventResponsible)
+			) {
+				return(True);
+			}
+		} else if($rightType == "delete") {
+			if(
+				$session->checkRights("delete_all_events") == True OR
+				($session->checkRights("delete_own_events") == True AND $eventResponsible)
+			) {
+				return(True);
+			}
+		}
+		return(False);
+	}
+	
+	//delete event data and attributes as tags
+	
+	function deleteEvent() {
+		TagAssignment::deleteTagsForAttribute(1,$this->getID());
+		
+		//delete responsibles
+		
+		if($this->deleteData()) {
+			return(True);
+		}
+		return(False);
 	}
 	
 	//load all tags for this event
@@ -141,7 +204,7 @@ class Event extends ObjectType {
 	//get start/end time of event
 	//generate end time if not set
 	
-	function getTime($timeType) {
+	function getTime($timeType,$format = "display") {
 		if($timeType == "start") {
 			$time = new DateTime($this->start_time);
 		} else if($timeType == "end") {
@@ -156,6 +219,12 @@ class Event extends ObjectType {
 			return("");
 		}
 		
+		if($format == "formDate") {
+			return($time->format("Y-m-d"));
+		} else if($format == "formTime") {
+			return($time->format("H:i"));
+		}
+		
 		return($time->format("d.m.Y H:i"));
 	}
 	
@@ -165,5 +234,25 @@ class Event extends ObjectType {
 			return($time->format("d.m.Y H:i"));
 		} 
 		return("");
+	}
+	
+	//set functions
+	
+	
+	function setName($value) {
+		if(!empty($value)) {
+			$this->name = $value;
+			return(True);
+		}
+		return(False);
+	}
+	
+	function setStartTime($value) {
+		if(!empty($value)) {
+			$date = new DateTime($value);
+			$this->start_time = $date->format("Y-m-d H:i:s");
+			return(True);
+		}
+		return(False);
 	}
 }
