@@ -656,6 +656,32 @@ header.header .mobileHeader .fa-user-circle-o {
 	width: auto !important;
 }
 
+/* QR-code print */
+
+	.page.qrCode.displayQrCode .print .qrCode {
+		width: 100%;
+		height: auto;
+	}
+	
+	.page.qrCode.displayQrCode .print .codeBox {
+		width: 33%;
+		margin: 0 auto;
+		float: left;
+	}
+	
+	.page.qrCode.displayQrCode page {
+		background: white;
+		display: block;
+		margin: 0 auto;
+		margin-bottom: 0.5cm;
+		box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+	}
+	.page.qrCode.displayQrCode page[size="A4"] {  
+		width: 21cm;
+		height: 29.7cm; 
+	}
+	
+
 /* Dashbord */
 
 	/* Lend */

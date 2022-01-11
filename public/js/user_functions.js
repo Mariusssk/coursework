@@ -133,10 +133,12 @@ function setLoginOverlay(redirectLogin = false) {
 		var dataCut = parsePostData(data);
 		if (typeof protectedPage !== 'undefined' && protectedPage == true) {
 			//display login form if not logged in
-			if(dataCut == "false") {
-				document.querySelector(".mainContainer .headerLoginOverlay").classList.remove("none");
-			} else {
-				document.querySelector(".mainContainer .headerLoginOverlay").classList.add("none");
+			if(document.querySelector(".mainContainer .headerLoginOverlay")) {
+				if(dataCut == "false") {
+					document.querySelector(".mainContainer .headerLoginOverlay").classList.remove("none");
+				} else {
+					document.querySelector(".mainContainer .headerLoginOverlay").classList.add("none");
+				}
 			}
 		} else if(redirectLogin == true) {
 			//redirect to login if not logged in

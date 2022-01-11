@@ -279,6 +279,9 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 			
 				defined("SCANNER_VIEW_STORAGE_LOCATION") ? null :  define("SCANNER_VIEW_STORAGE_LOCATION", "Location");
 			
+		//Generator
+		
+			defined("QR_GENERATOR_DATA_SELECT_TYPE_PLACEHOLDER") ? null :  define("QR_GENERATOR_DATA_SELECT_TYPE_PLACEHOLDER", "Select type");
 			
 	//Roles
 		
@@ -385,6 +388,8 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 	defined("WORD_LABELS") ? null :  define("WORD_LABELS", "Labels");
 	defined("WORD_COMMENTS") ? null :  define("WORD_COMMENTS", "Comments");
 	defined("WORD_TODO_LIST") ? null :  define("WORD_TODO_LIST", "ToDo List");
+	defined("WORD_STORAGE") ? null :  define("WORD_STORAGE", "Storage");
+	defined("WORD_ITEM") ? null :  define("WORD_ITEM", "Item");
 	defined("WORD_EVENT") ? null :  define("WORD_EVENT", "Events");
 	defined("WORD_BACK") ? null :  define("WORD_BACK", "Back");
 	

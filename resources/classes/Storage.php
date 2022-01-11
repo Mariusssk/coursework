@@ -108,6 +108,16 @@ class Storage extends SystemClass {
 		return(True);
 	}
 	
+	//generate key/url for qr code
+	
+	function generateQrCodeURL() {
+		return(URL."/scan/storage/".$this->getID());
+	}
+	
+	function generateQrCodeKey() {
+		return("Storage#".$this->getID());
+	}
+	
 	//Create string of storages
 	
 	function createStorageString() {

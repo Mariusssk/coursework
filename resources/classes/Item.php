@@ -30,6 +30,16 @@ class Item extends SystemClass {
 		return($this->getAmount() - Lend::calculateTotalAmountLend($this->getID()));
 	}
 	
+	//generate key/url for qr code
+	
+	function generateQrCodeURL() {
+		return(URL."/scan/item/".$this->getID());
+	}
+	
+	function generateQrCodeKey() {
+		return("Item#".$this->getID());
+	}
+	
 	
 	//get Functions
 	

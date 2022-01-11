@@ -77,7 +77,9 @@ RewriteRule ^scan/$ scanner.php?request=displayScanner [QSA,NC,L]
 RewriteRule ^scan/([A-Z]*)/([0-9]*)$ scanner.php?request=displayScanner&type=$1&attribute=$2 [QSA,NC,L]
 RewriteRule ^scan/display/(item|storage)/([0-9]*)$ scanner.php?request=displayAttribute&type=$1&attribute=$2 [QSA,NC,L]
 
-RewriteRule ^scan/generate/(item|storage)/([0-9]*)$ qr-generator.php?request=generateCode&type=$1&attribute=$2 [QSA,NC,L]
+RewriteRule ^scan/generate/(item|storage)/([0-9;]*)$ qr-code_page.php?request=displayQrCode&type=$1&IDs=$2 [QSA,NC,L]
+RewriteRule ^scan/generate$ qr-code_page.php?request=selectData [QSA,NC,L]
+
 
 #-----------------------------------------
 
@@ -91,6 +93,9 @@ RewriteRule ^(.*)storage_page.php$ 404 [R=301,L]
 
 RewriteCond %{THE_REQUEST} ^.*/item_page\.php [NC]
 RewriteRule ^(.*)item_page.php$ 404 [R=301,L]
+
+RewriteCond %{THE_REQUEST} ^.*/qr-code_page\.php [NC]
+RewriteRule ^(.*)qr-code_page.php$ 404 [R=301,L]
 
 
 RewriteCond %{THE_REQUEST} ^.*/user_profile\.php [NC]
