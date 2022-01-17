@@ -64,6 +64,7 @@ RewriteRule ^settings/user$ user_profile.php?request=personal_data [QSA,NC,L]
 
 RewriteRule ^settings/user/list$ user_settings.php?request=listUser [QSA,NC,L]
 RewriteRule ^settings/user/edit/([0-9]+)$ user_settings.php?request=editUser&ID=$1 [QSA,NC,L]
+RewriteRule ^settings/user/new$ user_settings.php?request=createNewUser [QSA,NC,L]
 RewriteRule ^settings/user/roles$ user_settings.php?request=listUserRoles [QSA,NC,L]
 RewriteRule ^settings/user/roles/edit/([0-9]+)$ user_settings.php?request=editUserRole&ID=$1 [QSA,NC,L]
 

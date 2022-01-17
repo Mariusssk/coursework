@@ -297,6 +297,22 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 			defined("ROLE_EDIT_FORM_PLACEHOLDER_NAME") ? null :  define("ROLE_EDIT_FORM_PLACEHOLDER_NAME", "Name");
 		
 		
+	//User
+	
+		//list
+		
+			defined("SETTINGS_USER_LIST_HEADLINE_ROLE") ? null : define("SETTINGS_USER_LIST_HEADLINE_ROLE", "Role");
+			defined("SETTINGS_USER_LIST_PLACEHOLDER_NAME") ? null : define("SETTINGS_USER_LIST_PLACEHOLDER_NAME", "Name");
+		
+		//edit
+		
+			defined("SETTINGS_USER_EDIT_LOAD_FAILED") ? null : define("SETTINGS_USER_EDIT_LOAD_FAILED", "User data could not be loaded");
+			defined("SETTINGS_USER_EDIT_PLACEHOLDER_EMAIL") ? null : define("SETTINGS_USER_EDIT_PLACEHOLDER_EMAIL", "Email");
+			defined("SETTINGS_USER_EDIT_PLACEHOLDER_SCHOOL_EMAIL") ? null : define("SETTINGS_USER_EDIT_PLACEHOLDER_SCHOOL_EMAIL", "School-Email");
+			defined("SETTINGS_USER_EDIT_PLACEHOLDER_USER_ROLE") ? null : define("SETTINGS_USER_EDIT_PLACEHOLDER_USER_ROLE", "User Role");
+			defined("SETTINGS_USER_EDIT_PLACEHOLDER_ACTIVE") ? null : define("SETTINGS_USER_EDIT_PLACEHOLDER_ACTIVE", "Active");
+			defined("SETTINGS_USER_EDIT_PLACEHOLDER_PREFERRED_LANGUAGE") ? null : define("SETTINGS_USER_EDIT_PLACEHOLDER_PREFERRED_LANGUAGE", "Preferred language");
+		
 		
 		
 //Emails

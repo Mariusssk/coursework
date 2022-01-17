@@ -400,4 +400,171 @@ function saveRoleData(roleID) {
 }
 
 
+//load list of all users
+
+function loadUserList() {
+	var listContainer = document.querySelector(".page.user.list .userList");
 	
+	var search = {};
+	
+	var searchInputs = document.querySelectorAll(".generalTableSearch .searchInput");
+	
+	for(i = 0;i < Object.keys(searchInputs).length;i++) {
+		var searchKey = searchInputs[i].dataset.searchName;
+		if(searchInputs[i].classList.contains("generalCheckbox")) {
+			if(searchInputs[i].checked  == true) {
+				search[searchKey] = "1";
+			} else {
+				search[searchKey] = "";
+			}
+		} else {
+			search[searchKey] = searchInputs[i].value;
+		}
+	}
+	
+	$.post(INCLUDES+"/user_functions.php",{
+		requestType: "loadUserList",
+		search: search
+	},
+	function(data, status){
+		//get return from PHP
+		var dataCut = parsePostData(data);
+		
+		//check if request is valid
+		if(dataCut == "error" || dataCut == "") {
+			headerNotification(LANG.ERROR_REQUEST_FAILED,"red");
+		} else {
+			data = JSON.parse(data);
+			var user = data['user'];
+			
+			var userString = "";
+			
+			for(i = 0; i < Object.keys(user).length; i++) {
+				var tmpUser = user[i];
+				
+				userString += `
+					<div class="td col-6 col-md-3">
+						`+tmpUser['username']+`
+					</div>
+					<div class="td  d-none d-md-block col-md-3">
+						`+tmpUser['firstname']+`
+					</div>
+					<div class="td d-none d-md-block col-md-3">
+						`+tmpUser['lastname']+`
+					</div>
+					<div class="td col-4 col-md-2">
+						`+tmpUser['roleName']+`
+					</div>
+					<div class="td col-2 col-md-1">
+						<span class="editUser icon onclick generalIcon" onclick="editUser('`+tmpUser['ID']+`')">
+							<i class="fa fa-pencil-square" aria-hidden="true"></i>
+						</span>
+					</div>
+				`;
+			}
+			
+			if(userString == "") {
+				userString = `
+				<div class="col-12">
+					`+LANG.USER_LIST_NON_FOUND+`
+				</div>
+				`;
+			}
+			
+			listContainer.innerHTML = userString;
+		}
+	});
+}
+
+//redirect to edit user page
+
+function editUser(userID) {
+	redirect(URL+"/settings/user/edit/"+userID);
+}
+
+//display or remove delete form
+
+function deleteUserDataForm() {
+	document.querySelector(".page.user.edit .deleteUserForm").classList.toggle("none");
+	document.querySelector(".page.user.edit .saveUserForm").classList.toggle("none");
+}
+
+//delete user
+
+function deleteUser(userID) {
+	$.post(INCLUDES+"/user_functions.php",{
+		requestType: "deleteUser",
+		userID: userID
+	},
+	function(data, status){
+		//get return from PHP
+		var dataCut = parsePostData(data);
+		
+		//check if request is valid
+		if(dataCut == "error" || dataCut == "") {
+			headerNotification(LANG.ERROR_REQUEST_FAILED,"red");
+		} else if(dataCut == "userIsActive") {
+			headerNotification(LANG.USER_EDIT_ERROR_DELETE_ACTIVE_USER,"red");
+		} else if(dataCut == "adminNeeded") {
+			headerNotification(LANG.USER_EDIT_ERROR_ADMIN_NEEEDED,"red");
+		} else if(dataCut == "success") {
+			redirect(URL+"/settings/user/list");
+		} else {
+			headerNotification(data,"red");
+		}
+	});
+}
+
+//save user data
+	
+function saveUserData() {
+	var inputs = {};
+	
+	var inputForms = document.querySelectorAll(".page.user.edit .dataInput");
+
+	for(i = 0;i < Object.keys(inputForms).length;i++) {
+		var searchKey = inputForms[i].dataset.inputName;
+		if(inputForms[i].classList.contains("generalCheckbox")) {
+			if(inputForms[i].checked  == true) {
+				inputs[searchKey] = "1";
+			} else {
+				inputs[searchKey] = "";
+			}
+		} else {
+			inputs[searchKey] = inputForms[i].value;
+		}
+	}
+	
+	
+	if(inputs['roleID'] == 0 | inputs['email'] == "" | inputs['username'] == "" | inputs['firstname'] == "" | inputs['lastname'] == "") {
+		headerNotification(LANG.USER_EDIT_NOT_ALL_INPUTS_FILLED,"red");
+	} else {
+		$.post(INCLUDES+"/user_functions.php",{
+			requestType: "saveUserData",
+			userData: inputs
+		},
+		function(data, status){
+			//get return from PHP
+			var dataCut = parsePostData(data);
+			
+			//check if request is valid
+			if(dataCut == "error" || dataCut == "") {
+				headerNotification(LANG.ERROR_REQUEST_FAILED,"red");
+			} else if(dataCut == "adminNeeded") {
+				headerNotification(LANG.USER_EDIT_ERROR_ADMIN_NEEEDED,"red");
+			} else if(dataCut == "success") {
+				headerNotification(LANG.PHRASE_SAVED_SUCCESS,"green");
+			} else if(dataCut == "usernameAlreadyUsed") {
+				headerNotification(LANG.SETTINGS_USER_PERSONAL_DATA_USERNAME_ALREADY_USED,"red");
+			} else if(dataCut == "emailAlreadyUsed") {
+				headerNotification(LANG.SETTINGS_USER_PERSONAL_DATA_EMAIL_ALREADY_USED,"red");
+			}  else if(dataCut == "created") {
+				redirect(URL+"/settings/user/list");
+			} else if(dataCut == "schoolEmailAlreadyUsed") {
+				headerNotification(LANG.SETTINGS_USER_PERSONAL_DATA_SCHOOL_EMAIL_ALREADY_USED,"red");
+			} else {
+				headerNotification(data,"red");
+			}
+		});
+	}
+}

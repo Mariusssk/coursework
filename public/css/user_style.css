@@ -135,3 +135,11 @@
 			.page.role.editRole .editRoleContainer .rightInput {
 				padding-top: 5px;
 			}
+			
+	/* User */
+	
+		/* edit */
+		
+			.page.user.edit .inputBlock {
+				padding: 10px 5px;
+			}

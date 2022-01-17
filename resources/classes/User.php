@@ -116,6 +116,38 @@ class User extends SystemClass {
 		$session->setUserID($this->{$this->TABLE_NAME."_id"});
 		$session->setPreferredLanguage($this->preferred_language);
 	}
+	
+	//check before edit/delete if there are enough admins
+	
+	function checkAdmins() {
+		if($this->getRoleID() != 1) {
+			return(True);
+		} else {
+			$sql = "SELECT ".$this->TABLE_NAME."_id FROM ".$this->TABLE_NAME." WHERE role_id = ? AND ".$this->TABLE_NAME."_id != ?";
+			$sqlType = "ii";
+			$sqlParams = array(1,$this->getID());
+			
+			$admins = pdSelect($sql, "mysqli", $sqlType, $sqlParams);
+			
+			$admins = $this->mergeResult($admins);
+			
+			$adminCount = count($admins);
+			
+			if($adminCount > 0) {
+				return(True);
+			}
+			return(False);
+		}
+	}
+	
+	//adapted create function to set static values
+	
+	function createNewData() {
+		$now = new DateTime;
+		$this->created = $now->format("Y-m-d H:i:s");
+		$this->password = "xxxxxxxxxxx";
+		return(Parent::createNewData());
+	}
 
 	//get functions
 	
@@ -150,6 +182,10 @@ class User extends SystemClass {
 		return($this->username);
 	}
 	
+	function getRoleID() {
+		return($this->role_id);
+	}
+	
 	function getEmail() {
 		return($this->email);
 	}
@@ -160,6 +196,21 @@ class User extends SystemClass {
 	
 	function getPreferredLanguage() {
 		return($this->preferred_language);
+	}
+	
+	function getRoleName() {
+		$role = new UserRole;
+		if($role->loadData($this->getRoleID())) {
+			return($role->getName());
+		}
+		return("");
+	}
+	
+	function getActiveChecked() {
+		if($this->active == 1) {
+			return("checked");
+		}
+		return("");
 	}
 	
 	//set functions
@@ -175,6 +226,17 @@ class User extends SystemClass {
 	function setLastname($value) {
 		if(!empty($value)) {
 			$this->lastname = $value;
+			return(True);
+		}
+		return(False);
+	}
+	
+	function setActive($value) {
+		if($value == 0 OR $value == 1) {
+			$this->active = $value;
+			return(True);
+		} else if(empty($value)) {
+			$this->active = 0;
 			return(True);
 		}
 		return(False);
@@ -207,7 +269,7 @@ class User extends SystemClass {
 		
 		
 		//check if users were found
-		if(count($users) > 0 AND empty($value)) {
+		if(count($users) > 0 AND !empty($value)) {
 			return("alreadyInUse");
 		} else if(empty($value)) {
 			return(False);
@@ -250,6 +312,15 @@ class User extends SystemClass {
 	function setPreferredLanguage($value) {
 		$this->preferred_language = $value;
 		return(True);
+	}
+	
+	function setRoleID($value) {
+		$role = new UserRole;
+		if($role->loadData($value)) {
+			$this->role_id = $value;
+			return(True);
+		}
+		return(False);
 	}
 	
 	

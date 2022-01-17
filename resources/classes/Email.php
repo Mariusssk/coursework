@@ -82,7 +82,7 @@ class Email {
 		$this->mailInstance->Host = 's203.goserver.host';
 		$this->mailInstance->SMTPAuth = true;
 		$this->mailInstance->Username = 'web144p7';
-		$this->mailInstance->Password = 'O7C3e8LJdh6xpk4uoDYc';
+		$this->mailInstance->Password = 'sq1FObJA9ShKcDwo';
 		$this->mailInstance->SMTPSecure = 'ssl';
 		$this->mailInstance->Port = 465;
 

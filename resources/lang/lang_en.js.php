@@ -121,6 +121,14 @@ var LANG = {
 	USER_ROLE_EDIT_USED: "This role is still used and hence can not be deleted",
 	USER_ROLE_EDIT_RIGHTS_SAVE_ERROR: "Not all changes could be saved succesfull",
 	
+	//User list/edit
+	
+	USER_LIST_NON_FOUND: "No users found for this search",
+	USER_EDIT_ERROR_DELETE_ACTIVE_USER: "You can not delete a user which is currently logged in",
+	USER_EDIT_ERROR_ADMIN_NEEEDED: "You need at least one user in the standard admin role",
+	
+	USER_EDIT_NOT_ALL_INPUTS_FILLED: "All inputs apart from school email and language must be filled",
+	
 	//Basic phrases
 	
 	PHRASE_FILL_ALL: "All fields maked with a * must be filled!",
