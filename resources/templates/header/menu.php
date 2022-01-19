@@ -92,7 +92,7 @@ $( document ).ready(function() {
 	if($session->checkRights("view_all_todo_lists") OR $session->checkRights("edit_personal_todo_list")) {
 	?>
 		<div class="menuElement" data-sub-menu-parent="Todo" data-destination="todo">
-			<a href="#">To-Do</a>
+			<span>To-Do</span>
 		</div>
 		<div class="subMenu" data-sub-menu="Todo">
 			<?php 
@@ -156,7 +156,7 @@ $( document ).ready(function() {
 	
 	<!-- Settings -->
 	
-	<div class="menuElement" data-sub-menu-parent="Settings" data-destination="settings">
+	<div class="menuElement" data-sub-menu-parent="Settings" data-destination="settings/user">
 		<a href="<?php echo URL;?>/settings/user"><?php echo HEADER_MENU_ITEM_SETTINGS_MAIN;?></a>
 	</div>
 	<div class="subMenu" data-sub-menu="Settings">
@@ -231,14 +231,17 @@ $( document ).ready(function() {
 			<a href="<?php echo URL;?>/item"><?php echo HEADER_MENU_ITEM_ITEM_MAIN;?></a><i class="fa fa-caret-down" data-sub-menu-button="Items" aria-hidden="true" onclick="subMenu('Items')"></i>
 		</div>
 		<div class="subMenu none" data-sub-menu="Items">
+			<div class="menuElement subElement" data-destination="item/consumable">
+				<a href="<?php echo URL;?>/item/consumable"><?php echo HEADER_MENU_ITEM_ITEM_CONSUMABLE;?></a>
+			</div>
+			<div class="menuElement subElement" data-destination="item">
+				<a href="<?php echo URL;?>/item"><?php echo HEADER_MENU_ITEM_ITEM_OVERVIEW;?></a>
+			</div>
 			<?php 
 			if($session->checkRights("create_new_item")) {
 			?>
 				<div class="menuElement subElement" data-destination="item/new">
 					<a href="<?php echo URL;?>/item/new"><?php echo HEADER_MENU_ITEM_ITEM_CREATE;?></a>
-				</div>
-				<div class="menuElement subElement" data-destination="item">
-					<a href="<?php echo URL;?>/item"><?php echo HEADER_MENU_ITEM_ITEM_OVERVIEW;?></a>
 				</div>
 				<?php
 			}
@@ -256,20 +259,31 @@ $( document ).ready(function() {
 	<!-- To Do List -->
 	
 	<?php
-	if($session->checkRights("view_all_todo_lists")) {
+	if($session->checkRights("view_all_todo_lists") OR $session->checkRights("edit_personal_todo_list")) {
 	?>
 		<div class="menuElement" data-sub-menu-parent="Todo" data-destination="todo">
-			<a href="<?php echo URL;?>/todo">To-Do</a><i class="fa fa-caret-down" data-sub-menu-button="Todo" aria-hidden="true" onclick="subMenu('Todo')"></i>
+			<span>To-Do</span><i class="fa fa-caret-down" data-sub-menu-button="Todo" aria-hidden="true" onclick="subMenu('Todo')"></i>
 		</div>
 		<div class="subMenu none" data-sub-menu="Todo">
 			<?php 
-			if($session->checkRights("create_global_todo_list")) {
+			if($session->checkRights("edit_todo_list_categories") OR $session->checkRights("edit_personal_todo_list")) {
 			?>
-				<div class="menuElement subElement" data-destination="storage/new">
-					<a href="<?php echo URL;?>/todo/new"><?php echo HEADER_MENU_ITEM_TODO_CREATE;?></a>
+				<div class="menuElement subElement" data-destination="todo/category">
+					<a href="<?php echo URL;?>/todo/category"><?php echo HEADER_MENU_ITEM_TODO_CATEGORY;?></a>
 				</div>
-				<div class="menuElement subElement" data-destination="storage">
-					<a href="<?php echo URL;?>/todo"><?php echo HEADER_MENU_ITEM_TODO_PUBLIC;?></a>
+			<?php
+			}
+			if($session->checkRights("view_all_todo_lists")) {
+			?>
+				<div class="menuElement subElement" data-destination="todo/global">
+					<a href="<?php echo URL;?>/todo/global"><?php echo HEADER_MENU_ITEM_TODO_PUBLIC;?></a>
+				</div>
+				<?php
+			}
+			if($session->checkRights("edit_personal_todo_list")) {
+			?>
+				<div class="menuElement subElement" data-destination="todo/personal">
+					<a href="<?php echo URL;?>/todo/personal"><?php echo HEADER_MENU_ITEM_TODO_PERSONAL;?></a>
 				</div>
 				<?php
 			}
@@ -284,23 +298,22 @@ $( document ).ready(function() {
 	<?php
 	if($session->checkRights("view_all_events") OR $session->checkRights("view_own_events")) {
 	?>
-		<div class="menuElement" data-sub-menu-parent="Events" data-destination="event">
+		<div class="menuElement" data-sub-menu-parent="Events" data-destination="events">
 			<a href="<?php echo URL;?>/events">Events</a><i class="fa fa-caret-down" data-sub-menu-button="Events" aria-hidden="true" onclick="subMenu('Events')"></i>
 		</div>
 		<div class="subMenu none" data-sub-menu="Events">
-			<div class="menuElement subElement" data-destination="event">
-				<a href="<?php echo URL;?>/event"><?php echo HEADER_MENU_ITEM_EVENT_OVERVIEW;?></a>
+			<div class="menuElement subElement" data-destination="events">
+				<a href="<?php echo URL;?>/events"><?php echo HEADER_MENU_ITEM_EVENT_OVERVIEW;?></a>
 			</div>
 			<?php 
-			if($session->checkRights("create_event")) {
-				?><div class="menuElement subElement" data-destination="event/new">
-					<a href="<?php echo URL;?>/event/new"><?php echo HEADER_MENU_ITEM_EVENT_CREATE;?></a>
+			if($session->checkRights("edit_event_clients")) {
+				?><div class="menuElement subElement" data-destination="events/clients">
+					<a href="<?php echo URL;?>/events/clients"><?php echo HEADER_MENU_ITEM_EVENT_CLIENT;?></a>
 				</div><?php
 			}
-			
 			if($session->checkRights("edit_event_locations")) {
-				?><div class="menuElement subElement" data-destination="event/locations">
-					<a href="<?php echo URL;?>/event/locations"><?php echo HEADER_MENU_ITEM_EVENT_LOCATIONS;?></a>
+				?><div class="menuElement subElement" data-destination="events/locations">
+					<a href="<?php echo URL;?>/events/locations"><?php echo HEADER_MENU_ITEM_EVENT_LOCATIONS;?></a>
 				</div><?php
 			}?>
 			
@@ -322,9 +335,9 @@ $( document ).ready(function() {
 			<a href="<?php echo URL;?>/settings/notifications"><?php echo HEADER_MENU_ITEM_SETTINGS_NOTIFICATIONS;?></a>
 		</div>
 		<?php 
-		if($session->checkRights("create_user")) {
-			?><div class="menuElement subElement" data-destination="settings/user/new">
-				<a href="<?php echo URL;?>/settings/user/new"><?php echo HEADER_MENU_ITEM_SETTINGS_CREATE_USER;?></a>
+		if($session->checkRights("edit_tags")) {
+			?><div class="menuElement subElement" data-destination="settings/tags">
+				<a href="<?php echo URL;?>/settings/tags"><?php echo HEADER_MENU_ITEM_SETTINGS_TAGS;?></a>
 			</div><?php
 		}
 		

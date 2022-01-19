@@ -31,6 +31,8 @@ foreach($users as $tmpUser) {
 		$notifications = Notification::getAllNotificationsForUser($user->getID(),True);
 		
 		$userNotificationString = "";
+		
+		print_r($notifications);
 
 		foreach($notifications as $tmpNotification) {
 			$notification = new Notification;

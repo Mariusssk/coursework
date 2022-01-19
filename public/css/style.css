@@ -441,7 +441,8 @@ header.header .mobileHeader .fa-user-circle-o {
 	width: 100%;
 }
 
-.menuContainer .desktopMenuContainer .menuElement a{
+.menuContainer .desktopMenuContainer .menuElement a,
+.menuContainer .desktopMenuContainer .menuElement span{
 	color: white;
 	text-decoration: none;
 	width: 100%;
@@ -453,12 +454,14 @@ header.header .mobileHeader .fa-user-circle-o {
 	background-color: #2271b1;
 }
 
-.menuContainer .desktopMenuContainer .menuElement.selected:hover a{
+.menuContainer .desktopMenuContainer .menuElement.selected:hover a,
+.menuContainer .desktopMenuContainer .menuElement.selected:hover span{
 	color: white;
 	font-weight: bold;
 }
 
-.menuContainer .desktopMenuContainer .menuElement:hover a{
+.menuContainer .desktopMenuContainer .menuElement:hover a,
+.menuContainer .desktopMenuContainer .menuElement:hover span{
 	color: #448cf7;
 }
 
@@ -509,7 +512,8 @@ header.header .mobileHeader .fa-user-circle-o {
 	background-color: #2271b1;
 }
 
-.menuContainer .mobileMenuContainer .menuElement a{
+.menuContainer .mobileMenuContainer .menuElement a,
+.menuContainer .mobileMenuContainer .menuElement span {
 	text-decoration: none;
 	color: white;
 	width: 80%;

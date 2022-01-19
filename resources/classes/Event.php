@@ -1,6 +1,6 @@
 <?php
 
-class Event extends ObjectType {
+class Event extends SystemClass {
 	
 	protected $event_id, $name, $event_client_id, $event_location_id, $start_time, $end_time, $description;
 	
