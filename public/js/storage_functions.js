@@ -195,6 +195,8 @@ function deleteStorage(storageID,action = "check") {
 				redirect(URL+"/storage");
 			}  else if(dataCut == "childsExisiting") {
 				headerNotification(LANG.STORAGE_DELETE_CHILD_EXISTING,"red");
+			} else {
+				console.log(data);
 			}
 		});
 	} else if(action == "abort") {
