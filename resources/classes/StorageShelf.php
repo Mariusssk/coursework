@@ -1,4 +1,5 @@
 <?php
+//-----------------New PHP Class File---------------------
 
 class StorageShelf extends Storage {
 	
@@ -57,4 +58,5 @@ class StorageShelf extends Storage {
 	}
 
 }
+?>
 

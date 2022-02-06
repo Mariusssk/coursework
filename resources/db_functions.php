@@ -1,5 +1,10 @@
 <?php
 
+//-----------------Config File---------------------
+//DB Config File
+//File managing requests to database and preventing sql injections
+//-----------------Config File---------------------
+
 function pdSelect($sql,$mysqli,$type = "",$params_a = array()) {
 	
 	try {
@@ -113,4 +118,4 @@ function pdLastID($mysqli) {
 	
 	return($lastID);
 	
-}
+}?>

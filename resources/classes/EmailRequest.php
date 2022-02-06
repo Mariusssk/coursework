@@ -1,5 +1,7 @@
 <?php
 
+//-----------------New PHP Class File---------------------
+
 class EmailRequest extends SystemClass {
 	
 	protected $email_request_id, $email_request_type_id , $user_id, $code, $request_created, $request_expiry, $verified;
@@ -218,3 +220,4 @@ class EmailRequest extends SystemClass {
 	}
 	
 }
+?>

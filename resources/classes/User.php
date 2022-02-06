@@ -1,4 +1,5 @@
 <?php
+//-----------------New PHP Class File---------------------
 
 class User extends SystemClass {
 	
@@ -322,6 +323,5 @@ class User extends SystemClass {
 		}
 		return(False);
 	}
-	
-	
 }
+?>

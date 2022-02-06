@@ -1,4 +1,5 @@
 <?php
+//-----------------New PHP Class File---------------------
 
 class ToDoCategory extends ObjectType {
 	
@@ -123,4 +124,4 @@ class ToDoCategory extends ObjectType {
 		return(False);
 	}
 	
-}
+}?>

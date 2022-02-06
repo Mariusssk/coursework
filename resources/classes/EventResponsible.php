@@ -1,4 +1,5 @@
 <?php
+//-----------------New PHP Class File---------------------
 
 class EventResponsible extends SystemClass {
 	
@@ -101,5 +102,5 @@ class EventResponsible extends SystemClass {
 		}
 		return(False);
 	}
-	
 }
+?>

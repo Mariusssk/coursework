@@ -1,5 +1,9 @@
 <?php
 
+//-----------------New Page---------------------
+//Verify page / verify e-mail adress / reset password page
+//-----------------New Page---------------------
+
 include_once("../resources/config.php");
 
 include(TEMPLATES."/header/header_basic.php");

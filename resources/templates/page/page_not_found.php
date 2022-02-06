@@ -1,5 +1,11 @@
 <?php
 
+//-----------------Template File---------------------
+//File will be included in other files and most focusses on style and not on processing data
+//Full page when page not found
+//-----------------Template File---------------------
+
+
 include(TEMPLATES."/header/header_basic.php");
 
 ?>
@@ -18,3 +24,5 @@ include(TEMPLATES."/header/header_basic.php");
 <?php
 
 include(TEMPLATES."/footer/footer.php");
+
+?>

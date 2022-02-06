@@ -1,7 +1,7 @@
 <?php
-
-//Basic functions
-
+//-----------------Config File---------------------
+//Very basic functions
+//-----------------Config File---------------------
 
 //redirect to new page
 

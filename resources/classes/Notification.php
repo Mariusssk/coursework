@@ -1,4 +1,5 @@
 <?php
+//-----------------New PHP Class File---------------------
 
 class Notification extends SystemClass{
 	
@@ -182,6 +183,5 @@ class Notification extends SystemClass{
 		$now = new DateTime();
 		$this->time_posted = $now->format("Y-m-d H:i:s");
 	}
-
-	
 }
+?>

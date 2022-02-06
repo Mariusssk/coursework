@@ -1,3 +1,10 @@
+<!--
+//-----------------Template File---------------------
+//File will be included in other files and most focusses on style and not on processing data
+//Website small header (for pages as login)
+//-----------------Template File---------------------
+-->
+
 <!-- Basics -->
 
 	<?php include(TEMPLATES."/header/header_basic.php");?>

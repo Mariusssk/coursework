@@ -1,5 +1,5 @@
 
-<!-- Java Script language data -->
+<!-- Java Script language data (english)-->
 
 
 <script>

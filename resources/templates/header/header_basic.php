@@ -1,5 +1,11 @@
 <?php
 
+//-----------------Template File---------------------
+//File will be included in other files and most focusses on style and not on processing data
+//Website basic header (js/css file import)
+//-----------------Template File---------------------
+
+
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);

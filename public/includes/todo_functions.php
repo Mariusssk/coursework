@@ -1,5 +1,9 @@
 <?php
 
+//-----------------New PHP Functions File---------------------
+//File for all functions for the to-do lists
+//-----------------New PHP Functions File---------------------
+
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
@@ -538,3 +542,4 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 }
 
 ob_flush();
+?>

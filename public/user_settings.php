@@ -1,5 +1,9 @@
 <?php
 
+//-----------------New Page---------------------
+//Settings Page (edit user, edit roles, view role rights, etc)
+//-----------------New Page---------------------
+
 include_once("../resources/config.php");
 
 //check if user is logged-in
@@ -306,3 +310,4 @@ if($session->loggedIn() === True) {
 	include(TEMPLATES."/page/login_needed.php");
 }
 
+?>

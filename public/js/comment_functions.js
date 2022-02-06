@@ -1,3 +1,8 @@
+//-----------------New JS Functions File---------------------
+//JS functions for the comment section
+//-----------------New JS Functions File---------------------
+
+
 //load comment container
 
 //Objective 6.3/7.5

@@ -1,5 +1,9 @@
-//load all items 
+//-----------------New JS Functions File---------------------
+//JS functions for the items/hardware
+//-----------------New JS Functions File---------------------
 
+//load all items 
+//Objective 4
 function loadItems(displayType = "") {
 	
 	var search = {};
@@ -70,6 +74,8 @@ function loadItems(displayType = "") {
 	});
 }
 
+//Display items is correct format
+//Objective 4
 
 function displayItems(data) {
 	var items = "";
@@ -96,6 +102,9 @@ function displayItems(data) {
 	return(items);
 }
 
+//Displays item in a view only way
+//Objective 4
+
 function displayView(data) {
 	var items = "";
 	
@@ -121,6 +130,9 @@ function displayView(data) {
 	return(items);
 }
 
+//Displays item for the consumeable pageXOffset
+//Objective 4.4
+
 function displayConsumeable(data) {
 	var items = "";
 	
@@ -141,6 +153,9 @@ function displayConsumeable(data) {
 	//return the display data
 	return(items);
 }
+
+//Display items on lend page
+//Objective 4.5
 
 function displayLend(data) {
 	var items = "";
@@ -167,6 +182,8 @@ function displayLend(data) {
 	return(items);
 }
 
+//Display items on page for selecting items to lend
+//Objective 4.5
 function displayAddLend(data) {
 	var items = "";
 	
@@ -188,7 +205,7 @@ function displayAddLend(data) {
 }
 
 //Change amount of item 
-
+//Objective 4.1.1
 function changeItemAmount(itemID, amount = 0, attribute) {
 	//Send attributes to php script for changing db values
 	$.post(INCLUDES+"/item_functions.php",{
@@ -218,7 +235,7 @@ function changeItemAmount(itemID, amount = 0, attribute) {
 }
 
 //return item which was lended
-
+//Objective 4.5.1.4
 function returnItemLend(itemID) {
 	//send request to php to return item which was lend
 	$.post(INCLUDES+"/item_functions.php",{
@@ -242,7 +259,7 @@ function returnItemLend(itemID) {
 }
 
 //change return date
-
+//Objective 4.5.1.3
 function changeReturnDate(itemID) {
 	//find html elemnts on page
 	var returnDateField = document.querySelector(".page.item.lended #itemList .generalTableContentRow[data-item-id='"+itemID+"'] .returnDate");
@@ -288,13 +305,11 @@ function changeReturnDate(itemID) {
 }
 
 //redirect to page of item
-
 function viewItem(ID) {
 	redirect(URL+"/item/edit/"+ID);
 }
 
 //set colour for consumable depending on amount
-
 function setConsumableColour() {
 	//load all consumable rows
 	var amounts = document.querySelectorAll('.consumable [data-item-id].generalTableContentRow');
@@ -332,7 +347,7 @@ function removeConsumableColours(amountField) {
 }
 
 //open lend item form
-
+//Objective 4.5
 function lendNewItem(itemID) {
 	var newLendContainer = document.querySelector(".page.item.addLend .lendNewItemConatiner");
 	
@@ -359,7 +374,7 @@ function lendNewItem(itemID) {
 }
 
 //submit lend item form
-
+//Objective 4.5
 function submitLendItem() {
 	var newLendContainer = document.querySelector(".page.item.addLend .lendNewItemConatiner");
 	
@@ -391,8 +406,8 @@ function submitLendItem() {
 }
 
 
-//delete storage
-
+//delete item
+//Objective 4.1.2
 function deleteItem(itemID,action = "check") {
 	//check stage of deleting
 	if(action == "check") {
@@ -425,7 +440,7 @@ function deleteItem(itemID,action = "check") {
 }
 
 //save data 
-
+//Objective 4.1.1
 function saveItemData(itemID) {
 	
 	var itemData = {};
@@ -481,7 +496,7 @@ function saveItemData(itemID) {
 }
 
 //Open page to add lend
-
+//Objective 4.5
 function addLendItem(returnHome = 0) {
 	if(returnHome == 0) {
 		redirect(URL+"/item/lend/add");
@@ -494,6 +509,7 @@ function addLendItem(returnHome = 0) {
 
 $(document).ready(function() {
 	//detect enter on search
+	//Objective 4.6
 	$(".page.item.overview .searchInput").on('keyup', function (e) {
 		if (e.key === 'Enter' || e.keyCode === 13) {
 			loadItems();

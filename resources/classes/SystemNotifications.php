@@ -1,4 +1,5 @@
 <?php
+//-----------------New PHP Class File---------------------
 
 class SystemNotifications extends SystemClass {
 	
@@ -73,4 +74,4 @@ class SystemNotifications extends SystemClass {
 	}
 	
 	
-}
+}?>

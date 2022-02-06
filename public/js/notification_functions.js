@@ -1,5 +1,9 @@
-//resend email to confirm email
+//-----------------New JS Functions File---------------------
+//JS functions for the notifications
+//-----------------New JS Functions File---------------------
 
+//resend email to confirm email
+//Objective 9.6.1
 function sendConfirmEmail(type) {
 	$.post(INCLUDES+"/notification_functions.php",{
 		requestType: "sendConfirmEmail",
@@ -20,8 +24,8 @@ function sendConfirmEmail(type) {
 	});
 }
 
-//Load all personal notifications of userAgent
-
+//Load all personal notifications of user
+//Object 11
 function loadPersonalNotifications() {
 	$.post(INCLUDES+"/notification_functions.php",{
 		requestType: "loadPersonalNotifications"
@@ -82,7 +86,7 @@ function loadPersonalNotifications() {
 }
 
 //Mark the notifications as read
-
+//Objective 11.6
 function markNotificationsAsRead() {
 	$.post(INCLUDES+"/notification_functions.php",{
 		requestType: "markNotificationsAsRead"
@@ -102,7 +106,7 @@ function markNotificationsAsRead() {
 }
 
 //Load list of all notification requests 
-
+//Objective 11.3
 function loadNotificationRequestList() {
 	
 	var requestTypeID = document.querySelector('.page.notifications.requestList .searchInput[data-search-name="typeID"]').value;

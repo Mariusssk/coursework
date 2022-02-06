@@ -1,5 +1,10 @@
 <?php
 
+//-----------------Template File---------------------
+//File will be included in other files and most focusses on style and not on processing data
+//e-mail header template
+//-----------------Template File---------------------
+
 namespace Template\Email;
 
 function getEmailHeader($type = "") {
@@ -52,3 +57,4 @@ HTML;
 	 
 	return($header);
 }
+?>

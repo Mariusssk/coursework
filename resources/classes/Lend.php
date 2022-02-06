@@ -1,4 +1,5 @@
 <?php
+//-----------------New PHP Class File---------------------
 
 class Lend extends SystemClass {
 	
@@ -197,3 +198,4 @@ class Lend extends SystemClass {
 		return(False);
 	}
 }
+?>

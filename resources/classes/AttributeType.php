@@ -1,5 +1,7 @@
 <?php
 
+//-----------------New PHP Class File---------------------
+
 class AttributeType {
 	
 	//create select for all attribute types
@@ -39,3 +41,5 @@ class AttributeType {
 		
 	}
 }
+
+?>

@@ -1,5 +1,4 @@
-
-<!-- Java Script language data -->
+<!-- Java Script language data (German)-->
 
 
 <script>

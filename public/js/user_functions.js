@@ -1,12 +1,18 @@
+//-----------------New JS Functions File---------------------
+//JS functions for the user
+//-----------------New JS Functions File---------------------
+
 //Run on load
 
 $(document).ready(function() {
+	//check if user presses enter on login form
 	$(".loginFormOverlay .generalDataInput").on('keyup', function (e) {
 		if (e.key === 'Enter' || e.keyCode === 13) {
 			submitLogin();
 		}
 	});
 	
+	//check if page needs login
 	if (typeof protectedPage !== 'undefined' && protectedPage == true) {
 		setLoginOverlay();
 		setInterval(function(){ 
@@ -16,7 +22,7 @@ $(document).ready(function() {
 });
 
 //login user
-
+//Objective 3.3
 function submitLogin() {
 	//get form data
 	var username = document.querySelector('.loginFormOverlay .generalDataInput[data-input-name="username"]').value;
@@ -56,7 +62,7 @@ function submitLogin() {
 }
 
 //display password reset request form
-
+//Objective 9.7
 function passwordResetForm() {
 
 	var loginContainers = document.querySelectorAll(".loginForm");
@@ -75,7 +81,7 @@ function passwordResetForm() {
 }
 
 //request password reset 
-
+//Objective 9.7
 function requestPasswordReset(e) {
 	var resetContainer = e.parentNode;
 	var username = resetContainer.querySelector("input[data-input-name='resetUsername']").value;
@@ -97,7 +103,7 @@ function requestPasswordReset(e) {
 
 
 //login user
-
+//Objective 3.3
 function submitLogout() {
 	//send new lang to php
 	$.post(INCLUDES+"/post_functions.php",{
@@ -123,7 +129,7 @@ function changeLang(lang) {
 }
 
 //Check if user logged-in on protected page
-
+//Objective 3.3
 function setLoginOverlay(redirectLogin = false) {
 	//request login status from php
 	$.post(INCLUDES+"/post_functions.php",{
@@ -152,6 +158,7 @@ function setLoginOverlay(redirectLogin = false) {
 }
 
 //reset password 
+//Objective 9.7
 function resetPassword() {
 	var passwordInputs = document.querySelectorAll(".page .passwordResetContainer .generalInput");
 	var passwordA = "";
@@ -209,7 +216,7 @@ function resetPassword() {
 
 
 //Load list of all user roles
-
+//Objective 9.2
 function loadRoles() {
 	var name = document.querySelector('.page.role.roleList .searchInput[data-search-name="roleName"]').value;
 
@@ -297,7 +304,7 @@ function editRole(roleID) {
 }
 
 //Delete user role/display delete form
-
+//Objective 9.2
 function deleteRole(action = "", roleID = 0) {
 	var containerV1 = document.querySelector(".page.role.editRole .questionDeleteButton");
 	var containerV2 = document.querySelector(".page.role.editRole .deleteButtons");
@@ -334,7 +341,7 @@ function deleteRole(action = "", roleID = 0) {
 }
 
 //Create new template of role 
-
+//Objective 9.2
 function createNewRole() {
 	$.post(INCLUDES+"/user_functions.php",{
 		requestType: "createNewRole"
@@ -356,7 +363,7 @@ function createNewRole() {
 }
 
 //save data of role after edit
-
+//Objective 9.2
 function saveRoleData(roleID) {
 	var rights = {};
 	
@@ -401,7 +408,7 @@ function saveRoleData(roleID) {
 
 
 //load list of all users
-
+//Objective 9.3
 function loadUserList() {
 	var listContainer = document.querySelector(".page.user.list .userList");
 	
@@ -490,7 +497,7 @@ function deleteUserDataForm() {
 }
 
 //delete user
-
+//Objective 9.3
 function deleteUser(userID) {
 	$.post(INCLUDES+"/user_functions.php",{
 		requestType: "deleteUser",
@@ -516,7 +523,7 @@ function deleteUser(userID) {
 }
 
 //save user data
-	
+//Objective 9.3
 function saveUserData() {
 	var inputs = {};
 	

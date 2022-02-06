@@ -1,4 +1,8 @@
 <?php
+//-----------------CRON JOB File---------------------
+//This file is exectuded every 5 minutes to send out the notification emails
+//-----------------CRON JOB File---------------------
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -88,3 +92,4 @@ foreach($users as $tmpUser) {
 		}
 	}
 }
+?>

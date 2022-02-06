@@ -1,5 +1,11 @@
 <?php
 
+//-----------------Template File---------------------
+//File will be included in other files and most focusses on style and not on processing data
+//Website Menu
+//-----------------Template File---------------------
+
+
 $URL = $_SERVER['REQUEST_URI'];
 
 $URL = str_replace(URL_PATH,"",$URL);

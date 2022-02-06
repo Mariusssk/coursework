@@ -1,3 +1,7 @@
+//-----------------New JS Functions File---------------------
+//Genrals JS Functions
+//-----------------New JS Functions File---------------------
+
 
 //Basic standard functions
 	

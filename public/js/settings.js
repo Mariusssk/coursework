@@ -1,5 +1,9 @@
-//save personal data of user
+//-----------------New JS Functions File---------------------
+//JS functions for the settings section
+//-----------------New JS Functions File---------------------
 
+//save personal data of user
+//Objective 9.4
 function saveUserPersonalData() {
 	
 	//select all inputs
@@ -44,7 +48,7 @@ function saveUserPersonalData() {
 }
 
 //Change password
-
+//Objective 9.7
 function changePassword() {
 	$.post(INCLUDES+"/settings_functions.php",{
 		requestType: "changePassword"
@@ -71,7 +75,7 @@ function changePassword() {
 
 
 //verify code of email request 
-
+//Objective 9.6/9.7
 function verifyEmailRequest() {
 	var container = document.querySelector(".page.verify .verifyData");
 	var code = document.getElementById("verifyCode").value;

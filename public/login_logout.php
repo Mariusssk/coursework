@@ -1,5 +1,9 @@
 <?php
 
+//-----------------New Page---------------------
+//Login/Logout Page
+//-----------------New Page---------------------
+
 include_once("../resources/config.php");
 
 //check if user is already logged-in
@@ -28,4 +32,4 @@ if(isset($_GET['request']) AND $_GET['request'] == "logout") {
 	include(TEMPLATES."/page/login.php");
 }
 
-
+?>

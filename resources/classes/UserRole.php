@@ -1,4 +1,5 @@
 <?php
+//-----------------New PHP Class File---------------------
 
 class UserRole extends ObjectType {
 	
@@ -96,5 +97,5 @@ class UserRole extends ObjectType {
 		}
 		return(False);
 	}
-	
 }
+?>

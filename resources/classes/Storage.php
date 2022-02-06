@@ -1,4 +1,5 @@
 <?php
+//-----------------New PHP Class File---------------------
 
 class Storage extends SystemClass {
 	
@@ -239,5 +240,5 @@ class Storage extends SystemClass {
 		}
 		return(False);
 	}
-	
 }
+?>

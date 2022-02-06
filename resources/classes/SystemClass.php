@@ -1,5 +1,5 @@
 <?php
-
+//-----------------New PHP Class File---------------------
 
 class SystemClass {
 	
@@ -247,4 +247,4 @@ class SystemClass {
 		//return merged results
 		return($object->mergeResult($entrys));
 	}
-}
+}?>

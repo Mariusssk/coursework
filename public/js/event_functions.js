@@ -1,3 +1,7 @@
+//-----------------New JS Functions File---------------------
+//JS functions for the events
+//-----------------New JS Functions File---------------------
+
 //CLient Lits
 
 //load list of all clients

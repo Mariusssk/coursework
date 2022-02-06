@@ -1,5 +1,9 @@
-//Load list of all notification requests 
+//-----------------New JS Functions File---------------------
+//JS functions for the tags
+//-----------------New JS Functions File---------------------
 
+//Load list of all notification requests 
+//Objective 8
 function loadTagList() {
 	
 	var tagName = document.querySelector('.page.tags.tagList .searchInput[data-search-name="tagName"]').value;
@@ -83,7 +87,7 @@ function loadTagList() {
 }
 
 //Display form to edit tag
-
+//Objective 8.1
 function editTagForm(tagID) {
 	var tagContainer = document.querySelector('.page.tags.tagList .tagContainer[data-request-id="'+tagID+'"]');
 	
@@ -131,7 +135,7 @@ function editTagForm(tagID) {
 }
 
 //Delete tag form and submit
-
+//Objective 8
 function deleteTag(tagID) {
 	var tagContainer = document.querySelector('.page.tags.tagList .tagContainer[data-request-id="'+tagID+'"]');
 	
@@ -175,7 +179,7 @@ function deleteTag(tagID) {
 }
 
 //save tag data
-
+//Objective 8
 function saveTagData(tagID) {
 	var tagContainer = document.querySelector('.page.tags.tagList .tagContainer[data-request-id="'+tagID+'"]');
 	
@@ -212,7 +216,7 @@ function saveTagData(tagID) {
 }
 
 //Create a new tag
-
+//Objective 8
 function createNewTag() {
 	$.post(INCLUDES+"/settings_functions.php",{
 		requestType: "createNewTag"

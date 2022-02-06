@@ -1,4 +1,5 @@
 <?php
+//-----------------New PHP Class File---------------------
 
 class NotificationRequest extends SystemClass {
 	
@@ -191,3 +192,4 @@ class NotificationRequest extends SystemClass {
 		return("");
 	}
 }
+?>

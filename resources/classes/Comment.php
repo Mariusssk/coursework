@@ -1,5 +1,7 @@
 <?php
 
+//-----------------New PHP Class File---------------------
+
 class Comment extends SystemClass {
 	
 	protected $comment_id , $user_id, $attribute_type_id, $attribute_id, $data, $posting_date;
@@ -118,6 +120,6 @@ class Comment extends SystemClass {
 		}
 		return(False);
 	}
-	
-	
 }
+
+?>

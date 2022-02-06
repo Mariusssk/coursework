@@ -1,4 +1,5 @@
 <?php
+//-----------------New PHP Class File---------------------
 
 class ObjectType extends SystemClass {
 	
@@ -62,7 +63,5 @@ class ObjectType extends SystemClass {
 		return($post);
 		
 	}
-	
 }
-		
-	
+?>	

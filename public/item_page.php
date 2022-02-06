@@ -1,5 +1,9 @@
 <?php
 
+//-----------------New Page---------------------
+//Item/ Hardware Page (create, edit, etc);
+//-----------------New Page---------------------
+
 include_once("../resources/config.php");
 
 //check if user is logged-in
@@ -324,3 +328,4 @@ if($session->loggedIn() === True) {
 	include(TEMPLATES."/page/login_needed.php");
 }
 
+?>

@@ -1,9 +1,14 @@
+//-----------------New File---------------------
+//DATABASE export during test
+//-----------------New File---------------------
+
+
 -- phpMyAdmin SQL Dump
 -- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 06. Dez 2021 um 11:40
+-- Erstellungszeit: 06. Feb 2022 um 16:04
 -- Server-Version: 8.0.25
 -- PHP-Version: 8.0.6
 
@@ -20,21 +25,6 @@ SET time_zone = "+00:00";
 --
 -- Datenbank: `aulatechnik_db`
 --
-
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `attachment`
---
-
-CREATE TABLE `attachment` (
-  `attachment_id` int NOT NULL,
-  `attribute_type_id` int NOT NULL,
-  `attribute_id` int NOT NULL,
-  `uploaded` datetime NOT NULL,
-  `file_type` varchar(16) NOT NULL,
-  `file_name` varchar(2048) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -71,13 +61,6 @@ CREATE TABLE `comment` (
   `posting_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Daten für Tabelle `comment`
---
-
-INSERT INTO `comment` (`comment_id`, `user_id`, `attribute_type_id`, `attribute_id`, `data`, `posting_date`) VALUES
-(53, 1, 3, 25, 'ddd', '2021-11-29 16:25:35');
-
 -- --------------------------------------------------------
 
 --
@@ -93,23 +76,6 @@ CREATE TABLE `email_request` (
   `request_expiry` datetime NOT NULL,
   `verified` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Daten für Tabelle `email_request`
---
-
-INSERT INTO `email_request` (`email_request_id`, `email_request_type_id`, `user_id`, `code`, `request_created`, `request_expiry`, `verified`) VALUES
-(50, 1, 1, '8E988E61BA3F0BDAB3B31FD91DEF7DFD3A4EDF00', '2021-07-22 07:07:54', '2021-07-23 07:07:54', 1),
-(51, 3, 1, '1234', '2021-07-22 09:38:08', '2021-07-23 09:38:08', 1),
-(56, 2, 1, 'E59F7C41D74C112F3B29DF778D10B2D21D74A791', '2021-07-27 10:39:02', '2021-07-28 10:39:02', 1),
-(64, 3, 1, 'D680BF08977C7CE2B8E9513CEB65852DCE77629E', '2021-09-22 15:19:57', '2021-09-23 15:19:57', 1),
-(65, 3, 1, '36B13741007D185CB0EF36A5C058374B78C1FA4B', '2021-09-22 15:22:21', '2021-09-23 15:22:21', 1),
-(66, 3, 1, '398D4E403E7114B243741D297D22C26A5B74883C', '2021-09-22 15:23:42', '2021-09-23 15:23:42', 1),
-(78, 1, 1, 'B866F2794183E7D958464B7CF7FFAED89C01A067', '2021-09-24 10:17:40', '2021-09-25 10:17:40', 1),
-(79, 2, 1, '5E1546445E72C5D98D8C72066E08EDA36A9F678E', '2021-09-24 10:18:10', '2021-09-25 10:18:10', 1),
-(80, 1, 4, '8499CDE6BD55BAEACED1C71CE085763B7C7C5ED0', '2021-11-22 13:39:49', '2021-11-23 13:39:49', 1),
-(81, 3, 4, 'E7BA43773B09C43E8FC825A85E0FED68D30D592F', '2021-11-22 13:40:34', '2021-11-23 13:40:34', 1),
-(83, 2, 1, '98D5B1045E0421D13D06636C9E20EEC0B1CCDF2B', '2021-11-29 16:34:16', '2021-11-30 16:34:16', 1);
 
 -- --------------------------------------------------------
 
@@ -147,13 +113,6 @@ CREATE TABLE `event` (
   `description` mediumtext
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Daten für Tabelle `event`
---
-
-INSERT INTO `event` (`event_id`, `name`, `event_client_id`, `event_location_id`, `start_time`, `end_time`, `description`) VALUES
-(1, 'Event A', 1, 1, '2021-10-03 18:00:08', '2021-10-04 17:00:08', 'Testevent');
-
 -- --------------------------------------------------------
 
 --
@@ -163,7 +122,7 @@ INSERT INTO `event` (`event_id`, `name`, `event_client_id`, `event_location_id`,
 CREATE TABLE `event_client` (
   `event_client_id` int NOT NULL,
   `name` varchar(256) NOT NULL,
-  `description` varchar(1024) DEFAULT NULL,
+  `description` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `external` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -172,7 +131,7 @@ CREATE TABLE `event_client` (
 --
 
 INSERT INTO `event_client` (`event_client_id`, `name`, `description`, `external`) VALUES
-(1, 'Testclient', NULL, 0);
+(7, 'Drama Department', 'Teacher: Mr X\nE-Mail: mrx@school.com\nOnly in school mon-wed\n\nOffice: Room 46\nClassroom: Room 45', 0);
 
 -- --------------------------------------------------------
 
@@ -182,15 +141,16 @@ INSERT INTO `event_client` (`event_client_id`, `name`, `description`, `external`
 
 CREATE TABLE `event_location` (
   `event_location_id` int NOT NULL,
-  `name` varchar(256) NOT NULL
+  `name` varchar(256) NOT NULL,
+  `description` mediumtext
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Daten für Tabelle `event_location`
 --
 
-INSERT INTO `event_location` (`event_location_id`, `name`) VALUES
-(1, 'Testlocation');
+INSERT INTO `event_location` (`event_location_id`, `name`, `description`) VALUES
+(5, 'Hall', NULL);
 
 -- --------------------------------------------------------
 
@@ -225,10 +185,10 @@ CREATE TABLE `item` (
 --
 
 INSERT INTO `item` (`item_id`, `item_type_id`, `storage_id`, `name`, `lenght`, `description`, `amount`) VALUES
-(1, 1, NULL, 'DMX 10m Kabel', '10m', '', 0),
-(2, 3, NULL, 'Glühbirne 10W', NULL, NULL, 7),
-(3, 9, NULL, 'Glühbirne 10a', NULL, NULL, 4),
-(8, 6, 4, 'eed', '4', 'ee', 2);
+(9, 9, 15, 'Duct tape', NULL, NULL, 5),
+(10, 3, 12, 'Lightbulb 10A', NULL, 'Lightbulb with a 10A socket fitting in most stage lights produced by thomann', 2),
+(11, 1, 16, 'DMX Cable', '10', 'DMX Cable to connect speakers', 14),
+(12, 2, NULL, 'Stage Light Big', NULL, 'Stage light used as a spot', 2);
 
 -- --------------------------------------------------------
 
@@ -278,12 +238,7 @@ CREATE TABLE `lend` (
 --
 
 INSERT INTO `lend` (`lend_id`, `user_id`, `item_id`, `amount`, `return_date`, `returned`) VALUES
-(1, 1, 1, 24, '2021-09-22', 1),
-(3, 1, 2, 5, '2021-09-10', 1),
-(6, 1, 8, 15, NULL, 1),
-(7, 1, 8, 10, '2021-10-07', 1),
-(8, 1, 3, 3, '2021-09-23', 1),
-(9, 1, 2, 3, '2021-11-26', 1);
+(11, 1, 12, 1, '2022-02-11', 0);
 
 -- --------------------------------------------------------
 
@@ -334,13 +289,14 @@ CREATE TABLE `storage` (
 --
 
 INSERT INTO `storage` (`storage_id`, `storage_parent_id`, `storage_type_id`, `name`, `size_x`, `size_y`) VALUES
-(1, NULL, 1, 'Lager', NULL, NULL),
-(2, 1, 2, 'Regal A', 5, 5),
-(4, NULL, 1, 'Kellerr', NULL, NULL),
-(5, NULL, 1, 'Regie', NULL, NULL),
-(6, 2, 3, 'Box C', 3, 4),
-(7, 2, 3, 'Box B', 0, 0),
-(8, 2, 3, 'Box E', 5, 5);
+(10, NULL, 1, 'Backstage', NULL, NULL),
+(11, 10, 2, 'Server Rack', 1, 5),
+(12, 10, 2, 'Grey Shelf', 5, 4),
+(13, 11, 3, 'Server Rack A', 1, 1),
+(14, 11, 3, 'Server Rack B', 1, 3),
+(15, 12, 3, 'Box A', 3, 2),
+(16, 12, 3, 'Box B', 0, 0),
+(17, 10, 2, 'Storage A', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -380,7 +336,7 @@ CREATE TABLE `tag` (
 --
 
 INSERT INTO `tag` (`tag_id`, `name`, `colour`) VALUES
-(1, 'Tag A', '#b3a400'),
+(1, 'Tag A', '#04a400'),
 (3, 'Tag B', '#e11414');
 
 -- --------------------------------------------------------
@@ -395,15 +351,6 @@ CREATE TABLE `tag_assignment` (
   `attribute_type_id` int NOT NULL,
   `attribute_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Daten für Tabelle `tag_assignment`
---
-
-INSERT INTO `tag_assignment` (`tag_assignment_id`, `tag_id`, `attribute_type_id`, `attribute_id`) VALUES
-(17, 1, 3, 22),
-(19, 1, 3, 25),
-(20, 3, 3, 25);
 
 -- --------------------------------------------------------
 
@@ -425,8 +372,7 @@ CREATE TABLE `todo_list` (
 --
 
 INSERT INTO `todo_list` (`todo_list_id`, `event_id`, `user_id`, `todo_list_category_id`, `created`, `name`) VALUES
-(22, NULL, 1, 10, '2021-11-19 09:36:16', 'New ToDo List'),
-(25, NULL, NULL, NULL, '2021-11-29 16:25:30', 'New ToDo List');
+(26, NULL, NULL, NULL, '2022-02-04 14:57:26', 'Change lights for drama');
 
 -- --------------------------------------------------------
 
@@ -445,8 +391,8 @@ CREATE TABLE `todo_list_category` (
 --
 
 INSERT INTO `todo_list_category` (`todo_list_category_id`, `user_id`, `name`) VALUES
-(9, NULL, 'Important'),
-(10, 1, 'ToDo');
+(11, NULL, 'Important'),
+(12, 1, 'School');
 
 -- --------------------------------------------------------
 
@@ -467,8 +413,8 @@ CREATE TABLE `todo_list_entry` (
 --
 
 INSERT INTO `todo_list_entry` (`todo_list_entry_id`, `todo_list_id`, `parent_entry_id`, `name`, `checked`) VALUES
-(27, 22, NULL, 'Test', 0),
-(28, 22, 27, 'dd', 0);
+(30, 26, NULL, 'Take down old lights', 0),
+(31, 26, NULL, 'Put up new lights', 0);
 
 -- --------------------------------------------------------
 
@@ -495,9 +441,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `role_id`, `created`, `active`, `email`, `school_email`, `username`, `firstname`, `lastname`, `password`, `preferred_language`) VALUES
-(1, 1, '2021-07-17 14:37:37', 1, 'marius.kauling@web.de', 'tom.kauling2003@gmail.com', 'MariusSK', 'Marius', 'Kauling', '$2y$10$yK.JVni/OgagG74pr3M2peIofqi27Mv/VUFRB5d2wOQLPr/jl6Huy', 'de'),
-(3, 2, '2021-07-27 14:37:37', 1, 'test@test.de', '', 'Testuser', 'Max', 'Musteruser', '$2y$10$m9OqD4pei9Uclhl2y4GLk.XkBf/5v6lbPQK.x3JlLEZHvwssRle1O', 'de'),
-(4, 1, '2021-11-19 14:50:28', 1, 'aulatechnik_system@color-site-web.de', NULL, 'test1', 'test', 'test', '$2y$10$swNssKhmC5WLPDQ8nPaPD.hIUroE3MowKu0v75sas66NjNjf1WLRy', 'de');
+(1, 1, '2021-07-17 14:37:37', 1, 'joe.bloggs@info.com', NULL, 'JoeB', 'Joe ', 'Bloggs', '$2y$10$yK.JVni/OgagG74pr3M2peIofqi27Mv/VUFRB5d2wOQLPr/jl6Huy', 'de');
 
 -- --------------------------------------------------------
 
@@ -522,6 +466,7 @@ CREATE TABLE `user_role` (
   `delete_all_events` tinyint(1) NOT NULL,
   `delete_own_events` tinyint(1) NOT NULL,
   `edit_event_locations` tinyint(1) NOT NULL,
+  `edit_event_clients` tinyint(1) NOT NULL,
   `create_global_todo_list` tinyint(1) NOT NULL,
   `edit_all_todo_lists` tinyint(1) NOT NULL,
   `view_all_todo_lists` tinyint(1) NOT NULL,
@@ -540,31 +485,20 @@ CREATE TABLE `user_role` (
   `view_storages` tinyint(1) NOT NULL,
   `view_items_specific_storage` tinyint(1) NOT NULL,
   `comment_everything` tinyint(1) NOT NULL,
-  `comment_own` tinyint(1) NOT NULL,
-  `upload_attachment` tinyint(1) NOT NULL,
-  `view_attachments` tinyint(1) NOT NULL,
-  `delete_attachment` tinyint(1) NOT NULL
+  `comment_own` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Daten für Tabelle `user_role`
 --
 
-INSERT INTO `user_role` (`user_role_id`, `name`, `pre_defined`, `create_user`, `edit_user`, `delete_user`, `edit_user_role`, `create_event`, `view_all_events`, `view_own_events`, `edit_all_events`, `edit_own_events`, `edit_event_responsibles`, `delete_all_events`, `delete_own_events`, `edit_event_locations`, `create_global_todo_list`, `edit_all_todo_lists`, `view_all_todo_lists`, `edit_personal_todo_list`, `edit_todo_list_categories`, `edit_tags`, `view_all_items`, `view_specific_item`, `create_new_item`, `edit_item`, `delete_item`, `lend_item`, `create_new_storage`, `edit_storage`, `delete_storage`, `view_storages`, `view_items_specific_storage`, `comment_everything`, `comment_own`, `upload_attachment`, `view_attachments`, `delete_attachment`) VALUES
-(1, 'Admin', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(2, 'User', 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0),
-(4, 'New Role', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+INSERT INTO `user_role` (`user_role_id`, `name`, `pre_defined`, `create_user`, `edit_user`, `delete_user`, `edit_user_role`, `create_event`, `view_all_events`, `view_own_events`, `edit_all_events`, `edit_own_events`, `edit_event_responsibles`, `delete_all_events`, `delete_own_events`, `edit_event_locations`, `edit_event_clients`, `create_global_todo_list`, `edit_all_todo_lists`, `view_all_todo_lists`, `edit_personal_todo_list`, `edit_todo_list_categories`, `edit_tags`, `view_all_items`, `view_specific_item`, `create_new_item`, `edit_item`, `delete_item`, `lend_item`, `create_new_storage`, `edit_storage`, `delete_storage`, `view_storages`, `view_items_specific_storage`, `comment_everything`, `comment_own`) VALUES
+(1, 'Admin', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(2, 'User', 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1);
 
 --
 -- Indizes der exportierten Tabellen
 --
-
---
--- Indizes für die Tabelle `attachment`
---
-ALTER TABLE `attachment`
-  ADD PRIMARY KEY (`attachment_id`),
-  ADD KEY `fx_attribute_type_idx` (`attribute_type_id`);
 
 --
 -- Indizes für die Tabelle `attribute_type`
@@ -732,12 +666,6 @@ ALTER TABLE `user_role`
 --
 
 --
--- AUTO_INCREMENT für Tabelle `attachment`
---
-ALTER TABLE `attachment`
-  MODIFY `attachment_id` int NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT für Tabelle `attribute_type`
 --
 ALTER TABLE `attribute_type`
@@ -747,43 +675,43 @@ ALTER TABLE `attribute_type`
 -- AUTO_INCREMENT für Tabelle `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `comment_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `comment_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT für Tabelle `email_request`
 --
 ALTER TABLE `email_request`
-  MODIFY `email_request_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `email_request_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 
 --
 -- AUTO_INCREMENT für Tabelle `event`
 --
 ALTER TABLE `event`
-  MODIFY `event_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `event_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT für Tabelle `event_client`
 --
 ALTER TABLE `event_client`
-  MODIFY `event_client_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `event_client_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT für Tabelle `event_location`
 --
 ALTER TABLE `event_location`
-  MODIFY `event_location_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `event_location_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT für Tabelle `event_responsible`
 --
 ALTER TABLE `event_responsible`
-  MODIFY `event_responsible_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `event_responsible_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT für Tabelle `item`
 --
 ALTER TABLE `item`
-  MODIFY `item_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `item_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT für Tabelle `item_type`
@@ -795,25 +723,25 @@ ALTER TABLE `item_type`
 -- AUTO_INCREMENT für Tabelle `lend`
 --
 ALTER TABLE `lend`
-  MODIFY `lend_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `lend_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT für Tabelle `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `notification_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `notification_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT für Tabelle `notification_request`
 --
 ALTER TABLE `notification_request`
-  MODIFY `notification_request_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `notification_request_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT für Tabelle `storage`
 --
 ALTER TABLE `storage`
-  MODIFY `storage_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `storage_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT für Tabelle `tag`
@@ -825,31 +753,31 @@ ALTER TABLE `tag`
 -- AUTO_INCREMENT für Tabelle `tag_assignment`
 --
 ALTER TABLE `tag_assignment`
-  MODIFY `tag_assignment_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `tag_assignment_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT für Tabelle `todo_list`
 --
 ALTER TABLE `todo_list`
-  MODIFY `todo_list_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `todo_list_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT für Tabelle `todo_list_category`
 --
 ALTER TABLE `todo_list_category`
-  MODIFY `todo_list_category_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `todo_list_category_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT für Tabelle `todo_list_entry`
 --
 ALTER TABLE `todo_list_entry`
-  MODIFY `todo_list_entry_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `todo_list_entry_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT für Tabelle `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT für Tabelle `user_role`
@@ -860,12 +788,6 @@ ALTER TABLE `user_role`
 --
 -- Constraints der exportierten Tabellen
 --
-
---
--- Constraints der Tabelle `attachment`
---
-ALTER TABLE `attachment`
-  ADD CONSTRAINT `fx_attribute_type_idx` FOREIGN KEY (`attribute_type_id`) REFERENCES `attribute_type` (`attribute_type_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Constraints der Tabelle `comment`

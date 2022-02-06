@@ -1,3 +1,10 @@
+<!--
+//-----------------Template File---------------------
+//File will be included in other files and most focusses on style and not on processing data
+//Login Form itself
+//-----------------Template File---------------------
+-->
+
 <div class="loginForm">
 	<div class="loginNotice"></div>
 	<input type="text" name="username" class="generalDataInput" data-input-name="username" placeholder="<?php echo USER_USERNAME;?>">

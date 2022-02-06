@@ -1,4 +1,5 @@
 <?php
+//-----------------New PHP Class File---------------------
 
 class ToDoListEntry extends SystemClass {
 	
@@ -168,4 +169,4 @@ class ToDoListEntry extends SystemClass {
 		return(False);
 	}
 	
-}
+}?>

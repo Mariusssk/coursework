@@ -1,4 +1,10 @@
 <?php
+
+//-----------------Template File---------------------
+//File will be included in other files and most focusses on style and not on processing data
+//E-mail footer template
+//-----------------Template File---------------------
+
 namespace Template\Email;
 
 function getEmailFooter($type) {
@@ -45,5 +51,4 @@ function getFooterBottom() {
 	';
 	return($bottom);
 }
-	
-
+?>

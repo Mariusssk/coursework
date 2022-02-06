@@ -1,4 +1,5 @@
 <?php
+//-----------------New PHP Class File---------------------
 
 class Session {
 	
@@ -89,3 +90,4 @@ class Session {
 		return($this->current_user->checkRights($key));
 	}
 }
+?>

@@ -1,4 +1,5 @@
 <?php
+//-----------------New PHP Class File---------------------
 
 class EventLocation extends ObjectType {
 	
@@ -58,6 +59,5 @@ class EventLocation extends ObjectType {
 		$this->description = $value;
 		return(True);
 	}
-
-	
 }
+?>

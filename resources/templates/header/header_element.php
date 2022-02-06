@@ -1,3 +1,10 @@
+<!--
+//-----------------Template File---------------------
+//File will be included in other files and most focusses on style and not on processing data
+//HTML header element template
+//-----------------Template File---------------------
+-->
+
 <header class="header">
 		
 	<!-- Desktop header -->

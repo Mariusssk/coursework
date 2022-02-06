@@ -1,5 +1,7 @@
 <?php
 
+//-----------------New PHP Class File---------------------
+
 class Item extends SystemClass {
 	
 	protected $item_id, $item_type_id, $storage_id, $name, $lenght, $description, $amount;
@@ -157,6 +159,5 @@ class Item extends SystemClass {
 		}
 		return(False);
 	}
-	
-	
 }
+?>

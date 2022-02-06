@@ -1,5 +1,9 @@
 <?php
 
+//-----------------New Page---------------------
+//Startpage / Dashboard
+//-----------------New Page---------------------
+
 include_once("../resources/config.php");
 
 if($session->loggedIn()) {
@@ -56,3 +60,4 @@ if($session->loggedIn()) {
 } else {
 	include(TEMPLATES."/page/login_needed.php");
 }
+?>

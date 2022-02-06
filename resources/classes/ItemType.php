@@ -1,4 +1,5 @@
 <?php
+//-----------------New PHP Class File---------------------
 
 class ItemType extends ObjectType {
 	
@@ -29,3 +30,4 @@ class ItemType extends ObjectType {
 	}
 	
 }
+?>

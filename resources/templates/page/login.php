@@ -1,4 +1,10 @@
 <?php
+//-----------------Template File---------------------
+//File will be included in other files and most focusses on style and not on processing data
+//Full login Page
+//-----------------Template File---------------------
+
+
 include(TEMPLATES."/header/header_basic.php");
 ?>
 <div class="fullPageContent">
@@ -10,3 +16,4 @@ include(TEMPLATES."/header/header_basic.php");
 </div>
 <?php
 include(TEMPLATES."/footer/footer.php");
+?>

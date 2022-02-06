@@ -1,5 +1,5 @@
 <?php
-
+//-----------------New PHP Class File---------------------
 
 class Email {
 	
@@ -104,6 +104,6 @@ class Email {
 			return(False);
 		}
 	}
-	
-	
 }
+
+?>

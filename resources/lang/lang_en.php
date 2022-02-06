@@ -1,5 +1,7 @@
 <?php
 
+//-----------------Lnaguage File English---------------------
+
 //Error
 
 defined("LANG_404_ERROR") ? null :  define("LANG_404_ERROR", "Error: 404 Page not found");

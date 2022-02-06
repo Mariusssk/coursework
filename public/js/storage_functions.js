@@ -1,6 +1,9 @@
+//-----------------New JS Functions File---------------------
+//JS functions for the storages
+//-----------------New JS Functions File---------------------
 
-//load all storage entrys
-
+//load all storages
+//Objective 5
 function loadStorages() {
 	
 	var search = {};
@@ -52,7 +55,7 @@ function loadStorages() {
 }
 
 //open page listing all items which are in one storage
-
+//Objective 5.3
 function listStorageItems(storageID) {
 	redirect(URL+"/storage/list/"+storageID);
 }
@@ -115,7 +118,7 @@ function viewStorage(ID) {
 }
 
 //save data 
-
+//Objective 5.2
 function saveStorageData(storageID) {
 	
 	var storageData = {};
@@ -170,7 +173,7 @@ function saveStorageData(storageID) {
 }
 
 //delete storage
-
+//Objective 5.2
 function deleteStorage(storageID,action = "check") {
 	//check stage of deleting
 	if(action == "check") {
@@ -207,7 +210,7 @@ function deleteStorage(storageID,action = "check") {
 }
 
 //set up grid
-
+//Objective 5.5
 function setUpGrid() {
 	//set up non defined boxes as drag and drop
 	var openBoxes = document.getElementById('openBoxes');
@@ -229,7 +232,7 @@ function setUpGrid() {
 }
 
 //save grid data 
-
+//Objective 5.5
 function saveGrid() {
 	//find all boxes
 	var boxesInGrid = document.querySelectorAll(".page.storage.edit .shelfAlignmentContainer .shelfGrid.desktopGrid .gridBox .option");
@@ -282,6 +285,8 @@ function saveGrid() {
 
 $(document).ready(function() {
 	//detect enter on search
+	
+	//Objective 5.6
 	$(".page.storage.overview .generalInput").on('keyup', function (e) {
 		if (e.key === 'Enter' || e.keyCode === 13) {
 			loadStorages();

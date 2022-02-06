@@ -1,5 +1,12 @@
 <?php
 
+//-----------------Config File---------------------
+//Overall config file
+//SQL connection
+//URL and file constants
+//Import of language and class files 
+//-----------------Config File---------------------
+
 //Session
 session_start();
 
@@ -20,7 +27,7 @@ include "functions.php";
 	
 	defined("URL_PATH") ? null : define("URL_PATH", "/coursework/public");
 	
-	$allowedURL = array("192.168.178.99","10.10.216.72","localhost","192.168.0.116","192.168.137.1","192.168.1.14","128.0.147.97");
+	$allowedURL = array("localhost");
 
 	if(isset($_SERVER['SERVER_NAME']) AND in_array($_SERVER['SERVER_NAME'],$allowedURL)) {
 		defined("URL") ? null : define("URL", "http://".$_SERVER['SERVER_NAME'].URL_PATH);

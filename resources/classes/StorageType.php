@@ -1,4 +1,5 @@
 <?php
+//-----------------New PHP Class File---------------------
 
 class StorageType extends ObjectType {
 	
@@ -41,4 +42,4 @@ class StorageType extends ObjectType {
 		return($this->name_en);
 	}
 	
-}
+}?>

@@ -1,5 +1,10 @@
 <?php
 
+//-----------------Template File---------------------
+//File will be included in other files and most focusses on style and not on processing data
+//Genral E-mail template
+//-----------------Template File---------------------
+
 namespace Template\Email;
 
 function getEmailContent($type,$attributes = array()) {
@@ -99,3 +104,4 @@ function getEmailContent($type,$attributes = array()) {
 	return($email);
 }
 
+?>

@@ -1,5 +1,9 @@
-//load all categories 
+//-----------------New JS Functions File---------------------
+//JS functions for the to-do pages
+//-----------------New JS Functions File---------------------
 
+//load all categories 
+//Objective 7.3
 function loadTodoCategories() {
 	
 	var search = {};
@@ -80,7 +84,7 @@ function createNewCategory(ID) {
 }
 
 //create new todo list
-
+//Objective 7.1
 function createNewTodoList(type) {
 	$.post(INCLUDES+"/todo_functions.php",{
 		requestType: "createNewToDoList",
@@ -102,7 +106,7 @@ function createNewTodoList(type) {
 }
 
 //open overlay for todo list
-
+//Objective 7
 function openToDoList(listID) {
 	//request list data from php
 	$.post(INCLUDES+"/todo_functions.php",{
@@ -193,7 +197,7 @@ function openToDoList(listID) {
 }
 
 //toggle notifications for todo list
-
+//Objective 11.1
 function toggleToDoListNotifications(type, attributeID, currentState) {
 	
 	var overlay = document.querySelector(".todo .overlayContainer");
@@ -219,7 +223,7 @@ function toggleToDoListNotifications(type, attributeID, currentState) {
 
 
 //Delete ToDo list
-
+//Objective 7.1
 function deleteToDoList() {
 	var overlay = document.querySelector(".todo .overlayContainer");
 	
@@ -247,7 +251,7 @@ function deleteToDoList() {
 }
 
 //Edit name of Todo list
-
+//Objective 7.1
 function editToDoListName(listID, saveData = 0) {
 	var overlay = document.querySelector(".todo .overlayContainer");
 	if(saveData == 0) {
@@ -317,7 +321,7 @@ function editToDoListName(listID, saveData = 0) {
 
 
 //display todo list edit view
-
+//Objective 7.1
 function openTodoListEdit(listID) {
 	var overlay = document.querySelector(".todo .overlayContainer");
 	
@@ -338,7 +342,7 @@ function openTodoListEdit(listID) {
 }
 
 //close todo list edit mode
-
+//Objective 7.1
 function closeToDoListEdit(listID, init = 0) {
 	var overlay = document.querySelector(".todo .overlayContainer");
 	var editEntriesButton = `<div class="generalButton" onclick="openTodoListEdit('`+listID+`')"> `+LANG.WORD_EDIT+` </div>`;
@@ -351,7 +355,7 @@ function closeToDoListEdit(listID, init = 0) {
 }
 
 //Display add entry form
-
+//Objective 7.2
 function addEntryToListForm(listID) {
 	
 	var overlay = document.querySelector(".todo .overlayContainer");
@@ -405,7 +409,7 @@ function addEntryToListForm(listID) {
 }
 
 //Save new entry to todo list
-
+//Objective 7.2
 function saveToDoListEntry(listID) {
 	var overlayForm = document.querySelector(".todo .overlayContainer .newToDoListEntryForm");
 	var name = overlayForm.querySelector(".entryName").value;
@@ -438,7 +442,7 @@ function saveToDoListEntry(listID) {
 
 
 //delete element from todo list
-
+//Objective 7.2
 function removeToDoListEntry(entryID) {
 	var overlay = document.querySelector(".todo .overlayContainer");
 	
@@ -467,7 +471,7 @@ function removeToDoListEntry(entryID) {
 }
 
 //display entries in format for the select
-
+//Objective 7.2
 function displayEntriesForSelect(entryList, level = 0, entryText = "") {
 	var tmpText = "";
 	var keyLength = Object.keys(entryList).length;
@@ -491,7 +495,7 @@ function displayEntriesForSelect(entryList, level = 0, entryText = "") {
 
 
 //load all tags
-
+//Objective 8.2
 function loadListTags(listID, overlay, displayType = "view") {
 	//Load tags from PHP
 	$.post(INCLUDES+"/todo_functions.php",{
@@ -544,14 +548,14 @@ function loadListTags(listID, overlay, displayType = "view") {
 }
 
 //Edit todo list tags
-
+//Objective 8.2
 function editTags(listID) {
 	var overlay = document.querySelector(".todo .overlayContainer");
 	loadListTags(listID,overlay,"edit");
 }
 
 //add new tag form
-
+//Objective 8.2
 function addTagForm() {
 	var overlay = document.querySelector(".todo .overlayContainer");
 	
@@ -583,7 +587,7 @@ function addTagForm() {
 }
 
 //add tag from 
-
+//Objective 8.2
 function addTag() {
 	var overlay = document.querySelector(".todo .overlayContainer");
 	
@@ -616,6 +620,7 @@ function addTag() {
 }
 
 //delete tag from list 
+//Objective 8.2
 function deleteTodoListTag(tagID) {
 	var overlay = document.querySelector(".todo .overlayContainer");
 	var listID = overlay.dataset.todoListId;
@@ -640,7 +645,7 @@ function deleteTodoListTag(tagID) {
 }
 
 //load all entries of todo list
-
+//Objective 7.2
 function loadListEntries(listID, overlay, displayType = "view") {
 	//Load entries from PHP
 	$.post(INCLUDES+"/todo_functions.php",{
@@ -682,7 +687,7 @@ function loadListEntries(listID, overlay, displayType = "view") {
 
 
 //Recoursively display entries
-
+//Objective 7.2
 function displayEntries(entryList, entryText = "", displayType) {
 	var tmpText = "";
 	var keyLength = Object.keys(entryList).length;
@@ -731,7 +736,7 @@ function displayEntries(entryList, entryText = "", displayType) {
 }
 
 //list entry check or uncheck
-
+//Objective 7.2.1
 function todoListEntryStatusChange(entryID, checked, object) {
 	$.post(INCLUDES+"/todo_functions.php",{
 		requestType: "changeEntryStatus",
@@ -758,7 +763,7 @@ function todoListEntryStatusChange(entryID, checked, object) {
 }
 
 //delete category
-
+//Objective 7.3.1
 function deleteCategory(categoryID,action = "check") {
 	//check stage of deleting
 	if(action == "check") {
@@ -790,8 +795,8 @@ function deleteCategory(categoryID,action = "check") {
 	}
 }
 
-//save data
-
+//save data for category
+//Objective 7.3.1
 function saveCategoryData(categoryID) {
 	
 	var objectData = {};

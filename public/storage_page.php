@@ -1,5 +1,9 @@
 <?php
 
+//-----------------New Page---------------------
+//Storage Page (create, edit , etc) /view items in storage
+//-----------------New Page---------------------
+
 include_once("../resources/config.php");
 
 //check if user is logged-in
@@ -266,4 +270,4 @@ if($session->loggedIn() === True) {
 } else {
 	include(TEMPLATES."/page/login_needed.php");
 }
-
+?>

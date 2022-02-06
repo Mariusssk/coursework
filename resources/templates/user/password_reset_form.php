@@ -1,3 +1,10 @@
+<!--
+//-----------------Template File---------------------
+//File will be included in other files and most focusses on style and not on processing data
+//Reset password form itself
+//-----------------Template File---------------------
+-->
+
 <h4><?php echo USER_RESET_PASSWORD_BTN;?>:</h4>
 <input class="generalInput" data-input-name="password" type="password" placeholder="<?php echo USER_PASSWORD;?>*">
 <input class="generalInput" data-input-name="passwordRepeat" type="password" placeholder="<?php echo USER_REPEAT_PASSWORD;?>*">

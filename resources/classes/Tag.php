@@ -1,4 +1,5 @@
 <?php
+//-----------------New PHP Class File---------------------
 
 class Tag extends ObjectType {
 	
@@ -50,4 +51,4 @@ class Tag extends ObjectType {
 		return(False);
 	}
 	
-}
+}?>

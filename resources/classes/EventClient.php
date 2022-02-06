@@ -1,4 +1,5 @@
 <?php
+//-----------------New PHP Class File---------------------
 
 class EventClient extends ObjectType {
 	
@@ -71,3 +72,4 @@ class EventClient extends ObjectType {
 	}
 	
 }
+?>

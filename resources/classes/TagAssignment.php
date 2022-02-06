@@ -1,4 +1,5 @@
 <?php
+//-----------------New PHP Class File---------------------
 
 class TagAssignment extends SystemClass {
 	
@@ -130,3 +131,4 @@ class TagAssignment extends SystemClass {
 	}
 	
 }
+?>
