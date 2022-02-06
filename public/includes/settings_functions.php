@@ -14,6 +14,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 	
 	if($session->loggedIn() == True) {
 		//save user personal data
+		//Objective 9.4
 		if($request == "saveUserPersonalData") {
 			//check if data was transmitted correctly
 			if(isset($_POST['personalData']) AND count($_POST['personalData']) >= 4) {
@@ -76,7 +77,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		} 
 		
 		//Request password change
-		
+		//Objective 9.7
 		else if($request == "changePassword") {
 			$emailRequest = new EmailRequest;
 			
@@ -89,7 +90,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//return all tags available
-		
+		//Objective 8
 		else if($request == "loadTagList") {
 			
 			$tags = Tag::getAll();
@@ -119,7 +120,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//sava data of tag
-		
+		//Objective 8.1/8.3
 		else if($request == "saveTagData") {
 			
 			$tag = new Tag;
@@ -147,7 +148,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//delete tag
-		
+		//Objective 8.3
 		else if($request == "deleteTag") {
 			
 			$tag = new Tag;
@@ -173,7 +174,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//create a new tag
-		
+		//Objective 8
 		else if($request == "createNewTag") {
 			
 			$tag = new Tag;
@@ -197,6 +198,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 	}
 		
 	//verify code in email
+	//Objective 9.6.1 / 9.7.1
 	
 	if($request == "verifyCode") {
 		//check if data was transmitted correctly

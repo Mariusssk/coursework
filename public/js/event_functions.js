@@ -1,7 +1,7 @@
 //CLient Lits
 
 //load list of all clients
-
+//Objectives 6.6
 function loadClientList() {
 	
 	var search = {};
@@ -116,7 +116,7 @@ function loadClientList() {
 
 
 //toggle if full description should be shown
-
+//Objectives 6.6.2.1
 function toggleDescriptionContainer(dataId) {	
 	var clientContainer = document.querySelector(".page.event .generalTableContentRow[data-id='"+dataId+"']");
 
@@ -137,7 +137,7 @@ function toggleDescriptionContainer(dataId) {
 }
 
 //toggle form to edit client data
-
+//Objective 6.6.1
 function editClient(clientID) {
 	var clientContainer = document.querySelector(".page.event.clients .generalTableContentRow[data-id='"+clientID+"']");
 	
@@ -192,7 +192,7 @@ function editClient(clientID) {
 }
 
 //save data for client change
-
+//Objective 6.61
 function saveClientData(clientID) {
 	var clientContainer = document.querySelector(".page.event.clients .generalTableContentRow[data-id='"+clientID+"'] .clientEditForm");
 	
@@ -239,7 +239,7 @@ function saveClientData(clientID) {
 }
 
 //delete client
-
+//Objective 6.6.1
 function deleteData(type, dataID) {
 	//send data to PHP
 	$.post(INCLUDES+"/event_functions.php",{
@@ -271,7 +271,7 @@ function deleteData(type, dataID) {
 }
 
 //create a new template client
-
+//Objective 6.6
 function createNew(type) {
 	
 	//send data to PHP
@@ -299,7 +299,7 @@ function createNew(type) {
 }
 
 //load list of all location
-
+//Objective 6.5
 function loadLocationList() {
 	
 	var search = {};
@@ -401,7 +401,7 @@ function loadLocationList() {
 }
 
 //toggle form to edit location data
-
+//Object 6.5.1
 function editLocationData(locationID) {
 	var locationContainer = document.querySelector(".page.event.locations .generalTableContentRow[data-id='"+locationID+"']");
 	
@@ -448,7 +448,7 @@ function editLocationData(locationID) {
 
 
 //save data for location change
-
+//Objective 6.5.1
 function saveLocationData(locationID) {
 	var locationContainer = document.querySelector(".page.event.locations .generalTableContentRow[data-id='"+locationID+"'] .clientEditForm");
 	
@@ -486,7 +486,7 @@ function saveLocationData(locationID) {
 }
 
 //create new template event
-
+//Objective 6.1
 function createNewEvent() {
 	
 	//send data to PHP
@@ -509,13 +509,13 @@ function createNewEvent() {
 }
 
 //open page to edit event data
-
+//Objective 6.2
 function openEventPage(eventID) {
 	redirect(URL+"/events/edit/"+eventID);
 }
 
 //display delete form and delete if selected
-
+//Objective 6
 function deleteEvent(eventID, request) {
 	var buttonContainer = document.querySelector(".page.event.editEvent .buttonConatiner");
 	
@@ -553,7 +553,7 @@ function deleteEvent(eventID, request) {
 
 
 //remove a tag from event
-
+//Objective 8.2
 function deleteEventTag(tagID, eventID) {
 	//send data to PHP
 	$.post(INCLUDES+"/event_functions.php",{
@@ -576,13 +576,13 @@ function deleteEventTag(tagID, eventID) {
 }
 
 //display form to add a tag
-
+//Objective 8.2
 function addEventTagForm() {
 	document.querySelector(".page.event.editEvent .addTagContainer").classList.toggle("none");
 }
 
 //add tag to event 
-
+//Objective 8.2
 function addEventTag(eventID) {
 	var tagID = document.querySelector(".page.event.editEvent .addTagContainer .addTagSelect").value;
 	//send data to PHP
@@ -610,14 +610,14 @@ function addEventTag(eventID) {
 }
 
 //display form to add a event responsible
-
+//Objective 6.4
 function addResposibleForm() {
 	document.querySelector(".page.event.editEvent .addResposibleContainer").classList.toggle("none");
 }
 
 
-//add tag to event 
-
+//add responsible to event 
+//Objective 6.4
 function addEventResponsible(eventID) {
 	var userID = document.querySelector(".page.event.editEvent .addResposibleContainer .addResponsibleSelect").value;
 	//send data to PHP
@@ -645,7 +645,7 @@ function addEventResponsible(eventID) {
 }
 
 //remove a responsible user from event
-
+//Objective 6.4
 function deleteEventResponsible(userID, eventID) {
 	//send data to PHP
 	$.post(INCLUDES+"/event_functions.php",{
@@ -670,7 +670,7 @@ function deleteEventResponsible(userID, eventID) {
 }
 
 //save edited event data
-
+//Objective 6
 function saveEventData(eventID) {
 	
 	var container = document.querySelector(".page.event.editEvent .editEventContainer");
@@ -722,6 +722,8 @@ function saveEventData(eventID) {
 //toggle comment notifications for event
 
 //toggle notifications for todo list
+
+//Objective 6.3/7.5
 
 function toggleEventNotifications(type, attributeID, currentState) {
 	

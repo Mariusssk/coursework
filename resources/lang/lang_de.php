@@ -18,6 +18,7 @@ defined("ERROR_PAGE_LOGIN_NEEDED") ? null :  define("ERROR_PAGE_LOGIN_NEEDED", "
 	//Menu Items
 	
 		//Storage
+			defined("HEADER_MENU_ITEM_STORAGE") ? null :  define("HEADER_MENU_ITEM_STORAGE", "Lager");
 			defined("HEADER_MENU_ITEM_STORAGE_CREATE") ? null :  define("HEADER_MENU_ITEM_STORAGE_CREATE", "Neu");
 			defined("HEADER_MENU_ITEM_STORAGE_OVERVIEW") ? null :  define("HEADER_MENU_ITEM_STORAGE_OVERVIEW", "Übersicht");
 			

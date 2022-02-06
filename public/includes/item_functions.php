@@ -13,7 +13,9 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 	
 	
 	if($session->loggedIn() == True) {
+		
 		//load items based on search
+		//Objectives 4
 		if($request == "loadItems") {
 			//check user rights
 			if($session->checkRights("view_all_items") == True) {
@@ -51,6 +53,9 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 						$tmpItemArray['name'] = $item->getName();
 						$tmpItemArray['typeName'] = $item->getTypeName();
 						$tmpItemArray['consumeable'] = $item->getConsumeable();
+						
+						//search through items
+						//Objectives 4.6
 						
 						if(isset($search['lend']) AND $search['lend'] == 1) {
 							$lend = new Lend;
@@ -105,7 +110,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//Change amount of item in storage / lended
-		
+		//4.4.1 / 4.5.1.2
 		else if($request == "changeItemAmount") {
 			//Check if storage or lended
 			if(isset($_POST['attribute']) AND $_POST['attribute'] = "lend") {
@@ -139,8 +144,8 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 			}
 		}
 		
-		//delete storages
-		
+		//delete item
+		//Objectives 4.1.2
 		else if($request == "deleteItem") {
 			//check user rights
 			if($session->checkRights("delete_item") == True) {
@@ -162,7 +167,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		} 
 		
 		//save lend return date
-		
+		//Objective 4.5.1.3
 		else if($request == "saveReturnDate") {
 			//check user rights
 			if($session->checkRights("lend_item") == True) {
@@ -189,7 +194,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		} 
 		
 		//return item which was lend
-		
+		//Objective 4.5.1.4
 		else if($request == "returnItemLend") {
 			//check user rights
 			if($session->checkRights("lend_item") == True) {
@@ -211,7 +216,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		} 
 		
 		//get name of item
-		
+
 		else if($request == "loadItemName") {
 			//check user rights
 			if($session->checkRights("view_all_items") == True OR $session->checkRights("view_specific_item") == True) {
@@ -229,7 +234,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//lend item
-		
+		//Objective 4.5
 		else if($request == "lendItem") {
 			//check user rights
 			if($session->checkRights("lend_item") == True) {
@@ -262,6 +267,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//save data or create new
+		//Objective 4.1.1
 		else if($request == "saveItemData") {
 			$item = new Item;
 			

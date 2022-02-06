@@ -92,6 +92,7 @@ function closeOverlay(overlay) {
 	}
 
 //Menu
+//Objective 3
 
 	//Open mobile menu
 

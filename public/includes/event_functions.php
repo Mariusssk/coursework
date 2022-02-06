@@ -16,6 +16,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		
 		
 		//load list of event clients to display
+		//Objective 6.6
 		if($request == "loadCLientList") {
 			//check user rights
 			if($session->checkRights("edit_event_clients") == True) {
@@ -72,7 +73,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		} 
 		
 		//save data for edited client
-		
+		//Objective 6.6.1
 		else if($request == "saveClientData") {
 			//check user rights
 			if($session->checkRights("edit_event_clients") == True) {
@@ -98,7 +99,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//delete data if unused
-		
+		//Objectives 6.5.1 / 6.6.1
 		else if($request == "deleteData") {
 			if(isset($_POST['type']) AND isset($_POST['dataID'])) {
 				
@@ -145,7 +146,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//create new template 
-		
+		//Objectivs 6.5/6.6
 		else if($request == "createNew") {
 			if(isset($_POST['type'])) {
 				
@@ -181,7 +182,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//load list of all locations
-		
+		//Objectives 6.5
 		else if($request == "loadLocationList") {
 			//check user rights
 			if($session->checkRights("edit_event_locations") == True) {
@@ -233,7 +234,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//save data for edited location
-		
+		//Objectives 6.5.1
 		else if($request == "saveLocationData") {
 			//check user rights
 			if($session->checkRights("edit_event_locations") == True) {
@@ -258,7 +259,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//create template new event
-		
+		//Objectives 6.1
 		else if($request == "createNewEvent") {
 			//check user rights
 			if($session->checkRights("create_event") == True) {
@@ -278,7 +279,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//delete event and attributes as tags
-		
+		//Objectives 6
 		else if($request == "deleteEvent") {
 			$event = new Event;
 			if(isset($_POST['eventID']) AND $event->loadData($_POST['eventID'])) {
@@ -297,7 +298,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//delete specific tag from event
-		
+		//Objectives 8.2
 		else if($request == "deleteTag") {
 			$event = new Event;
 			$tag = new Tag;
@@ -322,7 +323,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//add tag to event if not already added
-		
+		//Objectives 8.2
 		else if($request == "addTag") {
 			$event = new Event;
 			$tag = new Tag;
@@ -348,7 +349,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//add resonsible user to event if not already added
-		
+		//Objectives 6.4
 		else if($request == "addResponsible") {
 			$event = new Event;
 			$user = new User;
@@ -378,7 +379,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//delete specific event responsible from event
-		
+		//Objectives 6.4
 		else if($request == "deleteResponsible") {
 			$event = new Event;
 			$user = new User;
@@ -403,7 +404,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//save event data after it was editied
-		
+		//Objectives 6.2
 		else if($request == "saveEventData") {
 			$event = new Event;
 			

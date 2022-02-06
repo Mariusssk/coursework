@@ -14,6 +14,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 	
 	if($session->loggedIn() == True) {
 		//load storages based on search
+		//Objective 5
 		if($request == "loadStorages") {
 			//check user rights
 			if($session->checkRights("view_storages") == True) {
@@ -37,6 +38,9 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 						$tmpStorageArray['name'] = $storage->getName();
 						$tmpStorageArray['parentName'] = $storage->getParentName();
 						$tmpStorageArray['typeName'] = $storage->getTypeName();
+						
+						//Search
+						//Objective 5.6
 						
 						if(isset($search['type']) AND !empty($search['type']) AND $search['type'] != $storage->getTypeID()) {
 							$searchFail = 1;
@@ -68,6 +72,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//Load parent options for storage edit/new
+		//Objectives 5.1
 		else if($request == "loadParentOptions") {
 			//check if user has rights to edit or create new storage
 			if($session->checkRights("create_new_storage") == True OR $session->checkRights("edit_storage") == True) {
@@ -110,6 +115,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//save data or create new
+		//Objectives 5.2
 		else if($request == "saveStorageData") {
 			$storage = new Storage;
 			if(isset($_POST['storageID']) AND $storage->loadData($_POST['storageID'])) {
@@ -196,7 +202,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//delete storages
-		
+		//Objective 5.2
 		else if($request == "deleteStorage") {
 			//check user rights
 			if($session->checkRights("delete_storage") == True) {
@@ -222,7 +228,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//save coordinates of boxes
-		
+		//Objectives 5.5
 		else if($request == "saveGrid") {
 			//check user rights
 			if($session->checkRights("edit_storage") == True) {

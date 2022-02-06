@@ -15,7 +15,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 	if($session->loggedIn() == True) {
 		
 		//resend email to confirm email
-		
+		//Objective 9.6
 		if($request == "sendConfirmEmail") {
 			
 			//check which type of email needs to be confirmed
@@ -34,8 +34,8 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 			}
 		}
 
-		//Load all notifications of user_error
-		
+		//Load all notifications of user
+		//Objective 11
 		else if($request == "loadPersonalNotifications") {
 			$notifications = Notification::getAllNotificationsForUser($session->getSessionUserID());
 			
@@ -82,7 +82,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//Mark unread notifications as read
-		
+		//Objective 11
 		else if($request == "markNotificationsAsRead") {
 			$notifications = Notification::getAllNotificationsForUser($session->getSessionUserID());
 			
@@ -104,8 +104,8 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 			}
 		}
 		
-		//load all notification requsts for specific user_error
-		
+		//load all notification requsts for specific user
+		//Objectives 11.3
 		else if($request == "loadNotificationRequestList") {
 			$requests = NotificationRequest::loadRequestsByUserID($session->getSessionUserID());
 			
@@ -151,7 +151,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//change updates of notifications request as email update
-	
+		//Objectives 11.4
 		else if($request == "changeNotificationsRequestUpdates") {
 			$request = new NotificationRequest;
 			if(

@@ -14,6 +14,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 	
 	if($session->loggedIn() == True) {
 		//load todo categories
+		//Objectives 7.3
 		if($request == "loadTodoCategories") {
 			//check user rights
 			if($session->checkRights("edit_todo_list_categories") == True OR $session->checkRights("edit_personal_todo_list") == True) {
@@ -75,7 +76,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		} 
 		
 		//delete category
-		
+		//Objectives 7.3.1
 		else if($request == "deleteCategory") {
 			//check user rights
 			if($session->checkRights("edit_todo_list_categories") == True OR $session->checkRights("edit_personal_todo_list") == True) {
@@ -103,9 +104,10 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//save data or create new
+		//Objectives 7.3.1
 		else if($request == "saveCategoryData") {
 
-			$category = new TodoCategory;
+			$category = new ToDoCategory;
 			if(isset($_POST['categoryID']) AND $category->loadData($_POST['categoryID'])) {
 				$requestType = "edit";
 			} else if((isset($_POST['categoryID']) AND empty($_POST['categoryID'])) OR !isset($_POST['categoryID'])) {
@@ -166,7 +168,8 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 			}
 		}
 		
-		
+		//get data for todo list
+		//Objectives 7.4
 		else if($request == "getListData") {
 			$list = new ToDoList;
 			if(isset($_POST['listID']) AND $list->loadData($_POST['listID'])) {
@@ -214,7 +217,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		
 		
 		//Load all tags for specific list
-	
+		//Objectives 8.2
 		else if($request == "loadToDoListTags") {
 			$list = new ToDoList;
 			if(isset($_POST['listID']) AND $list->loadData($_POST['listID'])) {
@@ -253,7 +256,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//Load all entries for specific list
-	
+		//Objectives 7.2
 		else if($request == "loadToDoListEntries") {
 			$list = new ToDoList;
 			if(isset($_POST['listID']) AND $list->loadData($_POST['listID'])) {
@@ -284,6 +287,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		
 		
 		//Remove tag from list
+		//Objectives 8.2
 		else if($request == "removeToDoListTag") {
 			$assigment = new TagAssignment;
 			$list = new ToDoList;
@@ -306,6 +310,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//add tag to list
+		//Objectives 8.2
 		else if($request == "addToDoListTag") {
 			$assigment = new TagAssignment;
 			$list = new ToDoList;
@@ -331,7 +336,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//change checked status of todo list entry
-		
+		//Objectives 7.2
 		else if($request == "changeEntryStatus") {
 			$entry = new ToDoListEntry;
 			if(isset($_POST['entryID']) AND $entry->loadData($_POST['entryID'])) {
@@ -360,7 +365,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		
 		
 		//Add new entry to todo list
-		
+		//Objectives 7.2
 		else if($request == "saveNewListEntry") {
 			$list = new ToDoList;
 			if(
@@ -389,7 +394,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//remove entry from todo list
-		
+		//Objectives 7.2
 		else if($request == "removeListEntry") {
 			$list = new ToDoList;
 			$entry = new ToDoListEntry;
@@ -419,6 +424,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		
 		
 		//create new todo list
+		//Objectives 7.1
 		else if($request == "createNewToDoList") {
 			if(
 				isset($_POST['type']) AND
@@ -442,7 +448,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//save name of todo list
-		
+		//Objectives 7
 		else if($request == "editToDoListName") {
 			$list = new ToDoList;
 			if(
@@ -469,7 +475,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//get all possible categories for todo list
-		
+		//Objectives 7.3
 		else if($request == "getToDoListCategories") {
 			$list = new ToDoList;
 			if(
@@ -506,7 +512,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//delete todo list
-		
+		//Objectives 7
 		else if($request == "deleteToDoList") {
 			$list = new ToDoList;
 			if(

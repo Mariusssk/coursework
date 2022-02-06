@@ -465,8 +465,6 @@ header.header .mobileHeader .fa-user-circle-o {
 	color: #448cf7;
 }
 
-.menuContainer .desktopMenuContainer .menuElement:hover + .subMenu,
-.menuContainer .desktopMenuContainer .subMenu:hover,
 .menuContainer .desktopMenuContainer .subMenu.subMenuOpen {
 	display: block;
 }

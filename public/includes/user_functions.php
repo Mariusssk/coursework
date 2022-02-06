@@ -15,7 +15,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 	if($session->loggedIn() == True) {
 		
 		//load list of all user roles
-		
+		//Objectives 9.2
 		if($request == "loadRoleList") {
 			//check user rights
 			if($session->checkRights("edit_user_role") == True) {
@@ -72,7 +72,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		} 
 		
 		//Create a new role template
-		
+		//Objectives 9.2
 		else if($request == "createNewRole") {
 			//check user rights
 			if($session->checkRights("edit_user_role") == True) {
@@ -93,8 +93,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//delete role if unused
-		
-		
+		//Objectives 9.2
 		else if($request == "deleteRole") {
 			//check user rights
 			if($session->checkRights("edit_user_role") == True) {
@@ -118,7 +117,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//save role data after editing
-		
+		//Objectives 9.2
 		else if($request == "saveRoleData") {
 			//check user rights
 			if($session->checkRights("edit_user_role") == True) {
@@ -161,7 +160,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//get list of all users
-		
+		//Objectives 9.3
 		else if($request == "loadUserList") {
 			//check user rights
 			if($session->checkRights("edit_user") == True) {
@@ -224,7 +223,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//delete user
-		
+		//Objectives 9.3
 		else if($request == "deleteUser") {
 			//check user rights
 			if($session->checkRights("delete_user") == True) {
@@ -256,7 +255,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 		}
 		
 		//save data for user after it was editited
-		
+		//Objectives 9.3
 		else if($request == "saveUserData") {
 			//check user rights
 			if($session->checkRights("edit_user") == True) {

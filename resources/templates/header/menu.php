@@ -33,7 +33,7 @@ $( document ).ready(function() {
 	if($session->checkRights("view_storages")) {
 		?>
 		<div class="menuElement" data-sub-menu-parent="Storage" data-destination="storage">
-			<a href="<?php echo URL;?>/storage">Storage</a>
+			<a href="<?php echo URL;?>/storage"><?php echo HEADER_MENU_ITEM_STORAGE;?></a>
 		</div>
 		<div class="subMenu" data-sub-menu="Storage">
 			<div class="menuElement subElement" data-destination="storage">
@@ -92,7 +92,7 @@ $( document ).ready(function() {
 	if($session->checkRights("view_all_todo_lists") OR $session->checkRights("edit_personal_todo_list")) {
 	?>
 		<div class="menuElement" data-sub-menu-parent="Todo" data-destination="todo">
-			<span>To-Do</span>
+			<a href="<?php echo URL;?>/todo/personal">To-Do</a>
 		</div>
 		<div class="subMenu" data-sub-menu="Todo">
 			<?php 
@@ -156,7 +156,7 @@ $( document ).ready(function() {
 	
 	<!-- Settings -->
 	
-	<div class="menuElement" data-sub-menu-parent="Settings" data-destination="settings/user">
+	<div class="menuElement" data-sub-menu-parent="Settings" data-destination="settings">
 		<a href="<?php echo URL;?>/settings/user"><?php echo HEADER_MENU_ITEM_SETTINGS_MAIN;?></a>
 	</div>
 	<div class="subMenu" data-sub-menu="Settings">
@@ -170,6 +170,12 @@ $( document ).ready(function() {
 		if($session->checkRights("edit_tags")) {
 			?><div class="menuElement subElement" data-destination="settings/tags">
 				<a href="<?php echo URL;?>/settings/tags"><?php echo HEADER_MENU_ITEM_SETTINGS_TAGS;?></a>
+			</div><?php
+		}
+		
+		if($session->checkRights("create_user")) {
+			?><div class="menuElement subElement" data-destination="settings/user/new">
+				<a href="<?php echo URL;?>/settings/user/new"><?php echo HEADER_MENU_ITEM_SETTINGS_CREATE_USER;?></a>
 			</div><?php
 		}
 		
@@ -338,6 +344,12 @@ $( document ).ready(function() {
 		if($session->checkRights("edit_tags")) {
 			?><div class="menuElement subElement" data-destination="settings/tags">
 				<a href="<?php echo URL;?>/settings/tags"><?php echo HEADER_MENU_ITEM_SETTINGS_TAGS;?></a>
+			</div><?php
+		}
+		
+		if($session->checkRights("create_user")) {
+			?><div class="menuElement subElement" data-destination="settings/user/new">
+				<a href="<?php echo URL;?>/settings/user/new"><?php echo HEADER_MENU_ITEM_SETTINGS_CREATE_USER;?></a>
 			</div><?php
 		}
 		

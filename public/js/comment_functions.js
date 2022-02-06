@@ -1,5 +1,7 @@
 //load comment container
 
+//Objective 6.3/7.5
+
 function loadCommentSection(type, attributeID, containerID) {
 	var commentContainer = "";
 	
@@ -26,6 +28,7 @@ function loadCommentSection(type, attributeID, containerID) {
 }
 
 //toggle notifications for comments
+//Objectives 11.1
 
 function toggleCommentNotifications(type, attributeID, newState = "") {
 
@@ -52,7 +55,7 @@ function toggleCommentNotifications(type, attributeID, newState = "") {
 }
 
 //open form to put in new comment
-
+//Objectives 6.3/7.5
 function displayNewCommentForm(type, attributeID, containerID) {
 	var commentContainer = "";
 	
@@ -72,7 +75,7 @@ function displayNewCommentForm(type, attributeID, containerID) {
 }
 
 //load all comments for specific todo list and add to display
-
+//Objectives 6.3/7.5
 function loadComments(type, attributeID, containerID) {
 	$.post(INCLUDES+"/post_functions.php",{
 		requestType: "loadComments",
@@ -118,7 +121,7 @@ function loadComments(type, attributeID, containerID) {
 }
 
 //Display form to edit comment
-
+//Objectives 6.3/7.5
 function editCommentForm(commentID, containerID) {
 	var commentContainer = document.getElementById(containerID).querySelector(".commentContainer[data-comment-id='"+commentID+"']");
 
@@ -133,7 +136,7 @@ function editCommentForm(commentID, containerID) {
 }
 
 //send request to php to save edited comment
-
+//Objectives 6.3/7.5
 function saveEditedComment(commentID, containerID) {
 	var comment = document.getElementById(containerID).querySelector(".commentContainer[data-comment-id='"+commentID+"'] .generalInput.editCommentInput").value;
 	
@@ -167,7 +170,7 @@ function saveEditedComment(commentID, containerID) {
 }
 
 //send request to php to save new comment
-
+//Objectives 6.3/7.5
 function saveNewComment(type, attributeID, containerID) {
 	var comment = document.getElementById(containerID).querySelector(".commentInputContainer .generalInput.newComment").value;
 	

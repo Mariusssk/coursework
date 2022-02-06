@@ -138,7 +138,7 @@ class Item extends SystemClass {
 	}
 	
 	function setTypeID($value) {
-		$itemType = new itemType;
+		$itemType = new ItemType;
 		if($itemType->loadData($value)) {
 			$this->item_type_id = $value;
 			return(True);

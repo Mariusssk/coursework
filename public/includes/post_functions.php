@@ -12,7 +12,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 	$request = $_POST['requestType'];
 	
 	//check status of user login
-	
+	//Objective 3.3
 	if($request == "checkUserLoginStatus") {
 		$session = new Session;
 		if($session->loggedIn() == True) {
@@ -23,7 +23,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 	}
 	
 	//login user
-	
+	//Objective 3.3
 	else if($request == "login") {
 		if(isset($_POST['username']) AND !empty($_POST['username']) AND isset($_POST['userPassword']) AND !empty($_POST['userPassword'])) {
 			if($session->login($_POST['username'],$_POST['userPassword'])) {
@@ -35,13 +35,13 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 	}
 	
 	//logout user
-	
+	//Objective 3.3
 	else if($request == "logout") {
 		$session->logout();
 	}
 	
 	//reset password of user
-	
+	//Objective 9.7
 	else if($request == "resetPassword") {
 		if(isset($_POST['passwordA']) AND !empty($_POST['passwordA']) AND isset($_POST['passwordB']) AND !empty($_POST['passwordB'])) {
 			if($_POST['passwordA'] == $_POST['passwordB']) {
@@ -62,7 +62,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 	}
 	
 	//request password reset
-	
+	//Objective 9.7
 	else if($request == "requestPasswordReset") {
 		if(isset($_POST['username']) AND !empty($_POST['username'])) {
 			$user = new User;
@@ -76,7 +76,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 	}
 	
 	//set session lang
-	
+	//Objective 3.2
 	else if($request == "setLanguage" AND isset($_POST['lang']) AND !empty($_POST['lang'])) {
 		if(strlen($_POST['lang']) == 2) {
 			$session->setPreferredLanguage($_POST['lang']);
@@ -84,13 +84,13 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 	}
 	
 	//load all tags
-	
+	//Objective 8
 	else if($request == "loadTags") {
 		echo json_encode(Tag::getSelect(array("class" => "generalSelect")));
 	}
 	
 	//load comments for specific attribute type and attribute
-	
+	//Objective 6.3/7.5
 	else if($request == "loadComments") {
 		if(
 			isset($_POST['type']) AND isset($_POST['attributeID'])
@@ -149,7 +149,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 	}
 	
 	//Save new comment
-	
+	//Objective 6.3/7.5
 	else if($request == "saveNewComment") {
 		$todo = new ToDoList;
 		$event = new Event;
@@ -186,7 +186,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 	}
 	
 	//Save edited comment
-	
+	//Objective 6.3/7.5
 	else if($request == "saveEditedComment") {
 		$comment = new Comment;
 		if(
@@ -218,7 +218,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 	}
 	
 	//toggle notifications for comments on specific attribute
-	
+	//Objective 11.1
 	else if($request == "toggleCommentNotifications") {
 		$todo = new ToDoList;
 		$event = new Event;
@@ -280,7 +280,7 @@ if(isset($_POST['requestType']) AND !empty($_POST['requestType'])) {
 	
 	
 	//decode data of qr-code scanner
-	
+	//Objective 4.3/5.4
 	else if($request == "decodeScanData") {
 		if(isset($_POST['data']) AND !empty($_POST['data'])) {
 			$data = $_POST['data'];
