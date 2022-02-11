@@ -27,6 +27,9 @@ if($session->loggedIn() === True) {
 	<?php
 	
 	//load page based on request
+	
+	//Page listing all user roles with the ability to create a new one
+	//Objective 9.2
 	if($request == "listUserRoles") {
 		if($session->checkRights("edit_user_role") == True) {
 			?>
@@ -70,7 +73,10 @@ if($session->loggedIn() === True) {
 		} else {
 			include(TEMPLATES."/user/missing_rights.php");
 		}
-	} else if($request == "editUserRole" OR $request == "viewUserRole") {
+	} 
+	//Page to display pre-defined role or data for created role
+	//Objective 9.1 / 9.2 / 9.2.1
+	else if($request == "editUserRole" OR $request == "viewUserRole") {
 		if($session->checkRights("edit_user_role") == True) {
 			?>
 			<div class="page role editRole">
@@ -147,7 +153,10 @@ if($session->loggedIn() === True) {
 		} else {
 			include(TEMPLATES."/user/missing_rights.php");
 		}
-	} else if($request == "listUser") {
+	} 
+	//Page listing all users of the system
+	//Objective 9.3
+	else if($request == "listUser") {
 		if($session->checkRights("edit_user") == True) {
 			?>
 			<div class="page user list">
@@ -199,7 +208,10 @@ if($session->loggedIn() === True) {
 		} else {
 			include(TEMPLATES."/user/missing_rights.php");
 		}
-	} else if($request == "editUser" OR $request == "createNewUser") {
+	} 
+	//Page to edit existing or create a new user
+	//Objective 9.2
+	else if($request == "editUser" OR $request == "createNewUser") {
 		if(
 			($session->checkRights("create_user") == True AND $request == "createNewUser") OR 
 			($session->checkRights("edit_user") == True AND $request == "editUser")

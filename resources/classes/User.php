@@ -18,7 +18,7 @@ class User extends SystemClass {
 	}
 	
 	//check if a password would be valid
-	
+	//Objective 9.5
 	static function checkPasswordRequirements($password) {
 		if(strlen($password) >= 8 AND strlen($password) <= 20 AND preg_match("/[a-zA-Z]+/",$password) AND preg_match("/[0-9]+/",$password) AND preg_match("/[!?@#$%&*]+/",$password)) {
 			return(True);
@@ -27,7 +27,7 @@ class User extends SystemClass {
 	}
 	
 	//check if any user has specific role
-	
+	//Objective 9.3
 	static function checkIfRoleIsUsed($roleID) {
 		$user = new User;
 		$sql = "SELECT ".$user->TABLE_NAME."_id FROM ".$user->TABLE_NAME." WHERE role_id = ?";
@@ -43,7 +43,7 @@ class User extends SystemClass {
 	}
 	
 	//save function with included email confirmation
-	
+	//Objective 9.4 / 9.6
 	function saveData() {
 		//load old user data
 		$oldUserData = new User;
@@ -79,7 +79,7 @@ class User extends SystemClass {
 	
 	
 	//Find user by email for login
-	
+	//Objective 3.3
 	function loadUserByUsername($username = "") {
 		$sql = "SELECT ".$this->TABLE_NAME."_id FROM ".$this->TABLE_NAME." WHERE username = ? OR email = ? OR school_email = ?";
 		$sqlType = "sss";
@@ -96,7 +96,7 @@ class User extends SystemClass {
 	}
 	
 	//Check user password
-	
+	//Objective 3.3
 	function checkPassword($password = "") {
 		if(password_verify($password, $this->password)) {
 			return(True);
@@ -105,7 +105,7 @@ class User extends SystemClass {
 	}
 	
 	//check user rights based on user role and rights key
-	
+	//Objective 9.2
 	function checkRights($key = "") {
 		return(UserRole::checkRights($this->role_id,$key));
 	}
@@ -119,7 +119,7 @@ class User extends SystemClass {
 	}
 	
 	//check before edit/delete if there are enough admins
-	
+	//Objective 9.3.1
 	function checkAdmins() {
 		if($this->getRoleID() != 1) {
 			return(True);
@@ -163,6 +163,8 @@ class User extends SystemClass {
 		}
 		return($created->format("d.m.Y"));
 	}
+	
+	//Get name of user with either first or lastname or both
 	
 	function getName($firstname = 1,$lastname = 1) {
 		$name = "";

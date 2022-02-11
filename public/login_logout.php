@@ -7,6 +7,8 @@
 include_once("../resources/config.php");
 
 //check if user is already logged-in
+//Else display login/logout form
+//Objective 3.3
 
 if(isset($_GET['request']) AND $_GET['request'] == "logout") {
 	$session->logout();

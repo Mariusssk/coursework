@@ -15,6 +15,8 @@ class Event extends SystemClass {
 	//Functions
 
 	//get all events with specific client
+	//Select all events for a specific client to check if client can be deleted
+	//Objective 6.5.3
 	
 	public static function selectAllEventsWithClient($clientID) {
 		$event = new Event;
@@ -30,6 +32,8 @@ class Event extends SystemClass {
 	}
 	
 	//get all events with specific location
+	//check if events with locations exist to check if it can be deleted
+	//Objective 6.6.4
 	
 	public static function selectAllEventsWithLocation($clientID) {
 		$event = new Event;
@@ -45,13 +49,15 @@ class Event extends SystemClass {
 	}
 	
 	//load a list of all tags
+	//Objective 8.2
 	
-	function getTags() {
+	function loadTags() {
 		$tags = TagAssignment::loadTagsByAttribute(1,$this->getID());
 		return($tags);
 	}
 	
 	//load a list of responsible user
+	//Objective 6.4
 	
 	function getResponsible() {
 		$user = EventResponsible::loadResponsibleForEvent($this->getID());
@@ -59,6 +65,8 @@ class Event extends SystemClass {
 	}
 	
 	//create array of all events by time
+	//Load all events and categorise them by time 
+	//objective 6
 	
 	public static function createTimeListAllEvents($session) {
 		$event = new Event;
@@ -106,6 +114,7 @@ class Event extends SystemClass {
 	}
 	
 	//check event specific rights
+	//Check if user has the specific rights to edit an event
 	
 	function checkRights($session, $rightType) {
 		$eventResponsible = EventResponsible::checkIfIsResponsible($session->getSessionUserID(),$this->getID());
@@ -136,6 +145,7 @@ class Event extends SystemClass {
 	
 	//delete event data and attributes as tags
 	
+	
 	function deleteEvent() {
 		TagAssignment::deleteTagsForAttribute(1,$this->getID());
 		
@@ -147,12 +157,6 @@ class Event extends SystemClass {
 		return(False);
 	}
 	
-	//load all tags for this event
-	
-	function loadTags() {
-		$tags = TagAssignment::loadTagsByAttribute(1, $this->getID());
-		return($tags);
-	}
 	
 	//get functions
 	

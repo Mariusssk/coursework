@@ -8,7 +8,7 @@
 	//cut down return from post function
 	
 	function parsePostData(data) {
-		return(data.replace(/(\r\n|\n|\r)/gm,"").replace(" ",""));
+		return(data.replace(/(\r\n|\n|\r)/gm,"").replace(/ /g,"").replace(/\t+/g,''));
 	}
 	
 	//redirect to new URL

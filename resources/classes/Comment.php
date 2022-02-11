@@ -30,7 +30,8 @@ class Comment extends SystemClass {
 	}
 	
 	//load all comments for type and attributeID
-	
+	//Load all comments for specific todo list or event
+	//Objective 6.3 / 7.5
 	public static function loadCommentsForTypeAndAttribute($type, $attributeID) {
 		$comment = new Comment;
 		$sql = "SELECT ".$comment->TABLE_NAME."_id FROM ".$comment->TABLE_NAME." WHERE attribute_type_id = ? AND attribute_id = ? ORDER BY posting_date ASC";
@@ -44,8 +45,8 @@ class Comment extends SystemClass {
 		return($comments);
 	}
 	
-	//Create new comment
-	
+	//Create a new comment
+	//Objective 6.3 / 7.5
 	function createNewComment($type, $attributeID, $comment, $userID) {
 		$this->attribute_type_id = $type;
 		$this->attribute_id = $attributeID;
@@ -61,7 +62,7 @@ class Comment extends SystemClass {
 	}
 	
 	//Create notificiations for new comments
-	
+	//Objective 11.2
 	function createNotifications($userID) {
 		$requests = NotificationRequest::getRequestsForTypeAndAttribute($this->getTypeID(), $this->getAttributeID());
 		

@@ -11,14 +11,14 @@ class Notification extends SystemClass{
 	}
 	
 	//count open notifications
-	
+	//Objective 11
 	public static function countUnreadNotifications($userID) {
 		$notifications = Notification::getAllNotificationsForUser($userID, True);
 		return(count($notifications));
 	}
 	
 	//get all personal notifications for userID
-	
+	//Objective 11
 	public static function getAllNotificationsForUser($userID, $onlyUnread = False) {
 		$notificationsRequests = NotificationRequest::loadRequestsByUserID($userID);
 		
@@ -81,7 +81,7 @@ class Notification extends SystemClass{
 	}
 	
 	//Create a new notification
-	
+	//Objective 11
 	function createNewNotification($requestID) {
 		$request = new NotificationRequest;
 		if($request->loadData($requestID)) {
@@ -146,6 +146,9 @@ class Notification extends SystemClass{
 	}
 	
 	//update
+	
+	//set if email was send if requested
+	//Objective 11.4
 	
 	function updateEmailSent($value) {
 		if($value == 0 OR $value == 1) {

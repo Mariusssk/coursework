@@ -19,7 +19,7 @@ class ToDoList extends SystemClass {
 	}
 	
 	//create new template todo list
-	
+	//Objective 7.1
 	function createNewList() {
 		$this->setDateCreated();
 		$this->setName(TODO_LISTS_OVERVIEW_NEW_LIST_NAME);
@@ -27,7 +27,7 @@ class ToDoList extends SystemClass {
 	}
 	
 	//find all todo list for category
-	
+	//Objective 7.3
 	static function findListByCategory($category = 0, $userID = 0) {
 		$list = new ToDoList;
 		$sql = "SELECT ".$list->TABLE_NAME."_id FROM ".$list->TABLE_NAME;
@@ -91,7 +91,7 @@ class ToDoList extends SystemClass {
 	}
 	
 	//check if list has tag
-	
+	//Objective 8.2
 	function checkIfListHasTag($tagID) {
 		return(TagAssignment::checkIfAttributeHasTag(3,$this->getID(),$tagID));
 	}
@@ -108,6 +108,7 @@ class ToDoList extends SystemClass {
 	
 	
 	//function load todo list entries
+	//Objective 7.2
 	function loadEntries() {
 		$this->entries = array();
 		//check if list ID is set
@@ -124,6 +125,7 @@ class ToDoList extends SystemClass {
 	
 	
 	//load todo list tags
+	//Objective 8.2
 	function loadTags() {
 		$tags = array();
 		//check if list ID is set
@@ -135,7 +137,7 @@ class ToDoList extends SystemClass {
 	}
 	
 	//delete todo list and the connected data
-	
+	//Objective 7.1
 	function deleteList() {
 		
 		$entries = ToDoListEntry::loadEntriesArray($this->getID());
@@ -186,7 +188,7 @@ class ToDoList extends SystemClass {
 	}
 	
 	//recursiveley delete todo lis entries
-	
+	//Objective 7.2
 	function recursiveDeleteEntry($tmpArray) {
 		if(isset($tmpArray['children']) AND count($tmpArray['children']) > 0) {
 			foreach($tmpArray['children'] as $tmpChildren) {
@@ -228,6 +230,8 @@ class ToDoList extends SystemClass {
 	
 	// set function
 	
+	//check if user is existing
+	
 	function setUserID($value) {
 		$user = new User;
 		if($user->loadData($value)) {
@@ -236,6 +240,8 @@ class ToDoList extends SystemClass {
 		}
 		return(False);
 	}
+	
+	//check if category is either existing or empty
 	
 	function setCategoryID($value) {
 		$category = new ToDoCategory;

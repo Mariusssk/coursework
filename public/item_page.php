@@ -26,6 +26,8 @@ if($session->loggedIn() === True) {
 	<div class="page item <?php echo $request;?>">
 		<?php 
 		//Load page data based on request
+		// List of all items 
+		//Objective 4
 		if($request == "overview") {
 			if($session->checkRights("view_all_items") == True) {
 				?>
@@ -77,7 +79,10 @@ if($session->loggedIn() === True) {
 			} else {
 				include(TEMPLATES."/user/missing_rights.php");
 			}
-		} else if($request == "consumable") {
+		} 
+		//Display page to list all consumable items in storage
+		//Objective 4.4.1
+		else if($request == "consumable") {
 			if($session->checkRights("view_all_items") == True) {
 				?>
 				<div class="generalTable">
@@ -125,7 +130,11 @@ if($session->loggedIn() === True) {
 			} else {
 				include(TEMPLATES."/user/missing_rights.php");
 			}
-		} else if($request == "new" OR $request == "edit") {
+		} 
+		//Form to either edit or create a new hardware/item
+		//Objective 4.1 / 4.1.1
+		
+		else if($request == "new" OR $request == "edit") {
 			//check rights for edit/new
 			if(($request == "edit" AND $session->checkRights("edit_item") == True) OR ($request == "new" AND $session->checkRights("create_new_item") == True)) {
 				$item = new Item;
@@ -190,7 +199,11 @@ if($session->loggedIn() === True) {
 			} else {
 				include(TEMPLATES."/user/missing_rights.php");
 			}
-		} else if($request == "lended") {
+		} 
+		//Page to give the user the option to lend items // show items lend in past
+		//Objective 4.5
+		
+		else if($request == "lended") {
 			if($session->checkRights("lend_item") == True) {
 				?>
 				<div class="generalTable">
@@ -248,7 +261,10 @@ if($session->loggedIn() === True) {
 			} else {
 				include(TEMPLATES."/user/missing_rights.php");
 			}
-		} else if($request == "addLend") {
+		} 
+		//Page to select objective to add to already lend objects
+		//Objective 4.5.1
+		else if($request == "addLend") {
 			if($session->checkRights("lend_item") == True) {
 				?>
 				<div class="generalTable">

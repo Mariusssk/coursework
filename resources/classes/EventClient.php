@@ -22,6 +22,7 @@ class EventClient extends ObjectType {
 	}
 	
 	//check if event client is used
+	//Objective 6.6.4
 	
 	function checkIfUsed() {
 		if(count(Event::selectAllEventsWithClient($this->getID())) > 0) {
@@ -62,6 +63,8 @@ class EventClient extends ObjectType {
 		$this->description = $value;
 		return(True);
 	}
+	
+	//Objective 6.6.2
 	
 	function setExternal($value) {
 		if($value == 0 OR $value == 1) {

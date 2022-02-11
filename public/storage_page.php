@@ -27,6 +27,10 @@ if($session->loggedIn() === True) {
 	<div class="page storage <?php echo $request;?>">
 		<?php 
 		//Load page data based on request
+		//Display page listing all stoarges
+		//Objective 5
+		//Page has search form
+		//Objective 5.6
 		if($request == "overview") {
 			if($session->checkRights("view_storages") == True) {
 				?>
@@ -74,7 +78,10 @@ if($session->loggedIn() === True) {
 			} else {
 				include(TEMPLATES."/user/missing_rights.php");
 			}
-		} else if($request == "new" OR $request == "edit") {
+		} 
+		//Form to create a new or edit a storage
+		//Objective 5/5.2
+		else if($request == "new" OR $request == "edit") {
 			//check rights for edit/new
 			if(($request == "edit" AND $session->checkRights("edit_storage") == True) OR ($request == "new" AND $session->checkRights("create_new_storage") == True)) {
 				$storage = new Storage;
@@ -138,6 +145,9 @@ if($session->loggedIn() === True) {
 					loadParentOptions(<?php echo "'".$storage->getTypeID()."','".$storage->getParentID()."'";?>);
 				</script>
 				<?php
+				//Display X/Y Grid for storage
+				//Objective 5.5
+				
 				$storageGrid = new StorageShelf;
 				if($storage->getTypeID() == 2) {
 					$storageGrid = $storage;
@@ -184,7 +194,10 @@ if($session->loggedIn() === True) {
 			} else {
 				include(TEMPLATES."/user/missing_rights.php");
 			}
-		} else if($request == "listItems") {
+		} 
+		//Page displaying all items storaged in a particular storage
+		//Objective 5.3
+		else if($request == "listItems") {
 			if($session->checkRights("view_items_specific_storage") == True) {
 				$storage = new Storage;
 				//load data of storage

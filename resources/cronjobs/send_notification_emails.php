@@ -9,7 +9,8 @@ error_reporting(E_ALL);
 
 include __DIR__ . "/../config.php";
 
-//Send all emails for notifications 
+//Checks for unseen notifications and sends out emails if requested by the user
+//Objective 10.3
 
 $now = new DateTime();
 
@@ -21,6 +22,7 @@ if($now->format("H") == "18") {
 
 
 $users = User::getAll();
+
 
 foreach($users as $tmpUser) {
 	$user = new User;
@@ -41,6 +43,9 @@ foreach($users as $tmpUser) {
 		foreach($notifications as $tmpNotification) {
 			$notification = new Notification;
 			$request = new NotificationRequest;
+			
+			//check if user selected to get e-mail updates
+			
 			if(
 				$notification->loadData($tmpNotification) AND $request->loadData($notification->getRequestID()) AND
 				(
@@ -51,6 +56,8 @@ foreach($users as $tmpUser) {
 			) {
 				
 				$notificationText = $notification->getTimePosted("external").": ";
+				
+				//Set email text based on if it is event or todo list
 				
 				if($request->getAttributeTypeID() == 1) {
 					$event = new Event;
@@ -85,6 +92,8 @@ foreach($users as $tmpUser) {
 				$notification->updateEmailSent(1);
 			}
 		}
+		
+		//Send email
 
 		if(strlen($userNotificationString) > 0) {
 			$email = new Email;

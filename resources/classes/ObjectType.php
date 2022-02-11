@@ -3,6 +3,9 @@
 
 class ObjectType extends SystemClass {
 	
+	//Holder class not actually used to have basic functions as creating a select
+	//Used for types of objectives as item type which regularly need selects
+	
 	//Functions
 
 	//get a list of all storage type IDs

@@ -27,6 +27,8 @@ if($session->loggedIn() === True) {
 	<?php
 	
 	//load page based on request
+	//Display page with a list of all tags and the option to edit and delete them 
+	//Objective 8 / 8.3
 	if($request == "tagList") {
 		if($session->checkRights("edit_tags") == True) {
 			?>

@@ -24,7 +24,7 @@ class ToDoCategory extends ObjectType {
 	}
 	
 	//get all categories for specific user
-	
+	//Objective 7.3
 	static function getUserCategories($userID) {
 		$category = new ToDoCategory;
 		$sql = "SELECT ".$category->TABLE_NAME."_id FROM ".$category->TABLE_NAME." WHERE user_id = ? OR user_id IS NULL";
@@ -39,7 +39,7 @@ class ToDoCategory extends ObjectType {
 	}
 	
 	//get all personal categories for specific user
-	
+	//Objective 7.3.3
 	static function getPersonalCategories($userID) {
 		$category = new ToDoCategory;
 		$sql = "SELECT ".$category->TABLE_NAME."_id FROM ".$category->TABLE_NAME." WHERE user_id = ?";
@@ -54,7 +54,7 @@ class ToDoCategory extends ObjectType {
 	}
 	
 	//get all global categories
-	
+	//Objectives 7.3.2
 	static function getGlobalCategories() {
 		$category = new ToDoCategory;
 		$sql = "SELECT ".$category->TABLE_NAME."_id FROM ".$category->TABLE_NAME." WHERE user_id IS NULL";
@@ -82,6 +82,8 @@ class ToDoCategory extends ObjectType {
 		}
 		return(False);
 	}
+	
+	//check if user is existing
 	
 	function setUserID($value = "") {
 		$user = new User;

@@ -5,6 +5,8 @@ class Tag extends ObjectType {
 	
 	protected $tag_id, $name, $colour;
 	
+	//Overall objective 8
+	
 	function __construct() {
 		//Name of the table
 		$this->TABLE_NAME = "tag";

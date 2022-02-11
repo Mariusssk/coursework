@@ -3,6 +3,8 @@
 
 class SystemClass {
 	
+	//Container classed not used itself to basic functions as database read and write operations
+	
 	public $NULL_VAR = array();
 	public $TABLE_NAME = "";
 	public $IGNORE = array("NULL_VAR","TABLE_NAME","IGNORE");

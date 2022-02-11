@@ -549,7 +549,7 @@ function deleteEvent(eventID, request) {
 			} else if(dataCut == "success") {
 				redirect(URL+"/events");
 			} else {
-				console.log(data);
+				console.log("/"+dataCut+"/");
 			}
 		});
 	}

@@ -27,6 +27,9 @@ if($session->loggedIn() === True) {
 	<div class="page scan <?php echo $request;?>">
 		<?php 
 		//Load page data based on request
+		
+		//Display page with qr-code scanner
+		//Objective 4.3/5.4
 		if($request == "displayScanner") {
 			?>
 			<div class="barcodeReaderContainer none"><div class="closeWindow" onclick="closeScanner()"> <i class="fa fa-window-close" aria-hidden="true"></i></div><div id="barcodeReader" class="barcodeReader"></div></div>
@@ -47,14 +50,18 @@ if($session->loggedIn() === True) {
 				</script>
 				<?php
 			}
-		} else if($request == "displayAttribute") {
+		} 
+		
+		//Page to display data after qr-code scanned
+		//Objective 4.3 / 5.4 
+		else if($request == "displayAttribute") {
 			if(isset($_GET['type']) AND isset($_GET['attribute']) AND ($_GET['type'] == "item" OR $_GET['type'] == "storage")) {
 				$type = $_GET['type'];
 				$attributID = $_GET['attribute'];
 				$item = new Item;
 				$storage = new Storage;
 				
-				//check if data can be loaded
+				//check if data can be loaded and if qr-code is for item or storage
 				
 				if(
 					($type == "item" AND $item->loadData($attributID)) OR
@@ -203,7 +210,11 @@ if($session->loggedIn() === True) {
 										<b><?php echo SCANNER_VIEW_STORAGE_LOCATION;?>:</b>
 									</div>
 									<div class="col-12 col-md-6">
-										<?php echo $storage->createStorageString();?>
+										<?php 
+										//Objective 5.4.2
+										echo $storage->createStorageString();
+										
+										?>
 									</div>
 									<div class="col-12">
 										<hr>

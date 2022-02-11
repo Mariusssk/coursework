@@ -26,13 +26,14 @@ class Item extends SystemClass {
 		return(Parent::getAll($object));
 	}
 	
-	//get actual amount of items in storage
-	
+	//get actual amount of items in storage updated by how many lend
+	//Objective 4.5.2
 	function getActualAmount() {
 		return($this->getAmount() - Lend::calculateTotalAmountLend($this->getID()));
 	}
 	
 	//generate key/url for qr code
+	//Generate data for the QR code
 	
 	function generateQrCodeURL() {
 		return(URL."/scan/item/".$this->getID());
@@ -68,6 +69,8 @@ class Item extends SystemClass {
 	function getStorageID() {
 		return($this->storage_id);
 	}
+	
+	//Load values of indivual parts to get the names
 	
 	function getTypeName() {
 		$itemType = new ItemType;
@@ -115,6 +118,8 @@ class Item extends SystemClass {
 		return(False);
 	}
 	
+	//check if length is a number
+	
 	function setLength($value) {
 		if(is_numeric($value) or empty($value)) {
 			$this->lenght = $value;
@@ -122,6 +127,8 @@ class Item extends SystemClass {
 		}
 		return(False);
 	}
+	
+	//Check if amount is either a number or 0
 	
 	function setAmount($value) {
 		if(is_numeric($value) AND !empty($value)) {
@@ -138,6 +145,8 @@ class Item extends SystemClass {
 		$this->description = $value;
 		return(True);
 	}
+	
+	//check type and storage exist
 	
 	function setTypeID($value) {
 		$itemType = new ItemType;

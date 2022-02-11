@@ -26,12 +26,15 @@ if($session->loggedIn() === True) {
 	<div class="page event <?php echo $request;?>">
 		<?php 
 		//Load page data based on request
+		//Objective 6.6
+		//Page displaying list of all clients with the ability to edit and delete it
 		if($request == "clients") {
 			if($session->checkRights("edit_event_clients") == True) {
 				//Load list of all event clients
 				?>
 				<div class="generalTable">
 					<div class="row generalTableSearch">
+						<!-- Search Inpus -->
 						<div class="td col-md-4 col-sm-12">
 							<input type="text" class="generalInput searchInput" data-search-name="name" placeholder="<?php echo EVENT_CLIENT_LIST_HEADER_NAME;?>">
 						</div>
@@ -81,11 +84,16 @@ if($session->loggedIn() === True) {
 			} else {
 				include(TEMPLATES."/user/missing_rights.php");
 			}
-		} else if($request == "locations") {
+		} 
+		
+		//Objective 6.5
+		//Page to display list of locations with the ability to edit and delete them
+		else if($request == "locations") {
 			if($session->checkRights("edit_event_locations") == True) {
 				//Load list of all event location
 				?>
 				<div class="generalTable">
+					<!-- Search Inputs -->
 					<div class="row generalTableSearch">
 						<div class="td col-md-6 col-sm-12">
 							<input type="text" class="generalInput searchInput" data-search-name="name" placeholder="<?php echo EVENT_CLIENT_LIST_HEADER_NAME;?>">
@@ -123,14 +131,18 @@ if($session->loggedIn() === True) {
 					</div>
 				</div>
 				<script>
-					//load all clients
+					//load all locations
 					loadLocationList();
 				</script>
 				<?php
 			} else {
 				include(TEMPLATES."/user/missing_rights.php");
 			}
-		} else if($request == "overview") {
+		} 
+		
+		//Objective 6
+		//Page to display overview of all events split timespan
+		else if($request == "overview") {
 			//display overview of all events
 			$events = Event::createTimeListAllEvents($session);
 			
@@ -143,6 +155,7 @@ if($session->loggedIn() === True) {
 					<div class="eventCategoryContainer">
 						<div class="categoryHeader">
 							<?php
+							//Set time category of event d
 							if($tmpCategoryName == "running")
 								echo EVENT_OVERVIEW_CATEGORY_RUNNING;
 							else if($tmpCategoryName == "soon")
@@ -156,7 +169,9 @@ if($session->loggedIn() === True) {
 							?>
 						</div>
 						<div class="categoryContent">
+							
 							<?php
+							//Load all events by category
 							if($tmpCategoryName == "uncategorized" AND $session->checkRights("create_event") == True) {
 								?>
 								<div class="generalButton createNewToDoBtn" onclick="createNewEvent()"> New </div>
@@ -237,13 +252,17 @@ if($session->loggedIn() === True) {
 			?>
 			</div>
 			<?php
-		} else if($request == "editEvent") {
+		} 
+		//Objective 6.2
+		//Display page to edit events with the ability to delete them 
+		else if($request == "editEvent") {
 			//display page to edit event
 			$event = new Event;
 			if(isset($_GET['ID']) AND $event->loadData($_GET['ID'])) {
 				if($event->checkRights($session, "edit")) {
 					?>
 					<div class="editEventContainer row">
+						<!-- Input Form data -->
 						<div class="col-12 inputRow">
 							<input class="generalInput dataInput" type="text" data-input-name="name" value="<?php echo $event->getName();?>" placeholder="<?php echo EVENT_EDIT_PLACEHOLDER_NAME;?>">
 						</div>
@@ -294,12 +313,14 @@ if($session->loggedIn() === True) {
 						<div class="col-12">
 							<hr class="hr">
 						</div>
+						<!-- Block to add and remove tags -->
+						<!-- Objective 8.2 -->
 						<div class="col-12">
 							<h4><?php echo EVENT_EDIT_HEADLINE_TAGS;?></h4>
 							<div class="tagsList">
 								<?php
 								$allTags = Tag::getAll();
-								$tags = $event->getTags();
+								$tags = $event->loadTags();
 								foreach($tags as $tmpTag) {
 									$tag = new Tag;
 									if($tag->loadData($tmpTag)) {
@@ -342,6 +363,9 @@ if($session->loggedIn() === True) {
 							<div class="col-12">
 								<hr class="hr">
 							</div>
+							<!-- List event responsibles -->
+							<!-- Option to edit and remove them -->
+							<!-- Objective 6.4 -->
 							<div class="col-12">
 								<h4><?php echo EVENT_EDIT_HEADLINE_RESPONSIBLES;?></h4>
 								<div class="responsibleList">
@@ -386,6 +410,9 @@ if($session->loggedIn() === True) {
 							</div>
 						<?php
 						}
+						
+						//Display if notification request is active
+						//Objective 11.1
 						
 						$notificationsActive = NotificationRequest::checkIfRequestActivated($session->getSessionUserID(),1,$event->getID());
 						

@@ -1,35 +1,10 @@
-//-----------------New File---------------------
-//DATABASE export during test
-//-----------------New File---------------------
+-- New File --
+-- Sate of the Database used during the testing process --
+-- Generated with phpMyAdmin --
 
-
--- phpMyAdmin SQL Dump
--- version 5.1.0
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Erstellungszeit: 06. Feb 2022 um 16:04
--- Server-Version: 8.0.25
--- PHP-Version: 8.0.6
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Datenbank: `aulatechnik_db`
---
-
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `attribute_type`
+-- Table structure for table `attribute_type`
 --
 
 CREATE TABLE `attribute_type` (
@@ -38,7 +13,7 @@ CREATE TABLE `attribute_type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Daten für Tabelle `attribute_type`
+-- Dumping data for table `attribute_type`
 --
 
 INSERT INTO `attribute_type` (`attribute_type_id`, `name`) VALUES
@@ -49,7 +24,7 @@ INSERT INTO `attribute_type` (`attribute_type_id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `comment`
+-- Table structure for table `comment`
 --
 
 CREATE TABLE `comment` (
@@ -64,7 +39,7 @@ CREATE TABLE `comment` (
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `email_request`
+-- Table structure for table `email_request`
 --
 
 CREATE TABLE `email_request` (
@@ -80,7 +55,7 @@ CREATE TABLE `email_request` (
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `email_request_type`
+-- Table structure for table `email_request_type`
 --
 
 CREATE TABLE `email_request_type` (
@@ -89,7 +64,7 @@ CREATE TABLE `email_request_type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Daten für Tabelle `email_request_type`
+-- Dumping data for table `email_request_type`
 --
 
 INSERT INTO `email_request_type` (`email_request_type_id`, `name`) VALUES
@@ -100,7 +75,7 @@ INSERT INTO `email_request_type` (`email_request_type_id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `event`
+-- Table structure for table `event`
 --
 
 CREATE TABLE `event` (
@@ -116,7 +91,7 @@ CREATE TABLE `event` (
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `event_client`
+-- Table structure for table `event_client`
 --
 
 CREATE TABLE `event_client` (
@@ -127,7 +102,7 @@ CREATE TABLE `event_client` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Daten für Tabelle `event_client`
+-- Dumping data for table `event_client`
 --
 
 INSERT INTO `event_client` (`event_client_id`, `name`, `description`, `external`) VALUES
@@ -136,7 +111,7 @@ INSERT INTO `event_client` (`event_client_id`, `name`, `description`, `external`
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `event_location`
+-- Table structure for table `event_location`
 --
 
 CREATE TABLE `event_location` (
@@ -146,7 +121,7 @@ CREATE TABLE `event_location` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Daten für Tabelle `event_location`
+-- Dumping data for table `event_location`
 --
 
 INSERT INTO `event_location` (`event_location_id`, `name`, `description`) VALUES
@@ -155,7 +130,7 @@ INSERT INTO `event_location` (`event_location_id`, `name`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `event_responsible`
+-- Table structure for table `event_responsible`
 --
 
 CREATE TABLE `event_responsible` (
@@ -167,7 +142,7 @@ CREATE TABLE `event_responsible` (
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `item`
+-- Table structure for table `item`
 --
 
 CREATE TABLE `item` (
@@ -181,7 +156,7 @@ CREATE TABLE `item` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Daten für Tabelle `item`
+-- Dumping data for table `item`
 --
 
 INSERT INTO `item` (`item_id`, `item_type_id`, `storage_id`, `name`, `lenght`, `description`, `amount`) VALUES
@@ -193,7 +168,7 @@ INSERT INTO `item` (`item_id`, `item_type_id`, `storage_id`, `name`, `lenght`, `
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `item_type`
+-- Table structure for table `item_type`
 --
 
 CREATE TABLE `item_type` (
@@ -204,7 +179,7 @@ CREATE TABLE `item_type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Daten für Tabelle `item_type`
+-- Dumping data for table `item_type`
 --
 
 INSERT INTO `item_type` (`item_type_id`, `name_en`, `name_de`, `consumable`) VALUES
@@ -221,7 +196,7 @@ INSERT INTO `item_type` (`item_type_id`, `name_en`, `name_de`, `consumable`) VAL
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `lend`
+-- Table structure for table `lend`
 --
 
 CREATE TABLE `lend` (
@@ -234,7 +209,7 @@ CREATE TABLE `lend` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Daten für Tabelle `lend`
+-- Dumping data for table `lend`
 --
 
 INSERT INTO `lend` (`lend_id`, `user_id`, `item_id`, `amount`, `return_date`, `returned`) VALUES
@@ -243,7 +218,7 @@ INSERT INTO `lend` (`lend_id`, `user_id`, `item_id`, `amount`, `return_date`, `r
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `notification`
+-- Table structure for table `notification`
 --
 
 CREATE TABLE `notification` (
@@ -257,7 +232,7 @@ CREATE TABLE `notification` (
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `notification_request`
+-- Table structure for table `notification_request`
 --
 
 CREATE TABLE `notification_request` (
@@ -272,7 +247,7 @@ CREATE TABLE `notification_request` (
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `storage`
+-- Table structure for table `storage`
 --
 
 CREATE TABLE `storage` (
@@ -285,7 +260,7 @@ CREATE TABLE `storage` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Daten für Tabelle `storage`
+-- Dumping data for table `storage`
 --
 
 INSERT INTO `storage` (`storage_id`, `storage_parent_id`, `storage_type_id`, `name`, `size_x`, `size_y`) VALUES
@@ -301,7 +276,7 @@ INSERT INTO `storage` (`storage_id`, `storage_parent_id`, `storage_type_id`, `na
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `storage_type`
+-- Table structure for table `storage_type`
 --
 
 CREATE TABLE `storage_type` (
@@ -311,7 +286,7 @@ CREATE TABLE `storage_type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Daten für Tabelle `storage_type`
+-- Dumping data for table `storage_type`
 --
 
 INSERT INTO `storage_type` (`storage_type_id`, `name_en`, `name_de`) VALUES
@@ -322,7 +297,7 @@ INSERT INTO `storage_type` (`storage_type_id`, `name_en`, `name_de`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `tag`
+-- Table structure for table `tag`
 --
 
 CREATE TABLE `tag` (
@@ -332,7 +307,7 @@ CREATE TABLE `tag` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Daten für Tabelle `tag`
+-- Dumping data for table `tag`
 --
 
 INSERT INTO `tag` (`tag_id`, `name`, `colour`) VALUES
@@ -342,7 +317,7 @@ INSERT INTO `tag` (`tag_id`, `name`, `colour`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `tag_assignment`
+-- Table structure for table `tag_assignment`
 --
 
 CREATE TABLE `tag_assignment` (
@@ -355,7 +330,7 @@ CREATE TABLE `tag_assignment` (
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `todo_list`
+-- Table structure for table `todo_list`
 --
 
 CREATE TABLE `todo_list` (
@@ -368,7 +343,7 @@ CREATE TABLE `todo_list` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Daten für Tabelle `todo_list`
+-- Dumping data for table `todo_list`
 --
 
 INSERT INTO `todo_list` (`todo_list_id`, `event_id`, `user_id`, `todo_list_category_id`, `created`, `name`) VALUES
@@ -377,7 +352,7 @@ INSERT INTO `todo_list` (`todo_list_id`, `event_id`, `user_id`, `todo_list_categ
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `todo_list_category`
+-- Table structure for table `todo_list_category`
 --
 
 CREATE TABLE `todo_list_category` (
@@ -387,7 +362,7 @@ CREATE TABLE `todo_list_category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Daten für Tabelle `todo_list_category`
+-- Dumping data for table `todo_list_category`
 --
 
 INSERT INTO `todo_list_category` (`todo_list_category_id`, `user_id`, `name`) VALUES
@@ -397,7 +372,7 @@ INSERT INTO `todo_list_category` (`todo_list_category_id`, `user_id`, `name`) VA
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `todo_list_entry`
+-- Table structure for table `todo_list_entry`
 --
 
 CREATE TABLE `todo_list_entry` (
@@ -409,7 +384,7 @@ CREATE TABLE `todo_list_entry` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Daten für Tabelle `todo_list_entry`
+-- Dumping data for table `todo_list_entry`
 --
 
 INSERT INTO `todo_list_entry` (`todo_list_entry_id`, `todo_list_id`, `parent_entry_id`, `name`, `checked`) VALUES
@@ -419,7 +394,7 @@ INSERT INTO `todo_list_entry` (`todo_list_entry_id`, `todo_list_id`, `parent_ent
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -437,7 +412,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Daten für Tabelle `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`user_id`, `role_id`, `created`, `active`, `email`, `school_email`, `username`, `firstname`, `lastname`, `password`, `preferred_language`) VALUES
@@ -446,7 +421,7 @@ INSERT INTO `user` (`user_id`, `role_id`, `created`, `active`, `email`, `school_
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `user_role`
+-- Table structure for table `user_role`
 --
 
 CREATE TABLE `user_role` (
@@ -489,7 +464,7 @@ CREATE TABLE `user_role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Daten für Tabelle `user_role`
+-- Dumping data for table `user_role`
 --
 
 INSERT INTO `user_role` (`user_role_id`, `name`, `pre_defined`, `create_user`, `edit_user`, `delete_user`, `edit_user_role`, `create_event`, `view_all_events`, `view_own_events`, `edit_all_events`, `edit_own_events`, `edit_event_responsibles`, `delete_all_events`, `delete_own_events`, `edit_event_locations`, `edit_event_clients`, `create_global_todo_list`, `edit_all_todo_lists`, `view_all_todo_lists`, `edit_personal_todo_list`, `edit_todo_list_categories`, `edit_tags`, `view_all_items`, `view_specific_item`, `create_new_item`, `edit_item`, `delete_item`, `lend_item`, `create_new_storage`, `edit_storage`, `delete_storage`, `view_storages`, `view_items_specific_storage`, `comment_everything`, `comment_own`) VALUES
@@ -497,17 +472,17 @@ INSERT INTO `user_role` (`user_role_id`, `name`, `pre_defined`, `create_user`, `
 (2, 'User', 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1);
 
 --
--- Indizes der exportierten Tabellen
+-- Indexes for dumped tables
 --
 
 --
--- Indizes für die Tabelle `attribute_type`
+-- Indexes for table `attribute_type`
 --
 ALTER TABLE `attribute_type`
   ADD PRIMARY KEY (`attribute_type_id`);
 
 --
--- Indizes für die Tabelle `comment`
+-- Indexes for table `comment`
 --
 ALTER TABLE `comment`
   ADD PRIMARY KEY (`comment_id`,`user_id`,`attribute_type_id`,`attribute_id`),
@@ -515,7 +490,7 @@ ALTER TABLE `comment`
   ADD KEY `fx_comment_attribute_type_id` (`attribute_type_id`) USING BTREE;
 
 --
--- Indizes für die Tabelle `email_request`
+-- Indexes for table `email_request`
 --
 ALTER TABLE `email_request`
   ADD PRIMARY KEY (`email_request_id`,`email_request_type_id`,`user_id`),
@@ -523,13 +498,13 @@ ALTER TABLE `email_request`
   ADD KEY `fx_email_request_user_idx` (`user_id`) USING BTREE;
 
 --
--- Indizes für die Tabelle `email_request_type`
+-- Indexes for table `email_request_type`
 --
 ALTER TABLE `email_request_type`
   ADD PRIMARY KEY (`email_request_type_id`);
 
 --
--- Indizes für die Tabelle `event`
+-- Indexes for table `event`
 --
 ALTER TABLE `event`
   ADD PRIMARY KEY (`event_id`),
@@ -537,19 +512,19 @@ ALTER TABLE `event`
   ADD KEY `fx_event_event_client_idx` (`event_client_id`) USING BTREE;
 
 --
--- Indizes für die Tabelle `event_client`
+-- Indexes for table `event_client`
 --
 ALTER TABLE `event_client`
   ADD PRIMARY KEY (`event_client_id`);
 
 --
--- Indizes für die Tabelle `event_location`
+-- Indexes for table `event_location`
 --
 ALTER TABLE `event_location`
   ADD PRIMARY KEY (`event_location_id`);
 
 --
--- Indizes für die Tabelle `event_responsible`
+-- Indexes for table `event_responsible`
 --
 ALTER TABLE `event_responsible`
   ADD PRIMARY KEY (`event_responsible_id`,`user_id`,`event_id`),
@@ -557,7 +532,7 @@ ALTER TABLE `event_responsible`
   ADD KEY `fx_event_responsible_event_id` (`event_id`);
 
 --
--- Indizes für die Tabelle `item`
+-- Indexes for table `item`
 --
 ALTER TABLE `item`
   ADD PRIMARY KEY (`item_id`,`item_type_id`),
@@ -565,13 +540,13 @@ ALTER TABLE `item`
   ADD KEY `fx_storage_idx` (`storage_id`);
 
 --
--- Indizes für die Tabelle `item_type`
+-- Indexes for table `item_type`
 --
 ALTER TABLE `item_type`
   ADD PRIMARY KEY (`item_type_id`);
 
 --
--- Indizes für die Tabelle `lend`
+-- Indexes for table `lend`
 --
 ALTER TABLE `lend`
   ADD PRIMARY KEY (`lend_id`,`user_id`,`item_id`),
@@ -579,14 +554,14 @@ ALTER TABLE `lend`
   ADD KEY `fx_lend_user_idx` (`user_id`) USING BTREE;
 
 --
--- Indizes für die Tabelle `notification`
+-- Indexes for table `notification`
 --
 ALTER TABLE `notification`
   ADD PRIMARY KEY (`notification_id`,`notification_request_id`),
   ADD KEY `fx_notification_notification_request_id` (`notification_request_id`);
 
 --
--- Indizes für die Tabelle `notification_request`
+-- Indexes for table `notification_request`
 --
 ALTER TABLE `notification_request`
   ADD PRIMARY KEY (`notification_request_id`,`user_id`,`attribute_type_id`),
@@ -594,7 +569,7 @@ ALTER TABLE `notification_request`
   ADD KEY `fx_notification_request_attribute_type_id` (`attribute_type_id`);
 
 --
--- Indizes für die Tabelle `storage`
+-- Indexes for table `storage`
 --
 ALTER TABLE `storage`
   ADD PRIMARY KEY (`storage_id`,`storage_type_id`),
@@ -602,19 +577,19 @@ ALTER TABLE `storage`
   ADD KEY `fx_storage_type_idx` (`storage_type_id`) USING BTREE;
 
 --
--- Indizes für die Tabelle `storage_type`
+-- Indexes for table `storage_type`
 --
 ALTER TABLE `storage_type`
   ADD PRIMARY KEY (`storage_type_id`);
 
 --
--- Indizes für die Tabelle `tag`
+-- Indexes for table `tag`
 --
 ALTER TABLE `tag`
   ADD PRIMARY KEY (`tag_id`);
 
 --
--- Indizes für die Tabelle `tag_assignment`
+-- Indexes for table `tag_assignment`
 --
 ALTER TABLE `tag_assignment`
   ADD PRIMARY KEY (`tag_assignment_id`,`tag_id`,`attribute_type_id`,`attribute_id`),
@@ -622,7 +597,7 @@ ALTER TABLE `tag_assignment`
   ADD KEY `fx_tag_assignment_attribute_type_id` (`attribute_type_id`) USING BTREE;
 
 --
--- Indizes für die Tabelle `todo_list`
+-- Indexes for table `todo_list`
 --
 ALTER TABLE `todo_list`
   ADD PRIMARY KEY (`todo_list_id`),
@@ -631,14 +606,14 @@ ALTER TABLE `todo_list`
   ADD KEY `fx_todo_list_user_id` (`user_id`);
 
 --
--- Indizes für die Tabelle `todo_list_category`
+-- Indexes for table `todo_list_category`
 --
 ALTER TABLE `todo_list_category`
   ADD PRIMARY KEY (`todo_list_category_id`),
   ADD KEY `fx_todo_list_category_user_id` (`user_id`);
 
 --
--- Indizes für die Tabelle `todo_list_entry`
+-- Indexes for table `todo_list_entry`
 --
 ALTER TABLE `todo_list_entry`
   ADD PRIMARY KEY (`todo_list_entry_id`,`todo_list_id`),
@@ -646,7 +621,7 @@ ALTER TABLE `todo_list_entry`
   ADD KEY `fx_todo_list_entry_todo_list_id` (`todo_list_id`);
 
 --
--- Indizes für die Tabelle `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`),
@@ -656,210 +631,210 @@ ALTER TABLE `user`
   ADD KEY `fx_user_user_role_id` (`role_id`);
 
 --
--- Indizes für die Tabelle `user_role`
+-- Indexes for table `user_role`
 --
 ALTER TABLE `user_role`
   ADD PRIMARY KEY (`user_role_id`);
 
 --
--- AUTO_INCREMENT für exportierte Tabellen
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT für Tabelle `attribute_type`
+-- AUTO_INCREMENT for table `attribute_type`
 --
 ALTER TABLE `attribute_type`
   MODIFY `attribute_type_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT für Tabelle `comment`
+-- AUTO_INCREMENT for table `comment`
 --
 ALTER TABLE `comment`
   MODIFY `comment_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
--- AUTO_INCREMENT für Tabelle `email_request`
+-- AUTO_INCREMENT for table `email_request`
 --
 ALTER TABLE `email_request`
   MODIFY `email_request_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 
 --
--- AUTO_INCREMENT für Tabelle `event`
+-- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
   MODIFY `event_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT für Tabelle `event_client`
+-- AUTO_INCREMENT for table `event_client`
 --
 ALTER TABLE `event_client`
   MODIFY `event_client_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT für Tabelle `event_location`
+-- AUTO_INCREMENT for table `event_location`
 --
 ALTER TABLE `event_location`
   MODIFY `event_location_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT für Tabelle `event_responsible`
+-- AUTO_INCREMENT for table `event_responsible`
 --
 ALTER TABLE `event_responsible`
   MODIFY `event_responsible_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT für Tabelle `item`
+-- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
   MODIFY `item_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT für Tabelle `item_type`
+-- AUTO_INCREMENT for table `item_type`
 --
 ALTER TABLE `item_type`
   MODIFY `item_type_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT für Tabelle `lend`
+-- AUTO_INCREMENT for table `lend`
 --
 ALTER TABLE `lend`
   MODIFY `lend_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT für Tabelle `notification`
+-- AUTO_INCREMENT for table `notification`
 --
 ALTER TABLE `notification`
   MODIFY `notification_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
--- AUTO_INCREMENT für Tabelle `notification_request`
+-- AUTO_INCREMENT for table `notification_request`
 --
 ALTER TABLE `notification_request`
   MODIFY `notification_request_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT für Tabelle `storage`
+-- AUTO_INCREMENT for table `storage`
 --
 ALTER TABLE `storage`
   MODIFY `storage_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT für Tabelle `tag`
+-- AUTO_INCREMENT for table `tag`
 --
 ALTER TABLE `tag`
   MODIFY `tag_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT für Tabelle `tag_assignment`
+-- AUTO_INCREMENT for table `tag_assignment`
 --
 ALTER TABLE `tag_assignment`
   MODIFY `tag_assignment_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
--- AUTO_INCREMENT für Tabelle `todo_list`
+-- AUTO_INCREMENT for table `todo_list`
 --
 ALTER TABLE `todo_list`
   MODIFY `todo_list_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
--- AUTO_INCREMENT für Tabelle `todo_list_category`
+-- AUTO_INCREMENT for table `todo_list_category`
 --
 ALTER TABLE `todo_list_category`
   MODIFY `todo_list_category_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT für Tabelle `todo_list_entry`
+-- AUTO_INCREMENT for table `todo_list_entry`
 --
 ALTER TABLE `todo_list_entry`
   MODIFY `todo_list_entry_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
--- AUTO_INCREMENT für Tabelle `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT für Tabelle `user_role`
+-- AUTO_INCREMENT for table `user_role`
 --
 ALTER TABLE `user_role`
   MODIFY `user_role_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- Constraints der exportierten Tabellen
+-- Constraints for dumped tables
 --
 
 --
--- Constraints der Tabelle `comment`
+-- Constraints for table `comment`
 --
 ALTER TABLE `comment`
   ADD CONSTRAINT `fx_comment_attribute_type_id` FOREIGN KEY (`attribute_type_id`) REFERENCES `attribute_type` (`attribute_type_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `fx_comment_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
--- Constraints der Tabelle `email_request`
+-- Constraints for table `email_request`
 --
 ALTER TABLE `email_request`
   ADD CONSTRAINT `fx_email_request_type_idx` FOREIGN KEY (`email_request_type_id`) REFERENCES `email_request_type` (`email_request_type_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `fx_email_request_user_idx` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
--- Constraints der Tabelle `event`
+-- Constraints for table `event`
 --
 ALTER TABLE `event`
   ADD CONSTRAINT `fx_event_event_client_idx` FOREIGN KEY (`event_client_id`) REFERENCES `event_client` (`event_client_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `fx_event_event_location_id` FOREIGN KEY (`event_location_id`) REFERENCES `event_location` (`event_location_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
--- Constraints der Tabelle `event_responsible`
+-- Constraints for table `event_responsible`
 --
 ALTER TABLE `event_responsible`
   ADD CONSTRAINT `fx_event_responsible_event_id` FOREIGN KEY (`event_id`) REFERENCES `event` (`event_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `fx_event_responsible_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
--- Constraints der Tabelle `item`
+-- Constraints for table `item`
 --
 ALTER TABLE `item`
   ADD CONSTRAINT `fx_item_type_id` FOREIGN KEY (`item_type_id`) REFERENCES `item_type` (`item_type_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `fx_storage_idx` FOREIGN KEY (`storage_id`) REFERENCES `storage` (`storage_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
--- Constraints der Tabelle `lend`
+-- Constraints for table `lend`
 --
 ALTER TABLE `lend`
   ADD CONSTRAINT `fx_lend_user_idx` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `user_id ` FOREIGN KEY (`item_id`) REFERENCES `item` (`item_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
--- Constraints der Tabelle `notification`
+-- Constraints for table `notification`
 --
 ALTER TABLE `notification`
   ADD CONSTRAINT `fx_notification_notification_request_id` FOREIGN KEY (`notification_request_id`) REFERENCES `notification_request` (`notification_request_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
--- Constraints der Tabelle `notification_request`
+-- Constraints for table `notification_request`
 --
 ALTER TABLE `notification_request`
   ADD CONSTRAINT `fx_notification_request_attribute_type_id` FOREIGN KEY (`attribute_type_id`) REFERENCES `attribute_type` (`attribute_type_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `fx_notification_request_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
--- Constraints der Tabelle `storage`
+-- Constraints for table `storage`
 --
 ALTER TABLE `storage`
   ADD CONSTRAINT `fx_storage_parent_idx` FOREIGN KEY (`storage_parent_id`) REFERENCES `storage` (`storage_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `fx_storage_type_idx` FOREIGN KEY (`storage_type_id`) REFERENCES `storage_type` (`storage_type_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
--- Constraints der Tabelle `tag_assignment`
+-- Constraints for table `tag_assignment`
 --
 ALTER TABLE `tag_assignment`
   ADD CONSTRAINT `fx_tag_assignment_attribute_type_id` FOREIGN KEY (`attribute_type_id`) REFERENCES `attribute_type` (`attribute_type_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `fx_tag_assignment_tag_id` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`tag_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
--- Constraints der Tabelle `todo_list`
+-- Constraints for table `todo_list`
 --
 ALTER TABLE `todo_list`
   ADD CONSTRAINT `	fx_todo_list_event_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
@@ -867,25 +842,23 @@ ALTER TABLE `todo_list`
   ADD CONSTRAINT `fx_todo_list_todo_list_category_id` FOREIGN KEY (`todo_list_category_id`) REFERENCES `todo_list_category` (`todo_list_category_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
--- Constraints der Tabelle `todo_list_category`
+-- Constraints for table `todo_list_category`
 --
 ALTER TABLE `todo_list_category`
   ADD CONSTRAINT `fx_todo_list_category_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
--- Constraints der Tabelle `todo_list_entry`
+-- Constraints for table `todo_list_entry`
 --
 ALTER TABLE `todo_list_entry`
   ADD CONSTRAINT `fx_todo_list_entry_parent_entry_id` FOREIGN KEY (`parent_entry_id`) REFERENCES `todo_list_entry` (`todo_list_entry_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `fx_todo_list_entry_todo_list_id` FOREIGN KEY (`todo_list_id`) REFERENCES `todo_list` (`todo_list_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
--- Constraints der Tabelle `user`
+-- Constraints for table `user`
 --
 ALTER TABLE `user`
   ADD CONSTRAINT `fx_user_user_role_id` FOREIGN KEY (`role_id`) REFERENCES `user_role` (`user_role_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+

@@ -11,7 +11,7 @@ class NotificationRequest extends SystemClass {
 	}
 	
 	//get all requests for specific user_error
-	
+	//Objective 11.3
 	public static function loadRequestsByUserID($userID) {
 		$request = new NotificationRequest;
 		
@@ -27,13 +27,13 @@ class NotificationRequest extends SystemClass {
 	}
 	
 	//Delete all notifications for specific request
-	
+	//Objective 11
 	function deleteAllNotifications() {
 		return(Notification::deleteAllNotificationsForRequest($this->getID()));
 	}
 	
 	//load request by attribute and user
-	
+	//Objective 11.3
 	function loadDataByAttributeAndUser($userID, $typeID, $attributeID) {
 		
 		$request = new NotificationRequest;
@@ -88,7 +88,7 @@ class NotificationRequest extends SystemClass {
 	}
 	
 	//Create a new notification request
-	
+	//Objective 11.1
 	public static function createRequest($userID, $typeID, $attributeID) {
 		if(NotificationRequest::checkIfRequestActivated($userID, $typeID, $attributeID) == False) {
 			$request = new NotificationRequest;
@@ -110,7 +110,7 @@ class NotificationRequest extends SystemClass {
 	}
 	
 	//delete existing notification request
-	
+	//Objective 11.1 / 11.3
 	public static function deleteRequest($userID, $typeID, $attributeID) {
 		$request = new NotificationRequest;
 		if(
@@ -176,6 +176,9 @@ class NotificationRequest extends SystemClass {
 	function getUserID() {
 		return($this->user_id);
 	}
+	
+	//Get name of attribute for which notification requets is for
+	//Name of todo list/name of event
 	
 	function getAttributeName() {
 		if($this->getAttributeTypeID() == 3) {

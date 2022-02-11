@@ -13,6 +13,7 @@ class TagAssignment extends SystemClass {
 	//Functions
 	
 	//Create new tag for todo list
+	//Objective 8.2
 	function createTagForList($listID, $tagID) {
 		$tag = new Tag();
 		if($tag->loadData($tagID)) {
@@ -27,6 +28,7 @@ class TagAssignment extends SystemClass {
 	}
 	
 	//Create new tag for event
+	//Objective 8.2
 	function createTagForEvent($eventID, $tagID) {
 		$tag = new Tag();
 		if($tag->loadData($tagID)) {
@@ -41,6 +43,7 @@ class TagAssignment extends SystemClass {
 	}
 	
 	//check if tags is used
+	//Objective 8.3.1
 	static function checkIfTagUsed($tagID) {
 		$assignment = new TagAssignment;
 		

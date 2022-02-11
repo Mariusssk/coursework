@@ -3,8 +3,11 @@
 
 class StorageShelf extends Storage {
 	
-	//get childs without position 
+	//Sub type of storage
+	//Objective 5.1.2
 	
+	//get childs without position for selecting to place on grid
+	//objective 5.5.1
 	function getChildsWithoutPosition() {
 		$childs = array();
 		
@@ -18,6 +21,7 @@ class StorageShelf extends Storage {
 	}
 	
 	//komplex function displaying grid of shelf
+	//Objective 5.5
 	function displayGrid() {
 		$post = "";
 		//check if storage is valid as grid generator

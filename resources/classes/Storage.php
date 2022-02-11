@@ -14,7 +14,8 @@ class Storage extends SystemClass {
 	}
 	
 	//get a select for storages
-	
+	//Select "parent" storage for upper level
+	//Objective 5.1
 	public static function getSelect($attributes = array(),$option = "0") {
 		//get array of all storages
 		$storages = Storage::getAll();
@@ -61,7 +62,7 @@ class Storage extends SystemClass {
 	}
 	
 	//create list with all sub storages
-	
+	//Objctive 5.1
 	function loadSubStorages() {
 		$children = $this->getListOfChildren();
 		
@@ -84,7 +85,7 @@ class Storage extends SystemClass {
 	}
 	
 	//create list of all direct children
-	
+	//Objective 5.1
 	function getListOfChildren() {
 		//prepare SQL query
 		$sql = "SELECT ".$this->TABLE_NAME."_id FROM ".$this->TABLE_NAME." WHERE ".$this->TABLE_NAME."_parent_id = ?";
@@ -100,7 +101,7 @@ class Storage extends SystemClass {
 	}
 	
 	//check if storage has childs before deleting
-	
+	//Objective 5.1
 	function checkForChilds() {
 		//check if childs are found
 		if(count($this->getListOfChildren()) == 0) {
@@ -119,12 +120,12 @@ class Storage extends SystemClass {
 		return("Storage#".$this->getID());
 	}
 	
-	//Create string of storages
+	//Create string of storages for easlier location finding
+	//Objective 5.4.2
 	
 	function createStorageString() {
 		$post = "";
-		
-		
+
 		if($this->getTypeID() == 3 OR $this->getTypeID() == 2) {
 			$parent = new Storage;
 			if($parent->loadData($this->getParentID())) {
@@ -228,6 +229,8 @@ class Storage extends SystemClass {
 		}
 		return(False);
 	}
+	
+	//check that parent is either existing or not set
 	
 	function setParentID($value) {
 		$storage = new Storage;

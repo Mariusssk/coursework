@@ -28,6 +28,9 @@ if($session->loggedIn() === True) {
 	
 	//load page based on request
 	
+	//Display list of all current notifications the user has
+	//Objective 11/ 11.2
+	
 	if($request == "list") {
 		?>
 		<div class="page notifications list">
@@ -64,7 +67,10 @@ if($session->loggedIn() === True) {
 			loadPersonalNotifications();
 		</script>
 		<?php
-	} else if($request == "requestList") {
+	} 
+	//Page to edit all notification requests the user has made for events or todo lists
+	//Objective 11.3
+	else if($request == "requestList") {
 		?>
 		<div class="page notifications requestList">
 			<div class="generalTable">
@@ -102,6 +108,7 @@ if($session->loggedIn() === True) {
 				</div>
 			</div>
 			<script>
+				//Load all notification requests
 				loadNotificationRequestList();
 			</script>
 		</div>

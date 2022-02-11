@@ -25,6 +25,8 @@ class ItemType extends ObjectType {
 		return($this->name_en);
 	}
 	
+	//Objective 4.4.1
+	
 	function getConsumable() {
 		return($this->consumable);
 	}

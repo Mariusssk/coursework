@@ -3,6 +3,8 @@
 
 class Session {
 	
+	//Class dealing with the session, so the login and current user data
+	
 	protected $current_user;
 	
 	//Function on construct
@@ -19,7 +21,7 @@ class Session {
 	}
 	
 	//check if user is logged in
-	
+	//Objective 3.3
 	public function loggedIn() {
 		if($this->current_user->loadData($this->getSessionUserID()) == True) {
 			return(True);
@@ -27,7 +29,7 @@ class Session {
 		return(False);
 	}
 	
-	//return the session user idate
+	//return the session user data
 	
 	function getSessionUserID() {
 		if(isset($_SESSION['user_id']) AND !empty($_SESSION['user_id'])) {
@@ -37,7 +39,7 @@ class Session {
 	}
 		
 	//Login
-	
+	//Objective 3.3
 	function login($username, $password) {
 		if($this->current_user->loadUserByUsername($username)) {
 			if($this->current_user->checkPassword($password)) {
@@ -59,7 +61,7 @@ class Session {
 	}
 	
 	//logout
-	
+	//Objective 3.3
 	function logout() {
 		session_destroy();
 		session_start();

@@ -22,6 +22,7 @@ class EventLocation extends ObjectType {
 	}
 	
 	//check if event client is used
+	//Objective 6.5.3
 	
 	function checkIfUsed() {
 		if(count(Event::selectAllEventsWithLocation($this->getID())) > 0) {

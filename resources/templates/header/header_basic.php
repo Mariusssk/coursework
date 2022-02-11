@@ -22,7 +22,6 @@ error_reporting(E_ALL);
 	<link rel="stylesheet" href="<?php echo CSS;?>/bootstrap/bootstrap.min.css" type="text/css">
 	<link rel="stylesheet" href="<?php echo CSS;?>/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="<?php echo CSS;?>/style.css" type="text/css">
-	<link rel="stylesheet" href="<?php echo CSS;?>/nice-select.css" type="text/css">
 	
 	<link rel="stylesheet" href="<?php echo CSS;?>/user_style.css" type="text/css">
 	<link rel="stylesheet" href="<?php echo CSS;?>/comment_style.css" type="text/css">
@@ -52,7 +51,6 @@ error_reporting(E_ALL);
 	<!-- Js Plugins -->
 	<script src="<?php echo JS;?>/jquery.min.js"></script>
 	
-	<script src="<?php echo JS;?>/jquery.nice-select.min.js"></script>
 	<script src="<?php echo JS;?>/functions.js"></script>
 	<script src="<?php echo JS;?>/user_functions.js"></script>
 	<script src="<?php echo JS;?>/storage_functions.js"></script>

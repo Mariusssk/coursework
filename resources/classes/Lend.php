@@ -24,6 +24,7 @@ class Lend extends SystemClass {
 	}
 	
 	//Load all items lend by user
+	//Objective 4.5
 	public static function getItemsLendByUser($userID) {
 		$lend = new Lend;
 		
@@ -40,24 +41,8 @@ class Lend extends SystemClass {
 		return($items);
 	}
 	
-	//Load all items lend by user
-	public static function getAllLendByUser($userID) {
-		$lend = new Lend;
-		
-		//setup SQL
-		$sql = "SELECT lend_id FROM ".$lend->TABLE_NAME." WHERE returned = ? AND user_id = ? ORDER BY return_date ASC";
-		$sqlType = "ii";
-		$sqlParams = array(0,$userID);
-		
-		//load items
-		$items = pdSelect($sql,"mysqli",$sqlType,$sqlParams);
-		
-		$items = $lend->mergeResult($items);
-		
-		return($items);
-	}
-	
-	//calculate the total amount lend for an item
+	//calculate the total amount lend for an item to change actual amount in storage
+	//Objective 4.5.1.3 / 4.5.2
 	public static function calculateTotalAmountLend($itemID) {
 		$lend = new Lend;
 		
@@ -76,6 +61,7 @@ class Lend extends SystemClass {
 	
 
 	//load lending data by item and user ID
+	//Objective 4.5.1
 	function loadDataByItemID($userID, $itemID) {
 		$sql = "SELECT ".$this->TABLE_NAME."_id FROM ".$this->TABLE_NAME." WHERE user_id = ? AND item_id = ? AND returned = ?";
 		$sqlType = "iii";
@@ -93,7 +79,7 @@ class Lend extends SystemClass {
 	}
 	
 	//check overdue
-	
+	//Objective 4.5.1.4
 	function checkOverdue() {
 		if(!empty($this->getReturnDate("form"))) {
 			$today = new DateTime();
@@ -106,7 +92,7 @@ class Lend extends SystemClass {
 	}
 	
 	//days until return date
-	
+	//Objective 4.5.1.4
 	function getDaysUntilReturn() {
 		if(!empty($this->getReturnDate("form"))) {
 			$today = new DateTime();
@@ -130,6 +116,8 @@ class Lend extends SystemClass {
 	function getItemID() {
 		return($this->item_id);
 	}
+	
+	//Return return date either in format for display or in format to process further
 	
 	function getReturnDate($type = "display") {
 		if(!empty($this->return_date)) {
@@ -178,6 +166,8 @@ class Lend extends SystemClass {
 		}
 		return(False);
 	}
+	
+	//Put return date into uniform format before saving
 	
 	function setReturnDate($value) {
 		if(empty($value)) {

@@ -14,6 +14,9 @@ class EmailRequest extends SystemClass {
 	//Functions
 	
 	//check if request is open
+	//check user has open request to reset password or to confirm email
+	//Hence if the user already confirmed the email
+	//Objective 9.6
 	
 	public static function checkOpenRequest($userID, $requestType = "personalEmail") {
 		$request = new EmailRequest;
@@ -60,7 +63,9 @@ class EmailRequest extends SystemClass {
 	}
 	
 	//create request for confirming changed email
-	
+	//Create a new request to confirm email 
+	//Objective 9.6
+
 	function createEmailConfirmRequest($user_id,$emailType = "email") {
 		//set basic data
 		if($emailType == "email") {
@@ -97,6 +102,7 @@ class EmailRequest extends SystemClass {
 	}
 	
 	//create request for password reset
+	//Objective 9.7
 	
 	function createPasswordResetRequest($user_id) {
 		//set basic data
@@ -126,6 +132,10 @@ class EmailRequest extends SystemClass {
 	}
 	
 	//create request code 
+	//Generate code which needs to be entered to verify email or to reset password
+	//Code is send to user by email
+	//Objective 9.6/9.7
+	
 	function createCode() {
 		$codeCreated = False;
 		
@@ -146,6 +156,9 @@ class EmailRequest extends SystemClass {
 	}
 	
 	//delete all existing requests
+	//Delete open requests for a user and type
+	//Delete all password reset requets when a new request is created
+	
 	
 	function deleteOpenRequests($userID, $typeID, $newRequest = 0) {
 		//Delete all old requests
@@ -158,6 +171,7 @@ class EmailRequest extends SystemClass {
 	}
 	
 	//find email request ID by code
+	//Find the e-mail request by code which was send in email 
 	
 	function loadDataByCode($code) {
 		//create SQL statment
@@ -179,6 +193,8 @@ class EmailRequest extends SystemClass {
 	
 	
 	//check if request has exired
+	//Check if request is still valid
+	//Objective 9.7.2
 	
 	function isValid() {
 		$now = new DateTime;
@@ -190,6 +206,8 @@ class EmailRequest extends SystemClass {
 	}
 	
 	//verify request
+	//Set request to verified 
+	//Hence email verified
 	
 	function verify() {
 		if($this->isValid()) {

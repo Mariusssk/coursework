@@ -35,6 +35,7 @@ class StorageType extends ObjectType {
 		return($this->storage_type_id);
 	}
 	
+	//get name of type depending on language selected
 	function getName() {
 		if(isset($_SESSION['lang']) AND $_SESSION['lang'] == "de") {
 			return($this->name_de);

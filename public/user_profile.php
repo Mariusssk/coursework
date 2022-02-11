@@ -28,6 +28,9 @@ if($session->loggedIn() === True) {
 	
 	//load page based on request
 	
+	
+	//Page for the user to edit its own personal data-input-name
+	//Objective 9.4
 	if($request == "personal_data") {
 		$user = new User;
 		$user->loadData($session->getSessionUserID());
@@ -87,7 +90,9 @@ if($session->loggedIn() === True) {
 			</div>
 		</div>
 		<?php
-	} else if($request == "profile") {
+	} 
+	//Profile Page for every user 
+	else if($request == "profile") {
 		$user = new User;
 		if(isset($_GET['username']) AND !empty($_GET['username'])) {
 			if(!$user->loadUserByUsername($_GET['username'])) {

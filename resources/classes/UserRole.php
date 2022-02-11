@@ -3,6 +3,8 @@
 
 class UserRole extends ObjectType {
 	
+	//Overall objective 9.2
+	
 	protected $user_role_id, $name, $pre_defined;
 	
 	function __construct() {

@@ -16,6 +16,10 @@ class Email {
 		return(True);
 	}
 	
+	//Create a new email based based on type of email
+	//Import templates for e-mail
+	//Objective 10.1
+	
 	function createEmail($type,$userID,$contentAttributes = array()) {
 		$user = new User;
 		if(!empty($type) AND $user->loadData($userID)) {
@@ -76,13 +80,15 @@ class Email {
 		return(False);
 	}
 	
+	//Add server data and receiver to email/
+	//Objective 10.2
 	
 	function prepareEmail() {
 		$this->mailInstance->isSMTP();
 		$this->mailInstance->Host = 's203.goserver.host';
 		$this->mailInstance->SMTPAuth = true;
 		$this->mailInstance->Username = 'web144p7';
-		$this->mailInstance->Password = 'sq1FObJA9ShKcDwo';
+		$this->mailInstance->Password = 'pt8wrpKovUa0J1xi!3';
 		$this->mailInstance->SMTPSecure = 'ssl';
 		$this->mailInstance->Port = 465;
 
@@ -92,8 +98,12 @@ class Email {
 		$this->mailInstance->Subject = $this->subject;
 		$this->mailInstance->isHTML(true);
 		$this->mailInstance->Body = $this->content;
+		
+		$this->mailInstance->AddEmbeddedImage(PUBLIC_DIR.'/images/aulatechnik_logo_square.png',"logo","logo.png", 'base64', 'image/png');
 	}
 	
+	//Send of the email
+	//Objective 10
 	
 	function sendEmail() {
 		if($this->mailInstance->send()) {

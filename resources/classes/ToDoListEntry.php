@@ -5,6 +5,8 @@ class ToDoListEntry extends SystemClass {
 	
 	protected $todo_list_entry_id, $todo_list_id, $parent_entry_id, $name, $checked;
 	
+	//Overall Objective 7.2
+	
 	function __construct() {
 		//Name of the table
 		$this->TABLE_NAME = "todo_list_entry";
@@ -16,7 +18,7 @@ class ToDoListEntry extends SystemClass {
 	//Functions
 	
 	//overriden create new data to acomplish for checked 0
-	
+
 	function createNewData() {
 		if(empty($this->checked)) {
 			$this->checked = 0;
@@ -160,6 +162,8 @@ class ToDoListEntry extends SystemClass {
 		}
 		return(False);
 	}
+	
+	//Objective 7.2.1
 	
 	function setChecked($value) {
 		if($value == 0 OR $value == 1) {

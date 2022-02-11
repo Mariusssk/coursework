@@ -17,6 +17,9 @@ if(isset($_GET['code'])) {
 <div class="fullPageContent">
 	<div class="page verify" style="background-image: url('<?php echo str_replace("\\","/",IMAGES."/background-stage.jpg");?>')">
 		
+		<!-- Input to put in code send by email to reset password or verify email -->
+		<!-- Objectives 9.6 / 9.7 -->
+		
 		<div class="verifyContainer">
 			<div class="verifyData">
 				<div class="inputCodeContainer">

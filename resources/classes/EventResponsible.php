@@ -11,7 +11,7 @@ class EventResponsible extends SystemClass {
 	}
 	
 	//Functions
-	
+	//Overall objective 6.4
 	
 	//find all responsibles for specific event
 	static function loadResponsibleForEvent($eventID) {

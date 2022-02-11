@@ -23,8 +23,10 @@ if($session->loggedIn()) {
 				</div>
 				<div class="boxContent">
 					<?php
+					//Display items lend by user on dashboard
+					
 					//Get items lend by user
-					$lendItems = Lend::getAllLendByUser($session->getSessionUserID());
+					$lendItems = Lend::getItemsLendByUser($session->getSessionUserID());
 					//check if user has lend items
 					if(count($lendItems) > 0) {
 						?>
